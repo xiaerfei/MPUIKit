@@ -1,0 +1,904 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		9C94051F2D83181A00623A41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C9404FB2D83181800623A41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C9405022D83181800623A41;
+			remoteInfo = TVUMPIOS;
+		};
+		9C9405292D83181A00623A41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C9404FB2D83181800623A41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C9405022D83181800623A41;
+			remoteInfo = TVUMPIOS;
+		};
+		9C9405552D83183100623A41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C9404FB2D83181800623A41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C94053F2D83183000623A41;
+			remoteInfo = TVUMPOSX;
+		};
+		9C94055F2D83183100623A41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C9404FB2D83181800623A41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C94053F2D83183000623A41;
+			remoteInfo = TVUMPOSX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9C9405032D83181800623A41 /* TVUMPIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVUMPIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C94051E2D83181A00623A41 /* TVUMPIOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVUMPIOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C9405282D83181A00623A41 /* TVUMPIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVUMPIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C9405402D83183000623A41 /* TVUMPOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVUMPOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C9405542D83183100623A41 /* TVUMPOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVUMPOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C94055E2D83183100623A41 /* TVUMPOSXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVUMPOSXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9C9405302D83181A00623A41 /* Exceptions for "TVUMPIOS" folder in "TVUMPIOS" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9C9405022D83181800623A41 /* TVUMPIOS */;
+		};
+		9C9405742D83184C00623A41 /* Exceptions for "TVUMPIOS" folder in "TVUMPOSX" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TVUMPUIKit/TVUMPView.m,
+			);
+			target = 9C94053F2D83183000623A41 /* TVUMPOSX */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		9C9405052D83181800623A41 /* TVUMPIOS */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9C9405302D83181A00623A41 /* Exceptions for "TVUMPIOS" folder in "TVUMPIOS" target */,
+				9C9405742D83184C00623A41 /* Exceptions for "TVUMPIOS" folder in "TVUMPOSX" target */,
+			);
+			path = TVUMPIOS;
+			sourceTree = "<group>";
+		};
+		9C9405212D83181A00623A41 /* TVUMPIOSTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TVUMPIOSTests;
+			sourceTree = "<group>";
+		};
+		9C94052B2D83181A00623A41 /* TVUMPIOSUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TVUMPIOSUITests;
+			sourceTree = "<group>";
+		};
+		9C9405412D83183000623A41 /* TVUMPOSX */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TVUMPOSX;
+			sourceTree = "<group>";
+		};
+		9C9405572D83183100623A41 /* TVUMPOSXTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TVUMPOSXTests;
+			sourceTree = "<group>";
+		};
+		9C9405612D83183100623A41 /* TVUMPOSXUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TVUMPOSXUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C9405002D83181800623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94051B2D83181A00623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405252D83181A00623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94053D2D83183000623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405512D83183100623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94055B2D83183100623A41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C9404FA2D83181800623A41 = {
+			isa = PBXGroup;
+			children = (
+				9C9405052D83181800623A41 /* TVUMPIOS */,
+				9C9405212D83181A00623A41 /* TVUMPIOSTests */,
+				9C94052B2D83181A00623A41 /* TVUMPIOSUITests */,
+				9C9405412D83183000623A41 /* TVUMPOSX */,
+				9C9405572D83183100623A41 /* TVUMPOSXTests */,
+				9C9405612D83183100623A41 /* TVUMPOSXUITests */,
+				9C9405042D83181800623A41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9C9405042D83181800623A41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C9405032D83181800623A41 /* TVUMPIOS.app */,
+				9C94051E2D83181A00623A41 /* TVUMPIOSTests.xctest */,
+				9C9405282D83181A00623A41 /* TVUMPIOSUITests.xctest */,
+				9C9405402D83183000623A41 /* TVUMPOSX.app */,
+				9C9405542D83183100623A41 /* TVUMPOSXTests.xctest */,
+				9C94055E2D83183100623A41 /* TVUMPOSXUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C9405022D83181800623A41 /* TVUMPIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C9405312D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOS" */;
+			buildPhases = (
+				9C9404FF2D83181800623A41 /* Sources */,
+				9C9405002D83181800623A41 /* Frameworks */,
+				9C9405012D83181800623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9C9405052D83181800623A41 /* TVUMPIOS */,
+			);
+			name = TVUMPIOS;
+			packageProductDependencies = (
+			);
+			productName = TVUMPIOS;
+			productReference = 9C9405032D83181800623A41 /* TVUMPIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9C94051D2D83181A00623A41 /* TVUMPIOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C9405362D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOSTests" */;
+			buildPhases = (
+				9C94051A2D83181A00623A41 /* Sources */,
+				9C94051B2D83181A00623A41 /* Frameworks */,
+				9C94051C2D83181A00623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C9405202D83181A00623A41 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9C9405212D83181A00623A41 /* TVUMPIOSTests */,
+			);
+			name = TVUMPIOSTests;
+			packageProductDependencies = (
+			);
+			productName = TVUMPIOSTests;
+			productReference = 9C94051E2D83181A00623A41 /* TVUMPIOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9C9405272D83181A00623A41 /* TVUMPIOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C9405392D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOSUITests" */;
+			buildPhases = (
+				9C9405242D83181A00623A41 /* Sources */,
+				9C9405252D83181A00623A41 /* Frameworks */,
+				9C9405262D83181A00623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C94052A2D83181A00623A41 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9C94052B2D83181A00623A41 /* TVUMPIOSUITests */,
+			);
+			name = TVUMPIOSUITests;
+			packageProductDependencies = (
+			);
+			productName = TVUMPIOSUITests;
+			productReference = 9C9405282D83181A00623A41 /* TVUMPIOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		9C94053F2D83183000623A41 /* TVUMPOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C9405662D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSX" */;
+			buildPhases = (
+				9C94053C2D83183000623A41 /* Sources */,
+				9C94053D2D83183000623A41 /* Frameworks */,
+				9C94053E2D83183000623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9C9405412D83183000623A41 /* TVUMPOSX */,
+			);
+			name = TVUMPOSX;
+			packageProductDependencies = (
+			);
+			productName = TVUMPOSX;
+			productReference = 9C9405402D83183000623A41 /* TVUMPOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9C9405532D83183100623A41 /* TVUMPOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C9405692D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSXTests" */;
+			buildPhases = (
+				9C9405502D83183100623A41 /* Sources */,
+				9C9405512D83183100623A41 /* Frameworks */,
+				9C9405522D83183100623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C9405562D83183100623A41 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9C9405572D83183100623A41 /* TVUMPOSXTests */,
+			);
+			name = TVUMPOSXTests;
+			packageProductDependencies = (
+			);
+			productName = TVUMPOSXTests;
+			productReference = 9C9405542D83183100623A41 /* TVUMPOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9C94055D2D83183100623A41 /* TVUMPOSXUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C94056C2D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSXUITests" */;
+			buildPhases = (
+				9C94055A2D83183100623A41 /* Sources */,
+				9C94055B2D83183100623A41 /* Frameworks */,
+				9C94055C2D83183100623A41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C9405602D83183100623A41 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9C9405612D83183100623A41 /* TVUMPOSXUITests */,
+			);
+			name = TVUMPOSXUITests;
+			packageProductDependencies = (
+			);
+			productName = TVUMPOSXUITests;
+			productReference = 9C94055E2D83183100623A41 /* TVUMPOSXUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C9404FB2D83181800623A41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					9C9405022D83181800623A41 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					9C94051D2D83181A00623A41 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 9C9405022D83181800623A41;
+					};
+					9C9405272D83181A00623A41 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 9C9405022D83181800623A41;
+					};
+					9C94053F2D83183000623A41 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					9C9405532D83183100623A41 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 9C94053F2D83183000623A41;
+					};
+					9C94055D2D83183100623A41 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 9C94053F2D83183000623A41;
+					};
+				};
+			};
+			buildConfigurationList = 9C9404FE2D83181800623A41 /* Build configuration list for PBXProject "TVUMPIOS" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9C9404FA2D83181800623A41;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9C9405042D83181800623A41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C9405022D83181800623A41 /* TVUMPIOS */,
+				9C94051D2D83181A00623A41 /* TVUMPIOSTests */,
+				9C9405272D83181A00623A41 /* TVUMPIOSUITests */,
+				9C94053F2D83183000623A41 /* TVUMPOSX */,
+				9C9405532D83183100623A41 /* TVUMPOSXTests */,
+				9C94055D2D83183100623A41 /* TVUMPOSXUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C9405012D83181800623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94051C2D83181A00623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405262D83181A00623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94053E2D83183000623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405522D83183100623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94055C2D83183100623A41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C9404FF2D83181800623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94051A2D83181A00623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405242D83181A00623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94053C2D83183000623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C9405502D83183100623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C94055A2D83183100623A41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C9405202D83181A00623A41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C9405022D83181800623A41 /* TVUMPIOS */;
+			targetProxy = 9C94051F2D83181A00623A41 /* PBXContainerItemProxy */;
+		};
+		9C94052A2D83181A00623A41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C9405022D83181800623A41 /* TVUMPIOS */;
+			targetProxy = 9C9405292D83181A00623A41 /* PBXContainerItemProxy */;
+		};
+		9C9405562D83183100623A41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C94053F2D83183000623A41 /* TVUMPOSX */;
+			targetProxy = 9C9405552D83183100623A41 /* PBXContainerItemProxy */;
+		};
+		9C9405602D83183100623A41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C94053F2D83183000623A41 /* TVUMPOSX */;
+			targetProxy = 9C94055F2D83183100623A41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9C9405322D83181A00623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TVUMPIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9C9405332D83181A00623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TVUMPIOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9C9405342D83181A00623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9C9405352D83181A00623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C9405372D83181A00623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVUMPIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TVUMPIOS";
+			};
+			name = Debug;
+		};
+		9C9405382D83181A00623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVUMPIOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TVUMPIOS";
+			};
+			name = Release;
+		};
+		9C94053A2D83181A00623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TVUMPIOS;
+			};
+			name = Debug;
+		};
+		9C94053B2D83181A00623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPIOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TVUMPIOS;
+			};
+			name = Release;
+		};
+		9C9405672D83183100623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TVUMPOSX/TVUMPOSX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		9C9405682D83183100623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TVUMPOSX/TVUMPOSX.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		9C94056A2D83183100623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVUMPOSX.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TVUMPOSX";
+			};
+			name = Debug;
+		};
+		9C94056B2D83183100623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TVUMPOSX.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TVUMPOSX";
+			};
+			name = Release;
+		};
+		9C94056D2D83183100623A41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSXUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = TVUMPOSX;
+			};
+			name = Debug;
+		};
+		9C94056E2D83183100623A41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.TVUMPOSXUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TEST_TARGET_NAME = TVUMPOSX;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C9404FE2D83181800623A41 /* Build configuration list for PBXProject "TVUMPIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C9405342D83181A00623A41 /* Debug */,
+				9C9405352D83181A00623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C9405312D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C9405322D83181A00623A41 /* Debug */,
+				9C9405332D83181A00623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C9405362D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C9405372D83181A00623A41 /* Debug */,
+				9C9405382D83181A00623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C9405392D83181A00623A41 /* Build configuration list for PBXNativeTarget "TVUMPIOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C94053A2D83181A00623A41 /* Debug */,
+				9C94053B2D83181A00623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C9405662D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C9405672D83183100623A41 /* Debug */,
+				9C9405682D83183100623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C9405692D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C94056A2D83183100623A41 /* Debug */,
+				9C94056B2D83183100623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C94056C2D83183100623A41 /* Build configuration list for PBXNativeTarget "TVUMPOSXUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C94056D2D83183100623A41 /* Debug */,
+				9C94056E2D83183100623A41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C9404FB2D83181800623A41 /* Project object */;
+}
