@@ -106,9 +106,14 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 - (id)requestParameter;
 - (NSString *)requestName;
 
-///< 开始请求
+/**
+ *  开始请求
+ *  note: 一般情况下，你不需要调用此方法，在 then 中包含
+ */
 - (void)start;
-///< 取消本次请求也包括重试
+/**
+ *  取消本次请求也包括重试
+ */
 - (void)stop;
 
 ///< 重试请求间隔(默认 1s)

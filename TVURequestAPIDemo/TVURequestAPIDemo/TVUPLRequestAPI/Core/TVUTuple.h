@@ -8,7 +8,9 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-/*
+/*0
+    元组
+ 
     使用方式：
     TVUTuple *tuple = [TVUTuple new];
     tuple[0] = value0;
