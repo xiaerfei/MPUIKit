@@ -48,8 +48,11 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 ///< 📢 注意: 自定义 URL、请求方式(GET、POST)和自定义请求参数等方法将不会调用
 - (NSURLRequest *)customRequest;
 ///< 解析响应数据，返回
-///< 0: data (eg: tuple[0] )
-///< 1: error(eg: tuple[1] )
+///< 0: API Class (eg: tuple[1] )
+///< 1: data (eg: tuple[1] )
+///< 2: error(eg: tuple[2] )
+///< 3 ~ ... : 自定义数据
+///< note: 当然你可以自定义数据格式
 - (TVUTuple *)customWithResponse:(NSURLResponse *)response
                             data:(NSData *)data
                            error:(NSError *)error;
@@ -59,6 +62,9 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 
 + (TVUPLRequestAPI *(^)(void))get;
 + (TVUPLRequestAPI *(^)(void))post;
+///< 请求的参数
++ (TVUPLRequestAPI *(^)(id param))parameter;
+
 - (TVUPLRequestAPI *(^)(void))get;
 - (TVUPLRequestAPI *(^)(void))post;
 ///< 请求的方式：GET 或者 POST
@@ -73,14 +79,26 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 - (TVUPLRequestAPI *(^)(NSInteger retry, NSTimeInterval time))retry;
 ///< 禁用 Retry
 - (TVUPLRequestAPI *(^)(void))noRetry;
-///< API 名称
+/**
+ *  API 名称, 用于调试、log 使用
+ */
 - (TVUPLRequestAPI *(^)(NSString *name))name;
-///< 请求结果回调，如果返回 NO 则会触发 Retry
-///< 请将 then 放到点语法的最后如：API.get().xxx.then(^(xxx,xxx) {});
-- (TVUPLRequestAPI *(^)(BOOL (^then)(id api, id info, NSError *error)))then;
-///< 同步返回, 请在异步线程使用(具体请看使用例子)
-///< 0: data (eg: tuple[0] )
-///< 1: error(eg: tuple[1] )
+/**
+ *  请求结果回调，如果返回 NO 则会触发 Retry
+ *  请将 then 放到点语法的最后如：API.get().xxx.then(^(tuple) {});
+ *  tuple[0] : API Class
+ *  tuple[1] : 返回结果
+ *  tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
+ *  tuple[3 ~ ...] : 自定义类型
+ */
+- (TVUPLRequestAPI *(^)(BOOL (^then)(TVUTuple *tuple)))then;
+/**
+ *  同步返回, 请在异步线程使用(具体请看使用例子)
+ *  tuple[0] : API Class
+ *  tuple[1] : 返回结果
+ *  tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
+ *  tuple[3 ~ ...] : 自定义类型
+ */
 - (TVUTuple *(^)(void))sync;
    
 - (TVUPLRAType)requestMethod;

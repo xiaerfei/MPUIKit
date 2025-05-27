@@ -80,4 +80,20 @@
 - (void)setObject:(id)object forKeyedSubscript:(NSString *)key {
 }
 
+- (id)copyWithZone:(nullable NSZone *)zone {
+    @synchronized (self) {
+        TVUTuple *tuple = [TVUTuple new];
+        tuple.value0 = self.value0;
+        tuple.value1 = self.value1;
+        tuple.value2 = self.value2;
+        tuple.value3 = self.value3;
+        tuple.value4 = self.value4;
+        tuple.value5 = self.value5;
+        tuple.value6 = self.value6;
+        tuple.value7 = self.value7;
+        tuple.value8 = self.value8;
+        tuple.value9 = self.value9;
+        return tuple;        
+    }
+}
 @end

@@ -15,7 +15,7 @@
 @property (nonatomic, assign) TVUPLRAType raType;
 @property (nonatomic,   copy) id raParameter;
 @property (nonatomic,   copy) NSString *raName;
-@property (nonatomic,   copy) BOOL(^raThen)(id api, id info, NSError *error);
+@property (nonatomic,   copy) BOOL(^raThen)(TVUTuple *tuple);
 @property (atomic, assign, readwrite) BOOL requesting;
 @property (nonatomic, assign) BOOL raMainQueue;
 ///< 正在第 n 次重试
@@ -59,6 +59,7 @@
         return api;
     };
 }
+
 - (TVUPLRequestAPI *(^)(void))get {
     return ^{
         self.raType = TVUPLRATypeGET;
@@ -76,6 +77,14 @@
     return ^(TVUPLRAType type) {
         self.raType = type;
         return self;
+    };
+}
+///< 请求的参数
++ (TVUPLRequestAPI *(^)(id param))parameter {
+    return ^(id param){
+        TVUPLRequestAPI *api = [self class].new;
+        api.raParameter = param;
+        return api;
     };
 }
 /// 请求的参数
@@ -115,8 +124,8 @@
         return self;
     };
 }
-- (TVUPLRequestAPI *(^)(BOOL(^then)(id api, id info, NSError *error)))then {
-    return ^(BOOL(^then)(TVUPLRequestAPI *api, id info, NSError *error)){
+- (TVUPLRequestAPI *(^)(BOOL(^then)(TVUTuple *tuple)))then {
+    return ^(BOOL(^then)(TVUTuple *tuple)){
         self.raThen = then;
         [self start];
         return self;
@@ -127,30 +136,21 @@
 ///< 1: error(eg: tuple[1] )
 - (TVUTuple *(^)(void))sync {
     return ^TVUTuple *(void){
-        __block id customResult = nil;
-        __block NSError *customError = nil;
+        __block id customTuple = nil;
         
         dispatch_group_t group = dispatch_group_create();
         dispatch_group_enter(group);
         
-        self.then(^BOOL(TVUPLRequestAPI *api,
-                        id info,
-                        NSError *error) {
+        self.then(^BOOL(TVUTuple *tuple) {
             if ([self isRetryMaximumLimit]) {
-                customResult = info;
-                customError  = error;
+                customTuple = tuple;
                 dispatch_group_leave(group);
             }
             return NO;
         });
         
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
-        
-        TVUTuple *tuple = [TVUTuple new];
-        tuple[0] = customResult;
-        tuple[1] = customError;
-        
-        return tuple;
+        return customTuple;
     };
 }
 ///< API 名称
@@ -279,22 +279,22 @@
            error:(NSError *)error {
     NSLog(@"② 请求成功 ~~~");
     self.requesting = NO;
-    id result = nil;
-    NSError *customError = error;
+    TVUTuple *customTuple = nil;
     if ([self.delegate respondsToSelector:@selector(customWithResponse:data:error:)]) {
-        TVUTuple *customTuple =
+        customTuple =
         [self.delegate customWithResponse:response
                                      data:data
                                     error:error];
-        result      = customTuple[0];
-        customError = customTuple[1];
     } else {
-        result = [self parseDataToObject:data];
+        customTuple = [TVUTuple new];
+        customTuple[0] = self;
+        customTuple[1] = [self parseDataToObject:data];
+        customTuple[2] = error;
     }
     void(^block)(void) = ^{
         @synchronized (self) {
             if (self.raThen == nil) return;
-            BOOL success = self.raThen(self, result, customError);
+            BOOL success = self.raThen(customTuple);
             if (success) return;
             self.doRetryCount ++;
             if ([self isRetryMaximumLimit] == NO) {

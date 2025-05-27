@@ -22,17 +22,12 @@
         .mainQueue()
         .retry(2,1)
         .name(@"UidInfo")
-        .then(^BOOL(TVUPLUidInfoAPI *api,
-                    id info,
-                    NSError *error) {
+        .then(^BOOL(TVUTuple *tuple) {
             return NO; // 返回 NO 表示需要 Retry
         });
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        TVUTuple *result = TVUPLUidInfoAPI
-            .get()
-            .parameter(@(123))
-            .sync();
+        TVUTuple *result = TVUPLUidInfoAPI.parameter(@(123)).sync();
         
     });
 }

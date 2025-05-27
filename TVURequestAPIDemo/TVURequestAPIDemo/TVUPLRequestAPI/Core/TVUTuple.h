@@ -16,9 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
     tuple[2] = value2;
  
     TVUTuple 最大支持 0 ~ 9 个索引
- 
  */
-@interface TVUTuple : NSObject
+@interface TVUTuple : NSObject <NSCopying>
 
 - (id)objectAtIndexedSubscript:(NSUInteger)index;
 - (void)setObject:(id)object atIndexedSubscript:(NSUInteger)index;
