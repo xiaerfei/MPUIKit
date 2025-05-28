@@ -108,7 +108,11 @@
         return self;
     };
 }
-/// 设置 Retry 参数 retry:最大重试次数 time: 重试间隔时间(填写 0，默认 0.1s)
+/**
+ *  设置 Retry 策略
+ *  retry: 最大重试次数
+ *  time: 重试间隔时间(最小间隔 0.1s，如果小于 0.1s，则默认 0.1s)
+ */
 - (TVUPLRequestAPI *(^)(NSInteger retry, NSTimeInterval time))retry {
     return ^(NSInteger retry, NSTimeInterval time) {
         self.retryCount = retry;
@@ -116,7 +120,9 @@
         return self;
     };
 }
-/// 禁用 Retry
+/**
+ *  禁用 Retry，目前默认没有重试(你无需调用)
+ */
 - (TVUPLRequestAPI *(^)(void))noRetry {
     return ^{
         self.retryCount = 0;
@@ -124,6 +130,28 @@
         return self;
     };
 }
+/**
+ *  API 名称, 用于调试、log 使用
+ */
+- (TVUPLRequestAPI *(^)(NSString *name))name {
+    return ^(NSString *name) {
+        self.raName = name;
+        return self;
+    };
+}
+/**
+ *  请求结果回调
+ *  回调参数:
+ *      请将 then 放到点语法的最后如：API.get().xxx.then(^(tuple) {});
+ *      tuple[0] : API Class
+ *      tuple[1] : 返回结果
+ *      tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
+ *      tuple[3 ~ 9] : 自定义类型
+ *  返回参数:
+ *      如果返回 NO 则会触发 Retry
+ *  注意:
+ *      默认异步线程回调
+ */
 - (TVUPLRequestAPI *(^)(BOOL(^then)(TVUTuple *tuple)))then {
     return ^(BOOL(^then)(TVUTuple *tuple)){
         self.raThen = then;
@@ -131,9 +159,13 @@
         return self;
     };
 }
-///< 同步返回, 请在异步线程使用(具体请看使用例子)
-///< 0: data (eg: tuple[0] )
-///< 1: error(eg: tuple[1] )
+/**
+ *  同步返回, 请在异步线程使用(具体请看使用例子)
+ *  tuple[0] : API Class
+ *  tuple[1] : 返回结果
+ *  tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
+ *  tuple[3 ~ ...] : 自定义类型
+ */
 - (TVUTuple *(^)(void))sync {
     return ^TVUTuple *(void){
         __block id customTuple = nil;
@@ -151,13 +183,6 @@
         
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
         return customTuple;
-    };
-}
-///< API 名称
-- (TVUPLRequestAPI *(^)(NSString *name))name {
-    return ^(NSString *name) {
-        self.raName = name;
-        return self;
     };
 }
 

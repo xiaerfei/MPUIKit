@@ -19,6 +19,7 @@
 		8AAA45D12DC9A6BA00D2654D /* TVUPLRequestAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45CC2DC9A6BA00D2654D /* TVUPLRequestAPI.m */; };
 		8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */; };
 		9CBB9C7E2DD99017005B5AD5 /* TVUTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB9C7D2DD99017005B5AD5 /* TVUTuple.m */; };
+		9CCD4F712DE75B58008E1778 /* NSObject+BaseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCD4F702DE75B58008E1778 /* NSObject+BaseDataType.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		8AAA45D32DC9A6E100D2654D /* TVUPartylineRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVUPartylineRequest.h; sourceTree = "<group>"; };
 		9CBB9C7C2DD99017005B5AD5 /* TVUTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUTuple.h; sourceTree = "<group>"; };
 		9CBB9C7D2DD99017005B5AD5 /* TVUTuple.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUTuple.m; sourceTree = "<group>"; };
+		9CCD4F6F2DE75B58008E1778 /* NSObject+BaseDataType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+BaseDataType.h"; sourceTree = "<group>"; };
+		9CCD4F702DE75B58008E1778 /* NSObject+BaseDataType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BaseDataType.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				8AAA45B42DC9A66E00D2654D /* ViewController.m */,
 				8AAA45D32DC9A6E100D2654D /* TVUPartylineRequest.h */,
 				8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */,
+				9CCD4F6F2DE75B58008E1778 /* NSObject+BaseDataType.h */,
+				9CCD4F702DE75B58008E1778 /* NSObject+BaseDataType.m */,
 				8AAA45B62DC9A66E00D2654D /* Main.storyboard */,
 				8AAA45B92DC9A67600D2654D /* Assets.xcassets */,
 				8AAA45BB2DC9A67600D2654D /* LaunchScreen.storyboard */,
@@ -195,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCD4F712DE75B58008E1778 /* NSObject+BaseDataType.m in Sources */,
 				8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */,
 				8AAA45D02DC9A6BA00D2654D /* TVUPLAPIManager.m in Sources */,
 				8AAA45B52DC9A66E00D2654D /* ViewController.m in Sources */,

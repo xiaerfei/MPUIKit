@@ -6,8 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObject+BaseDataType.h"
 #import "TVUTuple.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, TVUPLRAType) {

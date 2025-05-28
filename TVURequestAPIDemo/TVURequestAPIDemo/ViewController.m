@@ -23,7 +23,16 @@
         .retry(2,1)
         .name(@"UidInfo")
         .then(^BOOL(TVUTuple *tuple) {
-            return NO; // 返回 NO 表示需要 Retry
+            
+            NSError *error = [tuple[2] toErrorValue];
+            if (error) {
+                return NO;
+            }
+            
+            NSDictionary *info = [tuple[1] toDictionaryValue];
+            
+            
+            return YES; // 返回 NO 表示需要 Retry
         });
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
