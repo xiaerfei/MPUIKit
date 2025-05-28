@@ -286,7 +286,7 @@
                                      data:data
                                     error:error];
     } else {
-        customTuple = [TVUTuple new];
+        customTuple    = [TVUTuple new];
         customTuple[0] = self;
         customTuple[1] = [self parseDataToObject:data];
         customTuple[2] = error;

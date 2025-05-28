@@ -4,27 +4,7 @@
 //
 //  Created by sharexia on 4/15/25.
 //
-/*
- 
- [TVUPLUidInfoAPI new]
-     .get()
-     .parameter(@"uid")
-     .mainQueue()
-     .then(^BOOL(TVUPLUidInfoAPI *api, id info, NSError *error) {
-         
-         return YES;
-     });
- 
- TVUPLUidInfoAPI
-     .get()
-     .parameter(@(123))
-     .mainQueue()
-     .then(^BOOL(TVUPLUidInfoAPI *api, id info, NSError *error) {
-         
-         return NO;
-     });
- 
- */
+
 #import <Foundation/Foundation.h>
 #import "TVUTuple.h"
 
@@ -47,11 +27,11 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 ///< 自定义 Request
 ///< 📢 注意: 自定义 URL、请求方式(GET、POST)和自定义请求参数等方法将不会调用
 - (NSURLRequest *)customRequest;
-///< 解析响应数据，返回
+///< 解析响应数据格式
 ///< 0: API Class (eg: tuple[1] )
 ///< 1: data (eg: tuple[1] )
 ///< 2: error(eg: tuple[2] )
-///< 3 ~ ... : 自定义数据
+///< 3 ~ 9: ... : 自定义数据
 ///< note: 当然你可以自定义数据格式
 - (TVUTuple *)customWithResponse:(NSURLResponse *)response
                             data:(NSData *)data
@@ -62,34 +42,54 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 
 + (TVUPLRequestAPI *(^)(void))get;
 + (TVUPLRequestAPI *(^)(void))post;
-///< 请求的参数
-+ (TVUPLRequestAPI *(^)(id param))parameter;
-
 - (TVUPLRequestAPI *(^)(void))get;
 - (TVUPLRequestAPI *(^)(void))post;
-///< 请求的方式：GET 或者 POST
+/**
+ *  请求的方式：GET 或者 POST(建议调用 get/post方法或者在子类中实现协议)
+ */
 - (TVUPLRequestAPI *(^)(TVUPLRAType type))method;
-///< 请求的参数
+/**
+ *  设置请求的参数
+ */
++ (TVUPLRequestAPI *(^)(id param))parameter;
+/**
+ *  设置请求的参数
+ */
 - (TVUPLRequestAPI *(^)(id param))parameter;
-///< 请求的 URL
+/**
+ *  请求的 URL(建议在子类中实现协议)
+ */
 - (TVUPLRequestAPI *(^)(NSString *urlString))url;
-///< 请求结果回调是否在主线程
+/**
+ *  请求结果回调是否在主线程(默认在异步线程)
+ */
 - (TVUPLRequestAPI *(^)(void))mainQueue;
-///< 设置 Retry 参数 retry:最大重试次数 time: 重试间隔时间(填写 0，默认 0.1s)
+/**
+ *  设置 Retry 策略
+ *  retry: 最大重试次数
+ *  time: 重试间隔时间(最小间隔 0.1s，如果小于 0.1s，则默认 0.1s)
+ */
 - (TVUPLRequestAPI *(^)(NSInteger retry, NSTimeInterval time))retry;
-///< 禁用 Retry
+/**
+ *  禁用 Retry，目前默认没有重试(你无需调用)
+ */
 - (TVUPLRequestAPI *(^)(void))noRetry;
 /**
  *  API 名称, 用于调试、log 使用
  */
 - (TVUPLRequestAPI *(^)(NSString *name))name;
 /**
- *  请求结果回调，如果返回 NO 则会触发 Retry
- *  请将 then 放到点语法的最后如：API.get().xxx.then(^(tuple) {});
- *  tuple[0] : API Class
- *  tuple[1] : 返回结果
- *  tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
- *  tuple[3 ~ ...] : 自定义类型
+ *  请求结果回调
+ *  回调参数:
+ *      请将 then 放到点语法的最后如：API.get().xxx.then(^(tuple) {});
+ *      tuple[0] : API Class
+ *      tuple[1] : 返回结果
+ *      tuple[2] : error(默认 NSError *，但是你可以自定义返回类型如: NSString * 类型)
+ *      tuple[3 ~ 9] : 自定义类型
+ *  返回参数:
+ *      如果返回 NO 则会触发 Retry
+ *  注意:
+ *      默认异步线程回调
  */
 - (TVUPLRequestAPI *(^)(BOOL (^then)(TVUTuple *tuple)))then;
 /**

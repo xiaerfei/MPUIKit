@@ -27,8 +27,9 @@
         });
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        TVUTuple *result = TVUPLUidInfoAPI.parameter(@(123)).sync();
-        
+        TVUTuple *result0 = TVUPLUidInfoAPI.parameter(@(123)).sync();
+        TVUTuple *result1 = TVUPLUidInfoAPI.parameter(@(456)).sync();
+        TVUTuple *result2 = TVUPLUidInfoAPI.parameter(@(789)).sync();
     });
 }
 
