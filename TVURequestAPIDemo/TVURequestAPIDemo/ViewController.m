@@ -7,7 +7,8 @@
 
 #import "ViewController.h"
 #import "TVUPLUidInfoAPI.h"
-
+#import "TVUPLUsersAPI.h"
+#import "TVUPLTimeoutAPI.h"
 @interface ViewController ()
 
 @end
@@ -16,11 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    TVUPLUidInfoAPI
+    [self testTimeout];
+}
+
+- (void)testApi {
+    TVUPLUsersAPI
         .get()
-        .parameter(@(123))
         .mainQueue()
-        .retry(2,1)
         .name(@"UidInfo")
         .then(^BOOL(TVUTuple *tuple) {
             
@@ -29,18 +32,45 @@
                 return NO;
             }
             
-            NSDictionary *info = [tuple[1] toDictionaryValue];
-            
-            
+            NSLog(@"sharexia: info=%@", [tuple[1] toStringValue]);
             return YES; // 返回 NO 表示需要 Retry
         });
-    
+}
+
+- (void)testSync {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        TVUTuple *result0 = TVUPLUidInfoAPI.parameter(@(123)).sync();
-        TVUTuple *result1 = TVUPLUidInfoAPI.parameter(@(456)).sync();
-        TVUTuple *result2 = TVUPLUidInfoAPI.parameter(@(789)).sync();
+        TVUTuple *result0 = TVUPLUsersAPI.parameter(@(1)).sync();
+        NSError *error0 = [result0[1] toErrorValue];
+        if (error0) {
+            NSLog(@"error0:%@", error0.localizedDescription);
+            return;
+        } else {
+            NSLog(@"info0=%@", [result0[1] toStringValue]);
+        }
+        TVUTuple *result1 = TVUPLUsersAPI.parameter(@(2)).sync();
+        NSError *error1 = [result0[1] toErrorValue];
+        if (error1) {
+            NSLog(@"error1:%@", error1.localizedDescription);
+            return;
+        } else {
+            NSLog(@"info1=%@", [result1[1] toStringValue]);
+        }
     });
 }
+
+- (void)testTimeout {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        TVUTuple *result0 = TVUPLTimeoutAPI.parameter(nil).sync();
+        NSError *error0 = [result0[1] toErrorValue];
+        if (error0) {
+            NSLog(@"error0:%@", error0.localizedDescription);
+            return;
+        } else {
+            NSLog(@"info0=%@", [result0[1] toStringValue]);
+        }
+    });
+}
+
 
 
 @end

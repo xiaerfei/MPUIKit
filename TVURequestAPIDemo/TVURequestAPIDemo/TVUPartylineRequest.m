@@ -14,7 +14,15 @@
      completionHandler:(void (^)(NSData * _Nullable data,
                                  NSURLResponse * _Nullable response,
                                  NSError * _Nullable error))completionHandler {
-    return nil;
+    NSMutableURLRequest *request =
+    [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    
+    request.HTTPMethod = HTTPMethod;
+    request.timeoutInterval = 60;
+    if (param) {
+        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:param options:0 error:nil];
+    }
+    return [self request:request completionHandler:completionHandler];
 }
 
 + (NSURLSessionDataTask *)request:(NSURLRequest *)request
@@ -35,7 +43,7 @@
 }
 
 + (NSString *)domainString {
-    return @"https://api.tvunetworks.com/uniformapi/partyline";
+    return @"http://172.16.139.35:3000";
 }
 
 @end

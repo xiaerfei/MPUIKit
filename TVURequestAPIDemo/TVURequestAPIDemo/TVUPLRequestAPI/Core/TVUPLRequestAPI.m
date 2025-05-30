@@ -80,8 +80,8 @@
     };
 }
 ///< 请求的参数
-+ (TVUPLRequestAPI *(^)(id param))parameter {
-    return ^(id param){
++ (TVUPLRequestAPI *(^)(id _Nullable param))parameter {
+    return ^(id _Nullable param){
         TVUPLRequestAPI *api = [self class].new;
         api.raParameter = param;
         return api;
@@ -181,7 +181,22 @@
             return NO;
         });
         
-        dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+        // 设置超时，30秒
+        dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC);
+        if (dispatch_group_wait(group, timeout) != 0) {
+            customTuple = [TVUTuple new];
+            customTuple[0] = self;
+            // 超时处理
+            NSError *error = [NSError errorWithDomain:@"dispatch wait timeout 30s"
+                                                 code:NSURLErrorTimedOut
+                                             userInfo:nil];
+            customTuple[1] = error;
+            [self.dataTask cancel];
+        } else {
+            // 正常完成
+            NSLog(@"所有任务完成");
+        }
+        
         return customTuple;
     };
 }
@@ -262,7 +277,7 @@
 
 - (BOOL)isRetryMaximumLimit {
     @synchronized (self) {
-        return self.doRetryCount > self.retryCount;
+        return self.doRetryCount >= self.retryCount;
     }
 }
 
@@ -272,6 +287,8 @@
         url = [self.delegate customRequestURLString];
     } else {
         url = self.raUrlString;
+        /// 拼接 URL 参数
+        
     }
     url = [NSString stringWithFormat:@"%@/%@",
            [TVUPartylineRequest domainString], url];

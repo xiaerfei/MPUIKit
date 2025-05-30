@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
 /**
  *  设置请求的参数
  */
-+ (TVUPLRequestAPI *(^)(id param))parameter;
++ (TVUPLRequestAPI *(^)(id _Nullable param))parameter;
 /**
  *  设置请求的参数
  */
@@ -100,7 +100,10 @@ typedef NS_ENUM(NSInteger, TVUPLRAType) {
  *  tuple[3 ~ ...] : 自定义类型
  */
 - (TVUTuple *(^)(void))sync;
-   
+/// 同步超时, 默认 30s
+@property (nonatomic, assign) NSInteger syncWaitTime;
+
+
 - (TVUPLRAType)requestMethod;
 - (NSString *)requestURL;
 - (id)requestParameter;
