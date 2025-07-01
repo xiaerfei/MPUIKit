@@ -15,7 +15,7 @@
 @property (nonatomic, assign) TVUPLRAType raType;
 @property (nonatomic,   copy) id raParameter;
 @property (nonatomic,   copy) NSString *raName;
-@property (nonatomic,   copy) BOOL(^raThen)(TVUTuple *tuple);
+@property (nonatomic,   copy) BOOL(^raThenBlock)(TVUTuple *tuple);
 @property (atomic, assign, readwrite) BOOL requesting;
 @property (nonatomic, assign) BOOL raMainQueue;
 ///< 正在第 n 次重试
@@ -154,7 +154,7 @@
  */
 - (TVUPLRequestAPI *(^)(BOOL(^then)(TVUTuple *tuple)))then {
     return ^(BOOL(^then)(TVUTuple *tuple)){
-        self.raThen = then;
+        self.raThenBlock = then;
         [self start];
         return self;
     };
@@ -252,7 +252,7 @@
 - (void)stop {
     @synchronized (self) {
         [self.dataTask cancel];
-        self.raThen = nil;
+        self.raThenBlock = nil;
         [[TVUPLAPIManager manager] removeRetryWithAPI:self];        
     }
 }
@@ -335,8 +335,8 @@
     }
     void(^block)(void) = ^{
         @synchronized (self) {
-            if (self.raThen == nil) return;
-            BOOL success = self.raThen(customTuple);
+            if (self.raThenBlock == nil) return;
+            BOOL success = self.raThenBlock(customTuple);
             if (success) return;
             self.doRetryCount ++;
             if ([self isRetryMaximumLimit] == NO) {
