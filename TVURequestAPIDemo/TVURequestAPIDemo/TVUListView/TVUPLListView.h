@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) TVUPLRowType type;
 @property (nonatomic,   copy) NSString *key;
 @property (nonatomic, assign) UIEdgeInsets insets;
+@property (nonatomic, assign) UIEdgeInsets lineInsets;
+@property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);
 @property (nonatomic,   copy) id(^fetchRowParameterBlock)(TVUPLRow *row);
 @property (nonatomic, strong, readonly) UIView <TVUPLRowProtocol> *bindView;

@@ -18,6 +18,7 @@
 		2C98165C2E28A31300628759 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816502E28A31300628759 /* View+MASAdditions.m */; };
 		2C98165D2E28A31300628759 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816532E28A31300628759 /* ViewController+MASAdditions.m */; };
 		2C98165E2E28A31300628759 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98163C2E28A31300628759 /* MASCompositeConstraint.m */; };
+		2C9816832E2A527000628759 /* TVUPLDefaultRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816822E2A527000628759 /* TVUPLDefaultRow.m */; };
 		2CF318312DE946CA00C4202C /* TVUPLUsersAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */; };
 		2CF318452DE9534100C4202C /* TVUPLTimeoutAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318442DE9534100C4202C /* TVUPLTimeoutAPI.m */; };
 		8AAA45AF2DC9A66E00D2654D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45AE2DC9A66E00D2654D /* AppDelegate.m */; };
@@ -74,6 +75,9 @@
 		2C9816512E28A31300628759 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		2C9816522E28A31300628759 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		2C9816532E28A31300628759 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ViewController+MASAdditions.m"; sourceTree = "<group>"; };
+		2C9816812E2A527000628759 /* TVUPLDefaultRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLDefaultRow.h; sourceTree = "<group>"; };
+		2C9816822E2A527000628759 /* TVUPLDefaultRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultRow.m; sourceTree = "<group>"; };
+		2C9816842E2A54D100628759 /* TVUPLCRows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLCRows.h; sourceTree = "<group>"; };
 		2CF3182F2DE946CA00C4202C /* TVUPLUsersAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLUsersAPI.h; sourceTree = "<group>"; };
 		2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLUsersAPI.m; sourceTree = "<group>"; };
 		2CF318362DE948FD00C4202C /* TVURequestAPIDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVURequestAPIDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,9 @@
 		2C9813CC2E0A9B9F00628759 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2C9816812E2A527000628759 /* TVUPLDefaultRow.h */,
+				2C9816822E2A527000628759 /* TVUPLDefaultRow.m */,
+				2C9816842E2A54D100628759 /* TVUPLCRows.h */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -381,6 +388,7 @@
 				8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */,
 				8AAA45D02DC9A6BA00D2654D /* TVUPLAPIManager.m in Sources */,
 				2CF318312DE946CA00C4202C /* TVUPLUsersAPI.m in Sources */,
+				2C9816832E2A527000628759 /* TVUPLDefaultRow.m in Sources */,
 				2CF318452DE9534100C4202C /* TVUPLTimeoutAPI.m in Sources */,
 				8AAA45B52DC9A66E00D2654D /* ViewController.m in Sources */,
 				8AAA45CF2DC9A6BA00D2654D /* TVUPLUidInfoAPI.m in Sources */,

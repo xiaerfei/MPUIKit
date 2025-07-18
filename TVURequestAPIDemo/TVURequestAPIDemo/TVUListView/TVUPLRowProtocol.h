@@ -19,10 +19,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 };
 
 @protocol TVUPLRowProtocol <NSObject>
-@property (nonatomic, assign) TVUPLRowType type;
-@property (nonatomic,   copy) NSString *key;
 @property (nonatomic,   copy) void (^didSelectedBlock)(id _Nullable value);
-
 - (void)reloadWithData:(id)data;
 
 @end
