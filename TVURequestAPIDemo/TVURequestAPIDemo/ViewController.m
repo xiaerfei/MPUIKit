@@ -9,74 +9,19 @@
 #import "TVUPLUidInfoAPI.h"
 #import "TVUPLUsersAPI.h"
 #import "TVUPLTimeoutAPI.h"
-#import "TVUPLListView.h"
-#import "Masonry.h"
+
 @interface ViewController ()
-@property (nonatomic, strong) TVUPLListView *listView;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.listView = [[TVUPLListView alloc] init];
-    [self.view addSubview:self.listView];
-    
-    [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self);
-    }];
-    
-    __weak typeof(self) weakSelf = self;
-    [self.listView setFetchSectionsBlock:^NSArray<TVUPLSection *> * _Nonnull {
-        __strong typeof(weakSelf) self = weakSelf;
-        return @[[self firstSection]];
-    }];
+
 }
 
-- (TVUPLSection *)firstSection {
-    TVUPLRow *row0 = [[TVUPLRow alloc] init];
-    row0.type = TVUPLRowTypeDefault;
-    [row0 setFetchRowParameterBlock:^id _Nonnull(TVUPLRow * _Nonnull row) {
-        return @{
-            kTVUPLRowData : @{ @"text" : @"row0"},
-            kTVUPLRowKey : @"row0"
-        };
-    }];
-    TVUPLRow *row1 = [[TVUPLRow alloc] init];
-    [row1 setFetchRowParameterBlock:^id _Nonnull(TVUPLRow * _Nonnull row) {
-        return @{
-            kTVUPLRowData : @{ @"text" : @"row1"},
-            kTVUPLRowKey : @"row1"
-        };
-    }];
 
-    TVUPLRow *row2 = [[TVUPLRow alloc] init];
-    [row2 setFetchRowParameterBlock:^id _Nonnull(TVUPLRow * _Nonnull row) {
-        return @{
-            kTVUPLRowData : @{ @"text" : @"row2"},
-            kTVUPLRowKey : @"row2"
-        };
-    }];
-
-    TVUPLSection *section0 = [[TVUPLSection alloc] init];
-    section0.rows = @[row0, row1, row2].mutableCopy;
-    section0.cornerRadius = 6;
-    section0.backgroundColor = [UIColor whiteColor];
-    return section0;
-}
-
-- (TVUPLRow *)createRowWithString:(NSString *)string {
-    TVUPLRow *row0 = [[TVUPLRow alloc] init];
-    row0.type = TVUPLRowTypeDefault;
-    [row0 setFetchRowParameterBlock:^id _Nonnull(TVUPLRow * _Nonnull row) {
-        return @{
-            kTVUPLRowData : @{ @"text" : string},
-            kTVUPLRowKey : string
-        };
-    }];
-    return row0;
-}
 
 - (void)testApi {
     TVUPLUsersAPI

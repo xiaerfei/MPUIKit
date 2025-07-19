@@ -32,6 +32,8 @@
 		8AAA45D02DC9A6BA00D2654D /* TVUPLAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45CB2DC9A6BA00D2654D /* TVUPLAPIManager.m */; };
 		8AAA45D12DC9A6BA00D2654D /* TVUPLRequestAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45CC2DC9A6BA00D2654D /* TVUPLRequestAPI.m */; };
 		8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */; };
+		9C7D448E2E2B4A0500CC621B /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D448D2E2B4A0500CC621B /* ListViewController.m */; };
+		9C7D44912E2B611200CC621B /* TVUPLBaseRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D44902E2B611200CC621B /* TVUPLBaseRow.m */; };
 		9CBB9C7E2DD99017005B5AD5 /* TVUTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBB9C7D2DD99017005B5AD5 /* TVUTuple.m */; };
 		9CCD4F712DE75B58008E1778 /* NSObject+BaseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CCD4F702DE75B58008E1778 /* NSObject+BaseDataType.m */; };
 /* End PBXBuildFile section */
@@ -103,6 +105,10 @@
 		8AAA45CE2DC9A6BA00D2654D /* TVUPLRequestAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVUPLRequestAPI.h; sourceTree = "<group>"; };
 		8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVUPartylineRequest.m; sourceTree = "<group>"; };
 		8AAA45D32DC9A6E100D2654D /* TVUPartylineRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVUPartylineRequest.h; sourceTree = "<group>"; };
+		9C7D448C2E2B4A0500CC621B /* ListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		9C7D448D2E2B4A0500CC621B /* ListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		9C7D448F2E2B611200CC621B /* TVUPLBaseRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLBaseRow.h; sourceTree = "<group>"; };
+		9C7D44902E2B611200CC621B /* TVUPLBaseRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLBaseRow.m; sourceTree = "<group>"; };
 		9CBB9C7C2DD99017005B5AD5 /* TVUTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUTuple.h; sourceTree = "<group>"; };
 		9CBB9C7D2DD99017005B5AD5 /* TVUTuple.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUTuple.m; sourceTree = "<group>"; };
 		9CCD4F6F2DE75B58008E1778 /* NSObject+BaseDataType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+BaseDataType.h"; sourceTree = "<group>"; };
@@ -147,6 +153,8 @@
 				2C9813C92E0A9AB900628759 /* TVUPLListView.h */,
 				2C9813CA2E0A9AB900628759 /* TVUPLListView.m */,
 				2C98163A2E27AFD600628759 /* TVUPLRowProtocol.h */,
+				9C7D448F2E2B611200CC621B /* TVUPLBaseRow.h */,
+				9C7D44902E2B611200CC621B /* TVUPLBaseRow.m */,
 				2C9813CC2E0A9B9F00628759 /* Components */,
 			);
 			path = TVUListView;
@@ -224,6 +232,8 @@
 				8AAA45B12DC9A66E00D2654D /* SceneDelegate.m */,
 				8AAA45B32DC9A66E00D2654D /* ViewController.h */,
 				8AAA45B42DC9A66E00D2654D /* ViewController.m */,
+				9C7D448C2E2B4A0500CC621B /* ListViewController.h */,
+				9C7D448D2E2B4A0500CC621B /* ListViewController.m */,
 				8AAA45D32DC9A6E100D2654D /* TVUPartylineRequest.h */,
 				8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */,
 				9CCD4F6F2DE75B58008E1778 /* NSObject+BaseDataType.h */,
@@ -384,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C7D448E2E2B4A0500CC621B /* ListViewController.m in Sources */,
 				9CCD4F712DE75B58008E1778 /* NSObject+BaseDataType.m in Sources */,
 				8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */,
 				8AAA45D02DC9A6BA00D2654D /* TVUPLAPIManager.m in Sources */,
@@ -402,6 +413,7 @@
 				2C98165B2E28A31300628759 /* MASViewConstraint.m in Sources */,
 				2C98165C2E28A31300628759 /* View+MASAdditions.m in Sources */,
 				2C98165D2E28A31300628759 /* ViewController+MASAdditions.m in Sources */,
+				9C7D44912E2B611200CC621B /* TVUPLBaseRow.m in Sources */,
 				2C98165E2E28A31300628759 /* MASCompositeConstraint.m in Sources */,
 				8AAA45C02DC9A67600D2654D /* main.m in Sources */,
 				9CBB9C7E2DD99017005B5AD5 /* TVUTuple.m in Sources */,

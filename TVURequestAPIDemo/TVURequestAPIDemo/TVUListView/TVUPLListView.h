@@ -7,18 +7,23 @@
 
 #import <UIKit/UIKit.h>
 #import "TVUPLRowProtocol.h"
-
+#import "TVUPLCRows.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLRow : NSObject
-@property (nonatomic, assign) TVUPLRowType type;
-@property (nonatomic,   copy) NSString *key;
+@property (nonatomic, assign, readonly) TVUPLRowType type;
+@property (nonatomic,   copy, readonly) NSString *key;
 @property (nonatomic, assign) UIEdgeInsets insets;
 @property (nonatomic, assign) UIEdgeInsets lineInsets;
 @property (nonatomic, strong) UIColor *lineColor;
+@property (nonatomic, assign) BOOL hiddenLine;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, strong) id rowData;
 @property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);
-@property (nonatomic,   copy) id(^fetchRowParameterBlock)(TVUPLRow *row);
-@property (nonatomic, strong, readonly) UIView <TVUPLRowProtocol> *bindView;
+@property (nonatomic,   copy) void (^fetchRowParameterBlock)(TVUPLRow *row);
+@property (nonatomic, strong, readonly) TVUPLBaseRow <TVUPLRowProtocol> *bindView;
+
+- (instancetype)initWithType:(TVUPLRowType)type key:(NSString *)key;
 @end
 
 
@@ -29,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic,   copy) NSString *key;
 @property (nonatomic, strong) UIView *bindView;
-@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
+
+- (void)addRow:(TVUPLRow *)row;
 @end
 
 

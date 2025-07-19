@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TVUPLRowProtocol.h"
 
+#import "TVUPLBaseRow.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TVUPLDefaultRow : UIView <TVUPLRowProtocol>
+@interface TVUPLDefaultRow : TVUPLBaseRow <TVUPLRowProtocol>
 
 @end
 

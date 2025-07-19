@@ -33,7 +33,7 @@
 #pragma mark - Private Methods
 - (void)configureUI {
     self.textLabel = [[UILabel alloc] init];
-    self.textLabel.textColor = [UIColor blackColor];
+    self.textLabel.textColor = [UIColor whiteColor];
     [self addSubview:self.textLabel];
     
     [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {

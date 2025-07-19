@@ -9,5 +9,6 @@
 #define TVUPLCRows_h
 
 #import "TVUPLDefaultRow.h"
+#import "TVUPLBaseRow.h"
 
 #endif /* TVUPLCRows_h */
