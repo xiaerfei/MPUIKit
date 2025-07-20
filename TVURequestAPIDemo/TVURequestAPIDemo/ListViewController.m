@@ -25,7 +25,7 @@
     self.view.backgroundColor = TVUColorWithRHedix(0x141414);
     
     self.listView = [[TVUPLListView alloc] init];
-    [self.view addSubview:self.listView];
+    [self.view insertSubview:self.listView atIndex:0];
     
     [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view.mas_safeAreaLayoutGuide);
@@ -35,24 +35,24 @@
     [self.listView setFetchSectionsBlock:^NSArray<TVUPLSection *> * _Nonnull {
         __strong typeof(weakSelf) self = weakSelf;
         return @[
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
-            [self firstSection],
+            [self sectionWithStart:0 + 0],
+            [self sectionWithStart:0 + 3],
+            [self sectionWithStart:0 + 6],
+            [self sectionWithStart:0 + 9],
+            [self sectionWithStart:0 + 12],
+            [self sectionWithStart:0 + 15],
+            [self sectionWithStart:0 + 18],
+            [self sectionWithStart:0 + 21],
         ];
     }];
     
     [self.listView reload];
 }
 
-- (TVUPLSection *)firstSection {
-    TVUPLRow *row0 = [self createRowWithString:@"row0"];
-    TVUPLRow *row1 = [self createRowWithString:@"row1"];
-    TVUPLRow *row2 = [self createRowWithString:@"row2"];
+- (TVUPLSection *)sectionWithStart:(NSInteger)start {
+    TVUPLRow *row0 = [self createRowWithString:[NSString stringWithFormat:@"row%ld", start]];
+    TVUPLRow *row1 = [self createRowWithString:[NSString stringWithFormat:@"row%ld", start + 1]];
+    TVUPLRow *row2 = [self createRowWithString:[NSString stringWithFormat:@"row%ld", start + 2]];
 
     TVUPLSection *section0 = [[TVUPLSection alloc] init];
     [section0 addRow:row0];
@@ -64,31 +64,32 @@
     return section0;
 }
 
-- (TVUPLSection *)secondSection {
-    TVUPLRow *row0 = [self createRowWithString:@"row0"];
-    TVUPLRow *row1 = [self createRowWithString:@"row1"];
-    TVUPLRow *row2 = [self createRowWithString:@"row2"];
-
-    TVUPLSection *section0 = [[TVUPLSection alloc] init];
-    [section0 addRow:row0];
-    [section0 addRow:row1];
-    [section0 addRow:row2];
-    section0.cornerRadius = 6;
-    section0.backgroundColor = TVUColorWithRHedix(0x1F1F1F);
-    section0.insets = UIEdgeInsetsMake(5, 10, 5, 10);
-    return section0;
-}
-
+static int cnt = 1;
+static NSString *titleString = @"row7";
 - (TVUPLRow *)createRowWithString:(NSString *)string {
     TVUPLRow *row0 = [[TVUPLRow alloc] initWithType:TVUPLRowTypeDefault
                                                 key:string];
     row0.lineInsets = UIEdgeInsetsMake(0, 20, 0, 10);
     row0.lineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     [row0 setFetchRowParameterBlock:^(TVUPLRow * _Nonnull row) {
-        row.rowData = @{ @"text" : string};
-        row.height = 40;
+        if ([row.key isEqualToString:@"row7"]) {
+            row.rowData = @{ @"text" : titleString};
+            row.height = 40;
+            row.hidden = cnt % 3 == 0;
+        } else {
+            row.rowData = @{ @"text" : string};
+            row.height = 40;
+        }
     }];
     return row0;
 }
+
+- (IBAction)refreshAction:(id)sender {
+    cnt ++;
+    titleString = [NSString stringWithFormat:@"row --> %d", cnt];
+    [self.listView reloadRowWithKey:@"row7"];
+}
+
+
 
 @end

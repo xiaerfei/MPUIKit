@@ -46,8 +46,22 @@
                     <view key="view" contentMode="scaleToFill" id="brb-bp-tUH">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBl-zl-5jR">
+                                <rect key="frame" x="15" y="749" width="83" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshAction:" destination="ZZw-9W-nb9" eventType="touchUpInside" id="ekU-Sz-nud"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="41D-Na-o5u"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="IBl-zl-5jR" firstAttribute="bottom" secondItem="41D-Na-o5u" secondAttribute="bottom" id="Xst-UM-t2A"/>
+                            <constraint firstItem="IBl-zl-5jR" firstAttribute="leading" secondItem="41D-Na-o5u" secondAttribute="leading" constant="15" id="YPK-vG-EaK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q5D-wH-7ta"/>
                 </viewController>

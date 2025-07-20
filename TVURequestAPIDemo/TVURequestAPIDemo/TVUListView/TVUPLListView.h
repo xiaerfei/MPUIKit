@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UIEdgeInsets lineInsets;
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) BOOL hiddenLine;
+@property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) id rowData;
 @property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);
@@ -39,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
-@interface TVUPLListView : UIView
+@interface TVUPLListView : UIScrollView
 @property (nonatomic, copy) NSArray <TVUPLSection *>*(^fetchSectionsBlock)(void);
 
 - (void)reload;
