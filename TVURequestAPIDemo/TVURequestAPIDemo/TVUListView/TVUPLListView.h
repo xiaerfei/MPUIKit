@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) BOOL hiddenLine;
 @property (nonatomic, assign) BOOL hidden;
+@property (nonatomic, assign) BOOL showIndicator;
+@property (nonatomic, assign) BOOL unselected;
+@property (nonatomic, assign) BOOL unselectedStyle;
+///< 不再通过 rowData 刷新数据
+@property (nonatomic, assign) BOOL dataByUser;
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) id rowData;
 @property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);

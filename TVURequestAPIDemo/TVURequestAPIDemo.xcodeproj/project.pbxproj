@@ -19,6 +19,10 @@
 		2C98165D2E28A31300628759 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816532E28A31300628759 /* ViewController+MASAdditions.m */; };
 		2C98165E2E28A31300628759 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98163C2E28A31300628759 /* MASCompositeConstraint.m */; };
 		2C9816832E2A527000628759 /* TVUPLDefaultRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816822E2A527000628759 /* TVUPLDefaultRow.m */; };
+		2C98168B2E2DE63200628759 /* TVUPLIndicatorRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98168A2E2DE63200628759 /* TVUPLIndicatorRow.m */; };
+		2C98168E2E2DF0EA00628759 /* TVUPLSwitchRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C98168D2E2DF0EA00628759 /* TVUPLSwitchRow.m */; };
+		2C9816912E2E0AD900628759 /* TVUPLLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816902E2E0AD900628759 /* TVUPLLoginRow.m */; };
+		2C9816942E2E0B1E00628759 /* TVUPLUnLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816932E2E0B1E00628759 /* TVUPLUnLoginRow.m */; };
 		2CF318312DE946CA00C4202C /* TVUPLUsersAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */; };
 		2CF318452DE9534100C4202C /* TVUPLTimeoutAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318442DE9534100C4202C /* TVUPLTimeoutAPI.m */; };
 		8AAA45AF2DC9A66E00D2654D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45AE2DC9A66E00D2654D /* AppDelegate.m */; };
@@ -80,6 +84,14 @@
 		2C9816812E2A527000628759 /* TVUPLDefaultRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLDefaultRow.h; sourceTree = "<group>"; };
 		2C9816822E2A527000628759 /* TVUPLDefaultRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultRow.m; sourceTree = "<group>"; };
 		2C9816842E2A54D100628759 /* TVUPLCRows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLCRows.h; sourceTree = "<group>"; };
+		2C9816892E2DE63200628759 /* TVUPLIndicatorRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLIndicatorRow.h; sourceTree = "<group>"; };
+		2C98168A2E2DE63200628759 /* TVUPLIndicatorRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLIndicatorRow.m; sourceTree = "<group>"; };
+		2C98168C2E2DF0EA00628759 /* TVUPLSwitchRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLSwitchRow.h; sourceTree = "<group>"; };
+		2C98168D2E2DF0EA00628759 /* TVUPLSwitchRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLSwitchRow.m; sourceTree = "<group>"; };
+		2C98168F2E2E0AD900628759 /* TVUPLLoginRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLLoginRow.h; sourceTree = "<group>"; };
+		2C9816902E2E0AD900628759 /* TVUPLLoginRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLLoginRow.m; sourceTree = "<group>"; };
+		2C9816922E2E0B1E00628759 /* TVUPLUnLoginRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLUnLoginRow.h; sourceTree = "<group>"; };
+		2C9816932E2E0B1E00628759 /* TVUPLUnLoginRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLUnLoginRow.m; sourceTree = "<group>"; };
 		2CF3182F2DE946CA00C4202C /* TVUPLUsersAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLUsersAPI.h; sourceTree = "<group>"; };
 		2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLUsersAPI.m; sourceTree = "<group>"; };
 		2CF318362DE948FD00C4202C /* TVURequestAPIDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVURequestAPIDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,9 +164,9 @@
 			children = (
 				2C9813C92E0A9AB900628759 /* TVUPLListView.h */,
 				2C9813CA2E0A9AB900628759 /* TVUPLListView.m */,
-				2C98163A2E27AFD600628759 /* TVUPLRowProtocol.h */,
 				9C7D448F2E2B611200CC621B /* TVUPLBaseRow.h */,
 				9C7D44902E2B611200CC621B /* TVUPLBaseRow.m */,
+				2C98163A2E27AFD600628759 /* TVUPLRowProtocol.h */,
 				2C9813CC2E0A9B9F00628759 /* Components */,
 			);
 			path = TVUListView;
@@ -163,9 +175,17 @@
 		2C9813CC2E0A9B9F00628759 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2C9816842E2A54D100628759 /* TVUPLCRows.h */,
 				2C9816812E2A527000628759 /* TVUPLDefaultRow.h */,
 				2C9816822E2A527000628759 /* TVUPLDefaultRow.m */,
-				2C9816842E2A54D100628759 /* TVUPLCRows.h */,
+				2C9816892E2DE63200628759 /* TVUPLIndicatorRow.h */,
+				2C98168A2E2DE63200628759 /* TVUPLIndicatorRow.m */,
+				2C98168C2E2DF0EA00628759 /* TVUPLSwitchRow.h */,
+				2C98168D2E2DF0EA00628759 /* TVUPLSwitchRow.m */,
+				2C98168F2E2E0AD900628759 /* TVUPLLoginRow.h */,
+				2C9816902E2E0AD900628759 /* TVUPLLoginRow.m */,
+				2C9816922E2E0B1E00628759 /* TVUPLUnLoginRow.h */,
+				2C9816932E2E0B1E00628759 /* TVUPLUnLoginRow.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -396,7 +416,10 @@
 			files = (
 				9C7D448E2E2B4A0500CC621B /* ListViewController.m in Sources */,
 				9CCD4F712DE75B58008E1778 /* NSObject+BaseDataType.m in Sources */,
+				2C98168B2E2DE63200628759 /* TVUPLIndicatorRow.m in Sources */,
+				2C9816912E2E0AD900628759 /* TVUPLLoginRow.m in Sources */,
 				8AAA45D42DC9A6E100D2654D /* TVUPartylineRequest.m in Sources */,
+				2C98168E2E2DF0EA00628759 /* TVUPLSwitchRow.m in Sources */,
 				8AAA45D02DC9A6BA00D2654D /* TVUPLAPIManager.m in Sources */,
 				2CF318312DE946CA00C4202C /* TVUPLUsersAPI.m in Sources */,
 				2C9816832E2A527000628759 /* TVUPLDefaultRow.m in Sources */,
@@ -406,6 +429,7 @@
 				8AAA45AF2DC9A66E00D2654D /* AppDelegate.m in Sources */,
 				2C9816552E28A31300628759 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				2C9816562E28A31300628759 /* MASConstraint.m in Sources */,
+				2C9816942E2E0B1E00628759 /* TVUPLUnLoginRow.m in Sources */,
 				2C9816572E28A31300628759 /* NSArray+MASAdditions.m in Sources */,
 				2C9816582E28A31300628759 /* MASConstraintMaker.m in Sources */,
 				2C9816592E28A31300628759 /* MASLayoutConstraint.m in Sources */,

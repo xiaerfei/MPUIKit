@@ -16,6 +16,10 @@ extern NSString *const kTVUPLRowKey;
 
 typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeDefault,
+    TVUPLRowTypeIndicator,
+    TVUPLRowTypeSwitch,
+    TVUPLRowTypeLogin,
+    TVUPLRowTypeUnLogin,
 };
 
 @protocol TVUPLRowProtocol <NSObject>

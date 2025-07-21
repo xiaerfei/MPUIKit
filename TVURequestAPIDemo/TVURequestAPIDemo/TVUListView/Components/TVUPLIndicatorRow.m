@@ -1,16 +1,13 @@
 //
-//  TVUPLDefaultRow.m
+//  TVUPLIndicatorRow.m
 //  TVURequestAPIDemo
 //
-//  Created by TVUM4Pro on 2025/7/18.
+//  Created by TVUM4Pro on 2025/7/21.
 //
 
-#import "TVUPLDefaultRow.h"
+#import "TVUPLIndicatorRow.h"
 
-@interface TVUPLDefaultRow ()
-@end
-
-@implementation TVUPLDefaultRow
+@implementation TVUPLIndicatorRow
 @synthesize didSelectedBlock;
 
 - (instancetype)init {
@@ -24,20 +21,17 @@
 #pragma mark - TVUPLRowProtocol
 - (void)reloadWithData:(nonnull id)data {
     if ([data isDictionary] == NO) return;
-    self.textLabel.text = [data[@"text"] toStringValue];
+    self.textLabel.text  = [data[@"text"] toStringValue];
     self.valueLabel.text = [data[@"value"] toStringValue];
 }
-
 #pragma mark - Private Methods
 - (void)configureUI {
     self.textLabel = [[UILabel alloc] init];
     self.textLabel.textColor = [UIColor whiteColor];
-    self.textLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.textLabel];
     
     self.valueLabel = [[UILabel alloc] init];
-    self.valueLabel.textColor = [UIColor whiteColor];
-    self.valueLabel.font = [UIFont systemFontOfSize:15];
+    self.valueLabel.textColor = [UIColor lightGrayColor];
     [self addSubview:self.valueLabel];
     
     [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,7 +41,8 @@
     
     [self.valueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-20);
+        make.right.equalTo(self).offset(-30);
     }];
 }
+
 @end

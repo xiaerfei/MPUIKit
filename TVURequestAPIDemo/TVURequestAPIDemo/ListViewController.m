@@ -59,7 +59,7 @@
     [section0 addRow:row1];
     [section0 addRow:row2];
     section0.cornerRadius = 6;
-    section0.backgroundColor = TVUColorWithRHedix(0x1F1F1F);
+    section0.backgroundColor = TVUColorWithRHedix(0x1C1C1E);
     section0.insets = UIEdgeInsetsMake(5, 10, 5, 10);
     return section0;
 }
@@ -67,18 +67,29 @@
 static int cnt = 1;
 static NSString *titleString = @"row7";
 - (TVUPLRow *)createRowWithString:(NSString *)string {
-    TVUPLRow *row0 = [[TVUPLRow alloc] initWithType:TVUPLRowTypeDefault
+    TVUPLRowType type = TVUPLRowTypeDefault;
+    if ([string isEqualToString:@"row7"]) {
+        type = TVUPLRowTypeIndicator;
+    } else if ([string isEqualToString:@"row5"]) {
+        type = TVUPLRowTypeSwitch;
+    }
+    
+    TVUPLRow *row0 = [[TVUPLRow alloc] initWithType:type
                                                 key:string];
-    row0.lineInsets = UIEdgeInsetsMake(0, 20, 0, 10);
-    row0.lineColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
+    row0.lineInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+    
+    row0.lineColor = TVUColorWithRHedix(0x3D3C40);
     [row0 setFetchRowParameterBlock:^(TVUPLRow * _Nonnull row) {
         if ([row.key isEqualToString:@"row7"]) {
-            row.rowData = @{ @"text" : titleString};
-            row.height = 40;
+            row.rowData = @{ @"text" : @"PID", @"value" : @"256ms"};
+            row.height = 44;
             row.hidden = cnt % 3 == 0;
+        } else if ([row.key isEqualToString:@"row5"]) {
+            row.rowData = @{ @"text" : @"Debug", @"value" : @"YES"};
+            row.height = 44;
         } else {
             row.rowData = @{ @"text" : string};
-            row.height = 40;
+            row.height = 44;
         }
     }];
     return row0;
@@ -90,6 +101,43 @@ static NSString *titleString = @"row7";
     [self.listView reloadRowWithKey:@"row7"];
 }
 
-
-
+#pragma mark - Sections
+#pragma mark 登录
+- (TVUPLSection *)loginSection {
+    TVUPLSection *section = [[TVUPLSection alloc] init];
+    
+    TVUPLRow *unloginRow = [[TVUPLRow alloc] initWithType:TVUPLRowTypeUnLogin key:@"unlogin"];
+    unloginRow.hiddenLine = YES;
+    unloginRow.hidden = YES;
+    [unloginRow setFetchRowParameterBlock:^(TVUPLRow * _Nonnull row) {
+        row.rowData = @{
+            @"text" : @"登录",
+        };
+    }];
+    
+    
+    TVUPLRow *loginRow = [[TVUPLRow alloc] initWithType:TVUPLRowTypeLogin key:@"login"];
+    loginRow.hiddenLine = YES;
+    loginRow.unselectedStyle = YES;
+    [loginRow setFetchRowParameterBlock:^(TVUPLRow * _Nonnull row) {
+        row.rowData = @{
+            @"name"  : @"sharexia",
+            @"email" : @"sharexia@tvunetworks.com",
+            @"first" : @"s",
+        };
+    }];
+    
+    [section addRow:unloginRow];
+    [section addRow:loginRow];
+    
+    return section;
+}
+#pragma mark PGM Preview
+- (TVUPLSection *)pgmPreview {
+    TVUPLSection *section = [[TVUPLSection alloc] init];
+    
+    
+    
+    return section;
+}
 @end

@@ -10,5 +10,9 @@
 
 #import "TVUPLDefaultRow.h"
 #import "TVUPLBaseRow.h"
+#import "TVUPLIndicatorRow.h"
+#import "TVUPLSwitchRow.h"
+#import "TVUPLUnLoginRow.h"
+#import "TVUPLLoginRow.h"
 
 #endif /* TVUPLCRows_h */

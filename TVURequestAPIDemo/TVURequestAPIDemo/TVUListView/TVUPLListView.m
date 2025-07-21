@@ -152,25 +152,30 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     }
     view.type = row.type;
     view.row = row;
-    if (row.fetchRowParameterBlock) {
-        row.fetchRowParameterBlock(row);
-    }
-
-    if (row.lineView == nil) {
-        row.lineView = [[UIView alloc] init];
-        [view addSubview:row.lineView];
-    }
-    if (row.lineColor) {
-        row.lineView.backgroundColor = row.lineColor;
-    } else {
-        row.lineView.backgroundColor = [UIColor lightGrayColor];
-    }
-    
+    /// 添加背景 View
     if (row.backView == nil) {
         row.backView = [[UIView alloc] init];
         [view insertSubview:row.backView atIndex:0];
     }
-    [view reloadWithData:row.rowData];
+    /// 添加 line
+    if (row.lineView == nil) {
+        row.lineView = [[UIView alloc] init];
+        [view insertSubview:row.lineView atIndex:0];
+    }
+    
+    if (row.fetchRowParameterBlock) {
+        row.fetchRowParameterBlock(row);
+    }
+
+    if (row.lineColor) {
+        row.lineView.backgroundColor = row.lineColor;
+    } else {
+        row.lineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
+    }
+    if (row.hidden == NO && row.dataByUser == NO) {
+        [view reloadWithData:row.rowData];
+        view.showIndicator = row.showIndicator;
+    }
 }
 
 - (TVUPLBaseRow <TVUPLRowProtocol> *)viewForRowType:(TVUPLRowType)type {
@@ -302,7 +307,11 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         clsRowMap = @{
-            @(TVUPLRowTypeDefault) :  TVUPLDefaultRow.class
+            @(TVUPLRowTypeDefault)      : TVUPLDefaultRow.class,
+            @(TVUPLRowTypeIndicator)    : TVUPLIndicatorRow.class,
+            @(TVUPLRowTypeSwitch)       : TVUPLSwitchRow.class,
+            @(TVUPLRowTypeLogin)        : TVUPLLoginRow.class,
+            @(TVUPLRowTypeUnLogin)      : TVUPLUnLoginRow.class,
         };
     });
     return clsRowMap[@(type)];

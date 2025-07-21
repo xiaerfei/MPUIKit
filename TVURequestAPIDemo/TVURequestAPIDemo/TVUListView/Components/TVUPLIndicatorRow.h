@@ -1,8 +1,8 @@
 //
-//  TVUPLDefaultRow.h
+//  TVUPLIndicatorRow.h
 //  TVURequestAPIDemo
 //
-//  Created by TVUM4Pro on 2025/7/18.
+//  Created by TVUM4Pro on 2025/7/21.
 //
 
 #import <UIKit/UIKit.h>
@@ -10,9 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TVUPLDefaultRow : TVUPLBaseRow <TVUPLRowProtocol>
+@interface TVUPLIndicatorRow : TVUPLBaseRow <TVUPLRowProtocol>
 @property (nonatomic, strong) UILabel *textLabel;
 @property (nonatomic, strong) UILabel *valueLabel;
+@property (nonatomic, strong) UIImageView *indicatorImageView;
 @end
 
 NS_ASSUME_NONNULL_END

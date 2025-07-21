@@ -1,16 +1,13 @@
 //
-//  TVUPLDefaultRow.m
+//  TVUPLSwitchRow.m
 //  TVURequestAPIDemo
 //
-//  Created by TVUM4Pro on 2025/7/18.
+//  Created by TVUM4Pro on 2025/7/21.
 //
 
-#import "TVUPLDefaultRow.h"
+#import "TVUPLSwitchRow.h"
 
-@interface TVUPLDefaultRow ()
-@end
-
-@implementation TVUPLDefaultRow
+@implementation TVUPLSwitchRow
 @synthesize didSelectedBlock;
 
 - (instancetype)init {
@@ -25,7 +22,7 @@
 - (void)reloadWithData:(nonnull id)data {
     if ([data isDictionary] == NO) return;
     self.textLabel.text = [data[@"text"] toStringValue];
-    self.valueLabel.text = [data[@"value"] toStringValue];
+    self.switchView.on = [[data[@"value"] toStringValue] boolValue];
 }
 
 #pragma mark - Private Methods
@@ -35,19 +32,19 @@
     self.textLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.textLabel];
     
-    self.valueLabel = [[UILabel alloc] init];
-    self.valueLabel.textColor = [UIColor whiteColor];
-    self.valueLabel.font = [UIFont systemFontOfSize:15];
-    [self addSubview:self.valueLabel];
+    self.switchView = [[UISwitch alloc] init];
+    [self addSubview:self.switchView];
+    
     
     [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(20);
     }];
     
-    [self.valueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.switchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-20);
+        make.right.equalTo(self).offset(-10);
     }];
 }
+
 @end
