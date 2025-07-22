@@ -22,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = TVUColorWithRHedix(0x141414);
     
     self.listView = [[TVUPLListView alloc] init];
@@ -54,7 +55,7 @@
     TVUPLRow *row1 = [self createRowWithString:[NSString stringWithFormat:@"row%ld", start + 1]];
     TVUPLRow *row2 = [self createRowWithString:[NSString stringWithFormat:@"row%ld", start + 2]];
 
-    TVUPLSection *section0 = [[TVUPLSection alloc] init];
+    TVUPLSection *section0 = [[TVUPLSection alloc] initWithKey:[@(start) stringValue]];
     [section0 addRow:row0];
     [section0 addRow:row1];
     [section0 addRow:row2];
@@ -83,7 +84,6 @@ static NSString *titleString = @"row7";
         if ([row.key isEqualToString:@"row7"]) {
             row.rowData = @{ @"text" : @"PID", @"value" : @"256ms"};
             row.height = 44;
-            row.hidden = cnt % 3 == 0;
         } else if ([row.key isEqualToString:@"row5"]) {
             row.rowData = @{ @"text" : @"Debug", @"value" : @"YES"};
             row.height = 44;

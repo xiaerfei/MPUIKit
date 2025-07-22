@@ -25,10 +25,20 @@
                                     <segue destination="ZZw-9W-nb9" kind="show" id="RGs-GO-d7Q"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0hI-rT-OB7">
+                                <rect key="frame" x="130" y="463.66666666666669" width="133" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="TestTableView"/>
+                                <connections>
+                                    <segue destination="lza-Xh-IXW" kind="show" id="btJ-Fm-mFf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0hI-rT-OB7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LXp-8Z-Eft"/>
+                            <constraint firstItem="0hI-rT-OB7" firstAttribute="top" secondItem="dxE-eu-rBY" secondAttribute="bottom" constant="20" id="iEV-Vb-PMx"/>
                             <constraint firstItem="dxE-eu-rBY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sU8-NQ-Fsd"/>
                             <constraint firstItem="dxE-eu-rBY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vs6-Mf-M9K"/>
                         </constraints>
@@ -67,7 +77,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nz8-RD-Cwb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="798"/>
+            <point key="canvasLocation" x="668" y="403"/>
+        </scene>
+        <!--Test View Controller-->
+        <scene sceneID="uZs-l3-aab">
+            <objects>
+                <viewController id="lza-Xh-IXW" customClass="TestViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="62n-yy-nbl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="JU8-J2-6NO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Oet-9w-uF6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="90G-0S-Tie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="668" y="1243"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1rv-Tq-xJ0">

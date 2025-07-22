@@ -23,9 +23,13 @@
 
 #pragma mark - TVUPLRowProtocol
 - (void)reloadWithData:(nonnull id)data {
-    if ([data isDictionary] == NO) return;
-    self.textLabel.text = [data[@"text"] toStringValue];
-    self.valueLabel.text = [data[@"value"] toStringValue];
+    if ([data isDictionary]) {
+        self.textLabel.text = [data[@"text"] toStringValue];
+        self.valueLabel.text = [data[@"value"] toStringValue];
+    } else {
+        self.textLabel.text = @"";
+        self.valueLabel.text = @"";
+    }
 }
 
 #pragma mark - Private Methods
@@ -36,7 +40,10 @@
     [self addSubview:self.textLabel];
     
     self.valueLabel = [[UILabel alloc] init];
-    self.valueLabel.textColor = [UIColor whiteColor];
+    self.valueLabel.textColor = [UIColor colorWithRed:140.0f/255.0f
+                                                green:140.0f/255.0f
+                                                 blue:140.0f/255.0f
+                                                alpha:1];
     self.valueLabel.font = [UIFont systemFontOfSize:15];
     [self addSubview:self.valueLabel];
     

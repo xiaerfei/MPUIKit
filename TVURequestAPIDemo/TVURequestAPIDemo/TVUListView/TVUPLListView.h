@@ -40,8 +40,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic,   copy) NSString *key;
 @property (nonatomic, strong) UIView *bindView;
+@property (nonatomic, assign) BOOL hidden;
+@property (nonatomic,   copy) void (^fetchSectionParameterBlock)(TVUPLSection *section);
 
+- (instancetype)initWithKey:(NSString *)key;
 - (void)addRow:(TVUPLRow *)row;
+
 @end
 
 
@@ -50,6 +54,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reload;
 - (void)reloadRowWithKey:(NSString *)key;
+
+- (void)reloadSectionWithKey:(NSString *)key;
+- (void)reloadSection:(TVUPLSection *)section;
 @end
 
 NS_ASSUME_NONNULL_END

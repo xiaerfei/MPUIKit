@@ -44,7 +44,7 @@
 
     self.nameLabel = [[UILabel alloc] init];
     self.nameLabel.textColor = [UIColor whiteColor];
-    self.nameLabel.font = [UIFont systemFontOfSize:15];
+    self.nameLabel.font = [UIFont systemFontOfSize:25];
     [self addSubview:self.nameLabel];
     
     self.emailLabel = [[UILabel alloc] init];
@@ -66,13 +66,13 @@
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(firstWordView.mas_right).offset(5);
         make.top.equalTo(firstWordView.mas_top);
-        make.height.mas_equalTo(25);
+        make.height.mas_equalTo(30);
     }];
     
     [self.emailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(firstWordView.mas_right).offset(5);
         make.bottom.equalTo(firstWordView.mas_bottom);
-        make.height.mas_equalTo(25);
+        make.height.mas_equalTo(20);
     }];
 }
 

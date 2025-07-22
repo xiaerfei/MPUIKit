@@ -20,6 +20,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeSwitch,
     TVUPLRowTypeLogin,
     TVUPLRowTypeUnLogin,
+    TVUPLRowTypeCenterText,
 };
 
 @protocol TVUPLRowProtocol <NSObject>

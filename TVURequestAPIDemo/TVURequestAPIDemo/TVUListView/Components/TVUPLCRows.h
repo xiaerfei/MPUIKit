@@ -14,5 +14,6 @@
 #import "TVUPLSwitchRow.h"
 #import "TVUPLUnLoginRow.h"
 #import "TVUPLLoginRow.h"
+#import "TVUPLCenterTextRow.h"
 
 #endif /* TVUPLCRows_h */
