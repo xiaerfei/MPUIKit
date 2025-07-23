@@ -30,6 +30,8 @@
     if (self.row.unselectedStyle == NO) {
         self.row.backView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
     }
+    self.currentState = UIGestureRecognizerStateBegan;
+    NSLog(@"sharexia: touch began");
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -37,6 +39,7 @@
     if (self.row.unselectedStyle == NO) {
         self.row.backView.backgroundColor = [UIColor clearColor];
     }
+    NSLog(@"sharexia: touch ended");
 }
 
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -44,6 +47,8 @@
     if (self.row.unselectedStyle == NO) {
         self.row.backView.backgroundColor = [UIColor clearColor];
     }
+    NSLog(@"sharexia: touch cancelled");
+    self.currentState = UIGestureRecognizerStateCancelled;
 }
 
 #pragma mark - Private Methods
@@ -85,19 +90,24 @@
     switch (gesture.state) {
         case UIGestureRecognizerStateEnded:
         {
-            if (self.row.unselectedStyle == NO) {
+            if (self.row.unselectedStyle == NO &&
+                (self.row.backView.backgroundColor != [UIColor clearColor] ||
+                 self.currentState == UIGestureRecognizerStatePossible)) {
                 [UIView animateWithDuration:0.25 animations:^{
                     self.row.backView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
                 } completion:^(BOOL finished) {
                     self.row.backView.backgroundColor = [UIColor clearColor];
                 }];
             }
-
-            if (self.row.unselected == NO &&
-                self.row.didSelectedBlock) {
-                self.row.didSelectedBlock(self.row, nil);
+            if (self.currentState == UIGestureRecognizerStateBegan ||
+                self.currentState == UIGestureRecognizerStatePossible) {
+                if (self.row.unselected == NO &&
+                    self.row.didSelectedBlock) {
+                    self.row.didSelectedBlock(self.row, nil);
+                }
+                NSLog(@"sharexia:gesture ended");
             }
-            NSLog(@"sharexia: touch ended");
+            self.currentState = UIGestureRecognizerStatePossible;
             break;
         }
         default:
@@ -105,7 +115,8 @@
             if (self.row.unselectedStyle == NO) {
                 self.row.backView.backgroundColor = [UIColor clearColor];
             }
-            NSLog(@"sharexia: touch cancelled");
+            self.currentState = UIGestureRecognizerStateCancelled;
+            NSLog(@"sharexia:gesture cancelled");
             break;
         }
     }

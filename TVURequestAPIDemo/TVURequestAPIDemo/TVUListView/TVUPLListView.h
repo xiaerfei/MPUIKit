@@ -55,8 +55,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)reload;
 - (void)reloadRowWithKey:(NSString *)key;
 
+- (TVUPLRow *)rowForKey:(NSString *)key;
+
 - (void)reloadSectionWithKey:(NSString *)key;
 - (void)reloadSection:(TVUPLSection *)section;
+- (TVUPLSection *)sectionForKey:(NSString *)key;
 @end
 
 NS_ASSUME_NONNULL_END

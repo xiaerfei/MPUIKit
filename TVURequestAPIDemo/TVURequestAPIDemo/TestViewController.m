@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UICollectionView *collect = nil;
+    
     // 设置数据
     self.sectionTitles = @[@"第一部分", @"第二部分", @"第三部分"];
     self.sectionData = @[

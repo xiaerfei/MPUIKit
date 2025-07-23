@@ -25,6 +25,8 @@
 		2C9816942E2E0B1E00628759 /* TVUPLUnLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816932E2E0B1E00628759 /* TVUPLUnLoginRow.m */; };
 		2C9816EB2E2F840100628759 /* TVUPLCenterTextRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816EA2E2F840100628759 /* TVUPLCenterTextRow.m */; };
 		2C9816EE2E2F98B800628759 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816ED2E2F98B800628759 /* TestViewController.m */; };
+		2C9816F12E3078BE00628759 /* TestCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9816F02E3078BE00628759 /* TestCollectViewController.m */; };
+		2CEB43D52E30ABC20025F02B /* NSArray+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB43D42E30ABC20025F02B /* NSArray+Function.m */; };
 		2CF318312DE946CA00C4202C /* TVUPLUsersAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */; };
 		2CF318452DE9534100C4202C /* TVUPLTimeoutAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF318442DE9534100C4202C /* TVUPLTimeoutAPI.m */; };
 		8AAA45AF2DC9A66E00D2654D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AAA45AE2DC9A66E00D2654D /* AppDelegate.m */; };
@@ -98,6 +100,10 @@
 		2C9816EA2E2F840100628759 /* TVUPLCenterTextRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLCenterTextRow.m; sourceTree = "<group>"; };
 		2C9816EC2E2F98B800628759 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		2C9816ED2E2F98B800628759 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		2C9816EF2E3078BE00628759 /* TestCollectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCollectViewController.h; sourceTree = "<group>"; };
+		2C9816F02E3078BE00628759 /* TestCollectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestCollectViewController.m; sourceTree = "<group>"; };
+		2CEB43D32E30ABC20025F02B /* NSArray+Function.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Function.h"; sourceTree = "<group>"; };
+		2CEB43D42E30ABC20025F02B /* NSArray+Function.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Function.m"; sourceTree = "<group>"; };
 		2CF3182F2DE946CA00C4202C /* TVUPLUsersAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLUsersAPI.h; sourceTree = "<group>"; };
 		2CF318302DE946CA00C4202C /* TVUPLUsersAPI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLUsersAPI.m; sourceTree = "<group>"; };
 		2CF318362DE948FD00C4202C /* TVURequestAPIDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVURequestAPIDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,10 +270,14 @@
 				9C7D448D2E2B4A0500CC621B /* ListViewController.m */,
 				2C9816EC2E2F98B800628759 /* TestViewController.h */,
 				2C9816ED2E2F98B800628759 /* TestViewController.m */,
+				2C9816EF2E3078BE00628759 /* TestCollectViewController.h */,
+				2C9816F02E3078BE00628759 /* TestCollectViewController.m */,
 				8AAA45D32DC9A6E100D2654D /* TVUPartylineRequest.h */,
 				8AAA45D22DC9A6E100D2654D /* TVUPartylineRequest.m */,
 				9CCD4F6F2DE75B58008E1778 /* NSObject+BaseDataType.h */,
 				9CCD4F702DE75B58008E1778 /* NSObject+BaseDataType.m */,
+				2CEB43D32E30ABC20025F02B /* NSArray+Function.h */,
+				2CEB43D42E30ABC20025F02B /* NSArray+Function.m */,
 				8AAA45B62DC9A66E00D2654D /* Main.storyboard */,
 				8AAA45B92DC9A67600D2654D /* Assets.xcassets */,
 				8AAA45BB2DC9A67600D2654D /* LaunchScreen.storyboard */,
@@ -450,7 +460,9 @@
 				2C98165D2E28A31300628759 /* ViewController+MASAdditions.m in Sources */,
 				9C7D44912E2B611200CC621B /* TVUPLBaseRow.m in Sources */,
 				2C98165E2E28A31300628759 /* MASCompositeConstraint.m in Sources */,
+				2C9816F12E3078BE00628759 /* TestCollectViewController.m in Sources */,
 				8AAA45C02DC9A67600D2654D /* main.m in Sources */,
+				2CEB43D52E30ABC20025F02B /* NSArray+Function.m in Sources */,
 				9CBB9C7E2DD99017005B5AD5 /* TVUTuple.m in Sources */,
 				2C9816EB2E2F840100628759 /* TVUPLCenterTextRow.m in Sources */,
 				8AAA45B22DC9A66E00D2654D /* SceneDelegate.m in Sources */,
@@ -498,7 +510,7 @@
 				DEVELOPMENT_TEAM = YDEVQQ22JR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TVURequestAPIDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,7 +529,7 @@
 				DEVELOPMENT_TEAM = YDEVQQ22JR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TVURequestAPIDemoTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -658,7 +670,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -686,7 +698,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

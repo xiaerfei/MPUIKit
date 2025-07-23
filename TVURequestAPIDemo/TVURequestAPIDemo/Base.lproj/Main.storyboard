@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B7Q-Ec-H7g">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -33,6 +32,15 @@
                                     <segue destination="lza-Xh-IXW" kind="show" id="btJ-Fm-mFf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUC-gR-JQq">
+                                <rect key="frame" x="128" y="521" width="137" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="CollectionView"/>
+                                <connections>
+                                    <segue destination="H74-xo-Bql" kind="show" id="ch9-sT-ZjU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -58,19 +66,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBl-zl-5jR">
-                                <rect key="frame" x="15" y="749" width="83" height="35"/>
+                                <rect key="frame" x="15" y="749" width="95" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Refresh"/>
+                                <buttonConfiguration key="configuration" style="plain" title="隐藏 Row"/>
                                 <connections>
                                     <action selector="refreshAction:" destination="ZZw-9W-nb9" eventType="touchUpInside" id="ekU-Sz-nud"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kmB-Np-19q">
+                                <rect key="frame" x="260" y="749" width="118" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="隐藏Section"/>
+                                <connections>
+                                    <action selector="hiddenSectionAction:" destination="ZZw-9W-nb9" eventType="touchUpInside" id="nUC-Gi-Wls"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="41D-Na-o5u"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="41D-Na-o5u" firstAttribute="trailing" secondItem="kmB-Np-19q" secondAttribute="trailing" constant="15" id="Ww4-0H-QGi"/>
                             <constraint firstItem="IBl-zl-5jR" firstAttribute="bottom" secondItem="41D-Na-o5u" secondAttribute="bottom" id="Xst-UM-t2A"/>
                             <constraint firstItem="IBl-zl-5jR" firstAttribute="leading" secondItem="41D-Na-o5u" secondAttribute="leading" constant="15" id="YPK-vG-EaK"/>
+                            <constraint firstItem="41D-Na-o5u" firstAttribute="bottom" secondItem="kmB-Np-19q" secondAttribute="bottom" id="amU-TQ-5fP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="q5D-wH-7ta"/>
@@ -78,6 +96,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nz8-RD-Cwb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="668" y="403"/>
+        </scene>
+        <!--Test Collect View Controller-->
+        <scene sceneID="qat-pU-MJm">
+            <objects>
+                <viewController id="H74-xo-Bql" customClass="TestCollectViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cdr-bX-DDX">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="owf-l6-190"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5NJ-0U-eLB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kx2-lA-fsw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-408" y="1753"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="uZs-l3-aab">

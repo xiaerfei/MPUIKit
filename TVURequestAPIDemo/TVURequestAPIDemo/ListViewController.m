@@ -29,7 +29,8 @@
     [self.view insertSubview:self.listView atIndex:0];
     
     [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view.mas_safeAreaLayoutGuide);
+        make.left.top.right.equalTo(self.view.mas_safeAreaLayoutGuide);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuide).offset(-50);
     }];
     
     __weak typeof(self) weakSelf = self;
@@ -99,7 +100,49 @@ static NSString *titleString = @"row7";
     cnt ++;
     titleString = [NSString stringWithFormat:@"row --> %d", cnt];
     [self.listView reloadRowWithKey:@"row7"];
+    [self showAlert:YES];
 }
+
+- (IBAction)hiddenSectionAction:(id)sender {
+    [self showAlert:NO];
+}
+
+
+- (void)showAlert:(BOOL)isRow {
+    UIAlertController *alertVC =
+    [UIAlertController alertControllerWithTitle:isRow ? @"Row" : @"Section"
+                                        message:@""
+                                 preferredStyle:UIAlertControllerStyleActionSheet];
+    NSArray *titles = isRow ?
+    @[@"1",@"3",@"7",@"9",@"12",@"16",@"18",@"23",] :
+    @[@"0",@"3",@"6",@"9",@"12",@"15",@"18",@"21",];
+    
+    for (NSString *str in titles) {
+        UIAlertAction *action =
+        [UIAlertAction actionWithTitle:str
+                                 style:(UIAlertActionStyleDefault)
+                               handler:^(UIAlertAction * _Nonnull action) {
+            [self actionWithStr:str isRow:isRow];
+        }];
+        [alertVC addAction:action];
+    }
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)actionWithStr:(NSString *)str isRow:(BOOL)isRow {
+    NSString *key = isRow ? [NSString stringWithFormat:@"row%@", str] :
+                            [NSString stringWithFormat:@"%@", str];
+    if (isRow) {
+        TVUPLRow *row = [self.listView rowForKey:key];
+        row.hidden = !row.hidden;
+        [self.listView reloadRowWithKey:key];
+    } else {
+        TVUPLSection *section = [self.listView sectionForKey:key];
+        section.hidden = !section.hidden;
+        [self.listView reloadSectionWithKey:key];
+    }
+}
+
 
 #pragma mark - Sections
 #pragma mark 登录
