@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLUnLoginRow : TVUPLBaseRow <TVUPLRowProtocol>
-@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong, nullable) UIImageView *unLoginImageView;
 @end
 

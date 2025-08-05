@@ -10,6 +10,8 @@
 #import "TVUPLCRows.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@class TVUSectionView;
+
 @interface TVUPLRow : NSObject
 @property (nonatomic, assign, readonly) TVUPLRowType type;
 @property (nonatomic,   copy, readonly) NSString *key;
@@ -39,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL separateLine;
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic,   copy) NSString *key;
-@property (nonatomic, strong) UIView *bindView;
+@property (nonatomic, strong) TVUSectionView *bindView;
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic,   copy) void (^fetchSectionParameterBlock)(TVUPLSection *section);
 

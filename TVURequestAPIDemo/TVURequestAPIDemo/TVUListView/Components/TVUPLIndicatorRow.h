@@ -11,9 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLIndicatorRow : TVUPLBaseRow <TVUPLRowProtocol>
-@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *valueLabel;
-@property (nonatomic, strong) UIImageView *indicatorImageView;
 @end
 
 NS_ASSUME_NONNULL_END

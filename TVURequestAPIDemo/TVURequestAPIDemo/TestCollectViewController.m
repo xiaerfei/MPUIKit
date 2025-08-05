@@ -6,72 +6,88 @@
 //
 
 #import "TestCollectViewController.h"
+#import "SectionHeaderView.h"
+#import "CustomCell.h"
 
 #define TVUColorWithRHedix(rgbValue) \
     [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0  \
                     green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
                      blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-// 自定义背景视图类
-@interface SectionBackgroundView : UICollectionReusableView
-@end
-
-@implementation SectionBackgroundView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.backgroundColor = TVUColorWithRHedix(0x1C1C1E);
-        self.layer.cornerRadius = 8.0;
-        self.layer.masksToBounds = YES;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.layer.shadowOffset = CGSizeMake(0, 1);
-        self.layer.shadowOpacity = 0.15;
-        self.layer.shadowRadius = 2.0;
-        self.layer.masksToBounds = NO;
-    }
-    return self;
-}
-
-@end
-
-
-
 @interface TestCollectViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSArray *dataArray;
+
+// 数据源：每个分区的数据
 @property (nonatomic, strong) NSArray *sectionTitles;
 @property (nonatomic, strong) NSArray *sectionData;
 @end
 
 @implementation TestCollectViewController
 
-static NSString *const CellIdentifier = @"Cell";
-static NSString *const SectionBackgroundElementKind = @"SectionBackground";
+static NSString *const cellIdentifier = @"CustomCell";
+static NSString *const HeaderIdentifier = @"SectionHeaderView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = TVUColorWithRHedix(0x141414);
-    // 设置数据
-    self.sectionTitles = @[@"第一部分", @"第二部分", @"第三部分"];
+    self.view.backgroundColor = UIColor.whiteColor;
+    self.title = @"CollectionView as TableView";
+    
+    // 准备数据
+    [self setupData];
+    
+    // 配置CollectionView
+    [self setupCollectionView];
+}
+
+- (void)setupData {
+    // 分区标题
+    self.sectionTitles = @[@"第一组", @"第二组", @"第三组", @"第四组", @"第五组"];
+    
+    // 每个分区的数据
     self.sectionData = @[
-        @[@"第一部分 项目1", @"第一部分 项目2"],
-        @[@"第二部分 项目1", @"第二部分 项目2", @"第二部分 项目3"],
-        @[@"第三部分 项目1", @"第三部分 项目2", @"第三部分 项目3", @"第三部分 项目4"]
+        @[@"项目 1-1", @"项目 1-2", @"项目 1-3", @"项目 1-4"],
+        @[@"项目 2-1", @"项目 2-2", @"项目 2-3"],
+        @[@"项目 3-1", @"项目 3-2"],
+        @[@"项目 4-1", @"项目 4-2", @"项目 4-3"],
+        @[@"项目 5-1", @"项目 5-2", @"项目 5-3"],
     ];
+}
+
+- (void)setupCollectionView {
+    // 创建流式布局
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    // 设置为垂直滚动
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    // 没有间距，模拟表格
+    layout.minimumLineSpacing = 0;
+    layout.minimumInteritemSpacing = 0;
     
-    // 创建布局
-    UICollectionViewCompositionalLayout *layout = [self createLayout];
+    layout.sectionInset = UIEdgeInsetsZero;
+    layout.headerReferenceSize = CGSizeMake(self.collectionView.bounds.size.width, 40);
     
-    // 注册背景装饰视图
-    [layout registerClass:[SectionBackgroundView class] forDecorationViewOfKind:SectionBackgroundElementKind];
-    
-    // 初始化集合视图
+    // 创建CollectionView
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
-    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = UIColor.whiteColor;
     self.collectionView.dataSource = self;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
+    self.collectionView.delegate = self;
+    
+    // 注册单元格
+    [self.collectionView registerClass:[CustomCell class] forCellWithReuseIdentifier:cellIdentifier];
+    // 注册分区头部
+    [self.collectionView registerClass:[SectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:HeaderIdentifier];
+
+    // 自动布局设置
+    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.collectionView];
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    
+    // 添加约束，让CollectionView充满整个视图
+    [NSLayoutConstraint activateConstraints:@[
+        [self.collectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [self.collectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [self.collectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [self.collectionView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor]
+    ]];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -85,52 +101,58 @@ static NSString *const SectionBackgroundElementKind = @"SectionBackground";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    CustomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    UILabel *label = (UILabel *)[cell viewWithTag:100];
-    if (!label) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.contentView.bounds.size.width - 20, cell.contentView.bounds.size.height)];
-        label.tag = 100;
-        label.font = [UIFont systemFontOfSize:16];
-        [cell.contentView addSubview:label];
-    }
+    // 设置单元格数据
+    cell.textLabel.text = self.sectionData[indexPath.section][indexPath.item];
     
-    label.text = self.sectionData[indexPath.section][indexPath.item];
-    cell.contentView.backgroundColor = [UIColor clearColor];
+    // 交替行颜色
+//    if (indexPath.item % 2 == 0) {
+//        cell.backgroundColor = UIColor.whiteColor;
+//    } else {
+//        cell.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+//    }
     
     return cell;
 }
+#pragma mark - Supplementary Views (Section Headers)
 
-#pragma mark - Layout
-- (UICollectionViewCompositionalLayout *)createLayout {
-    UICollectionViewCompositionalLayout *layout = [[UICollectionViewCompositionalLayout alloc] initWithSectionProvider:^NSCollectionLayoutSection *(NSInteger section, id<NSCollectionLayoutEnvironment> environment) {
-        
-        // 定义项目大小和布局
-        NSCollectionLayoutSize *itemSize = [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension fractionalWidthDimension:1.0]
-                                                                          heightDimension:[NSCollectionLayoutDimension estimatedDimension:44]];
-        NSCollectionLayoutItem *item = [NSCollectionLayoutItem itemWithLayoutSize:itemSize];
-        // 定义组大小和布局
-        NSCollectionLayoutSize *groupSize = [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension fractionalWidthDimension:1.0]
-                                                                           heightDimension:[NSCollectionLayoutDimension estimatedDimension:44]];
-        NSCollectionLayoutGroup *group = [NSCollectionLayoutGroup verticalGroupWithLayoutSize:groupSize subitems:@[item]];
-        
-        // 定义分区大小和布局
-        NSCollectionLayoutSection *sectionLayout = [NSCollectionLayoutSection sectionWithGroup:group];
-        
-        // 设置section之间的间距
-        sectionLayout.contentInsets = NSDirectionalEdgeInsetsMake(15, 15, 15, 15);
-        sectionLayout.interGroupSpacing = 1;
-        
-        // 创建背景装饰视图，使其小于section的实际尺寸
-        NSCollectionLayoutDecorationItem *background =
-        [NSCollectionLayoutDecorationItem backgroundDecorationItemWithElementKind:SectionBackgroundElementKind]; // 底部间距为30
-        
-        sectionLayout.decorationItems = @[background];
-        
-        return sectionLayout;
-    }];
-    
-    return layout;
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        SectionHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:HeaderIdentifier forIndexPath:indexPath];
+        header.titleLabel.text = self.sectionTitles[indexPath.section];
+        return header;
+    }
+    return nil;
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 单元格宽度等于collectionView宽度，高度固定为60
+    return CGSizeMake(collectionView.bounds.size.width, 40);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    // 确保旋转时更新头部宽度
+    return CGSizeMake(collectionView.bounds.size.width, 40);
+}
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 处理单元格点击事件，类似表格的didSelectRowAtIndexPath
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    NSString *title = self.sectionData[indexPath.section][indexPath.item];
+    NSLog(@"sharexia: title did select=%@", title);
+}
+#pragma mark - 屏幕旋转处理
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    // 旋转时刷新布局
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    } completion:nil];
+}
 @end

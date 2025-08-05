@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLCenterTextRow : TVUPLBaseRow <TVUPLRowProtocol>
-@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @end
 
 NS_ASSUME_NONNULL_END

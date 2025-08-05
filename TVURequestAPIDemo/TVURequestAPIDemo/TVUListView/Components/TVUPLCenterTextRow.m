@@ -21,20 +21,20 @@
 #pragma mark - TVUPLRowProtocol
 - (void)reloadWithData:(nonnull id)data {
     if ([data isDictionary]) {
-        self.textLabel.text = [data[@"text"] toStringValue];
+        self.titleLabel.text = [data[@"text"] toStringValue];
     } else {
-        self.textLabel.text = @"";
+        self.titleLabel.text = @"";
     }
 }
 
 #pragma mark - Private Methods
 - (void)configureUI {
-    self.textLabel = [[UILabel alloc] init];
-    self.textLabel.textColor = [UIColor whiteColor];
-    self.textLabel.font = [UIFont systemFontOfSize:15];
-    [self addSubview:self.textLabel];
+    self.titleLabel = [[UILabel alloc] init];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self addSubview:self.titleLabel];
         
-    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
     }];
 }

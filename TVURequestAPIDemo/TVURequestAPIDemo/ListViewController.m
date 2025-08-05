@@ -93,6 +93,9 @@ static NSString *titleString = @"row7";
             row.height = 44;
         }
     }];
+    [row0 setDidSelectedBlock:^(TVUPLRow * _Nonnull row, id  _Nullable value) {
+        NSLog(@"did selected: %@ value: %@", row.key, value);
+    }];
     return row0;
 }
 
@@ -100,15 +103,15 @@ static NSString *titleString = @"row7";
     cnt ++;
     titleString = [NSString stringWithFormat:@"row --> %d", cnt];
     [self.listView reloadRowWithKey:@"row7"];
-    [self showAlert:YES];
+    [self showAlert:YES sender:sender];
 }
 
 - (IBAction)hiddenSectionAction:(id)sender {
-    [self showAlert:NO];
+    [self showAlert:NO sender:sender];
 }
 
 
-- (void)showAlert:(BOOL)isRow {
+- (void)showAlert:(BOOL)isRow sender:(UIButton *)sender {
     UIAlertController *alertVC =
     [UIAlertController alertControllerWithTitle:isRow ? @"Row" : @"Section"
                                         message:@""
@@ -126,6 +129,8 @@ static NSString *titleString = @"row7";
         }];
         [alertVC addAction:action];
     }
+    alertVC.popoverPresentationController.sourceView = sender;
+    alertVC.popoverPresentationController.sourceRect = sender.bounds;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
