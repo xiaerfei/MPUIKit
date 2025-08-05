@@ -102,14 +102,18 @@
 }
 #pragma mark - SectionBackgroundCollectionViewLayoutDelegate
 // 实现此代理方法来设置每个section的header宽度
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout widthForHeaderInSection:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+  widthForHeaderInSection:(NSInteger)section {
     // 可以为不同section设置不同宽度
     UIEdgeInsets insets = ((SectionBackViewLayout *)collectionView.collectionViewLayout).sectionInset;
     // 其他组与屏幕同宽
     return CGRectGetWidth(collectionView.frame) - insets.left - insets.right;
 }
 // 控制header高度
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForHeaderInSection:(NSInteger)section {
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+ heightForHeaderInSection:(NSInteger)section {
     // 如果是隐藏的分区，高度设为0
     return 0; // 正常高度
 }

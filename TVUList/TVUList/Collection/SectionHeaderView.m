@@ -39,5 +39,7 @@
         [self.titleLabel.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:16],
         [self.titleLabel.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]
     ]];
+    
+    self.layer.masksToBounds = YES;
 }
 @end

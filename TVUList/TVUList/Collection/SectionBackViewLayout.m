@@ -32,6 +32,7 @@
         
         // 1. 计算Header尺寸
         CGFloat headerWidth = self.defaultHeaderWidth;
+        CGFloat headerHeight = self.headerHeight;
         // 检查是否实现了代理方法来获取宽度
         if ([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:widthForHeaderInSection:)]) {
             headerWidth = [(id<SectionBackgroundCollectionViewLayoutDelegate>)self.collectionView.delegate
@@ -39,7 +40,15 @@
                           layout:self
                           widthForHeaderInSection:section];
         }
-        CGSize headerSize = CGSizeMake(headerWidth, self.headerHeight);
+        
+        if ([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:heightForHeaderInSection:)]) {
+            headerHeight = [(id<SectionBackgroundCollectionViewLayoutDelegate>)self.collectionView.delegate
+                            collectionView:self.collectionView
+                            layout:self
+                            heightForHeaderInSection:section];
+        }
+        
+        CGSize headerSize = CGSizeMake(headerWidth, headerHeight);
         
         // 2. 创建Header的布局属性
         NSIndexPath *headerIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
