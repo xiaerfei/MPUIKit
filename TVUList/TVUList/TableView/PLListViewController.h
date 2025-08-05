@@ -1,5 +1,5 @@
 //
-//  ListTableViewController.h
+//  PLListViewController.h
 //  TVUList
 //
 //  Created by erfeixia on 2025/8/5.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ListTableViewController : UIViewController
+@interface PLListViewController : UIViewController
 
 @end
 

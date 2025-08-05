@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9CC1C9432E40E0FC007DB9FD /* Exceptions for "TVUList" folder in "TVUList" target */ = {
+		9CDE335A2E4245FA00B34633 /* Exceptions for "TVUList" folder in "TVUList" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -21,10 +21,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9CC1C92E2E40E0FB007DB9FD /* TVUList */ = {
+		9CDE334C2E4245FA00B34633 /* TVUList */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				9CC1C9432E40E0FC007DB9FD /* Exceptions for "TVUList" folder in "TVUList" target */,
+				9CDE335A2E4245FA00B34633 /* Exceptions for "TVUList" folder in "TVUList" target */,
 			);
 			path = TVUList;
 			sourceTree = "<group>";
@@ -45,7 +45,7 @@
 		9CC1C9232E40E0FB007DB9FD = {
 			isa = PBXGroup;
 			children = (
-				9CC1C92E2E40E0FB007DB9FD /* TVUList */,
+				9CDE334C2E4245FA00B34633 /* TVUList */,
 				9CC1C92D2E40E0FB007DB9FD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				9CC1C92E2E40E0FB007DB9FD /* TVUList */,
+				9CDE334C2E4245FA00B34633 /* TVUList */,
 			);
 			name = TVUList;
 			packageProductDependencies = (
