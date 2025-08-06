@@ -54,7 +54,7 @@
     
     [self.valueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-20);
+        make.right.equalTo(self).offset(-30);
     }];
 }
 @end

@@ -32,7 +32,7 @@
         
         [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
-            make.right.equalTo(self).offset(-5);
+            make.right.equalTo(self).offset(-15);
         }];
         self.indicatorImageView = iconView;
     } else {

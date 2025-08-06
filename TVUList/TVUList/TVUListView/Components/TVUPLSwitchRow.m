@@ -43,7 +43,7 @@
     
     [self.switchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-10);
+        make.right.equalTo(self).offset(-15);
     }];
 }
 
