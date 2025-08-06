@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VeR-sP-zuM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -93,14 +94,28 @@
                     <view key="view" contentMode="scaleToFill" id="5mk-GD-CKn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGZ-lF-Xi3">
+                                <rect key="frame" x="295" y="749" width="83" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshAction:" destination="jcc-uN-hAP" eventType="touchUpInside" id="4e5-QW-EYs"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="S3Y-q4-vRN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S3Y-q4-vRN" firstAttribute="trailing" secondItem="GGZ-lF-Xi3" secondAttribute="trailing" constant="15" id="4mq-GV-2y8"/>
+                            <constraint firstItem="GGZ-lF-Xi3" firstAttribute="bottom" secondItem="S3Y-q4-vRN" secondAttribute="bottom" id="FjE-ou-6sm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="CBb-YV-9HE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiJ-79-0b0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2198" y="1243"/>
+            <point key="canvasLocation" x="2197.709923664122" y="1242.9577464788733"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5vB-Wj-aMv">

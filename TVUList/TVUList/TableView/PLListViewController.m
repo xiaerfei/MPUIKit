@@ -37,6 +37,9 @@
     }];
     [self.listView reload];
 }
+- (IBAction)refreshAction:(id)sender {
+    [self.listView reload];
+}
 
 #pragma mark - Sections
 #pragma mark Login
@@ -104,6 +107,7 @@
         [section addRow:[self mirrorRow]];
         [section addRow:[self regionRow]];
         [section addRow:[self debugRow]];
+        [section addRow:[self ntpOffsetRow]];
     }];
     
     return section;
@@ -211,6 +215,22 @@
         row.rowData = @{
             @"text" : @"调试",
             @"value" : @NO
+        };
+    }];
+    return row;
+}
+
+- (TVUPLRow *)ntpOffsetRow {
+    TVUPLRow *row =
+    [[TVUPLRow alloc] initWithType:TVUPLRowTypeDefault
+                               key:@"NTPOffset"];
+    [row setFetchRowParameterBlock:^(TVUPLRow * _Nonnull row) {
+        row.showIndicator = NO;
+        row.unselected = YES;
+        row.height = 44;
+        row.rowData = @{
+            @"text" : @"NTP",
+            @"value" : @"33ms"
         };
     }];
     return row;
