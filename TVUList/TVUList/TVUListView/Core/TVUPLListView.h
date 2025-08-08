@@ -24,9 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL unselected;
 @property (nonatomic, assign) BOOL unselectedStyle;
 ///< 不再通过 rowData 刷新数据
-@property (nonatomic, assign) BOOL dataByUser;
-@property (nonatomic, assign) CGFloat height;
 @property (nonatomic, strong) id rowData;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) BOOL dataByUser;
 @property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);
 @property (nonatomic,   copy) void (^fetchRowParameterBlock)(TVUPLRow *row);
 @property (nonatomic, strong, readonly) TVUPLBaseRow <TVUPLRowProtocol> *bindView;
@@ -36,13 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface TVUPLSection : NSObject
-@property (nonatomic, assign) CGFloat cornerRadius;
-@property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, assign) BOOL separateLine;
-@property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic,   copy) NSString *key;
-@property (nonatomic, strong) TVUSectionView *bindView;
 @property (nonatomic, assign) BOOL hidden;
+@property (nonatomic, assign) BOOL separateLine;
+@property (nonatomic, assign) UIEdgeInsets insets;
+@property (nonatomic, assign) CGFloat cornerRadius;
+@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic, strong) TVUSectionView *bindView;
 @property (nonatomic,   copy) void (^fetchSectionParameterBlock)(TVUPLSection *section);
 
 - (instancetype)initWithKey:(NSString *)key;
