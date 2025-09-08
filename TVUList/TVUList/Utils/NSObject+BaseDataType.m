@@ -39,21 +39,25 @@
     }
     
     if (self.isDictionary || self.isArray) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:self options:0 error:nil];
-        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:0 error:NULL];
+        if (jsonData.length == 0) return nil;
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     
     return @"";
 }
 
-- (NSError *)toErrorValue {
-    if ([self isKindOfClass:NSError.class]) {
-        return (NSError *)self;
-    } else {
-        return nil;
-    }
+- (NSInteger)toIntegerValue {
+    return [[self toStringValue] integerValue];
 }
 
+- (BOOL)toBoolValue {
+    return [[self toStringValue] boolValue];
+}
+
+- (int)toIntValue {
+    return [[self toStringValue] intValue];
+}
 
 ///< 判断字符串是否全为空格
 - (BOOL)isBlank {
@@ -129,4 +133,16 @@
     return [(NSString *)temp dataUsingEncoding : NSUTF8StringEncoding];
 }
 
+/// 如果 obj 为 nil/Null 则返回 @""(空字符串)
++ (NSString *)toNoNullString:(id)obj {
+    if ([obj isString]) {
+        return (NSString *)obj;
+    }
+    return @"";
+}
+/// 如果 obj 为 nil/Null 则返回 YES
++ (BOOL)equalNullValue:(id)obj {
+    return (obj == nil || [obj isNull]);
+}
 @end
+

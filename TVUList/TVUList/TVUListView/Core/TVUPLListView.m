@@ -16,6 +16,14 @@ NSString *const kTVUPLRowData   = @"RowData";
 NSString *const kTVUPLRowType   = @"RowType";
 NSString *const kTVUPLRowKey    = @"RowKey";
 
+NSString *const kTVUPLRowTitle    = @"RowTitle";
+NSString *const kTVUPLRowSubtitle = @"RowSubtitle";
+NSString *const kTVUPLRowImage    = @"RowImage";
+NSString *const kTVUPLRowValue    = @"RowValue";
+
+NSString *const kTVUPLRowIndicatorImage = @"RowIndicatorImage";
+NSString *const kTVUPLRowShowIndicator  = @"RowShowIndicator";
+
 @interface TVUPLListView ()
 @property (nonatomic, strong) NSArray <TVUPLSection *> *sections;
 @property (nonatomic, strong) UIView *contentView;
@@ -101,6 +109,7 @@ NSString *const kTVUPLRowKey    = @"RowKey";
         TVUPLSection *section = sections[i];
         section.index = i;
         self.sectionMap[section.key] = section;
+        
         [self prepareForSection:section];
     }
 }
@@ -109,26 +118,37 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     if (section.fetchSectionParameterBlock != nil) {
         section.fetchSectionParameterBlock(section);
     }
-    if (section.bindView == nil) {
-        section.bindView = [[TVUSectionView alloc] init];
-        [self.contentView addSubview:section.bindView];
+    if (section.sectionView == nil) {
+        section.sectionView = [[TVUSectionView alloc] init];
+        [self.contentView addSubview:section.sectionView];
     }
-    section.bindView.section = section;
-    section.bindView.hidden = section.hidden;
+    
+    if (section.contentView == nil) {
+        section.contentView = [[UIView alloc] init];
+        [section.sectionView addSubview:section.contentView];
+    }
+    
+    section.sectionView.section = section;
+    section.sectionView.hidden = section.hidden;
     if (section.rows.count == 0 || section.hidden) return;
     
     if (section.backgroundColor) {
-        section.bindView.backgroundColor = section.backgroundColor;
+        section.contentView.backgroundColor = section.backgroundColor;
     } else {
-        section.bindView.backgroundColor = [UIColor clearColor];
+        section.contentView.backgroundColor = [UIColor clearColor];
     }
     
     if (section.cornerRadius > 0) {
-        section.bindView.layer.cornerRadius  = section.cornerRadius;
-        section.bindView.layer.masksToBounds = YES;
+        section.contentView.layer.cornerRadius  = section.cornerRadius;
+        section.contentView.layer.masksToBounds = YES;
     } else {
-        section.bindView.layer.cornerRadius  = 0;
-        section.bindView.layer.masksToBounds = NO;
+        section.contentView.layer.cornerRadius  = 0;
+        section.contentView.layer.masksToBounds = NO;
+    }
+    /// header
+    if (section.header) {
+        self.rowMap[section.header.key] = section.header;
+        [self prepareForRow:section.header];
     }
     
     for (int i = 0; i < section.rows.count; i++) {
@@ -138,6 +158,11 @@ NSString *const kTVUPLRowKey    = @"RowKey";
         self.rowMap[row.key] = row;
         [self prepareForRow:row];
     }
+    /// footer
+    if (section.footer) {
+        self.rowMap[section.footer.key] = section.footer;
+        [self prepareForRow:section.footer];
+    }
 }
 
 - (void)prepareForRow:(TVUPLRow *)row {
@@ -145,7 +170,11 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     if (view == nil) {
         view = [self viewForRowType:row.type];
         row.bindView = view;
-        [row.section.bindView addSubview:view];
+        if (row.headerOrFooter) {
+            [row.section.sectionView addSubview:view];
+        } else {
+            [row.section.contentView addSubview:view];
+        }
     }
     view.type = row.type;
     view.row = row;
@@ -170,8 +199,8 @@ NSString *const kTVUPLRowKey    = @"RowKey";
         row.lineView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
     }
     if (row.hidden == NO && row.dataByUser == NO) {
-        [view reloadWithData:row.rowData];
         view.showIndicator = row.showIndicator;
+        [view reloadWithData:row.rowData];
     }
 }
 
@@ -190,7 +219,7 @@ NSString *const kTVUPLRowKey    = @"RowKey";
 }
 
 - (void)layoutForSection:(TVUPLSection *)section {
-    UIView *bindView = section.bindView;
+    UIView *bindView = section.sectionView;
     
     TVUPLSection *preSection = [self getPreSctionAtIndex:section.index];
     BOOL isLastOne = [self isLastOneSection:section];
@@ -199,7 +228,7 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     [bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(section.insets.left);
         if (preSection) {
-            make.top.equalTo(preSection.bindView.mas_bottom).offset(top);
+            make.top.equalTo(preSection.sectionView.mas_bottom).offset(top);
         } else {
             make.top.equalTo(self.contentView).offset(top);
         }
@@ -212,8 +241,53 @@ NSString *const kTVUPLRowKey    = @"RowKey";
     if (section.hidden == YES) {
         return;
     }
+    
+    [self layoutHeaderAndFooterSection:section];
+    
     for (TVUPLRow *row in section.rows) {
         [self layoutForRow:row];
+    }
+}
+
+- (void)layoutHeaderAndFooterSection:(TVUPLSection *)section {
+    if (section.header) {
+        TVUPLRow *row = section.header;
+        UIView *bindView = row.bindView;
+        UIView *superView = bindView.superview;
+        [bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(superView).offset(row.insets.left);
+            make.right.equalTo(superView).offset(-row.insets.right);
+            make.top.equalTo(superView).offset(row.insets.top);
+            make.bottom.equalTo(section.contentView.mas_top).offset(row.insets.bottom);
+            if (row.height > 0) {
+                make.height.mas_equalTo(row.height);
+            }
+        }];
+    }
+    
+    [section.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if (section.header == nil || section.header.hidden) {
+            make.top.equalTo(section.sectionView);
+        }
+        make.left.right.equalTo(section.sectionView);
+        if (section.footer == nil || section.footer.hidden) {
+            make.bottom.equalTo(section.sectionView);
+        }
+    }];
+    
+    if (section.footer) {
+        TVUPLRow *row = section.footer;
+        UIView *bindView = row.bindView;
+        UIView *superView = bindView.superview;
+        [bindView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(superView).offset(row.insets.left);
+            make.right.equalTo(superView).offset(-row.insets.right);
+            make.top.equalTo(section.contentView.mas_bottom).offset(row.insets.top);
+            make.bottom.equalTo(superView).offset(-row.insets.bottom);
+            if (row.height > 0) {
+                make.height.mas_equalTo(row.height);
+            }
+        }];
     }
 }
 
@@ -327,6 +401,7 @@ NSString *const kTVUPLRowKey    = @"RowKey";
             @(TVUPLRowTypeLogin)        : TVUPLLoginRow.class,
             @(TVUPLRowTypeUnLogin)      : TVUPLUnLoginRow.class,
             @(TVUPLRowTypeCenterText)   : TVUPLCenterTextRow.class,
+            @(TVUPLRowTypeButton)       : TVUPLButtonRow.class,
         };
     });
     return clsRowMap[@(type)];

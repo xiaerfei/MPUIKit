@@ -20,8 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL hiddenLine;
 @property (nonatomic, assign) BOOL hidden;
 @property (nonatomic, assign) BOOL showIndicator;
+@property (nonatomic,   copy) NSString *indicatorImageName;
+@property (nonatomic, strong) UIColor *indicatorColor;
 @property (nonatomic, assign) BOOL unselected;
 @property (nonatomic, assign) BOOL unselectedStyle;
+@property (nonatomic, assign) BOOL showLeftImage;
 ///< 不再通过 rowData 刷新数据
 @property (nonatomic, strong) id rowData;
 @property (nonatomic, assign) CGFloat height;
@@ -34,8 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, weak) TVUPLSection *section;
+@property (nonatomic, assign) BOOL headerOrFooter;
 
 - (instancetype)initWithType:(TVUPLRowType)type key:(NSString *)key;
+
+- (instancetype)initWithData:(NSDictionary *)data;
+
 @end
 
 NS_ASSUME_NONNULL_END

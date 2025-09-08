@@ -6,8 +6,8 @@
 //
 
 #import "TVUPLSection.h"
+#import "TVUPLRow.h"
 #import "NSObject+BaseDataType.h"
-
 @interface TVUPLSection ()
 @end
 
@@ -28,4 +28,31 @@
         [self.rows addObject:row];
     }
 }
+
+- (void)addRows:(NSArray <TVUPLRow *>*)rows {
+    if (rows.isArray == NO || rows.count == 0) {
+        return;
+    }
+    
+    for (id row in rows) {
+        [self addRow:row];
+    }
+}
+
+- (void)addHeader:(TVUPLRow *)row {
+    if (row == nil) return;
+    row.headerOrFooter = YES;
+    row.section = self;
+    row.index = 0;
+    self.header = row;
+}
+
+- (void)addFooter:(TVUPLRow *)row {
+    if (row == nil) return;
+    row.headerOrFooter = YES;
+    row.section = self;
+    row.index = 1;
+    self.footer = row;
+}
+
 @end

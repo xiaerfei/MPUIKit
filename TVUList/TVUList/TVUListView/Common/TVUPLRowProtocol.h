@@ -14,12 +14,20 @@ extern NSString *const kTVUPLRowData;
 extern NSString *const kTVUPLRowType;
 extern NSString *const kTVUPLRowKey;
 
+extern NSString *const kTVUPLRowTitle;
+extern NSString *const kTVUPLRowSubtitle;
+extern NSString *const kTVUPLRowImage;
+extern NSString *const kTVUPLRowValue;
+
+extern NSString *const kTVUPLRowIndicatorImage;
+extern NSString *const kTVUPLRowShowIndicator;
 typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeDefault,
     TVUPLRowTypeSwitch,
     TVUPLRowTypeLogin,
     TVUPLRowTypeUnLogin,
     TVUPLRowTypeCenterText,
+    TVUPLRowTypeButton,
 };
 
 #define TVUColorWithRHedix(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]

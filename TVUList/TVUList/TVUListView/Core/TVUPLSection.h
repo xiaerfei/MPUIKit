@@ -19,14 +19,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UIEdgeInsets insets;
 @property (nonatomic, assign) CGFloat cornerRadius;
 @property (nonatomic, strong) UIColor *backgroundColor;
-@property (nonatomic, strong) TVUSectionView *bindView;
+@property (nonatomic, strong) TVUSectionView *sectionView;
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic,   copy) void (^fetchSectionParameterBlock)(TVUPLSection *section);
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
 
+@property (nonatomic, strong) TVUPLRow *header;
+@property (nonatomic, strong) TVUPLRow *footer;
+
 - (instancetype)initWithKey:(NSString *)key;
 - (void)addRow:(TVUPLRow *)row;
+- (void)addRows:(NSArray <TVUPLRow *>*)rows;
 
+- (void)addHeader:(TVUPLRow *)row;
+- (void)addFooter:(TVUPLRow *)row;
 @end
 
 NS_ASSUME_NONNULL_END

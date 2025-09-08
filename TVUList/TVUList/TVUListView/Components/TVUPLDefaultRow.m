@@ -23,11 +23,11 @@
 
 #pragma mark - TVUPLRowProtocol
 - (void)reloadWithData:(nonnull id)data {
+    [super reloadWithData:data];
     if ([data isDictionary]) {
-        self.titleLabel.text = [data[@"text"] toStringValue];
-        self.valueLabel.text = [data[@"value"] toStringValue];
+        self.valueLabel.text = [data[kTVUPLRowValue] toStringValue];
+        [self remakeValueConstraints];
     } else {
-        self.titleLabel.text = @"";
         self.valueLabel.text = @"";
     }
 }
@@ -44,7 +44,7 @@
                                                 green:140.0f/255.0f
                                                  blue:140.0f/255.0f
                                                 alpha:1];
-    self.valueLabel.font = [UIFont systemFontOfSize:15];
+    self.valueLabel.font = [UIFont systemFontOfSize:12];
     [self addSubview:self.valueLabel];
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -57,4 +57,14 @@
         make.right.equalTo(self).offset(-30);
     }];
 }
+
+- (void)remakeValueConstraints {
+    if (self.indicatorImageView) {
+        [self.valueLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self);
+            make.right.equalTo(self.indicatorImageView.mas_left).offset(-10);
+        }];
+    }
+}
+
 @end

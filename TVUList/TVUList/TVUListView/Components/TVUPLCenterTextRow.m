@@ -21,7 +21,7 @@
 #pragma mark - TVUPLRowProtocol
 - (void)reloadWithData:(nonnull id)data {
     if ([data isDictionary]) {
-        self.titleLabel.text = [data[@"text"] toStringValue];
+        self.titleLabel.text = [data[kTVUPLRowTitle] toStringValue];
     } else {
         self.titleLabel.text = @"";
     }

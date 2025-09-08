@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL showIndicator;
 
 @property (nonatomic, strong, nullable) UIImageView *indicatorImageView;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *subtitleLabel;
+@property (nonatomic, strong, nullable) UIImageView *LeftImageView;
+
+- (void)reloadWithData:(NSDictionary *)data;
 @end
 
 NS_ASSUME_NONNULL_END

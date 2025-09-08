@@ -9,7 +9,6 @@
 #import "TVUPLListView.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
@@ -17,6 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    [self configureList];
 }
 
 
