@@ -10,63 +10,11 @@
 #import "NSArray+Function.h"
 #import "TVUSectionView.h"
 #import "Masonry.h"
-#define TVUColorWithRHedix(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
 
 NSString *const kTVUPLRowHeight = @"RowH";
 NSString *const kTVUPLRowData   = @"RowData";
 NSString *const kTVUPLRowType   = @"RowType";
 NSString *const kTVUPLRowKey    = @"RowKey";
-
-@interface TVUPLRow ()
-@property (nonatomic, assign, readwrite) TVUPLRowType type;
-@property (nonatomic,   copy, readwrite) NSString *key;
-@property (nonatomic, strong, readwrite) TVUPLBaseRow <TVUPLRowProtocol> *bindView;
-@property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIView *backView;
-@property (nonatomic, assign) NSUInteger index;
-@property (nonatomic, weak) TVUPLSection *section;
-@end
-@implementation TVUPLRow
-- (instancetype)initWithType:(TVUPLRowType)type
-                         key:(NSString *)key {
-    self = [super init];
-    if (self) {
-#if DEBUG
-        NSAssert([key toStringValue].length != 0, @"key is null");
-#endif
-        self.type = type;
-        self.key  = key;
-        self.lineInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-        self.lineColor = TVUColorWithRHedix(0x3D3C40);
-        self.height = 44;
-    }
-    return self;
-}
-@end
-
-@interface TVUPLSection ()
-@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
-@property (nonatomic, assign) NSUInteger index;
-@end
-@implementation TVUPLSection
-- (instancetype)initWithKey:(NSString *)key {
-    self = [super init];
-    if (self) {
-#if DEBUG
-        NSAssert([key toStringValue].length != 0, @"key is null");
-#endif
-        self.key = key;
-        self.rows = [NSMutableArray array];
-    }
-    return self;
-}
-- (void)addRow:(TVUPLRow *)row {
-    if (row != nil && [self.rows containsObject:row] == NO) {
-        [self.rows addObject:row];
-    }
-}
-@end
 
 @interface TVUPLListView ()
 @property (nonatomic, strong) NSArray <TVUPLSection *> *sections;

@@ -7,9 +7,6 @@
 
 #import "TVUPLBaseRow.h"
 #import "TVUPLListView.h"
-@interface TVUPLRow ()
-@property (nonatomic, strong) UIView *backView;
-@end
 
 @implementation TVUPLBaseRow
 #pragma mark - Private Methods

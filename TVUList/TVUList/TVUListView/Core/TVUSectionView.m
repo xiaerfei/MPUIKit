@@ -8,21 +8,6 @@
 #import "TVUSectionView.h"
 #import "TVUPLListView.h"
 
-@interface TVUPLSection ()
-@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
-@property (nonatomic, assign) NSUInteger index;
-@end
-
-@interface TVUPLRow ()
-@property (nonatomic, assign, readwrite) TVUPLRowType type;
-@property (nonatomic,   copy, readwrite) NSString *key;
-@property (nonatomic, strong, readwrite) TVUPLBaseRow <TVUPLRowProtocol> *bindView;
-@property (nonatomic, strong) UIView *lineView;
-@property (nonatomic, strong) UIView *backView;
-@property (nonatomic, assign) NSUInteger index;
-@property (nonatomic, weak) TVUPLSection *section;
-@end
-
 
 @interface TVUSectionView ()
 @property (nonatomic, strong) TVUPLRow *clickRow;

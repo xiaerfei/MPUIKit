@@ -1,31 +1,24 @@
 //
 //  ViewController.m
-//  TVULogger
+//  iOSTest
 //
-//  Created by erfeixia on 2025/8/2.
+//  Created by TVUM4Pro on 2025/8/22.
 //
 
 #import "ViewController.h"
 #import "TVULogger.h"
 
+@interface ViewController ()
+
+@end
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     // Do any additional setup after loading the view.
 }
-
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
-}
 - (IBAction)testLoggerAction:(id)sender {
-}
-
-- (IBAction)addLogAction:(id)sender {
     static int cnt = 0;
     NSString *log = [NSString stringWithFormat:@"第%d条日志", cnt];
     [TVULogger logWithLevel:LogLevelError
@@ -34,5 +27,6 @@
     NSLog(@"%@", log);
     cnt++;
 }
+
 
 @end

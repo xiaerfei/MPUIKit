@@ -6,19 +6,98 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		2C683E1F2E5858EF00868C4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CFE561B2E3DAC11006761CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C683E032E5858EE00868C4A;
+			remoteInfo = iOSTest;
+		};
+		2C683E292E5858EF00868C4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CFE561B2E3DAC11006761CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C683E032E5858EE00868C4A;
+			remoteInfo = iOSTest;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2C683E042E5858EE00868C4A /* iOSTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C683E1E2E5858EF00868C4A /* iOSTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C683E282E5858EF00868C4A /* iOSTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CFE56232E3DAC11006761CE /* TVULogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVULogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2C683E362E5858EF00868C4A /* Exceptions for "iOSTest" folder in "iOSTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2C683E032E5858EE00868C4A /* iOSTest */;
+		};
+		2C683E552E58596100868C4A /* Exceptions for "TVULogger" folder in "iOSTest" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TVULogger/TVULogger.m,
+			);
+			target = 2C683E032E5858EE00868C4A /* iOSTest */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2C683E052E5858EE00868C4A /* iOSTest */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2C683E362E5858EF00868C4A /* Exceptions for "iOSTest" folder in "iOSTest" target */,
+			);
+			path = iOSTest;
+			sourceTree = "<group>";
+		};
+		2C683E212E5858EF00868C4A /* iOSTestTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = iOSTestTests;
+			sourceTree = "<group>";
+		};
+		2C683E2B2E5858EF00868C4A /* iOSTestUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = iOSTestUITests;
+			sourceTree = "<group>";
+		};
 		9CFE56252E3DAC11006761CE /* TVULogger */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2C683E552E58596100868C4A /* Exceptions for "TVULogger" folder in "iOSTest" target */,
+			);
 			path = TVULogger;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C683E012E5858EE00868C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E1B2E5858EF00868C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E252E5858EF00868C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CFE56202E3DAC11006761CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				9CFE56252E3DAC11006761CE /* TVULogger */,
+				2C683E052E5858EE00868C4A /* iOSTest */,
+				2C683E212E5858EF00868C4A /* iOSTestTests */,
+				2C683E2B2E5858EF00868C4A /* iOSTestUITests */,
 				9CFE56242E3DAC11006761CE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +123,9 @@
 			isa = PBXGroup;
 			children = (
 				9CFE56232E3DAC11006761CE /* TVULogger.app */,
+				2C683E042E5858EE00868C4A /* iOSTest.app */,
+				2C683E1E2E5858EF00868C4A /* iOSTestTests.xctest */,
+				2C683E282E5858EF00868C4A /* iOSTestUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +133,74 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C683E032E5858EE00868C4A /* iOSTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C683E372E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTest" */;
+			buildPhases = (
+				2C683E002E5858EE00868C4A /* Sources */,
+				2C683E012E5858EE00868C4A /* Frameworks */,
+				2C683E022E5858EE00868C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2C683E052E5858EE00868C4A /* iOSTest */,
+			);
+			name = iOSTest;
+			packageProductDependencies = (
+			);
+			productName = iOSTest;
+			productReference = 2C683E042E5858EE00868C4A /* iOSTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2C683E1D2E5858EF00868C4A /* iOSTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C683E382E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTestTests" */;
+			buildPhases = (
+				2C683E1A2E5858EF00868C4A /* Sources */,
+				2C683E1B2E5858EF00868C4A /* Frameworks */,
+				2C683E1C2E5858EF00868C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C683E202E5858EF00868C4A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2C683E212E5858EF00868C4A /* iOSTestTests */,
+			);
+			name = iOSTestTests;
+			packageProductDependencies = (
+			);
+			productName = iOSTestTests;
+			productReference = 2C683E1E2E5858EF00868C4A /* iOSTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2C683E272E5858EF00868C4A /* iOSTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C683E392E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTestUITests" */;
+			buildPhases = (
+				2C683E242E5858EF00868C4A /* Sources */,
+				2C683E252E5858EF00868C4A /* Frameworks */,
+				2C683E262E5858EF00868C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C683E2A2E5858EF00868C4A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2C683E2B2E5858EF00868C4A /* iOSTestUITests */,
+			);
+			name = iOSTestUITests;
+			packageProductDependencies = (
+			);
+			productName = iOSTestUITests;
+			productReference = 2C683E282E5858EF00868C4A /* iOSTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		9CFE56222E3DAC11006761CE /* TVULogger */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9CFE56362E3DAC12006761CE /* Build configuration list for PBXNativeTarget "TVULogger" */;
@@ -79,6 +232,17 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					2C683E032E5858EE00868C4A = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					2C683E1D2E5858EF00868C4A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 2C683E032E5858EE00868C4A;
+					};
+					2C683E272E5858EF00868C4A = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = 2C683E032E5858EE00868C4A;
+					};
 					9CFE56222E3DAC11006761CE = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -99,11 +263,35 @@
 			projectRoot = "";
 			targets = (
 				9CFE56222E3DAC11006761CE /* TVULogger */,
+				2C683E032E5858EE00868C4A /* iOSTest */,
+				2C683E1D2E5858EF00868C4A /* iOSTestTests */,
+				2C683E272E5858EF00868C4A /* iOSTestUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C683E022E5858EE00868C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E1C2E5858EF00868C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E262E5858EF00868C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CFE56212E3DAC11006761CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -114,6 +302,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C683E002E5858EE00868C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E1A2E5858EF00868C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2C683E242E5858EF00868C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CFE561F2E3DAC11006761CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,7 +332,151 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2C683E202E5858EF00868C4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C683E032E5858EE00868C4A /* iOSTest */;
+			targetProxy = 2C683E1F2E5858EF00868C4A /* PBXContainerItemProxy */;
+		};
+		2C683E2A2E5858EF00868C4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C683E032E5858EE00868C4A /* iOSTest */;
+			targetProxy = 2C683E292E5858EF00868C4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		2C683E302E5858EF00868C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YDEVQQ22JR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C683E312E5858EF00868C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YDEVQQ22JR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2C683E322E5858EF00868C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.iOSTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSTest";
+			};
+			name = Debug;
+		};
+		2C683E332E5858EF00868C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.iOSTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSTest";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2C683E342E5858EF00868C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.iOSTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSTest;
+			};
+			name = Debug;
+		};
+		2C683E352E5858EF00868C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.iOSTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = iOSTest;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		9CFE56342E3DAC12006761CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -292,6 +645,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C683E372E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C683E302E5858EF00868C4A /* Debug */,
+				2C683E312E5858EF00868C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C683E382E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C683E322E5858EF00868C4A /* Debug */,
+				2C683E332E5858EF00868C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2C683E392E5858EF00868C4A /* Build configuration list for PBXNativeTarget "iOSTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C683E342E5858EF00868C4A /* Debug */,
+				2C683E352E5858EF00868C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9CFE561E2E3DAC11006761CE /* Build configuration list for PBXProject "TVULogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

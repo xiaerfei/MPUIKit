@@ -7,49 +7,12 @@
 
 #import <UIKit/UIKit.h>
 #import "TVUPLRowProtocol.h"
+#import "TVUPLSection.h"
 #import "TVUPLCRows.h"
+#import "TVUPLRow.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class TVUSectionView;
-
-@interface TVUPLRow : NSObject
-@property (nonatomic, assign, readonly) TVUPLRowType type;
-@property (nonatomic,   copy, readonly) NSString *key;
-@property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, assign) UIEdgeInsets lineInsets;
-@property (nonatomic, strong) UIColor *lineColor;
-@property (nonatomic, assign) BOOL hiddenLine;
-@property (nonatomic, assign) BOOL hidden;
-@property (nonatomic, assign) BOOL showIndicator;
-@property (nonatomic, assign) BOOL unselected;
-@property (nonatomic, assign) BOOL unselectedStyle;
-///< 不再通过 rowData 刷新数据
-@property (nonatomic, strong) id rowData;
-@property (nonatomic, assign) CGFloat height;
-@property (nonatomic, assign) BOOL dataByUser;
-@property (nonatomic,   copy) void (^didSelectedBlock)(TVUPLRow *row, id _Nullable value);
-@property (nonatomic,   copy) void (^fetchRowParameterBlock)(TVUPLRow *row);
-@property (nonatomic, strong, readonly) TVUPLBaseRow <TVUPLRowProtocol> *bindView;
-
-- (instancetype)initWithType:(TVUPLRowType)type key:(NSString *)key;
-@end
-
-
-@interface TVUPLSection : NSObject
-@property (nonatomic,   copy) NSString *key;
-@property (nonatomic, assign) BOOL hidden;
-@property (nonatomic, assign) BOOL separateLine;
-@property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, assign) CGFloat cornerRadius;
-@property (nonatomic, strong) UIColor *backgroundColor;
-@property (nonatomic, strong) TVUSectionView *bindView;
-@property (nonatomic,   copy) void (^fetchSectionParameterBlock)(TVUPLSection *section);
-
-- (instancetype)initWithKey:(NSString *)key;
-- (void)addRow:(TVUPLRow *)row;
-
-@end
-
 
 @interface TVUPLListView : UIScrollView
 @property (nonatomic, copy) NSArray <TVUPLSection *>*(^fetchSectionsBlock)(void);
