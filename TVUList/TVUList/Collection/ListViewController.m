@@ -36,7 +36,8 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[CustomCell class] forCellWithReuseIdentifier:@"CustomCell"];
-    [self.collectionView registerClass:[SectionBackView class] forSupplementaryViewOfKind:kSectionBackView withReuseIdentifier:kSectionBackView];
+    [self.collectionView registerClass:[SectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SectionHeaderView"];
+    [self.collectionView registerClass:[SectionBackView class] forSupplementaryViewOfKind:@"SectionBackground" withReuseIdentifier:@"SectionBackgroundView"];
     self.collectionView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:self.collectionView];
@@ -52,18 +53,6 @@
     // 准备数据
     [self prepareData];
 }
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    NSLog(@"viewWillLayoutSubviews");
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    NSLog(@"viewDidLayoutSubviews");
-}
-
-
 #pragma mark - 数据准备
 - (void)prepareData {
     // 假设这是你的分区标题数组
@@ -97,26 +86,56 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     // 单元格宽度等于collectionView宽度，高度固定为60
-//    CGFloat headerWidth = [self collectionView:collectionView layout:collectionViewLayout referenceSizeForHeaderInSection:indexPath.section].width;
-    return CGSizeMake(0, 60);
+    CGFloat headerWidth = [self collectionView:collectionView layout:collectionViewLayout referenceSizeForHeaderInSection:indexPath.section].width;
+    return CGSizeMake(headerWidth, 60);
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    // 确保旋转时更新头部宽度
+    return CGSizeZero;
+    return CGSizeMake(collectionView.bounds.size.width - 30, 40);
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@", indexPath.description);
 }
 #pragma mark - SectionBackgroundCollectionViewLayoutDelegate
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-           sizeInSection:(NSInteger)section {
+// 实现此代理方法来设置每个section的header宽度
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+  widthForHeaderInSection:(NSInteger)section {
+    // 可以为不同section设置不同宽度
     UIEdgeInsets insets = ((SectionBackViewLayout *)collectionView.collectionViewLayout).sectionInset;
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - insets.left - insets.right, 0);
+    // 其他组与屏幕同宽
+    return CGRectGetWidth(collectionView.frame) - insets.left - insets.right;
+}
+// 控制header高度
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+ heightForHeaderInSection:(NSInteger)section {
+    // 如果是隐藏的分区，高度设为0
+    return 0; // 正常高度
 }
 #pragma mark - 分区头部和背景
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
-    if ([kind isEqualToString:kSectionBackView]) {
-        SectionBackView *backgroundView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kSectionBackView forIndexPath:indexPath];
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        SectionHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"SectionHeaderView" forIndexPath:indexPath];
+        header.titleLabel.text = self.sectionTitles[indexPath.section];
+        return header;
+    }
+    else if ([kind isEqualToString:@"SectionBackground"]) {
+        SectionBackView *backgroundView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"SectionBackgroundView" forIndexPath:indexPath];
+        
+        // 为不同分区设置不同背景色
+//        NSArray *sectionColors = @[
+//            [UIColor colorWithRed:0.95 green:0.95 blue:1.0 alpha:1.0], // 浅蓝色
+//            [UIColor colorWithRed:0.95 green:1.0 blue:0.95 alpha:1.0], // 浅绿色
+//            [UIColor colorWithRed:1.0 green:0.95 blue:0.95 alpha:1.0]  // 浅红色
+//        ];
+        
         backgroundView.backgroundColor = [UIColor colorWithRed:31.0f/255.0f
                                                          green:31.0f/255.0f
                                                           blue:31.0f/255.0f
