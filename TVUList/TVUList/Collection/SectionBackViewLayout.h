@@ -11,8 +11,18 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SectionBackgroundCollectionViewLayoutDelegate <UICollectionViewDelegate>
 @optional
 // 用于设置每个section的header宽度
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout widthForHeaderInSection:(NSInteger)section;
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout heightForHeaderInSection:(NSInteger)section;
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+  widthForHeaderInSection:(NSInteger)section;
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+ heightForHeaderInSection:(NSInteger)section;
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+sizeForItemWithIndexPath:(NSIndexPath *)indexPath;
+
+
 @end
 @interface SectionBackViewLayout : UICollectionViewFlowLayout
 // 默认header高度

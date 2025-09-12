@@ -48,12 +48,12 @@
                             heightForHeaderInSection:section];
         }
         
-        CGSize headerSize = CGSizeMake(headerWidth, headerHeight);
-        
+        CGFloat gap = self.sectionInset.left + self.sectionInset.right;
+        CGSize headerSize = CGSizeMake(headerWidth - gap, headerHeight);
         // 2. 创建Header的布局属性
         NSIndexPath *headerIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
         UICollectionViewLayoutAttributes *headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:headerIndexPath];
-        headerAttributes.frame = CGRectMake((self.collectionView.bounds.size.width - headerWidth) / 2, currentY, headerWidth, headerSize.height);
+        headerAttributes.frame = CGRectMake((self.collectionView.bounds.size.width - headerSize.width) / 2, currentY, headerSize.width, headerSize.height);
         [attributes addObject:headerAttributes];
         
         currentY += headerSize.height;
@@ -62,22 +62,34 @@
         for (NSInteger item = 0; item < numberOfItems; item++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            CGSize itemSize = CGSizeZero;
+            if ([self.collectionView.delegate respondsToSelector:@selector(collectionView:layout:sizeForItemWithIndexPath:)]) {
+                itemSize = [(id<SectionBackgroundCollectionViewLayoutDelegate>)self.collectionView.delegate
+                                collectionView:self.collectionView
+                                layout:self
+                                sizeForItemWithIndexPath:indexPath];
+            }
             
-            // 让单元格宽度与header保持一致
-            CGFloat itemWidth = headerWidth;
-            CGFloat itemHeight = 60; // 单元格高度
+            itemSize.width = headerSize.width;
             
-            itemAttributes.frame = CGRectMake((self.collectionView.bounds.size.width - itemWidth) / 2, currentY, itemWidth, itemHeight);
+            if (itemSize.height == 0) {
+                itemSize.height = 44;
+            }
+            
+            itemAttributes.frame = CGRectMake((self.collectionView.bounds.size.width - itemSize.width) / 2, currentY, itemSize.width, itemSize.height);
             [attributes addObject:itemAttributes];
             
-            currentY += itemHeight;
+            currentY += itemSize.height;
         }
         
         // 4. 处理分区背景布局
         UICollectionViewLayoutAttributes *backgroundAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:@"SectionBackground" withIndexPath:headerIndexPath];
-        CGFloat sectionHeight = headerSize.height + (numberOfItems * 60);
-        CGFloat gap = self.sectionInset.left + self.sectionInset.right;
-        backgroundAttributes.frame = CGRectMake(self.sectionInset.left, headerAttributes.frame.origin.y, self.collectionView.bounds.size.width - gap, sectionHeight);
+        CGFloat sectionHeight = (numberOfItems * 60);
+        
+        backgroundAttributes.frame = CGRectMake(self.sectionInset.left,
+                                                headerAttributes.frame.origin.y + headerSize.height,
+                                                self.collectionView.bounds.size.width - gap,
+                                                sectionHeight);
         backgroundAttributes.zIndex = -1; // 确保在最底层
         [attributes addObject:backgroundAttributes];
         currentY += self.sectionInset.bottom;
@@ -104,11 +116,6 @@
 
 - (CGSize)collectionViewContentSize {
     return self.contentSize;
-}
-
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    // 当 bounds 变化时（如旋转屏幕），重新计算布局
-    return YES;
 }
 
 @end
