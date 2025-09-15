@@ -23,9 +23,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger section;
 @property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
 
+@property (nonatomic, strong) TVUPLRow *header;
+@property (nonatomic, strong) TVUPLRow *footer;
+
 @property (nonatomic,   copy) void (^fetchSectionsBlock)(TVUPLSection *section);
 
-+ (instancetype)fetch:(void(^)(TVUPLSection *section))fetch;
++ (instancetype)attributes:(void(^)(TVUPLSection *section))attributes
+                      rows:(NSArray <TVUPLRow *>*(^)(void))rows;
+
 
 - (void)addRow:(TVUPLRow *)row;
 - (void)addRows:(NSArray <TVUPLRow *>*)rows;

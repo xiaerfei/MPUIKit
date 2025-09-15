@@ -16,4 +16,8 @@
     row.didSelectedBlock = selected;
     return row;
 }
+
+- (void)parameter:(NSDictionary *)parameter {
+    
+}
 @end

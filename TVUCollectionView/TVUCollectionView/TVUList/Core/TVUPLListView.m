@@ -21,7 +21,7 @@ UICollectionViewDataSource>
 @property (nonatomic,   copy) NSArray *sectionTitles;
 @property (nonatomic,   copy) NSArray *sectionData;
 
-@property (nonatomic, strong) NSMutableArray <TVUPLSection *> *sections;
+@property (nonatomic, strong) NSArray <TVUPLSection *> *sections;
 
 @end
 
@@ -122,14 +122,17 @@ UICollectionViewDataSource>
 }
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    NSLog(@"sharexia: section count");
     return self.sections.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"sharexia: section row count");
     return self.sections[section].rows.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"sharexia: row cell");
     TVUPLRow *row = self.sections[indexPath.section].rows[indexPath.row];
     UICollectionViewCell *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.identifier
@@ -149,9 +152,13 @@ UICollectionViewDataSource>
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        TVUPLRow *headerRow = self.sections[indexPath.section].header;
+        if (headerRow.identifier == nil) {
+            return [UICollectionReusableView new];
+        }
         SectionHeaderView *header =
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                           withReuseIdentifier:@"SectionHeaderView"
+                                           withReuseIdentifier:headerRow.identifier
                                                   forIndexPath:indexPath];
         header.titleLabel.text = self.sectionTitles[indexPath.section];
         return header;
@@ -171,12 +178,27 @@ UICollectionViewDataSource>
     
     return nil;
 }
+#pragma mark - TVUPLListFlowLayoutDelegate
+- (TVUPLSection *)layout:(TVUPLListFlowLayout *)layout section:(NSInteger)section {
+    return self.sections[section];
+}
 
+- (TVUPLRow *)layout:(TVUPLListFlowLayout *)layout rowAtIndexPath:(NSIndexPath *)indexPath {
+    return self.sections[indexPath.section].rows[indexPath.row];
+}
+
+#pragma mark - Private Methods
 - (void)fetchSections {
-    
-    
-    
-    
+    if (self.fetchSectionsBlock) {
+        NSArray <TVUPLSection *> *sections = self.fetchSectionsBlock();
+        for (TVUPLSection *section in sections) {
+            if (section.fetchSectionsBlock) section.fetchSectionsBlock(section);
+            for (TVUPLRow *row in section.rows) {
+                if (row.fetchRowParameterBlock) row.fetchRowParameterBlock(row);
+            }
+        }
+        self.sections = sections;
+    }
 }
 
 

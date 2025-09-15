@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL unselected;
 @property (nonatomic, assign) BOOL unselectedStyle;
 @property (nonatomic, assign) BOOL showLeftImage;
+@property (nonatomic, assign) CGFloat height;
 
 @property (nonatomic, strong) id rowData;
 

@@ -73,18 +73,23 @@
             [self loginSection],
         ];
     }];
+    [self.listView reload];
 }
 
 - (TVUPLSection *)loginSection {
-    return [TVUPLSection fetch:^(TVUPLSection * _Nonnull section) {
+    return [TVUPLSection attributes:^(TVUPLSection * _Nonnull section) {
         
-        [section addRow:[self loginRow]];
-        [section addRow:[self unloginRow]];
+    } rows:^NSArray<TVUPLRow *> * _Nonnull{
+        return @[
+            [self loginRow],
+            [self unloginRow],
+        ];
     }];
 }
 
 - (TVUPLRow *)loginRow {
     return [TVUPLRow fetch:^(TVUPLRow * _Nonnull row) {
+        row.identifier = @"CustomCell";
         [row parameter:@{}];
     } selected:^(TVUPLRow * _Nonnull row, id  _Nonnull value) {
         
@@ -93,6 +98,7 @@
 
 - (TVUPLRow *)unloginRow {
     return [TVUPLRow fetch:^(TVUPLRow * _Nonnull row) {
+        row.identifier = @"CustomCell";
         [row parameter:@{}];
     } selected:^(TVUPLRow * _Nonnull row, id  _Nonnull value) {
         

@@ -8,10 +8,27 @@
 #import "TVUPLSection.h"
 #import "NSObject+BaseDataType.h"
 
+@interface TVUPLSection ()
+@property (nonatomic, copy) void(^attributesBlock)(TVUPLSection *section);
+@property (nonatomic, copy) NSArray <TVUPLRow *>*(^rowsBlock)(void);
+@end
+
 @implementation TVUPLSection
-+ (instancetype)fetch:(void(^)(TVUPLSection *section))fetch {
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.rows = [NSMutableArray array];
+    }
+    return self;
+}
+
+#pragma mark - Public Methods
++ (instancetype)attributes:(void(^)(TVUPLSection *section))attributes
+                      rows:(NSArray <TVUPLRow *>*(^)(void))rows {
     TVUPLSection *section = [TVUPLSection new];
-    section.fetchSectionsBlock = fetch;
+    section.attributesBlock = attributes;
+    section.rowsBlock = rows;
     return section;
 }
 
@@ -30,5 +47,7 @@
         [self addRow:row];
     }
 }
+
+
 
 @end
