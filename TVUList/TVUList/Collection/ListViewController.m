@@ -84,7 +84,7 @@
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+//    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@", indexPath.description);
 }
 #pragma mark - SectionBackgroundCollectionViewLayoutDelegate
