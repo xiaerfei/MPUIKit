@@ -88,21 +88,11 @@
 }
 
 - (TVUPLRow *)loginRow {
-    return [TVUPLRow fetch:^(TVUPLRow * _Nonnull row) {
-        row.identifier = @"CustomCell";
-        [row parameter:@{}];
-    } selected:^(TVUPLRow * _Nonnull row, id  _Nonnull value) {
-        
-    }];
+    return TVUPLRow.new.identifier(@"CustomCell").key(@"login");
 }
 
 - (TVUPLRow *)unloginRow {
-    return [TVUPLRow fetch:^(TVUPLRow * _Nonnull row) {
-        row.identifier = @"CustomCell";
-        [row parameter:@{}];
-    } selected:^(TVUPLRow * _Nonnull row, id  _Nonnull value) {
-        
-    }];
+    return TVUPLRow(@"CustomCell").key(@"").hidden(YES);
 }
 
 @end

@@ -158,7 +158,7 @@ UICollectionViewDataSource>
         }
         SectionHeaderView *header =
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                           withReuseIdentifier:headerRow.identifier
+                                           withReuseIdentifier:headerRow.rIdentifier
                                                   forIndexPath:indexPath];
         header.titleLabel.text = self.sectionTitles[indexPath.section];
         return header;
