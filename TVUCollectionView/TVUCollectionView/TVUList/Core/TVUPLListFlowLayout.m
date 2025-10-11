@@ -39,8 +39,8 @@ extern NSString *const kTVUPLSectionBackReuse;
         CGFloat headerOffset = currentY;
         if (header) {
             // 1. 计算Header尺寸
-            CGFloat headerWidth  = width - header.insets.left - header.insets.right;
-            headerHeight = header.height;
+            CGFloat headerWidth  = width - header.rInsets.left - header.rInsets.right;
+            headerHeight = header.rHeight;
             // 2. 创建Header的布局属性
             UICollectionViewLayoutAttributes *headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:headerIndexPath];
             headerAttributes.frame = CGRectMake((width - headerWidth) / 2,
@@ -61,8 +61,8 @@ extern NSString *const kTVUPLSectionBackReuse;
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             CGSize itemSize = CGSizeZero;
             
-            itemSize.width = width - row.insets.left - row.insets.right;
-            itemSize.height = row.height;
+            itemSize.width = width - row.rInsets.left - row.rInsets.right;
+            itemSize.height = row.rHeight;
 
             itemAttributes.frame = CGRectMake((width - itemSize.width) / 2,
                                               currentY,

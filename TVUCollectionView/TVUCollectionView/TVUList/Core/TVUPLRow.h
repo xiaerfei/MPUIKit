@@ -54,8 +54,5 @@
 + (instancetype)fetch:(void(^)(TVUPLRow *row))fetch
              selected:(void(^)(TVUPLRow *row, id value))selected;
 
-#define TVUPLRow(StringID)\
-    [[TVUPLRow alloc] initWithIdentifier:StringID]
-
 - (instancetype)initWithIdentifier:(NSString *)identifier;
 @end

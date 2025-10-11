@@ -73,7 +73,7 @@
             [self loginSection],
         ];
     }];
-    [self.listView reload];
+    [self.listView reload];    
 }
 
 - (TVUPLSection *)loginSection {
@@ -88,11 +88,11 @@
 }
 
 - (TVUPLRow *)loginRow {
-    return TVUPLRow.new.identifier(@"CustomCell").key(@"login");
+    return TVUPLRowReuse(@"CustomCell").key(@"login");
 }
 
 - (TVUPLRow *)unloginRow {
-    return TVUPLRow(@"CustomCell").key(@"").hidden(YES);
+    return TVUPLRowReuse(@"CustomCell").key(@"unlogin").hidden(YES);
 }
 
 @end

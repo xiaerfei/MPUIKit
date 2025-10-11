@@ -135,7 +135,7 @@ UICollectionViewDataSource>
     NSLog(@"sharexia: row cell");
     TVUPLRow *row = self.sections[indexPath.section].rows[indexPath.row];
     UICollectionViewCell *cell =
-    [collectionView dequeueReusableCellWithReuseIdentifier:row.identifier
+    [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
     // - (void)reloadWithData:(nonnull id)data
     
@@ -194,7 +194,7 @@ UICollectionViewDataSource>
         for (TVUPLSection *section in sections) {
             if (section.fetchSectionsBlock) section.fetchSectionsBlock(section);
             for (TVUPLRow *row in section.rows) {
-                if (row.fetchRowParameterBlock) row.fetchRowParameterBlock(row);
+                if (row.rFetchRowParameterBlock) row.rFetchRowParameterBlock(row);
             }
         }
         self.sections = sections;

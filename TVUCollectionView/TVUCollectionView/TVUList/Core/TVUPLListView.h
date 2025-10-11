@@ -7,8 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TVUPLSection.h"
-#import "TVUPLRow.h"
-
+#import "TVUPLReuseManager.h"
 NS_ASSUME_NONNULL_BEGIN
 
 #define UIColorFromHex(rgbValue) \
@@ -36,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerForFooter:(NSString *)cellName
                    bundle:(nullable NSBundle *)bundle
                    useNib:(BOOL)useNib;
-
 @end
 
 NS_ASSUME_NONNULL_END
