@@ -6,6 +6,12 @@
 //
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, TVUPLRowType) {
+    TVUPLRowTypeDefault,
+    TVUPLRowTypeHeader,
+    TVUPLRowTypeFooter
+};
+
 @interface TVUPLRow : NSObject
 @property (nonatomic,   copy, readonly) NSString *rKey;
 @property (nonatomic,   copy, readonly) NSString *rIdentifier;
@@ -32,6 +38,8 @@
 
 @property (nonatomic, assign) NSInteger tag;
 
+@property (nonatomic, assign, readonly) TVUPLRowType rrowType;
+
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
 - (TVUPLRow *(^)(NSString *identifier))identifier;
@@ -50,11 +58,13 @@
 
 - (TVUPLRow *(^)(id rowData))rowData;
 
-- (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))didSelectedBlock;
+- (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))tap;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))fetchRowParameterBlock;
 
-+ (instancetype)fetch:(void(^)(TVUPLRow *row))fetch
-             selected:(void(^)(TVUPLRow *row, id value))selected;
+- (TVUPLRow *(^)(TVUPLRowType rowType))rowType;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier;
+
+
+- (void)reload;
 @end

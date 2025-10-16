@@ -83,8 +83,19 @@
         .cornerRadius(8)
         .backgroundColor(UIColor.lightGrayColor)
         .rows(@[
-            RowReuse(@"CustomCell").key(@"login"),
-            RowReuse(@"CustomCell").key(@"unlogin").hidden(YES)
+            RowReuse(@"SectionHeaderView").rowType(TVUPLRowTypeHeader),
+            RowReuse(@"CustomCell")
+                .key(@"login")
+                .tap(^(TVUPLRow *row, id value) {
+                    
+                }),
+            RowReuse(@"CustomCell")
+                .key(@"unlogin")
+                .hidden(YES)
+                .tap(^(TVUPLRow *row, id value) {
+                    
+                }),
+            RowReuse(@"SectionHeaderView").rowType(TVUPLRowTypeFooter),
         ]);
 }
 

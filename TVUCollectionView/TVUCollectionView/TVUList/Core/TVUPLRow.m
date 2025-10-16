@@ -30,6 +30,8 @@
 
 @property (nonatomic,   copy, readwrite) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readwrite) void (^rFetchRowParameterBlock)(TVUPLRow *row);
+
+@property (nonatomic, assign, readwrite) TVUPLRowType rrowType;
 @end
 
 @implementation TVUPLRow
@@ -139,7 +141,7 @@
     };
 }
 
-- (TVUPLRow *(^)(void (^)(TVUPLRow *, id)))didSelectedBlock {
+- (TVUPLRow *(^)(void (^)(TVUPLRow *, id)))tap {
     return ^(void (^block)(TVUPLRow *row, id value)) {
         self.rDidSelectedBlock = block;
         return self;
@@ -153,16 +155,14 @@
     };
 }
 
-#pragma mark - Class Methods
-+ (instancetype)fetch:(void (^)(TVUPLRow *))fetch selected:(void (^)(TVUPLRow *, id))selected {
-    TVUPLRow *row = [[self alloc] init];
-    if (fetch) {
-        fetch(row);
-    }
-    row.didSelectedBlock(selected);
-    return row;
+- (TVUPLRow *(^)(TVUPLRowType rowType))rowType {
+    return ^(TVUPLRowType rowType) {
+        self.rrowType = rowType;
+        return self;
+    };
 }
 
+#pragma mark - Class Methods
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {

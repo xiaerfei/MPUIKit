@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray <TVUPLSection *>*(^fetchSectionsBlock)(void);
 
+- (TVUPLSection *(^)(NSArray *rows))rows;
+
 - (void)reload;
 - (void)reloadSectionForKey:(NSString *)key;
 - (void)reloadRowForKey:(NSString *)key;

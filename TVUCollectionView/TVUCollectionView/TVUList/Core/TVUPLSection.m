@@ -24,30 +24,42 @@
 }
 
 #pragma mark - Public Methods
-+ (instancetype)attributes:(void(^)(TVUPLSection *section))attributes
-                      rows:(NSArray <TVUPLRow *>*(^)(void))rows {
-    TVUPLSection *section = [TVUPLSection new];
-    section.attributesBlock = attributes;
-    section.rowsBlock = rows;
-    return section;
+- (TVUPLSection *(^)(NSString *key))key {
+    return ^(NSString *key) {
+        self.rkey = key;
+        return self;
+    };
+}
+- (TVUPLSection *(^)(BOOL rhidden))hidden {
+    return ^(BOOL rhidden) {
+        self.rhidden = rhidden;
+        return self;
+    };
+}
+- (TVUPLSection *(^)(UIEdgeInsets insets))insets {
+    return ^(UIEdgeInsets insets) {
+        self.rinsets = insets;
+        return self;
+    };
 }
 
-- (void)addRow:(TVUPLRow *)row {
-    if (row != nil && [self.rrows containsObject:row] == NO) {
-        [self.rrows addObject:row];
-    }
+- (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius {
+    return ^(CGFloat cornerRadius) {
+        self.rcornerRadius = cornerRadius;
+        return self;
+    };
+}
+- (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor {
+    return ^(UIColor *backgroundColor) {
+        self.rbackgroundColor = backgroundColor;
+        return self;
+    };
 }
 
-- (void)addRows:(NSArray <TVUPLRow *>*)rows {
-    if (rows.isArray == NO || rows.count == 0) {
-        return;
-    }
-    
-    for (id row in rows) {
-        [self addRow:row];
-    }
+- (TVUPLSection *(^)(NSArray *rows))rows {
+    return ^(NSArray *rows) {
+        self.rrows = rows;
+        return self;
+    };
 }
-
-
-
 @end

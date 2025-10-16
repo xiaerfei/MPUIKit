@@ -14,11 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TVUPLSection : NSObject
 @property (nonatomic,   copy) NSString *rkey;
 @property (nonatomic, assign) UIEdgeInsets rinsets;
+@property (nonatomic, assign) BOOL rhidden;
 @property (nonatomic, assign) CGFloat rcornerRadius;
 @property (nonatomic, strong) UIColor *rbackgroundColor;
 
 @property (nonatomic, assign) NSInteger section;
-@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rrows;
+@property (nonatomic, strong) NSArray <TVUPLRow *> *rrows;
 
 @property (nonatomic, strong) TVUPLRow *header;
 @property (nonatomic, strong) TVUPLRow *footer;
@@ -26,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 链式调用方法
 - (TVUPLSection *(^)(NSString *key))key;
+- (TVUPLSection *(^)(BOOL rhidden))hidden;
 - (TVUPLSection *(^)(UIEdgeInsets insets))insets;
 - (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius;
 - (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor;
 - (TVUPLSection *(^)(NSArray *rows))rows;
 
-- (void)addRow:(TVUPLRow *)row;
-- (void)addRows:(NSArray <TVUPLRow *>*)rows;
+- (void)reload;
 @end
 
 NS_ASSUME_NONNULL_END
