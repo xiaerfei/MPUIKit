@@ -30,6 +30,8 @@
 @property (nonatomic,   copy, readonly) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readonly) void (^rFetchRowParameterBlock)(TVUPLRow *row);
 
+@property (nonatomic, assign) NSInteger tag;
+
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
 - (TVUPLRow *(^)(NSString *identifier))identifier;

@@ -80,7 +80,7 @@ extern NSString *const kTVUPLSectionBackReuse;
                                                                        withIndexPath:headerIndexPath];
         backgroundAttributes.frame = CGRectMake(self.sectionInset.left,
                                                 headerOffset + headerHeight,
-                                                width - plSection.insets.left - plSection.insets.right,
+                                                width - plSection.rinsets.left - plSection.rinsets.right,
                                                 itemHeights);
         backgroundAttributes.zIndex = -1; // 确保在最底层
         [attributes addObject:backgroundAttributes];

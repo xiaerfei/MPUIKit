@@ -12,25 +12,24 @@ NS_ASSUME_NONNULL_BEGIN
 @class TVUPLRow;
 
 @interface TVUPLSection : NSObject
-@property (nonatomic,   copy) NSString *key;
-@property (nonatomic,   copy) NSString *identifier;
-/// 默认显示分割线
-@property (nonatomic, assign) BOOL separateLine;
-@property (nonatomic, assign) UIEdgeInsets insets;
-@property (nonatomic, assign) CGFloat cornerRadius;
-@property (nonatomic, strong) UIColor *backgroundColor;
+@property (nonatomic,   copy) NSString *rkey;
+@property (nonatomic, assign) UIEdgeInsets rinsets;
+@property (nonatomic, assign) CGFloat rcornerRadius;
+@property (nonatomic, strong) UIColor *rbackgroundColor;
 
 @property (nonatomic, assign) NSInteger section;
-@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rows;
+@property (nonatomic, strong) NSMutableArray <TVUPLRow *> *rrows;
 
 @property (nonatomic, strong) TVUPLRow *header;
 @property (nonatomic, strong) TVUPLRow *footer;
+@property (nonatomic, assign) NSInteger tag;
 
-@property (nonatomic,   copy) void (^fetchSectionsBlock)(TVUPLSection *section);
-
-+ (instancetype)attributes:(void(^)(TVUPLSection *section))attributes
-                      rows:(NSArray <TVUPLRow *>*(^)(void))rows;
-
+// 链式调用方法
+- (TVUPLSection *(^)(NSString *key))key;
+- (TVUPLSection *(^)(UIEdgeInsets insets))insets;
+- (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius;
+- (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor;
+- (TVUPLSection *(^)(NSArray *rows))rows;
 
 - (void)addRow:(TVUPLRow *)row;
 - (void)addRows:(NSArray <TVUPLRow *>*)rows;

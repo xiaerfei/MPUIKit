@@ -77,22 +77,15 @@
 }
 
 - (TVUPLSection *)loginSection {
-    return [TVUPLSection attributes:^(TVUPLSection * _Nonnull section) {
-        
-    } rows:^NSArray<TVUPLRow *> * _Nonnull{
-        return @[
-            [self loginRow],
-            [self unloginRow],
-        ];
-    }];
-}
-
-- (TVUPLRow *)loginRow {
-    return TVUPLRowReuse(@"CustomCell").key(@"login");
-}
-
-- (TVUPLRow *)unloginRow {
-    return TVUPLRowReuse(@"CustomCell").key(@"unlogin").hidden(YES);
+    return SectionReuse
+        .key(@"LoginSection")
+        .insets(UIEdgeInsetsZero)
+        .cornerRadius(8)
+        .backgroundColor(UIColor.lightGrayColor)
+        .rows(@[
+            RowReuse(@"CustomCell").key(@"login"),
+            RowReuse(@"CustomCell").key(@"unlogin").hidden(YES)
+        ]);
 }
 
 @end

@@ -128,12 +128,12 @@ UICollectionViewDataSource>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSLog(@"sharexia: section row count");
-    return self.sections[section].rows.count;
+    return self.sections[section].rrows.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"sharexia: row cell");
-    TVUPLRow *row = self.sections[indexPath.section].rows[indexPath.row];
+    TVUPLRow *row = self.sections[indexPath.section].rrows[indexPath.row];
     UICollectionViewCell *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
@@ -184,21 +184,12 @@ UICollectionViewDataSource>
 }
 
 - (TVUPLRow *)layout:(TVUPLListFlowLayout *)layout rowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.sections[indexPath.section].rows[indexPath.row];
+    return self.sections[indexPath.section].rrows[indexPath.row];
 }
 
 #pragma mark - Private Methods
 - (void)fetchSections {
-    if (self.fetchSectionsBlock) {
-        NSArray <TVUPLSection *> *sections = self.fetchSectionsBlock();
-        for (TVUPLSection *section in sections) {
-            if (section.fetchSectionsBlock) section.fetchSectionsBlock(section);
-            for (TVUPLRow *row in section.rows) {
-                if (row.rFetchRowParameterBlock) row.rFetchRowParameterBlock(row);
-            }
-        }
-        self.sections = sections;
-    }
+
 }
 
 

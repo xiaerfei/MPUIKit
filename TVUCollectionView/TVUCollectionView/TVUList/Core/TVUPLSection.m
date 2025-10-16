@@ -18,7 +18,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.rows = [NSMutableArray array];
+        self.rrows = [NSMutableArray array];
     }
     return self;
 }
@@ -33,8 +33,8 @@
 }
 
 - (void)addRow:(TVUPLRow *)row {
-    if (row != nil && [self.rows containsObject:row] == NO) {
-        [self.rows addObject:row];
+    if (row != nil && [self.rrows containsObject:row] == NO) {
+        [self.rrows addObject:row];
     }
 }
 
