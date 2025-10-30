@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 链式调用方法
 - (TVUPLSection *(^)(NSString *key))key;
-- (TVUPLSection *(^)(BOOL rhidden))hidden;
+- (TVUPLSection *(^)(BOOL hidden))hidden;
 - (TVUPLSection *(^)(UIEdgeInsets insets))insets;
 - (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius;
 - (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor;

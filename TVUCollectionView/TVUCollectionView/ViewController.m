@@ -66,14 +66,18 @@
     
     [self.listView registerForCell:@"CustomCell" bundle:nil useNib:NO];
     [self.listView registerForHeader:@"SectionHeaderView" bundle:nil useNib:NO];
-    @weakify(self);
-    [self.listView setFetchSectionsBlock:^NSArray<TVUPLSection *> * _Nonnull{
-        @strongify(self);
-        return @[
-            [self loginSection],
-        ];
-    }];
-    [self.listView reload];    
+
+    self.listView
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsZero)
+        .sectionColor(UIColor.lightGrayColor)
+        .sections(^{
+            return @[
+                [self loginSection],
+            ];
+        });
+    
+    [self.listView reload];
 }
 
 - (TVUPLSection *)loginSection {

@@ -30,8 +30,8 @@
         return self;
     };
 }
-- (TVUPLSection *(^)(BOOL rhidden))hidden {
-    return ^(BOOL rhidden) {
+- (TVUPLSection *(^)(BOOL hidden))hidden {
+    return ^(BOOL hidden) {
         self.rhidden = rhidden;
         return self;
     };

@@ -18,10 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLListView : UIView
 
-@property (nonatomic, copy) NSArray <TVUPLSection *>*(^fetchSectionsBlock)(void);
-
-- (TVUPLSection *(^)(NSArray *rows))rows;
-
 - (void)reload;
 - (void)reloadSectionForKey:(NSString *)key;
 - (void)reloadRowForKey:(NSString *)key;
@@ -37,6 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerForFooter:(NSString *)cellName
                    bundle:(nullable NSBundle *)bundle
                    useNib:(BOOL)useNib;
+
+#pragma mark - Section 相关设置
+- (TVUPLListView *(^)(NSArray *(^)(void)))sections;
+- (TVUPLListView *(^)(UIEdgeInsets insets))insets;
+- (TVUPLListView *(^)(CGFloat cornerRadius))cornerRadius;
+- (TVUPLListView *(^)(UIColor *backgroundColor))sectionColor;
 @end
 
 NS_ASSUME_NONNULL_END
