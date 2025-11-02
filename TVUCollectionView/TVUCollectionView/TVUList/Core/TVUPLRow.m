@@ -13,8 +13,8 @@
 @property (nonatomic, assign, readwrite) UIEdgeInsets rInsets;
 @property (nonatomic, assign, readwrite) UIEdgeInsets rLineInsets;
 @property (nonatomic, strong, readwrite) UIColor *rLineColor;
-@property (nonatomic, assign, readwrite) BOOL rHiddenLine;
-@property (nonatomic, assign, readwrite) BOOL rHidden;
+@property (nonatomic, assign, readwrite) BOOL rhiddenLine;
+@property (nonatomic, assign, readwrite) BOOL rhidden;
 @property (nonatomic, assign, readwrite) BOOL rShowIndicator;
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
@@ -32,6 +32,7 @@
 @property (nonatomic,   copy, readwrite) void (^rFetchRowParameterBlock)(TVUPLRow *row);
 
 @property (nonatomic, assign, readwrite) TVUPLRowType rrowType;
+@property (nonatomic,   copy, readwrite) void(^rprefetch)(TVUPLRow *row);
 @end
 
 @implementation TVUPLRow
@@ -73,14 +74,14 @@
 
 - (TVUPLRow *(^)(BOOL hiddenLine))hiddenLine {
     return ^(BOOL hiddenLine) {
-        self.rHiddenLine = hiddenLine;
+        self.rhiddenLine = hiddenLine;
         return self;
     };
 }
 
 - (TVUPLRow *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {
-        self.rHidden = hidden;
+        self.rhidden = hidden;
         return self;
     };
 }
@@ -155,19 +156,35 @@
     };
 }
 
-- (TVUPLRow *(^)(TVUPLRowType rowType))rowType {
+- (TVUPLRow *(^)(TVUPLRowType rowType))type {
     return ^(TVUPLRowType rowType) {
         self.rrowType = rowType;
         return self;
     };
 }
 
+- (TVUPLRow *(^)(void(^)(TVUPLRow *row)))prefetch {
+    return ^(void(^prefetch)(TVUPLRow *row)) {
+        self.rprefetch = prefetch;
+        return self;
+    };
+}
 #pragma mark - Class Methods
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
         self.rIdentifier = identifier;
+        self.rHeight = 44;
     }
     return self;
 }
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.rHeight = 44;
+    }
+    return self;
+}
+
 @end

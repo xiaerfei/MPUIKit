@@ -11,6 +11,7 @@
 @interface TVUPLSection ()
 @property (nonatomic, copy) void(^attributesBlock)(TVUPLSection *section);
 @property (nonatomic, copy) NSArray <TVUPLRow *>*(^rowsBlock)(void);
+@property (nonatomic, copy, readwrite)void(^rprefetch)(TVUPLSection *section);
 @end
 
 @implementation TVUPLSection
@@ -32,7 +33,7 @@
 }
 - (TVUPLSection *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {
-        self.rhidden = rhidden;
+        self.rhidden = hidden;
         return self;
     };
 }
@@ -59,6 +60,13 @@
 - (TVUPLSection *(^)(NSArray *rows))rows {
     return ^(NSArray *rows) {
         self.rrows = rows;
+        return self;
+    };
+}
+
+- (TVUPLSection *(^)(void(^)(TVUPLSection *section)))prefetch {
+    return ^(void(^prefetch)(TVUPLSection *section)) {
+        self.rprefetch = prefetch;
         return self;
     };
 }

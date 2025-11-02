@@ -18,8 +18,10 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @property (nonatomic, assign, readonly) UIEdgeInsets rInsets;
 @property (nonatomic, assign, readonly) UIEdgeInsets rLineInsets;
 @property (nonatomic, strong, readonly) UIColor *rLineColor;
-@property (nonatomic, assign, readonly) BOOL rHiddenLine;
-@property (nonatomic, assign, readonly) BOOL rHidden;
+@property (nonatomic, assign, readonly) BOOL rhiddenLine;
+///< header、footer 或者 Cell 只有一行则强制显示
+@property (nonatomic, assign, readonly) BOOL rforceShowLine;
+@property (nonatomic, assign, readonly) BOOL rhidden;
 @property (nonatomic, assign, readonly) BOOL rShowIndicator;
 @property (nonatomic,   copy, readonly) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readonly) UIColor *rIndicatorColor;
@@ -39,6 +41,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @property (nonatomic, assign) NSInteger tag;
 
 @property (nonatomic, assign, readonly) TVUPLRowType rrowType;
+@property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLRow *row);
 
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
@@ -61,10 +64,9 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))tap;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))fetchRowParameterBlock;
 
-- (TVUPLRow *(^)(TVUPLRowType rowType))rowType;
+- (TVUPLRow *(^)(TVUPLRowType rowType))type;
+- (TVUPLRow *(^)(void(^)(TVUPLRow *row)))prefetch;
+
 
 - (instancetype)initWithIdentifier:(NSString *)identifier;
-
-
-- (void)reload;
 @end

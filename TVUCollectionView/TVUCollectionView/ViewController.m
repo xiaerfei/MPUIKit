@@ -61,46 +61,97 @@
     [self.view addSubview:self.listView];
     
     [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.edges.equalTo(self.view.mas_safeAreaLayoutGuide);
     }];
     
     [self.listView registerForCell:@"CustomCell" bundle:nil useNib:NO];
-    [self.listView registerForHeader:@"SectionHeaderView" bundle:nil useNib:NO];
-
-    self.listView
-        .cornerRadius(8)
-        .insets(UIEdgeInsetsZero)
-        .sectionColor(UIColor.lightGrayColor)
-        .sections(^{
-            return @[
-                [self loginSection],
-            ];
-        });
     
+    self.listView
+        .prefetch(^(TVUPLListView *list) { list
+            .cornerRadius(8)
+            .insets(UIEdgeInsetsZero)
+            .sectionColor(UIColor.lightGrayColor)
+            .sections(@[
+                [self loginSection],
+                [self testSection],
+            ]);
+        });
     [self.listView reload];
 }
 
 - (TVUPLSection *)loginSection {
     return SectionReuse
+        .prefetch(^(TVUPLSection *section) { section
+            .key(@"LoginSection")
+            .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+            .cornerRadius(8)
+            .backgroundColor(UIColorFromHex(0x1F1F1F))
+            .rows(@[
+                RowReuse(@"CustomCell")
+                    .type(TVUPLRowTypeHeader)
+                    .rowData(@"Header"),
+                RowReuse(@"CustomCell")
+                    .key(@"login")
+                    .rowData(@"第 1 行")
+                    .lineInsets(UIEdgeInsetsMake(0, 15, 0, 0))
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .hidden(YES)
+                    .rowData(@"第 2 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .rowData(@"第 3 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .hidden(YES)
+                    .rowData(@"第 4 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .rowData(@"第 5 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .rowData(@"第 6 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .type(TVUPLRowTypeFooter)
+                    .rowData(@"Footer")
+                    .height(20),
+            ]);
+        });
+}
+
+- (TVUPLSection *)testSection {
+    return SectionReuse
         .key(@"LoginSection")
-        .insets(UIEdgeInsetsZero)
-        .cornerRadius(8)
-        .backgroundColor(UIColor.lightGrayColor)
-        .rows(@[
-            RowReuse(@"SectionHeaderView").rowType(TVUPLRowTypeHeader),
-            RowReuse(@"CustomCell")
-                .key(@"login")
-                .tap(^(TVUPLRow *row, id value) {
-                    
-                }),
-            RowReuse(@"CustomCell")
-                .key(@"unlogin")
-                .hidden(YES)
-                .tap(^(TVUPLRow *row, id value) {
-                    
-                }),
-            RowReuse(@"SectionHeaderView").rowType(TVUPLRowTypeFooter),
-        ]);
+        .prefetch(^(TVUPLSection *section) { section
+            .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+            .cornerRadius(8)
+            .backgroundColor(UIColorFromHex(0x1F1F1F))
+            .rows(@[
+                RowReuse(@"CustomCell")
+                    .type(TVUPLRowTypeHeader)
+                    .rowData(@"Header")
+                    .height(20)
+                    .insets(UIEdgeInsetsMake(0, 0, 0, 0)),
+                RowReuse(@"CustomCell")
+                    .key(@"login")
+                    .rowData(@"第 1 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .hidden(NO)
+                    .rowData(@"第 2 行")
+                    .tap(^(TVUPLRow *row, id value) {}),
+                RowReuse(@"CustomCell")
+                    .type(TVUPLRowTypeFooter)
+                    .rowData(@"Footer"),
+            ]);
+        });
 }
 
 @end

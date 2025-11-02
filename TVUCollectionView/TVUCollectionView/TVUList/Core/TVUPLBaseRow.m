@@ -6,20 +6,20 @@
 //
 
 #import "TVUPLBaseRow.h"
+#import "Masonry.h"
 
 @implementation TVUPLBaseRow
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self configureLine];
     }
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    
+    [self configureLine];
 }
 
 
@@ -34,4 +34,18 @@
     
 }
 
+#pragma mark - Private Methods
+- (void)configureLine {
+    UIView *line = [UIView new];
+    [self.contentView addSubview:line];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self);
+        make.height.equalTo(@1);
+    }];
+    
+    line.backgroundColor = [UIColor lightGrayColor];
+    
+    self.lineView = line;
+}
 @end

@@ -25,6 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) TVUPLRow *footer;
 @property (nonatomic, assign) NSInteger tag;
 
+@property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLSection *section);
+
+
+
 // 链式调用方法
 - (TVUPLSection *(^)(NSString *key))key;
 - (TVUPLSection *(^)(BOOL hidden))hidden;
@@ -32,8 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius;
 - (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor;
 - (TVUPLSection *(^)(NSArray *rows))rows;
-
-- (void)reload;
+- (TVUPLSection *(^)(void(^)(TVUPLSection *section)))prefetch;
 @end
 
 NS_ASSUME_NONNULL_END

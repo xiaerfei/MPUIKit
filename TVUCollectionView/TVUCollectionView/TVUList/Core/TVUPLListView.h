@@ -35,10 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
                    useNib:(BOOL)useNib;
 
 #pragma mark - Section 相关设置
-- (TVUPLListView *(^)(NSArray *(^)(void)))sections;
+- (TVUPLListView *(^)(NSArray *sections))sections;
 - (TVUPLListView *(^)(UIEdgeInsets insets))insets;
 - (TVUPLListView *(^)(CGFloat cornerRadius))cornerRadius;
 - (TVUPLListView *(^)(UIColor *backgroundColor))sectionColor;
+- (TVUPLListView *(^)(void(^)(TVUPLListView *list)))prefetch;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,19 +11,15 @@
 #import "Masonry.h"
 
 #import "CustomCell.h"
-#import "SectionHeaderView.h"
 
 @interface TVUPLListView ()<UICollectionViewDelegate,
 UICollectionViewDataSource>
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) TVUPLListFlowLayout *flowLayout;
-
-@property (nonatomic,   copy) NSArray *sectionTitles;
-@property (nonatomic,   copy) NSArray *sectionData;
-
 @property (nonatomic, strong) NSArray <TVUPLSection *> *ssections;
 
-@property (nonatomic, copy) NSArray <TVUPLSection *>*(^fetchSectionsBlock)(void);
+@property (nonatomic, copy) void(^fetchSectionsBlock)(TVUPLListView *list);
 @end
 
 @implementation TVUPLListView
@@ -98,12 +94,35 @@ UICollectionViewDataSource>
     }
 }
 
-- (TVUPLListView *(^)(NSArray *(^)(void)))sections {
-    return ^(NSArray * (^block)(void)) {
+- (TVUPLListView *(^)(NSArray *sections))sections {
+    return ^(NSArray *sections) {
+        self.ssections = sections;
+        return self;
+    };
+}
+
+- (TVUPLListView *(^)(UIEdgeInsets insets))insets {
+    return ^(UIEdgeInsets insets) {
+        return self;
+    };
+}
+- (TVUPLListView *(^)(CGFloat cornerRadius))cornerRadius {
+    return ^(CGFloat cornerRadius) {
+        return self;
+    };
+}
+- (TVUPLListView *(^)(UIColor *backgroundColor))sectionColor {
+    return ^(UIColor *backgroundColor) {
+        return self;
+    };
+}
+- (TVUPLListView *(^)(void(^)(TVUPLListView *list)))prefetch {
+    return ^(void(^block)(TVUPLListView *list)) {
         self.fetchSectionsBlock = block;
         return self;
     };
 }
+
 #pragma mark - Private Methods
 - (void)configureUI {
     self.flowLayout = [[TVUPLListFlowLayout alloc] init];
@@ -124,63 +143,45 @@ UICollectionViewDataSource>
     [self.collectionView registerClass:[TVUPLSectionBackView class]
             forSupplementaryViewOfKind:kTVUPLSectionBackReuse
                    withReuseIdentifier:kTVUPLSectionBackReuse];
-
-    self.ssections = [NSMutableArray array];
-    [self prepareData];
 }
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    NSLog(@"sharexia: section count");
     return self.ssections.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"sharexia: section row count");
     return self.ssections[section].rrows.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"sharexia: row cell");
     TVUPLRow *row = self.ssections[indexPath.section].rrows[indexPath.row];
-    UICollectionViewCell *cell =
+    TVUPLBaseRow *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
-    // - (void)reloadWithData:(nonnull id)data
-    
+    cell.section = indexPath.section;
+    cell.row = indexPath.row;
+    [self configureWithCell:cell indexPath:indexPath];
+    [cell updateWithData:row.rRowData];
     return cell;
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@", indexPath.description);
+    TVUPLRow *row = self.ssections[indexPath.section].rrows[indexPath.row];
+    if (row.rDidSelectedBlock) row.rDidSelectedBlock(row, nil);
 }
-
 #pragma mark - 分区头部和背景
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        TVUPLRow *headerRow = self.ssections[indexPath.section].header;
-        if (headerRow.identifier == nil) {
-            return [UICollectionReusableView new];
-        }
-        SectionHeaderView *header =
-        [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                           withReuseIdentifier:headerRow.rIdentifier
-                                                  forIndexPath:indexPath];
-        header.titleLabel.text = self.sectionTitles[indexPath.section];
-        return header;
-    }
-    else if ([kind isEqualToString:kTVUPLSectionBackReuse]) {
+    if ([kind isEqualToString:kTVUPLSectionBackReuse]) {
+        TVUPLSection *section = self.ssections[indexPath.section];
         UICollectionReusableView *backgroundView =
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                            withReuseIdentifier:kTVUPLSectionBackReuse
                                                   forIndexPath:indexPath];
-                
-        backgroundView.backgroundColor = [UIColor colorWithRed:31.0f/255.0f
-                                                         green:31.0f/255.0f
-                                                          blue:31.0f/255.0f
-                                                         alpha:1];
+        backgroundView.backgroundColor = section.rbackgroundColor;
+        backgroundView.layer.cornerRadius  = section.rcornerRadius;
+        backgroundView.layer.masksToBounds = YES;
         return backgroundView;
     }
     
@@ -197,22 +198,53 @@ UICollectionViewDataSource>
 
 #pragma mark - Private Methods
 - (void)fetchSections {
-
+    if (self.fetchSectionsBlock) {
+        self.fetchSectionsBlock(self);
+    }
 }
 
-
-#pragma mark - 测试数据
-- (void)prepareData {
-    // 假设这是你的分区标题数组
-    self.sectionTitles = @[@"第一组", @"第二组", @"第三组", @"第四组", @"第五组"];
+- (void)configureWithCell:(TVUPLBaseRow *)baseRow
+                indexPath:(NSIndexPath *)indexPath {
+    TVUPLSection *section = self.ssections[indexPath.section];
+    TVUPLRow *row = section.rrows[indexPath.row];
     
-    // 假设这是你的分区数据数组
-    self.sectionData = @[
-        @[@"项目 1-1", @"项目 1-2", @"项目 1-3"],
-        @[@"项目 2-1", @"项目 2-2"],
-        @[@"项目 3-1", @"项目 3-2", @"项目 3-3", @"项目 3-4"],
-        @[@"项目 4-1", @"项目 4-2", @"项目 4-3", @"项目 4-4"],
-        @[@"项目 5-1", @"项目 5-2", @"项目 5-3", @"项目 5-4"],
-    ];
+    void(^hiddenBlock)(BOOL hidden) = ^(BOOL hidden) {
+        baseRow.lineView.hidden = hidden;
+        [baseRow.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(baseRow).offset(row.rLineInsets.left);
+            make.right.equalTo(baseRow).offset(-row.rLineInsets.right);
+        }];
+    };
+    
+    if (row.rrowType == TVUPLRowTypeHeader ||
+        row.rrowType == TVUPLRowTypeFooter) {
+        hiddenBlock(row.rforceShowLine ? NO : YES);
+        return;
+    }
+    
+    if ((indexPath.row + 1) >= section.rrows.count) {
+        hiddenBlock(row.rforceShowLine ? NO : YES);
+        return;
+    }
+    
+    TVUPLRow *nextRow = [self findNextRowAtIndexPath:indexPath];
+    if (nextRow.rrowType == TVUPLRowTypeFooter) {
+        hiddenBlock(row.rforceShowLine ? NO : YES);
+        return;
+    }
+    hiddenBlock(row.rhiddenLine ? YES : NO);
 }
+
+- (TVUPLRow *)findNextRowAtIndexPath:(NSIndexPath *)indexPath {
+    TVUPLSection *section = self.ssections[indexPath.section];
+    for (NSInteger index = indexPath.row + 1;
+         index < section.rrows.count;
+         index++) {
+        TVUPLRow *row = section.rrows[index];
+        if (row.rhidden) continue;
+        return row;
+    }
+    return nil;
+}
+
 @end

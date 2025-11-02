@@ -11,6 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLBaseRow : UICollectionViewCell
 
+@property (nonatomic, assign) NSInteger section;
+@property (nonatomic, assign) NSInteger row;
+@property (nonatomic, strong) UIView *lineView;
+
 - (void)sendEventInfo:(id)info;
 
 - (void)updateWithData:(id)data;
