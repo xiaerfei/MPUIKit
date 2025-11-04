@@ -89,38 +89,55 @@
             .rows(@[
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeHeader)
-                    .rowData(@"Header"),
+                    .rowData(@"Header")
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"first header click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"login")
                     .rowData(@"第 1 行")
                     .lineInsets(UIEdgeInsetsMake(0, 15, 0, 0))
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
                     .hidden(YES)
                     .rowData(@"第 2 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
                     .rowData(@"第 3 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"3 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
-                    .hidden(YES)
+                    .hidden(NO)
                     .rowData(@"第 4 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"4 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
                     .rowData(@"第 5 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"5 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
                     .rowData(@"第 6 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"6 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeFooter)
                     .rowData(@"Footer")
-                    .height(20),
+                    .height(20).tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"first footer click");
+                    }),
             ]);
         });
 }
@@ -137,19 +154,36 @@
                     .type(TVUPLRowTypeHeader)
                     .rowData(@"Header")
                     .height(20)
-                    .insets(UIEdgeInsetsMake(0, 0, 0, 0)),
+                    .insets(UIEdgeInsetsMake(0, 0, 0, 0))
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2-Header click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"login")
                     .rowData(@"第 1 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2-1 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .key(@"unlogin")
                     .hidden(NO)
                     .rowData(@"第 2 行")
-                    .tap(^(TVUPLRow *row, id value) {}),
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2-2 click");
+                    }),
+                RowReuse(@"CustomCell")
+                    .key(@"unlogin")
+                    .hidden(NO)
+                    .rowData(@"第 3 行")
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2-3 click");
+                    }),
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeFooter)
-                    .rowData(@"Footer"),
+                    .rowData(@"Footer")
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"2-Footer click");
+                    }),
             ]);
         });
 }

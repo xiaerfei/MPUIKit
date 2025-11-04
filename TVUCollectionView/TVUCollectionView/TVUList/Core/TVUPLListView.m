@@ -126,8 +126,6 @@ UICollectionViewDataSource>
 #pragma mark - Private Methods
 - (void)configureUI {
     self.flowLayout = [[TVUPLListFlowLayout alloc] init];
-    
-    // 初始化CollectionView
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -143,6 +141,7 @@ UICollectionViewDataSource>
     [self.collectionView registerClass:[TVUPLSectionBackView class]
             forSupplementaryViewOfKind:kTVUPLSectionBackReuse
                    withReuseIdentifier:kTVUPLSectionBackReuse];
+    [self fetchSections];
 }
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -200,6 +199,12 @@ UICollectionViewDataSource>
 - (void)fetchSections {
     if (self.fetchSectionsBlock) {
         self.fetchSectionsBlock(self);
+    }
+    for (TVUPLSection *section in self.ssections) {
+        if (section.rprefetch) section.rprefetch(section);
+        for (TVUPLRow *row in section.rrows) {
+            if (row.rprefetch) row.rprefetch(row);
+        }
     }
 }
 
