@@ -157,6 +157,7 @@ UICollectionViewDataSource>
     TVUPLBaseRow *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
+    cell.plrow = row;
     cell.section = indexPath.section;
     cell.row = indexPath.row;
     [self configureWithCell:cell indexPath:indexPath];

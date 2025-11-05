@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TVUPLRow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger section;
 @property (nonatomic, assign) NSInteger row;
 @property (nonatomic, strong) UIView *lineView;
+@property (nonatomic,   weak) TVUPLRow *plrow;
 
 - (void)sendEventInfo:(id)info;
 

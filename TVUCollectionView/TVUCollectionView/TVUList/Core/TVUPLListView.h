@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
                  blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
+extern NSString *const kTVUPLRowTitle;
+extern NSString *const kTVUPLRowSubtitle;
+extern NSString *const kTVUPLRowImage;
+extern NSString *const kTVUPLDefaultRow;
+
 @interface TVUPLListView : UIView
 
 - (void)reload;

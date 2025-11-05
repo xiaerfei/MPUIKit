@@ -44,9 +44,9 @@ extern NSString *const kTVUPLSectionBackReuse;
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             TVUPLRow *row = [self rowAtIndexPath:indexPath];
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            CGFloat rwidth  = width - row.rInsets.left - row.rInsets.right - sleft - sright;
+            CGFloat rwidth  = width - sleft - sright;
             CGFloat rheight = row.rHeight;
-            CGFloat x = row.rInsets.left + sleft;
+            CGFloat x = sleft;
             CGFloat y = currentY;
             itemAttributes.frame = CGRectMake(x, y, rwidth, rheight);
             

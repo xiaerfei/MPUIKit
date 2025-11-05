@@ -65,6 +65,7 @@
     }];
     
     [self.listView registerForCell:@"CustomCell" bundle:nil useNib:NO];
+    [self.listView registerForCell:kTVUPLDefaultRow bundle:nil useNib:NO];
     
     self.listView
         .prefetch(^(TVUPLListView *list) { list
@@ -93,17 +94,23 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"first header click");
                     }),
-                RowReuse(@"CustomCell")
+                RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
-                    .rowData(@"第 1 行")
-                    .lineInsets(UIEdgeInsetsMake(0, 15, 0, 0))
+                    .rowData(@{
+                        kTVUPLRowTitle : @"RTMP(s)Push",
+                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app"
+                    })
+                    .insets(UIEdgeInsetsMake(0, 20, 0, 0))
+                    .lineInsets(UIEdgeInsetsMake(0, 0, 0, 0))
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(@"CustomCell")
+                RowReuse(kTVUPLDefaultRow)
                     .key(@"unlogin")
-                    .hidden(YES)
-                    .rowData(@"第 2 行")
+                    .hidden(NO)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"YouTube",
+                    })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"2 click");
                     }),
