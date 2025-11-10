@@ -79,8 +79,15 @@
         });
     [self.listView reload];
 }
-
 - (TVUPLSection *)loginSection {
+    return SectionReuse
+        .prefetch(^(TVUPLSection *section) { section
+            .key(@"LoginSection");
+        
+    });
+}
+
+- (TVUPLSection *)loginTestSection {
     return SectionReuse
         .prefetch(^(TVUPLSection *section) { section
             .key(@"LoginSection")
@@ -100,8 +107,6 @@
                         kTVUPLRowTitle : @"RTMP(s)Push",
                         kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app"
                     })
-                    .insets(UIEdgeInsetsMake(0, 20, 0, 0))
-                    .lineInsets(UIEdgeInsetsMake(0, 0, 0, 0))
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
@@ -142,7 +147,7 @@
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeFooter)
                     .rowData(@"Footer")
-                    .height(20).tap(^(TVUPLRow *row, id value) {
+                    .height(40).tap(^(TVUPLRow *row, id value) {
                         NSLog(@"first footer click");
                     }),
             ]);
@@ -154,14 +159,13 @@
         .key(@"LoginSection")
         .prefetch(^(TVUPLSection *section) { section
             .insets(UIEdgeInsetsMake(0, 20, 0, 20))
-            .cornerRadius(8)
+            .cornerRadius(16)
             .backgroundColor(UIColorFromHex(0x1F1F1F))
             .rows(@[
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeHeader)
                     .rowData(@"Header")
-                    .height(20)
-                    .insets(UIEdgeInsetsMake(0, 0, 0, 0))
+                    .height(40)
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"2-Header click");
                     }),

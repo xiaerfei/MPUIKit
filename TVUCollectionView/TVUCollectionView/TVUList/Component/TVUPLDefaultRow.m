@@ -42,25 +42,23 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
     NSString *subtitle = data[kTVUPLRowSubtitle];
     NSString *imageName = data[kTVUPLRowImage];
     
-    if (imageName == nil) {
-        if (subtitle == nil) {
-            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(self.contentView);
-            }];
-            self.titleLabel.text = title;
-        } else {
-            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(self.contentView);
-                make.bottom.equalTo(self.contentView.mas_centerY);
-            }];
-            [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(self.contentView);
-                make.top.equalTo(self.contentView.mas_centerY);
-            }];
-        }
-        self.titleLabel.text = title;
-        self.subtitleLabel.text = subtitle;
+    if (subtitle == nil) {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.contentView);
+        }];
+    } else {
+        [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.contentView);
+            make.bottom.equalTo(self.contentView.mas_centerY);
+        }];
+        [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(self.contentView);
+            make.top.equalTo(self.contentView.mas_centerY);
+        }];
     }
+
+    self.titleLabel.text = title;
+    self.subtitleLabel.text = subtitle;
 }
 #pragma mark - Private Methods
 - (void)configureUI {

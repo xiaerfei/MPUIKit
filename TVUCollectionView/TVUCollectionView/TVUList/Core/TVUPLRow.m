@@ -174,7 +174,9 @@
     self = [super init];
     if (self) {
         self.rIdentifier = identifier;
-        self.rHeight = 44;
+        self.rHeight = 50;
+        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
     }
     return self;
 }
@@ -182,7 +184,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.rHeight = 44;
+        self.rHeight = 50;
+        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
+
     }
     return self;
 }

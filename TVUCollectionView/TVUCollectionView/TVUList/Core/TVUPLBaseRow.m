@@ -46,7 +46,7 @@
         make.height.equalTo(@1);
     }];
     
-    line.backgroundColor = [UIColor lightGrayColor];
+    line.backgroundColor = [[UIColor lightTextColor] colorWithAlphaComponent:0.1];
     
     self.lineView = line;
 }

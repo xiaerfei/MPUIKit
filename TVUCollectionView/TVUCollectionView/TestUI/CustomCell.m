@@ -35,9 +35,9 @@
     
     // 添加约束
     [NSLayoutConstraint activateConstraints:@[
-        [self.textLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:16],
+        [self.textLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:0],
         [self.textLabel.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor],
-        [self.textLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-16]
+        [self.textLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:0]
     ]];
 }
 
