@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		9C86FF442E75230400082982 /* TVUCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVUCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C6385662EBF43980000B6EC /* StackViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9C86FF5B2E75230500082982 /* Exceptions for "TVUCollectionView" folder in "TVUCollectionView" target */ = {
+		9C63857D2EBF43990000B6EC /* Exceptions for "StackViewDemo" folder in "StackViewDemo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 9C86FF432E75230400082982 /* TVUCollectionView */;
+			target = 9C6385652EBF43980000B6EC /* StackViewDemo */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9C86FF462E75230400082982 /* TVUCollectionView */ = {
+		9C6385682EBF43980000B6EC /* StackViewDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				9C86FF5B2E75230500082982 /* Exceptions for "TVUCollectionView" folder in "TVUCollectionView" target */,
+				9C63857D2EBF43990000B6EC /* Exceptions for "StackViewDemo" folder in "StackViewDemo" target */,
 			);
-			path = TVUCollectionView;
+			path = StackViewDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9C86FF412E75230400082982 /* Frameworks */ = {
+		9C6385632EBF43980000B6EC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,18 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9C86FF3B2E75230400082982 = {
+		9C63855D2EBF43980000B6EC = {
 			isa = PBXGroup;
 			children = (
-				9C86FF462E75230400082982 /* TVUCollectionView */,
-				9C86FF452E75230400082982 /* Products */,
+				9C6385682EBF43980000B6EC /* StackViewDemo */,
+				9C6385672EBF43980000B6EC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		9C86FF452E75230400082982 /* Products */ = {
+		9C6385672EBF43980000B6EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C86FF442E75230400082982 /* TVUCollectionView.app */,
+				9C6385662EBF43980000B6EC /* StackViewDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,63 +61,63 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9C86FF432E75230400082982 /* TVUCollectionView */ = {
+		9C6385652EBF43980000B6EC /* StackViewDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C86FF5C2E75230500082982 /* Build configuration list for PBXNativeTarget "TVUCollectionView" */;
+			buildConfigurationList = 9C63857E2EBF43990000B6EC /* Build configuration list for PBXNativeTarget "StackViewDemo" */;
 			buildPhases = (
-				9C86FF402E75230400082982 /* Sources */,
-				9C86FF412E75230400082982 /* Frameworks */,
-				9C86FF422E75230400082982 /* Resources */,
+				9C6385622EBF43980000B6EC /* Sources */,
+				9C6385632EBF43980000B6EC /* Frameworks */,
+				9C6385642EBF43980000B6EC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				9C86FF462E75230400082982 /* TVUCollectionView */,
+				9C6385682EBF43980000B6EC /* StackViewDemo */,
 			);
-			name = TVUCollectionView;
+			name = StackViewDemo;
 			packageProductDependencies = (
 			);
-			productName = TVUCollectionView;
-			productReference = 9C86FF442E75230400082982 /* TVUCollectionView.app */;
+			productName = StackViewDemo;
+			productReference = 9C6385662EBF43980000B6EC /* StackViewDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9C86FF3C2E75230400082982 /* Project object */ = {
+		9C63855E2EBF43980000B6EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					9C86FF432E75230400082982 = {
+					9C6385652EBF43980000B6EC = {
 						CreatedOnToolsVersion = 16.3;
 					};
 				};
 			};
-			buildConfigurationList = 9C86FF3F2E75230400082982 /* Build configuration list for PBXProject "TVUCollectionView" */;
+			buildConfigurationList = 9C6385612EBF43980000B6EC /* Build configuration list for PBXProject "StackViewDemo" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 9C86FF3B2E75230400082982;
+			mainGroup = 9C63855D2EBF43980000B6EC;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 9C86FF452E75230400082982 /* Products */;
+			productRefGroup = 9C6385672EBF43980000B6EC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C86FF432E75230400082982 /* TVUCollectionView */,
+				9C6385652EBF43980000B6EC /* StackViewDemo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9C86FF422E75230400082982 /* Resources */ = {
+		9C6385642EBF43980000B6EC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,7 +127,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9C86FF402E75230400082982 /* Sources */ = {
+		9C6385622EBF43980000B6EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +137,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		9C86FF5D2E75230500082982 /* Debug */ = {
+		9C63857F2EBF43990000B6EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -146,7 +146,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEVQQ22JR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVUCollectionView/Info.plist;
+				INFOPLIST_FILE = StackViewDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -165,7 +165,7 @@
 			};
 			name = Debug;
 		};
-		9C86FF5E2E75230500082982 /* Release */ = {
+		9C6385802EBF43990000B6EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -174,7 +174,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YDEVQQ22JR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TVUCollectionView/Info.plist;
+				INFOPLIST_FILE = StackViewDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -193,7 +193,7 @@
 			};
 			name = Release;
 		};
-		9C86FF5F2E75230500082982 /* Debug */ = {
+		9C6385812EBF43990000B6EC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -254,7 +254,7 @@
 			};
 			name = Debug;
 		};
-		9C86FF602E75230500082982 /* Release */ = {
+		9C6385822EBF43990000B6EC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -312,25 +312,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9C86FF3F2E75230400082982 /* Build configuration list for PBXProject "TVUCollectionView" */ = {
+		9C6385612EBF43980000B6EC /* Build configuration list for PBXProject "StackViewDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C86FF5F2E75230500082982 /* Debug */,
-				9C86FF602E75230500082982 /* Release */,
+				9C6385812EBF43990000B6EC /* Debug */,
+				9C6385822EBF43990000B6EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C86FF5C2E75230500082982 /* Build configuration list for PBXNativeTarget "TVUCollectionView" */ = {
+		9C63857E2EBF43990000B6EC /* Build configuration list for PBXNativeTarget "StackViewDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9C86FF5D2E75230500082982 /* Debug */,
-				9C86FF5E2E75230500082982 /* Release */,
+				9C63857F2EBF43990000B6EC /* Debug */,
+				9C6385802EBF43990000B6EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9C86FF3C2E75230400082982 /* Project object */;
+	rootObject = 9C63855E2EBF43980000B6EC /* Project object */;
 }

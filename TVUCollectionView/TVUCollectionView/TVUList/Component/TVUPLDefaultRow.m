@@ -42,6 +42,7 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
     NSString *subtitle = data[kTVUPLRowSubtitle];
     NSString *imageName = data[kTVUPLRowImage];
     
+<<<<<<< Updated upstream
     if (subtitle == nil) {
         [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
@@ -57,6 +58,25 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
         }];
     }
 
+=======
+    if (imageName == nil) {
+        if (subtitle == nil) {
+            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.edges.equalTo(self.contentView);
+            }];
+            self.titleLabel.text = title;
+        } else {
+            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.contentView);
+                make.bottom.equalTo(self.contentView.mas_centerY);
+            }];
+            [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.equalTo(self.contentView);
+                make.top.equalTo(self.contentView.mas_centerY);
+            }];
+        }
+    }
+>>>>>>> Stashed changes
     self.titleLabel.text = title;
     self.subtitleLabel.text = subtitle;
 }

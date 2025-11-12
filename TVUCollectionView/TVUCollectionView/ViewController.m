@@ -113,6 +113,7 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"unlogin")
                     .hidden(NO)
+                    .insets(UIEdgeInsetsMake(0, 20, 0, 0))
                     .rowData(@{
                         kTVUPLRowTitle : @"YouTube",
                     })
@@ -155,12 +156,39 @@
 }
 
 - (TVUPLSection *)testSection {
+    NSMutableArray *rows = @[].mutableCopy;
+    [rows addObject:RowReuse(@"CustomCell")
+     .type(TVUPLRowTypeHeader)
+     .rowData(@"Header")
+     .height(20)
+     .insets(UIEdgeInsetsMake(0, 0, 0, 0))
+     .tap(^(TVUPLRow *row, id value) {
+         NSLog(@"2-Header click");
+     })];
+    for (int i = 0; i < 20; i++) {
+        NSString *dataStr = [NSString stringWithFormat:@"2-%d", i];
+        NSString *clickStr = [NSString stringWithFormat:@"%@ click", dataStr];
+        [rows addObject:RowReuse(@"CustomCell")
+         .rowData(dataStr)
+         .insets(UIEdgeInsetsMake(0, 0, 0, 0))
+         .tap(^(TVUPLRow *row, id value) {
+             NSLog(@"%@", clickStr);
+         })];
+    }
+    [rows addObject:RowReuse(@"CustomCell")
+     .type(TVUPLRowTypeFooter)
+     .rowData(@"Footer")
+     .tap(^(TVUPLRow *row, id value) {
+         NSLog(@"2-Footer click");
+     })];
+    
     return SectionReuse
         .key(@"LoginSection")
         .prefetch(^(TVUPLSection *section) { section
             .insets(UIEdgeInsetsMake(0, 20, 0, 20))
             .cornerRadius(16)
             .backgroundColor(UIColorFromHex(0x1F1F1F))
+<<<<<<< Updated upstream
             .rows(@[
                 RowReuse(@"CustomCell")
                     .type(TVUPLRowTypeHeader)
@@ -196,6 +224,9 @@
                         NSLog(@"2-Footer click");
                     }),
             ]);
+=======
+            .rows(rows);
+>>>>>>> Stashed changes
         });
 }
 

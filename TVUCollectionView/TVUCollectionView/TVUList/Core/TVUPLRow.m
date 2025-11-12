@@ -174,9 +174,14 @@
     self = [super init];
     if (self) {
         self.rIdentifier = identifier;
+<<<<<<< Updated upstream
         self.rHeight = 50;
         self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
         self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
+=======
+        self.rHeight = 44;
+        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+>>>>>>> Stashed changes
     }
     return self;
 }
@@ -184,10 +189,15 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+<<<<<<< Updated upstream
         self.rHeight = 50;
         self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
         self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
 
+=======
+        self.rHeight = 44;
+        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+>>>>>>> Stashed changes
     }
     return self;
 }
