@@ -74,12 +74,8 @@
         make.height.equalTo(@1);
     }];
     
-<<<<<<< Updated upstream
     line.backgroundColor = [[UIColor lightTextColor] colorWithAlphaComponent:0.1];
-=======
-    line.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.3];
->>>>>>> Stashed changes
-    
+
     self.lineView = line;
 }
 @end

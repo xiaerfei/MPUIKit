@@ -42,43 +42,30 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
     NSString *subtitle = data[kTVUPLRowSubtitle];
     NSString *imageName = data[kTVUPLRowImage];
     
-<<<<<<< Updated upstream
+    CGFloat offset = imageName ? 25 : 0;
+    
     if (subtitle == nil) {
         [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.contentView);
+            make.top.bottom.equalTo(self.contentView);
+            make.left.equalTo(self.contentView).offset(offset);
+            make.right.equalTo(self.contentView).offset(-offset);
         }];
+        self.titleLabel.text = title;
     } else {
         [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.contentView);
+            make.right.equalTo(self.contentView).offset(-offset);
+            make.left.equalTo(self.contentView).offset(offset);
             make.bottom.equalTo(self.contentView.mas_centerY);
         }];
         [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.contentView);
+            make.right.equalTo(self.contentView);
+            make.left.equalTo(self.contentView).offset(offset);
             make.top.equalTo(self.contentView.mas_centerY);
         }];
     }
-
-=======
-    if (imageName == nil) {
-        if (subtitle == nil) {
-            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.edges.equalTo(self.contentView);
-            }];
-            self.titleLabel.text = title;
-        } else {
-            [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(self.contentView);
-                make.bottom.equalTo(self.contentView.mas_centerY);
-            }];
-            [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.equalTo(self.contentView);
-                make.top.equalTo(self.contentView.mas_centerY);
-            }];
-        }
-    }
->>>>>>> Stashed changes
     self.titleLabel.text = title;
     self.subtitleLabel.text = subtitle;
+    self.iconImageView.image = [UIImage imageNamed:imageName];
 }
 #pragma mark - Private Methods
 - (void)configureUI {
@@ -94,6 +81,12 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
     
     self.iconImageView = [UIImageView new];
     [self.contentView addSubview:self.iconImageView];
+    
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.contentView);
+        make.left.equalTo(self.contentView);
+        make.width.height.equalTo(@20);
+    }];
 }
 
 - (UILabel *)createLabelWithSize:(CGFloat)size

@@ -19,22 +19,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /*
+        ( 0, 0, 20, 20)
+        (14, 0, 20, 20)
+        (34, 0, 20, 20)
+     */
+    
+    
     self.view.backgroundColor = [UIColor cyanColor];
     // 1. 创建容器视图 (210x120)
-    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 210, 120)];
+    UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(50, 100, 48, 20)];
     containerView.backgroundColor = [UIColor clearColor]; // 白色背景便于观察
     [self.view addSubview:containerView];
     
     // 2. 创建两个圆形icon
-    UIView *leftCircle = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
-    leftCircle.backgroundColor = [UIColor redColor];
-    leftCircle.layer.cornerRadius = 60.0f;
+    UIImageView *leftCircle = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    leftCircle.image = [UIImage imageNamed:@"tvu_cover_tiktok"];
+//    leftCircle.layer.cornerRadius = 10.0f;
     
-    UIView *rightCircle = [[UIView alloc] initWithFrame:CGRectMake(90, 0, 120, 120)];
-    rightCircle.backgroundColor = [UIColor blueColor];
-    rightCircle.layer.cornerRadius = 60.0f;
     
-    [containerView addSubview:rightCircle]; // rightCircle覆盖在leftCircle上
+    UIImageView *rightCircle = [[UIImageView alloc] initWithFrame:CGRectMake(14, 0, 20, 20)];
+    rightCircle.image = [UIImage imageNamed:@"tvu_cover_twitch"];
+    
+    UIImageView *thirdCircle = [[UIImageView alloc] initWithFrame:CGRectMake(28, 0, 20, 20)];
+    thirdCircle.image = [UIImage imageNamed:@"tvu_cover_youtube"];
+    [containerView addSubview:thirdCircle];
+    [containerView addSubview:rightCircle];
     [containerView addSubview:leftCircle];
     
     // 3. 创建mask图片 - 向右的半圆弧
@@ -43,7 +53,7 @@
     // 4. 创建CAShapeLayer作为mask
     CAShapeLayer *maskLayer = [CAShapeLayer layer];
     maskLayer.contents = (id)maskImage.CGImage;
-    maskLayer.frame = containerView.bounds; // mask应用到leftCircle的bounds
+    maskLayer.frame = CGRectMake(0, 0, 48, 20); // mask应用到leftCircle的bounds
     
     // 5. 应用mask到leftCircle
     containerView.layer.mask = maskLayer;
@@ -54,7 +64,7 @@
 // 创建向右的半圆弧mask图片
 - (UIImage *)createRightFacingSemiArcMaskImage {
     // 容器尺寸
-    CGSize containerSize = CGSizeMake(210, 120);
+    CGSize containerSize = CGSizeMake(48, 20);
     
     // 创建图形上下文
     UIGraphicsBeginImageContextWithOptions(containerSize, NO, 0.0);
@@ -63,15 +73,34 @@
     // 1. 先填充白色（不透明区域）
     CGContextSetFillColorWithColor(ctx, [UIColor whiteColor].CGColor);
     CGContextFillRect(ctx, CGRectMake(0, 0, containerSize.width, containerSize.height));
+        
+    // 5. 创建完整的半圆环路径
+    UIBezierPath *semiArcPath  = [self archPathWithCenter:CGPointMake(10, 10) radius:10 width:2 ctx:ctx];
+    UIBezierPath *semiArcPath1 = [self archPathWithCenter:CGPointMake(24, 10) radius:10 width:2 ctx:ctx];
     
-    // 2. 以(60, 60)为圆心，画向右的半圆弧，宽度为10
-    CGPoint center = CGPointMake(60, 60); // leftCircle的圆心
-    CGFloat borderWidth = 3.0f;
-    CGFloat radius = 60.0f; // 半径，可以根据需要调整
+    // 6. 设置透明色（清除模式） - 让半圆弧区域透明
+    CGContextSetBlendMode(ctx, kCGBlendModeClear);
+    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
     
+    // 7. 填充半圆弧区域
+    CGContextAddPath(ctx, semiArcPath.CGPath);
+    CGContextAddPath(ctx, semiArcPath1.CGPath);
+    CGContextFillPath(ctx);
+    
+    // 8. 获取生成的图片
+    UIImage *maskImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return maskImage;
+}
+
+- (UIBezierPath *)archPathWithCenter:(CGPoint)center
+                              radius:(CGFloat)radius
+                               width:(CGFloat)width
+                                 ctx:(CGContextRef)ctx {
     // 计算内外半径
-    CGFloat outerRadius = 65;
-    CGFloat innerRadius = 60;
+    CGFloat outerRadius = radius + width;
+    CGFloat innerRadius = radius;
     
     // 向右的半圆弧：从 -π/2 (270度) 到 π/2 (90度)
     CGFloat startAngle = -M_PI_2; // 270度，向下
@@ -98,21 +127,10 @@
     [semiArcPath appendPath:outerArcPath];
     [semiArcPath appendPath:innerArcPath];
     [semiArcPath closePath];
-    
-    // 6. 设置透明色（清除模式） - 让半圆弧区域透明
-    CGContextSetBlendMode(ctx, kCGBlendModeClear);
-    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-    
-    // 7. 填充半圆弧区域
-    CGContextAddPath(ctx, semiArcPath.CGPath);
-    CGContextFillPath(ctx);
-    
-    // 8. 获取生成的图片
-    UIImage *maskImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return maskImage;
+
+    return semiArcPath;
 }
+
 
 @end
 

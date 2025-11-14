@@ -82,9 +82,23 @@
 - (TVUPLSection *)loginSection {
     return SectionReuse
         .prefetch(^(TVUPLSection *section) { section
-            .key(@"LoginSection");
-        
-    });
+            .key(@"LoginSection")
+            .cornerRadius(8)
+            .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+            .backgroundColor(UIColorFromHex(0x1F1F1F))
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .rowData(@{
+                        kTVUPLRowTitle : @"RTMP(s)Push",
+                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
+                        kTVUPLRowImage : @"tvu_cover_rtmp"
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
 }
 
 - (TVUPLSection *)loginTestSection {
@@ -105,7 +119,8 @@
                     .key(@"login")
                     .rowData(@{
                         kTVUPLRowTitle : @"RTMP(s)Push",
-                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app"
+                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
+                        kTVUPLRowImage : @"tvu_cover_rtmp"
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -170,7 +185,6 @@
         NSString *clickStr = [NSString stringWithFormat:@"%@ click", dataStr];
         [rows addObject:RowReuse(@"CustomCell")
          .rowData(dataStr)
-         .insets(UIEdgeInsetsMake(0, 0, 0, 0))
          .tap(^(TVUPLRow *row, id value) {
              NSLog(@"%@", clickStr);
          })];
@@ -188,45 +202,7 @@
             .insets(UIEdgeInsetsMake(0, 20, 0, 20))
             .cornerRadius(16)
             .backgroundColor(UIColorFromHex(0x1F1F1F))
-<<<<<<< Updated upstream
-            .rows(@[
-                RowReuse(@"CustomCell")
-                    .type(TVUPLRowTypeHeader)
-                    .rowData(@"Header")
-                    .height(40)
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2-Header click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"login")
-                    .rowData(@"第 1 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2-1 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .hidden(NO)
-                    .rowData(@"第 2 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2-2 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .hidden(NO)
-                    .rowData(@"第 3 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2-3 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .type(TVUPLRowTypeFooter)
-                    .rowData(@"Footer")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2-Footer click");
-                    }),
-            ]);
-=======
             .rows(rows);
->>>>>>> Stashed changes
         });
 }
 
