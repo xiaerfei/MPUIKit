@@ -9,42 +9,15 @@
 #import "TVUPLListView.h"
 #import "Masonry.h"
 
-#if DEBUG
-#define tvu_keywordify autoreleasepool {}
-#else
-#define tvu_keywordify try {} @catch (...) {}
-#endif
+#define DictMake(Key, Value) \
+    Key : (Value ?: [NSNull null])
 
-#ifndef weakify
-    #if __has_feature(objc_arc)
-        #define weakify(object) \
-            tvu_keywordify  \
-            __weak __typeof__(object) weak##_##object = object;
-    #else
-        #define weakify(object) \
-            tvu_keywordify  \
-            __block __typeof__(object) block##_##object = object;
-    #endif
-#endif
+#define RowData  return [TVUPLRowData new]
 
-#ifndef strongify
-    #if __has_feature(objc_arc)
-        #define strongify(object) \
-            tvu_keywordify  \
-            _Pragma("clang diagnostic push") \
-            _Pragma("clang diagnostic ignored \"-Wshadow\"") \
-            __strong __typeof__(object) object = weak##_##object; \
-            _Pragma("clang diagnostic pop")
-    #else
-        #define strongify(object) \
-            tvu_keywordify  \
-            _Pragma("clang diagnostic push") \
-            _Pragma("clang diagnostic ignored \"-Wshadow\"") \
-            __strong __typeof__(object) object = block##_##object; \
-            _Pragma("clang diagnostic pop")
-    #endif
-#endif
-
+#define RowDataMake(properties) \
+    rowData(^id { return \
+        (properties); \
+    })
 
 @interface ViewController ()
 @property (nonatomic, strong) TVUPLListView *listView;
@@ -64,8 +37,13 @@
         make.edges.equalTo(self.view.mas_safeAreaLayoutGuide);
     }];
     
-    [self.listView registerForCell:@"CustomCell" bundle:nil useNib:NO];
-    [self.listView registerForCell:kTVUPLDefaultRow bundle:nil useNib:NO];
+    [self.listView registerClassForRow:@"CustomCell"];
+    [self.listView registerClassForRow:kTVUPLDefaultRow];
+    [self.listView registerClassForRow:kTVUPLSwitchRow];
+    [self.listView registerClassForRow:kTVUPLLoginRow];
+    [self.listView registerClassForRow:kTVUPLRightValueRow];
+
+    
     
     self.listView
         .prefetch(^(TVUPLListView *list) { list
@@ -89,10 +67,123 @@
             .rows(@[
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
+                    .showIndicator(YES)
+                    .hidden(NO)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"Login",
+                        kTVUPLRowTitleFont : @16,
+                        kTVUPLRowSystemIcon : @"person.crop.circle",
+                        kTVUPLRowIconTintColor : [UIColor grayColor],
+                        kTVUPLRowIconSize : [NSValue valueWithCGSize:CGSizeMake(40, 40)]
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLLoginRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"sharexia@tvunetworks.com",
+                        kTVUPLRowTitleFont : @20,
+                        kTVUPLRowSubtitle : @"sharexia@tvunetworks.com",
+                        kTVUPLRowLoginBigWord : @"S",
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
                     .rowData(@{
                         kTVUPLRowTitle : @"RTMP(s)Push",
-                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
-                        kTVUPLRowImage : @"tvu_cover_rtmp"
+                        //                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
+                        kTVUPLRowIcon : @"tvu_cover_rtmp",
+                        kTVUPLRowIconSize : [NSValue valueWithCGSize:CGSizeMake(30, 30)]
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认",
+                        kTVUPLRowIcon : @"tvu_cover_tiktok",
+                        DictMake(kTVUPLRowTitleFont, @(19))
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"YouTube",
+                        kTVUPLRowIcon : @"tvu_cover_youtube",
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认 20x20.提取了布局相关的常量（如间距），方便后续统一修改.优化了约束更新逻辑，使用mas_remakeConstraints更清晰地重置约束.完善了各种边缘情况的布局处理，确保显示符合预期",
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLSwitchRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"Twitch",
+                        kTVUPLRowSubtitle : @"好戏开场了,新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
+                        kTVUPLRowIcon  : @"tvu_cover_twitch",
+                        kTVUPLRowSwitchOn : @YES,
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowSubtitle : @"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"This is title",
+                        kTVUPLRowSubtitle : @"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLRightValueRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(@{
+                        kTVUPLRowTitle : @"Screenshare",
+                        kTVUPLRowRightValue : @"Mix",
+                        kTVUPLRowRightScale : @(0.7),
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLRightValueRow)
+                    .key(@"login")
+                    .showIndicator(YES)
+                    .rowData(^id {
+                        RowData
+                            .title(@"")
+                            .titleFont(@"")
+                            .titleColor(UIColor.grayColor)
+                            .custom(@"", @"");
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -120,7 +211,7 @@
                     .rowData(@{
                         kTVUPLRowTitle : @"RTMP(s)Push",
                         kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
-                        kTVUPLRowImage : @"tvu_cover_rtmp"
+                        kTVUPLRowIcon : [UIImage imageNamed:@"tvu_cover_rtmp"]
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");

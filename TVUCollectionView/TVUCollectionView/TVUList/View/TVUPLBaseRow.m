@@ -8,29 +8,24 @@
 #import "TVUPLBaseRow.h"
 #import "Masonry.h"
 
+@interface TVUPLBaseRow ()
+@property (nonatomic, strong, readwrite) UIView *plContentView;
+@property (nonatomic, strong, readwrite) UIImageView *indicatorImageView;
+@end
+
 @implementation TVUPLBaseRow
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self configureLine];
+        [self configureBaseRowUI];
     }
     return self;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self configureLine];
+    [self configureBaseRowUI];
 }
-
-- (void)layoutSubviews {
-    [super layoutSubviews]; // 必须先调用父类方法，确保系统默认布局完成
-    // 调整 contentView 的 frame（例如：缩小 10pt 边距）
-    self.contentView.frame =
-    CGRectInset(self.bounds,
-                self.plrow.rInsets.left,
-                self.plrow.rInsets.right);
-}
-
 // 触摸开始（按下）
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
@@ -64,8 +59,17 @@
 
 - (void)updateWithData:(id)data { }
 
+- (void)setPlrow:(TVUPLRow *)plrow {
+    _plrow = plrow;
+    [self.plContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).offset(plrow.rInsets.left);
+        make.right.equalTo(self.contentView).offset(-plrow.rInsets.right);
+    }];
+    self.indicatorImageView.hidden = !plrow.rshowIndicator;
+}
+
 #pragma mark - Private Methods
-- (void)configureLine {
+- (void)configureBaseRowUI {
     UIView *line = [UIView new];
     [self.contentView addSubview:line];
     
@@ -77,5 +81,25 @@
     line.backgroundColor = [[UIColor lightTextColor] colorWithAlphaComponent:0.1];
 
     self.lineView = line;
+    
+    self.plContentView = [[UIView alloc] init];
+    [self.contentView addSubview:self.plContentView];
+    
+    [self.plContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.contentView);
+    }];
+    
+    self.indicatorImageView = [[UIImageView alloc] init];
+    self.indicatorImageView.image = [UIImage systemImageNamed:@"chevron.forward"];
+    self.indicatorImageView.tintColor = [UIColor lightGrayColor];
+    [self.plContentView addSubview:self.indicatorImageView];
+    
+    [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.plContentView);
+        make.right.equalTo(self.plContentView).offset(-20);
+    }];
+    self.indicatorImageView.hidden = YES;
+    /// UIImageView 可能会被挤压,这里设置高优先级
+    [self.indicatorImageView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
 }
 @end

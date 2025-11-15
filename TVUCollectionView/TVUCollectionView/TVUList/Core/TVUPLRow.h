@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 ///< header、footer 或者 Cell 只有一行则强制显示
 @property (nonatomic, assign, readonly) BOOL rforceShowLine;
 @property (nonatomic, assign, readonly) BOOL rhidden;
-@property (nonatomic, assign, readonly) BOOL rShowIndicator;
+@property (nonatomic, assign, readonly) BOOL rshowIndicator;
 @property (nonatomic,   copy, readonly) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readonly) UIColor *rIndicatorColor;
 @property (nonatomic, assign, readonly) BOOL rUnselected;

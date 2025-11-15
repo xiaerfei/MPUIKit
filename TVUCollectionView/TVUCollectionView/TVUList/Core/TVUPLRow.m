@@ -15,7 +15,7 @@
 @property (nonatomic, strong, readwrite) UIColor *rLineColor;
 @property (nonatomic, assign, readwrite) BOOL rhiddenLine;
 @property (nonatomic, assign, readwrite) BOOL rhidden;
-@property (nonatomic, assign, readwrite) BOOL rShowIndicator;
+@property (nonatomic, assign, readwrite) BOOL rshowIndicator;
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
 @property (nonatomic, assign, readwrite) BOOL rUnselected;
@@ -88,7 +88,7 @@
 
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator {
     return ^(BOOL showIndicator) {
-        self.rShowIndicator = showIndicator;
+        self.rshowIndicator = showIndicator;
         return self;
     };
 }

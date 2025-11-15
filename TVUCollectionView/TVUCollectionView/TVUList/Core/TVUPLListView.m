@@ -52,46 +52,14 @@ UICollectionViewDataSource>
     
 }
 
-- (void)registerForCell:(NSString *)cellName
-                 bundle:(NSBundle *)bundle
-                 useNib:(BOOL)useNib {
-    if (useNib) {
-        UINib *nib = [UINib nibWithNibName:cellName bundle:bundle];
-        [self.collectionView registerNib:nib forCellWithReuseIdentifier:cellName];
-    } else {
-        [self.collectionView registerClass:NSClassFromString(cellName)
-                forCellWithReuseIdentifier:cellName];
-    }
+- (void)registerClassForRow:(NSString *)rowName {
+    [self.collectionView registerClass:NSClassFromString(rowName)
+            forCellWithReuseIdentifier:rowName];
 }
 
-- (void)registerForHeader:(NSString *)cellName
-                   bundle:(NSBundle *)bundle
-                   useNib:(BOOL)useNib {
-    if (useNib) {
-        UINib *nib = [UINib nibWithNibName:cellName bundle:bundle];
-        [self.collectionView registerNib:nib
-              forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                     withReuseIdentifier:cellName];
-    } else {
-        [self.collectionView registerClass:NSClassFromString(cellName)
-                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                       withReuseIdentifier:cellName];
-    }
-}
-
-- (void)registerForFooter:(NSString *)cellName
-                   bundle:(NSBundle *)bundle
-                   useNib:(BOOL)useNib {
-    if (useNib) {
-        UINib *nib = [UINib nibWithNibName:cellName bundle:bundle];
-        [self.collectionView registerNib:nib
-              forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                     withReuseIdentifier:cellName];
-    } else {
-        [self.collectionView registerClass:NSClassFromString(cellName)
-                forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                       withReuseIdentifier:cellName];
-    }
+- (void)registerNibForRow:(NSString *)rowName bundle:(nullable NSBundle *)bundle {
+    UINib *nib = [UINib nibWithNibName:rowName bundle:bundle];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:rowName];
 }
 
 - (TVUPLListView *(^)(NSArray *sections))sections {

@@ -8,6 +8,9 @@
 #import <UIKit/UIKit.h>
 #import "TVUPLSection.h"
 #import "TVUPLReuseManager.h"
+#import "TVUPLListConst.h"
+#import "TVUPLRowData.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 #define UIColorFromHex(rgbValue) \
@@ -15,29 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
                 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
                  blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-
-extern NSString *const kTVUPLRowTitle;
-extern NSString *const kTVUPLRowSubtitle;
-extern NSString *const kTVUPLRowImage;
-extern NSString *const kTVUPLDefaultRow;
-
 @interface TVUPLListView : UIView
 
 - (void)reload;
 - (void)reloadSectionForKey:(NSString *)key;
 - (void)reloadRowForKey:(NSString *)key;
 
-- (void)registerForCell:(NSString *)cellName
-                 bundle:(nullable NSBundle *)bundle
-                 useNib:(BOOL)useNib;
+- (void)registerClassForRow:(NSString *)rowName;
+- (void)registerNibForRow:(NSString *)rowName bundle:(nullable NSBundle *)bundle;
 
-- (void)registerForHeader:(NSString *)cellName
-                   bundle:(nullable NSBundle *)bundle
-                   useNib:(BOOL)useNib;
-
-- (void)registerForFooter:(NSString *)cellName
-                   bundle:(nullable NSBundle *)bundle
-                   useNib:(BOOL)useNib;
 
 #pragma mark - Section 相关设置
 - (TVUPLListView *(^)(NSArray *sections))sections;

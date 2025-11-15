@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger row;
 @property (nonatomic, strong) UIView *lineView;
 @property (nonatomic,   weak) TVUPLRow *plrow;
+@property (nonatomic, strong, readonly) UIImageView *indicatorImageView;
+@property (nonatomic, strong, readonly) UIView *plContentView;
 
 - (void)sendEventInfo:(id)info;
 
