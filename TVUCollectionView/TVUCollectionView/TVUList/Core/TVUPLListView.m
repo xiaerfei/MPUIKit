@@ -18,7 +18,8 @@ UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) TVUPLListFlowLayout *flowLayout;
 @property (nonatomic, strong) NSArray <TVUPLSection *> *ssections;
-
+@property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLSection *> *sectionDict;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLRow *> *rowDict;
 @property (nonatomic, copy) void(^fetchSectionsBlock)(TVUPLListView *list);
 @end
 
@@ -45,11 +46,22 @@ UICollectionViewDataSource>
 }
 
 - (void)reloadSectionForKey:(NSString *)key {
-    
+    if (key == nil) return;
+    TVUPLSection *section = self.sectionDict[key];
+    if (section.rprefetch) section.rprefetch(section);
+    if (section.rrows.count != 0) {
+        for (TVUPLRow *row in section.rrows) {
+            if (row.rprefetch) row.rprefetch(row);
+        }
+    }
+    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section.section]];
 }
 
 - (void)reloadRowForKey:(NSString *)key {
-    
+    if (key == nil) return;
+    TVUPLRow *row = self.rowDict[key];
+    if (row.rprefetch) row.rprefetch(row);
+    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row.row inSection:row.section]]];
 }
 
 - (void)registerClassForRow:(NSString *)rowName {
@@ -109,6 +121,8 @@ UICollectionViewDataSource>
     [self.collectionView registerClass:[TVUPLSectionBackView class]
             forSupplementaryViewOfKind:kTVUPLSectionBackReuse
                    withReuseIdentifier:kTVUPLSectionBackReuse];
+    self.sectionDict = @{}.mutableCopy;
+    self.rowDict = @{}.mutableCopy;
     [self fetchSections];
 }
 #pragma mark - UICollectionViewDataSource
@@ -121,7 +135,9 @@ UICollectionViewDataSource>
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TVUPLRow *row = self.ssections[indexPath.section].rrows[indexPath.row];
+    TVUPLSection *section = self.ssections[indexPath.section];
+    section.section = indexPath.section;
+    TVUPLRow *row = section.rrows[indexPath.row];
     TVUPLBaseRow *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
@@ -171,7 +187,9 @@ UICollectionViewDataSource>
     }
     for (TVUPLSection *section in self.ssections) {
         if (section.rprefetch) section.rprefetch(section);
+        if (section.rkey) self.sectionDict[section.rkey] = section;
         for (TVUPLRow *row in section.rrows) {
+            if (row.rKey) self.rowDict[row.rKey] = row;
             if (row.rprefetch) row.rprefetch(row);
         }
     }

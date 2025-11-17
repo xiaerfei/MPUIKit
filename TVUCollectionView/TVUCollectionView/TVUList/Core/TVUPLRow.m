@@ -135,9 +135,17 @@
     };
 }
 
-- (TVUPLRow *(^)(id rowData))rowData {
-    return ^(id rowData) {
-        self.rRowData = rowData;
+- (TVUPLRow *(^)(id (^)(void)))rowData {
+    return ^(id (^block)(void)) {
+        id value = nil;
+        if (block) value = block();
+        
+        if ([value isKindOfClass:TVUPLRowData.class]) {
+            TVUPLRowData *rowData = value;
+            self.rRowData = [rowData toRowDataDict];
+        } else {
+            self.rRowData = value;
+        }
         return self;
     };
 }

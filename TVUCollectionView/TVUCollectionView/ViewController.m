@@ -9,18 +9,9 @@
 #import "TVUPLListView.h"
 #import "Masonry.h"
 
-#define DictMake(Key, Value) \
-    Key : (Value ?: [NSNull null])
-
-#define RowData  return [TVUPLRowData new]
-
-#define RowDataMake(properties) \
-    rowData(^id { return \
-        (properties); \
-    })
-
 @interface ViewController ()
 @property (nonatomic, strong) TVUPLListView *listView;
+@property (nonatomic, assign) BOOL loginHide;
 @end
 
 @implementation ViewController
@@ -34,7 +25,8 @@
     [self.view addSubview:self.listView];
     
     [self.listView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view.mas_safeAreaLayoutGuide);
+        make.top.left.right.equalTo(self.view.mas_safeAreaLayoutGuide);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuide).offset(-40);
     }];
     
     [self.listView registerClassForRow:@"CustomCell"];
@@ -46,10 +38,10 @@
     
     
     self.listView
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsZero)
+        .sectionColor(UIColor.lightGrayColor)
         .prefetch(^(TVUPLListView *list) { list
-            .cornerRadius(8)
-            .insets(UIEdgeInsetsZero)
-            .sectionColor(UIColor.lightGrayColor)
             .sections(@[
                 [self loginSection],
                 [self testSection],
@@ -57,24 +49,37 @@
         });
     [self.listView reload];
 }
+
+
+#pragma mark - Action Methods
+
+- (IBAction)testBtnAction:(id)sender {
+    self.loginHide = !self.loginHide;
+    [self.listView reloadSectionForKey:@"LoginSectionTest"];
+//    [self.listView reload];
+}
+
+#pragma mark - sections
 - (TVUPLSection *)loginSection {
     return SectionReuse
         .prefetch(^(TVUPLSection *section) { section
-            .key(@"LoginSection")
+            .key(@"LoginSectionTest")
             .cornerRadius(8)
             .insets(UIEdgeInsetsMake(0, 20, 0, 20))
             .backgroundColor(UIColorFromHex(0x1F1F1F))
             .rows(@[
                 RowReuse(kTVUPLDefaultRow)
-                    .key(@"login")
+                    .key(@"LoginTest")
                     .showIndicator(YES)
-                    .hidden(NO)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"Login",
-                        kTVUPLRowTitleFont : @16,
-                        kTVUPLRowSystemIcon : @"person.crop.circle",
-                        kTVUPLRowIconTintColor : [UIColor grayColor],
-                        kTVUPLRowIconSize : [NSValue valueWithCGSize:CGSizeMake(40, 40)]
+                    .prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.loginHide)
+                        .rowData(^{ RowData
+                            .title(@"Login")
+                            .titleFont(@16)
+                            .systemIcon(@"person.crop.circle")
+                            .iconTintColor([UIColor grayColor])
+                            .iconSize(CGSizeMake(40, 40));
+                        });
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -82,11 +87,13 @@
                 RowReuse(kTVUPLLoginRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"sharexia@tvunetworks.com",
-                        kTVUPLRowTitleFont : @20,
-                        kTVUPLRowSubtitle : @"sharexia@tvunetworks.com",
-                        kTVUPLRowLoginBigWord : @"S",
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^ { RowData
+                            .title(@"sharexia@tvunetworks.com")
+                            .titleFont(@20)
+                            .subtitle(@"sharexia@tvunetworks.com")
+                            .loginBigWord(@"S");
+                        });
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -94,11 +101,11 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"RTMP(s)Push",
-                        //                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
-                        kTVUPLRowIcon : @"tvu_cover_rtmp",
-                        kTVUPLRowIconSize : [NSValue valueWithCGSize:CGSizeMake(30, 30)]
+                    .rowData(^id { RowData
+                        .title(@"RTMP(s)Push")
+                        .subtitle(@"rtmp://127.0.0.1/app")
+                        .icon(@"tvu_cover_rtmp")
+                        .iconSize(CGSizeMake(30, 30));
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -106,10 +113,10 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认",
-                        kTVUPLRowIcon : @"tvu_cover_tiktok",
-                        DictMake(kTVUPLRowTitleFont, @(19))
+                    .rowData(^ { RowData
+                        .title(@"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认")
+                        .icon(@"tvu_cover_tiktok")
+                        .titleFont(@19);
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -117,9 +124,11 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"YouTube",
-                        kTVUPLRowIcon : @"tvu_cover_youtube",
+                    .rowData(^{
+                        return @{
+                            kTVUPLRowTitle : @"YouTube",
+                            kTVUPLRowIcon : @"tvu_cover_youtube",
+                        };
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -127,20 +136,19 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认 20x20.提取了布局相关的常量（如间距），方便后续统一修改.优化了约束更新逻辑，使用mas_remakeConstraints更清晰地重置约束.完善了各种边缘情况的布局处理，确保显示符合预期",
+                    .rowData(^ { RowData
+                        .title(@"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认 20x20.提取了布局相关的常量（如间距），方便后续统一修改.优化了约束更新逻辑，使用mas_remakeConstraints更清晰地重置约束.完善了各种边缘情况的布局处理，确保显示符合预期");
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
                 RowReuse(kTVUPLSwitchRow)
                     .key(@"login")
-                    .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"Twitch",
-                        kTVUPLRowSubtitle : @"好戏开场了,新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
-                        kTVUPLRowIcon  : @"tvu_cover_twitch",
-                        kTVUPLRowSwitchOn : @YES,
+                    .rowData(^ { RowData
+                        .title(@"Twitch")
+                        .subtitle(@"好戏开场了,新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。")
+                        .icon(@"tvu_cover_twitch")
+                        .switchOn(NO);
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -148,8 +156,8 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowSubtitle : @"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
+                    .rowData(^ { RowData
+                        .title(@"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。");
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -157,9 +165,9 @@
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"This is title",
-                        kTVUPLRowSubtitle : @"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。",
+                    .rowData(^ { RowData
+                        .title(@"This is title")
+                        .subtitle(@"继承与复用：复用了TVUPLDefaultRow的核心布局逻辑（icon、title、subtitle 的排列），仅在右侧新增UISwitch. 新增常量：添加了kTVUPLRowSwitchOn（开关状态）和kTVUPLRowSwitchEnabled（开关可用性），统一配置入口。");
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -167,10 +175,10 @@
                 RowReuse(kTVUPLRightValueRow)
                     .key(@"login")
                     .showIndicator(YES)
-                    .rowData(@{
-                        kTVUPLRowTitle : @"Screenshare",
-                        kTVUPLRowRightValue : @"Mix",
-                        kTVUPLRowRightScale : @(0.7),
+                    .rowData(^{ RowData
+                        .title(@"Screenshare")
+                        .rightValue(@"Mix")
+                        .rightScale(0.7);
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -180,7 +188,7 @@
                     .showIndicator(YES)
                     .rowData(^id {
                         RowData
-                            .title(@"")
+                            .title(@"测试")
                             .titleFont(@"")
                             .titleColor(UIColor.grayColor)
                             .custom(@"", @"");
@@ -192,82 +200,12 @@
         });
 }
 
-- (TVUPLSection *)loginTestSection {
-    return SectionReuse
-        .prefetch(^(TVUPLSection *section) { section
-            .key(@"LoginSection")
-            .insets(UIEdgeInsetsMake(0, 20, 0, 20))
-            .cornerRadius(8)
-            .backgroundColor(UIColorFromHex(0x1F1F1F))
-            .rows(@[
-                RowReuse(@"CustomCell")
-                    .type(TVUPLRowTypeHeader)
-                    .rowData(@"Header")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"first header click");
-                    }),
-                RowReuse(kTVUPLDefaultRow)
-                    .key(@"login")
-                    .rowData(@{
-                        kTVUPLRowTitle : @"RTMP(s)Push",
-                        kTVUPLRowSubtitle : @"rtmp://127.0.0.1/app",
-                        kTVUPLRowIcon : [UIImage imageNamed:@"tvu_cover_rtmp"]
-                    })
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"1 click");
-                    }),
-                RowReuse(kTVUPLDefaultRow)
-                    .key(@"unlogin")
-                    .hidden(NO)
-                    .insets(UIEdgeInsetsMake(0, 20, 0, 0))
-                    .rowData(@{
-                        kTVUPLRowTitle : @"YouTube",
-                    })
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"2 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .rowData(@"第 3 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"3 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .hidden(NO)
-                    .rowData(@"第 4 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"4 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .rowData(@"第 5 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"5 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .key(@"unlogin")
-                    .rowData(@"第 6 行")
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"6 click");
-                    }),
-                RowReuse(@"CustomCell")
-                    .type(TVUPLRowTypeFooter)
-                    .rowData(@"Footer")
-                    .height(40).tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"first footer click");
-                    }),
-            ]);
-        });
-}
-
 - (TVUPLSection *)testSection {
     NSMutableArray *rows = @[].mutableCopy;
     [rows addObject:RowReuse(@"CustomCell")
      .type(TVUPLRowTypeHeader)
-     .rowData(@"Header")
+     .rowData(^ {return @"Header"; })
      .height(20)
-     .insets(UIEdgeInsetsMake(0, 0, 0, 0))
      .tap(^(TVUPLRow *row, id value) {
          NSLog(@"2-Header click");
      })];
@@ -275,14 +213,14 @@
         NSString *dataStr = [NSString stringWithFormat:@"2-%d", i];
         NSString *clickStr = [NSString stringWithFormat:@"%@ click", dataStr];
         [rows addObject:RowReuse(@"CustomCell")
-         .rowData(dataStr)
+         .rowData(^ { return dataStr; })
          .tap(^(TVUPLRow *row, id value) {
              NSLog(@"%@", clickStr);
          })];
     }
     [rows addObject:RowReuse(@"CustomCell")
      .type(TVUPLRowTypeFooter)
-     .rowData(@"Footer")
+     .rowData(^ { return @"Footer"; })
      .tap(^(TVUPLRow *row, id value) {
          NSLog(@"2-Footer click");
      })];

@@ -5,6 +5,10 @@
 //  Created by erfeixia on 2025/9/13.
 //
 #import <UIKit/UIKit.h>
+#import "TVUPLRowData.h"
+
+#define RowData  return [TVUPLRowData new]
+
 
 typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeDefault,
@@ -59,7 +63,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(BOOL showLeftImage))showLeftImage;
 - (TVUPLRow *(^)(CGFloat height))height;
 
-- (TVUPLRow *(^)(id rowData))rowData;
+- (TVUPLRow *(^)(id (^)(void)))rowData;
 
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))tap;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))fetchRowParameterBlock;
