@@ -44,7 +44,10 @@
         .prefetch(^(TVUPLListView *list) { list
             .sections(@[
                 [self loginSection],
-                [self testSection],
+                [self videoSection],
+                [self audioSection],
+                [self multistreamSection],
+                [self backupClipsSection]
             ]);
         });
     [self.listView reload];
@@ -55,26 +58,223 @@
 
 - (IBAction)testBtnAction:(id)sender {
     self.loginHide = !self.loginHide;
-    [self.listView reloadSectionForKey:@"LoginSectionTest"];
-//    [self.listView reload];
+//    [self.listView reloadSectionForKey:@"LoginSectionTest"];
+    [self.listView reloadRowForKeys:@[@"yyyyyy", @"xxxxxx"]];
 }
 
 #pragma mark - sections
 - (TVUPLSection *)loginSection {
     return SectionReuse
+        .key(@"LoginSection")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
-            .key(@"LoginSectionTest")
-            .cornerRadius(8)
-            .insets(UIEdgeInsetsMake(0, 20, 0, 20))
-            .backgroundColor(UIColorFromHex(0x1F1F1F))
             .rows(@[
+                RowReuse(kTVUPLDefaultRow).key(@"UnloginRow")
+                    .showIndicator(YES)
+                    .height(60)
+                    .rowData(^ { RowData
+                        .title(@"Login")
+                        .titleFont(@16)
+                        .systemIcon(@"person.crop.circle")
+                        .iconTintColor([UIColor grayColor])
+                        .iconSize(CGSizeMake(40, 40));
+                    }),
+                RowReuse(kTVUPLLoginRow)
+                    .key(@"LoginRow")
+                    .showIndicator(YES)
+                    .height(60)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^ { RowData
+                            .title(@"sharexia")
+                            .titleFont(@20)
+                            .subtitle(@"sharexia@tvunetworks.com")
+                            .loginBigWord(@"S");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+
+- (TVUPLSection *)videoSection {
+    return SectionReuse
+        .key(@"VideoSection")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(10, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .rowData(^ { RowData
+                        .title(@"Video")
+                        .titleColor([UIColor grayColor])
+                        .icon(@"tvu_setting_camera")
+                        .iconSize(CGSizeMake(16, 16));
+                    }),
+                RowReuse(kTVUPLRightValueRow)
+                    .key(@"Resolution")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Resolution")
+                            .rightScale(0.6)
+                            .rightValue(@"1280x720");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLRightValueRow)
+                    .key(@"FrameRate")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Frame rate")
+                            .rightScale(0.6)
+                            .rightValue(@"30P");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+
+- (TVUPLSection *)audioSection {
+    return SectionReuse
+        .key(@"AudioSection")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(10, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .rowData(^ { RowData
+                        .title(@"Audio")
+                        .titleColor([UIColor grayColor])
+                        .icon(@"tvu_cover_mic")
+                        .iconSize(CGSizeMake(16, 16));
+                    }),
+                RowReuse(kTVUPLRightValueRow)
+                    .key(@"Screenshare")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Screenshare")
+                            .rightScale(0.6)
+                            .rightValue(@"Mix");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+
+- (TVUPLSection *)multistreamSection {
+    return SectionReuse
+        .key(@"MultistreamSection")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(10, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .rowData(^ { RowData
+                        .title(@"Multistream")
+                        .titleColor([UIColor grayColor])
+                        .icon(@"tvu_share_platforms")
+                        .iconSize(CGSizeMake(16, 16));
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"StreamInfo")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Stream Info");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowReuse(kTVUPLDefaultRow)
+                    .key(@"SocialPlatforms")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Social Platforms");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+
+- (TVUPLSection *)backupClipsSection {
+    return SectionReuse
+        .key(@"BackupClipsSection")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(10, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .rowData(^ { RowData
+                        .title(@"Backup Clips")
+                        .titleColor([UIColor grayColor])
+                        .icon(@"tvu_setting_backupclips")
+                        .iconSize(CGSizeMake(16, 16));
+                    }),
+                RowReuse(kTVUPLSwitchRow)
+                    .key(@"StreamInfo")
+                    .prefetch(^(TVUPLRow *row) { row
+                        .rowData(^{ RowData
+                            .title(@"Disaster Recovery")
+                            .subtitle(@"Switch backup source when detect black frame");
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+
+- (TVUPLSection *)loginSectionTest {
+    return SectionReuse
+        .key(@"LoginSectionTest")
+        .cornerRadius(8)
+        .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+        .backgroundColor(UIColorFromHex(0x1F1F1F))
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowReuse(kTVUPLDefaultRow)
+                .type(TVUPLRowTypeHeader)
+                .rowData(^ { RowData
+                    .title(@"header");
+                }),
                 RowReuse(kTVUPLDefaultRow)
                     .key(@"LoginTest")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
-                        .hidden(self.loginHide)
                         .rowData(^{ RowData
-                            .title(@"Login")
+                            .title(self.loginHide ? @"Login" : @"This is test")
                             .titleFont(@16)
                             .systemIcon(@"person.crop.circle")
                             .iconTintColor([UIColor grayColor])
@@ -99,13 +299,15 @@
                         NSLog(@"1 click");
                     }),
                 RowReuse(kTVUPLDefaultRow)
-                    .key(@"login")
-                    .showIndicator(YES)
-                    .rowData(^id { RowData
-                        .title(@"RTMP(s)Push")
-                        .subtitle(@"rtmp://127.0.0.1/app")
-                        .icon(@"tvu_cover_rtmp")
-                        .iconSize(CGSizeMake(30, 30));
+                    .key(@"xxxxxx")
+                    .showIndicator(YES).prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.loginHide)
+                        .rowData(^id { RowData
+                            .title(@"RTMP(s)Push")
+                            .subtitle(@"rtmp://127.0.0.1/app")
+                            .icon(@"tvu_cover_rtmp")
+                            .iconSize(CGSizeMake(30, 30));
+                        });
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
@@ -184,18 +386,25 @@
                         NSLog(@"1 click");
                     }),
                 RowReuse(kTVUPLRightValueRow)
-                    .key(@"login")
+                    .key(@"yyyyyy")
                     .showIndicator(YES)
-                    .rowData(^id {
-                        RowData
-                            .title(@"测试")
+                    .prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.loginHide)
+                        .rowData(^ { RowData
+                            .title([NSString stringWithFormat:@"%@", [NSDate date]])
                             .titleFont(@"")
                             .titleColor(UIColor.grayColor)
                             .custom(@"", @"");
+                        });
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
+                RowReuse(kTVUPLDefaultRow)
+                .type(TVUPLRowTypeFooter)
+                .rowData(^ { RowData
+                    .title(@"footer");
+                }),
             ]);
         });
 }

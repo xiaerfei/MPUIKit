@@ -36,8 +36,8 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 
 @property (nonatomic, strong, readonly) id rRowData;
 
-@property (nonatomic, assign, readonly) NSInteger section;
-@property (nonatomic, assign, readonly) NSInteger row;
+@property (nonatomic, assign) NSInteger section;
+@property (nonatomic, assign) NSInteger row;
 
 @property (nonatomic,   copy, readonly) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readonly) void (^rFetchRowParameterBlock)(TVUPLRow *row);

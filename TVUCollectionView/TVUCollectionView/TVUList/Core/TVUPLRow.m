@@ -25,9 +25,6 @@
 
 @property (nonatomic, strong, readwrite) id rRowData;
 
-@property (nonatomic, assign, readwrite) NSInteger section;
-@property (nonatomic, assign, readwrite) NSInteger row;
-
 @property (nonatomic,   copy, readwrite) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readwrite) void (^rFetchRowParameterBlock)(TVUPLRow *row);
 

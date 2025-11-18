@@ -45,23 +45,63 @@ UICollectionViewDataSource>
     [self.collectionView reloadData];
 }
 
-- (void)reloadSectionForKey:(NSString *)key {
-    if (key == nil) return;
-    TVUPLSection *section = self.sectionDict[key];
-    if (section.rprefetch) section.rprefetch(section);
-    if (section.rrows.count != 0) {
-        for (TVUPLRow *row in section.rrows) {
-            if (row.rprefetch) row.rprefetch(row);
+- (void)reloadSectionForKeys:(NSArray *)keys {
+    NSInteger (^updateSectionsBlock)(NSString *key) = ^NSInteger(NSString *key) {
+        if (key == nil) return -1;
+        TVUPLSection *section = self.sectionDict[key];
+        if (section.rprefetch) section.rprefetch(section);
+        if (section.rrows.count != 0) {
+            for (TVUPLRow *row in section.rrows) {
+                if (row.rprefetch) row.rprefetch(row);
+            }
         }
+        return section.section;
+    };
+    
+    NSMutableSet *sets = [NSMutableSet new];
+    for (NSString *key in keys) {
+        NSInteger section = updateSectionsBlock(key);
+        if (section < 0) continue;
+        [sets addObject:@(section)];
     }
-    [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:section.section]];
+    
+    [self.collectionView reloadSections:sets.copy];
 }
 
-- (void)reloadRowForKey:(NSString *)key {
-    if (key == nil) return;
-    TVUPLRow *row = self.rowDict[key];
-    if (row.rprefetch) row.rprefetch(row);
-    [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:row.row inSection:row.section]]];
+- (void)reloadRowForKeys:(NSArray *)keys {
+    NSArray *(^updateRowBlock)(NSString *key) = ^NSArray *(NSString *key) {
+        if (key == nil) return nil;
+        TVUPLRow *row = self.rowDict[key];
+        if (row.rprefetch) row.rprefetch(row);
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row.row inSection:row.section];
+        TVUPLBaseRow *baseRowNow = [self.collectionView cellForItemAtIndexPath:indexPath];
+        [baseRowNow updateWithData:row.rRowData];
+        
+        NSArray *indexPaths = nil;
+        
+        TVUPLRow *preRow = [self findPreRowAtIndexPath:indexPath];
+        if (preRow) {
+            NSIndexPath *preIndexPath = [NSIndexPath indexPathForRow:preRow.row inSection:preRow.section];
+            TVUPLBaseRow *preRowNow = [self.collectionView cellForItemAtIndexPath:indexPath];
+            [self configureWithCell:preRowNow indexPath:preIndexPath];
+            indexPaths = @[indexPath, preIndexPath];
+        } else {
+            indexPaths = @[indexPath];
+        }
+        return indexPaths;
+    };
+    
+    NSMutableArray *indexPaths = @[].mutableCopy;
+    for (NSString *key in keys) {
+        NSArray *rowPaths = updateRowBlock(key);
+        if (rowPaths.count != 0) {
+            [indexPaths addObjectsFromArray:rowPaths];
+        }
+    }
+    
+    if (indexPaths.count != 0) {
+        [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+    }
 }
 
 - (void)registerClassForRow:(NSString *)rowName {
@@ -141,6 +181,8 @@ UICollectionViewDataSource>
     TVUPLBaseRow *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
+    row.section = indexPath.section;
+    row.row = indexPath.row;
     cell.plrow = row;
     cell.section = indexPath.section;
     cell.row = indexPath.row;
@@ -232,6 +274,16 @@ UICollectionViewDataSource>
     for (NSInteger index = indexPath.row + 1;
          index < section.rrows.count;
          index++) {
+        TVUPLRow *row = section.rrows[index];
+        if (row.rhidden) continue;
+        return row;
+    }
+    return nil;
+}
+
+- (TVUPLRow *)findPreRowAtIndexPath:(NSIndexPath *)indexPath {
+    TVUPLSection *section = self.ssections[indexPath.section];
+    for (NSInteger index = indexPath.row - 1; index >= 0; index--) {
         TVUPLRow *row = section.rrows[index];
         if (row.rhidden) continue;
         return row;

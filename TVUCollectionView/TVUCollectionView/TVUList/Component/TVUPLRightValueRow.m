@@ -41,7 +41,7 @@ NSString *const kTVUPLRightValueRow = @"TVUPLRightValueRow";
     self.rightLabel = [[UILabel alloc] init];
     self.rightLabel.numberOfLines = 1;
     // 默认样式
-    self.rightLabel.font = [UIFont boldSystemFontOfSize:14];
+    self.rightLabel.font = [UIFont systemFontOfSize:14];
     self.rightLabel.textAlignment = NSTextAlignmentRight;
     self.rightLabel.textColor = [UIColor grayColor];
     self.rightLabel.numberOfLines = 0;
