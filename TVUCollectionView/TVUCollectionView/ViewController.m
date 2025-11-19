@@ -58,8 +58,8 @@
 
 - (IBAction)testBtnAction:(id)sender {
     self.loginHide = !self.loginHide;
-//    [self.listView reloadSectionForKey:@"LoginSectionTest"];
-    [self.listView reloadRowForKeys:@[@"yyyyyy", @"xxxxxx"]];
+    [self.listView reloadSectionForKeys:@[@"LoginSection"]];
+//    [self.listView reloadRowForKeys:@[@"UnloginRow", @"LoginRow"]];
 }
 
 #pragma mark - sections
@@ -70,22 +70,27 @@
         .insets(UIEdgeInsetsMake(0, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
+//            .hidden(self.loginHide)
             .rows(@[
                 RowReuse(kTVUPLDefaultRow).key(@"UnloginRow")
                     .showIndicator(YES)
                     .height(60)
-                    .rowData(^ { RowData
-                        .title(@"Login")
-                        .titleFont(@16)
-                        .systemIcon(@"person.crop.circle")
-                        .iconTintColor([UIColor grayColor])
-                        .iconSize(CGSizeMake(40, 40));
+                    .prefetch(^(TVUPLRow *row) { row
+                        .hidden(!self.loginHide)
+                        .rowData(^ { RowData
+                            .title(@"Login")
+                            .titleFont(@16)
+                            .systemIcon(@"person.crop.circle")
+                            .iconTintColor([UIColor grayColor])
+                            .iconSize(CGSizeMake(40, 40));
+                        });
                     }),
                 RowReuse(kTVUPLLoginRow)
                     .key(@"LoginRow")
                     .showIndicator(YES)
                     .height(60)
                     .prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.loginHide)
                         .rowData(^ { RowData
                             .title(@"sharexia")
                             .titleFont(@20)
