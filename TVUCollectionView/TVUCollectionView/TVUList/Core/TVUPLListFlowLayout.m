@@ -42,8 +42,8 @@ extern NSString *const kTVUPLSectionBackReuse;
         TVUPLSection *plSection = [self section:section];
         NSIndexPath *headerIndexPath = [NSIndexPath indexPathForItem:-1 inSection:section];
         
-        CGFloat stop = plSection.rinsets.top;
-        CGFloat sbottom = plSection.rinsets.bottom;
+        CGFloat stop    = plSection.rhidden ? 0 : plSection.rinsets.top;
+        CGFloat sbottom = plSection.rhidden ? 0 : plSection.rinsets.bottom;
         
         currentY += stop; // 加上section顶部内边距
         
@@ -80,13 +80,13 @@ extern NSString *const kTVUPLSectionBackReuse;
     CGFloat y = *currentY;
     
     itemAttributes.frame = CGRectMake(x, y, rwidth, rheight);
-    itemAttributes.hidden = row.rhidden;
+    itemAttributes.hidden = row.rhidden || section.rhidden;
     
     // 缓存属性
     self.layoutAttributesCache[indexPath] = itemAttributes;
     
     // 只有item不隐藏时才累加Y坐标
-    if (!row.rhidden) {
+    if (!row.rhidden && !section.rhidden) {
         *currentY += rheight;
     }
 }
@@ -119,6 +119,7 @@ extern NSString *const kTVUPLSectionBackReuse;
     UICollectionViewLayoutAttributes *backgroundAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:kTVUPLSectionBackReuse withIndexPath:headerIndexPath];
     backgroundAttributes.frame = CGRectMake(sleft, headerOffset, width - sleft - sright, headerHeight);
     backgroundAttributes.zIndex = -1;
+    backgroundAttributes.hidden = plSection.rhidden;
     self.layoutAttributesCache[headerIndexPath] = backgroundAttributes; // 用section的headerIndexPath作为key
 }
 

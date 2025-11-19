@@ -7,6 +7,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define SectionUse [TVUPLSection new]
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class TVUPLRow;

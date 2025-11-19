@@ -8,9 +8,9 @@
 #import "TVUPLListView.h"
 #import "TVUPLSectionBackView.h"
 #import "TVUPLListFlowLayout.h"
+#import "NSArray+Function.h"
+#import "TVUPLBaseRow.h"
 #import "Masonry.h"
-
-#import "CustomCell.h"
 
 @interface TVUPLListView ()<UICollectionViewDelegate,
 UICollectionViewDataSource>
@@ -58,11 +58,11 @@ UICollectionViewDataSource>
         return section.section;
     };
     
-    NSMutableSet *sets = [NSMutableSet new];
+    NSMutableIndexSet *sets = [NSMutableIndexSet new];
     for (NSString *key in keys) {
         NSInteger section = updateSectionsBlock(key);
         if (section < 0) continue;
-        [sets addObject:@(section)];
+        [sets addIndex:section];
     }
     
     [self.collectionView reloadSections:sets.copy];
@@ -86,6 +86,7 @@ UICollectionViewDataSource>
             [self configureWithCell:preRowNow indexPath:preIndexPath];
             indexPaths = @[indexPath, preIndexPath];
         } else {
+            [self configureWithCell:baseRowNow indexPath:indexPath];
             indexPaths = @[indexPath];
         }
         return indexPaths;
@@ -255,17 +256,20 @@ UICollectionViewDataSource>
         hiddenBlock(row.rforceShowLine ? NO : YES);
         return;
     }
-    
-    if ((indexPath.row + 1) >= section.rrows.count) {
-        hiddenBlock(row.rforceShowLine ? NO : YES);
-        return;
-    }
-    
+    /// 找到下一个(没有隐藏)
     TVUPLRow *nextRow = [self findNextRowAtIndexPath:indexPath];
-    if (nextRow.rrowType == TVUPLRowTypeFooter) {
+    if (nextRow == nil) {
+        /// 如果没有找到，说明自己是最后一个
         hiddenBlock(row.rforceShowLine ? NO : YES);
         return;
     }
+    
+    if (nextRow.rrowType == TVUPLRowTypeFooter) {
+        /// 如果找到了并且是 Footer, 自己的分割线需要隐藏
+        hiddenBlock(row.rforceShowLine ? NO : YES);
+        return;
+    }
+
     hiddenBlock(row.rhiddenLine ? YES : NO);
 }
 
