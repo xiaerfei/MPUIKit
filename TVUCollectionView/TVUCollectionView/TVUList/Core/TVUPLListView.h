@@ -20,9 +20,9 @@
  */
 #import <UIKit/UIKit.h>
 #import "TVUPLSection.h"
-#import "TVUPLReuseManager.h"
 #import "TVUPLListConst.h"
 #import "TVUPLRowData.h"
+#import "TVUPLRow.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
