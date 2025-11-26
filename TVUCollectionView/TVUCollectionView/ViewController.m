@@ -64,7 +64,7 @@
 
 #pragma mark - sections
 - (TVUPLSection *)loginSection {
-    return SectionReuse
+    return SectionUse
         .key(@"LoginSection")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(0, 20, 0, 20))
@@ -72,7 +72,8 @@
         .prefetch(^(TVUPLSection *section) { section
 //            .hidden(self.loginHide)
             .rows(@[
-                RowReuse(kTVUPLDefaultRow).key(@"UnloginRow")
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"UnloginRow")
                     .showIndicator(YES)
                     .height(60)
                     .prefetch(^(TVUPLRow *row) { row
@@ -85,7 +86,7 @@
                             .iconSize(CGSizeMake(40, 40));
                         });
                     }),
-                RowReuse(kTVUPLLoginRow)
+                RowUse(kTVUPLLoginRow)
                     .key(@"LoginRow")
                     .showIndicator(YES)
                     .height(60)
@@ -106,14 +107,14 @@
 }
 
 - (TVUPLSection *)videoSection {
-    return SectionReuse
+    return SectionUse
         .key(@"VideoSection")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(10, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
                     .height(30)
                     .rowData(^ { RowData
@@ -122,7 +123,7 @@
                         .icon(@"tvu_setting_camera")
                         .iconSize(CGSizeMake(16, 16));
                     }),
-                RowReuse(kTVUPLRightValueRow)
+                RowUse(kTVUPLRightValueRow)
                     .key(@"Resolution")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -135,7 +136,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLRightValueRow)
+                RowUse(kTVUPLRightValueRow)
                     .key(@"FrameRate")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -153,14 +154,14 @@
 }
 
 - (TVUPLSection *)audioSection {
-    return SectionReuse
+    return SectionUse
         .key(@"AudioSection")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(10, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
                     .height(30)
                     .rowData(^ { RowData
@@ -169,7 +170,7 @@
                         .icon(@"tvu_cover_mic")
                         .iconSize(CGSizeMake(16, 16));
                     }),
-                RowReuse(kTVUPLRightValueRow)
+                RowUse(kTVUPLRightValueRow)
                     .key(@"Screenshare")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -187,14 +188,14 @@
 }
 
 - (TVUPLSection *)multistreamSection {
-    return SectionReuse
+    return SectionUse
         .key(@"MultistreamSection")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(10, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
                     .height(30)
                     .rowData(^ { RowData
@@ -203,7 +204,7 @@
                         .icon(@"tvu_share_platforms")
                         .iconSize(CGSizeMake(16, 16));
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"StreamInfo")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -214,7 +215,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"SocialPlatforms")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -230,14 +231,14 @@
 }
 
 - (TVUPLSection *)backupClipsSection {
-    return SectionReuse
+    return SectionUse
         .key(@"BackupClipsSection")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(10, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
                     .height(30)
                     .rowData(^ { RowData
@@ -246,7 +247,7 @@
                         .icon(@"tvu_setting_backupclips")
                         .iconSize(CGSizeMake(16, 16));
                     }),
-                RowReuse(kTVUPLSwitchRow)
+                RowUse(kTVUPLSwitchRow)
                     .key(@"StreamInfo")
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
@@ -262,19 +263,19 @@
 }
 
 - (TVUPLSection *)loginSectionTest {
-    return SectionReuse
+    return SectionUse
         .key(@"LoginSectionTest")
         .cornerRadius(8)
         .insets(UIEdgeInsetsMake(0, 20, 0, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                 .type(TVUPLRowTypeHeader)
                 .rowData(^ { RowData
                     .title(@"header");
                 }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"LoginTest")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -289,7 +290,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLLoginRow)
+                RowUse(kTVUPLLoginRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -303,7 +304,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"xxxxxx")
                     .showIndicator(YES).prefetch(^(TVUPLRow *row) { row
                         .hidden(self.loginHide)
@@ -317,7 +318,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^ { RowData
@@ -328,7 +329,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^{
@@ -340,7 +341,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^ { RowData
@@ -349,7 +350,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLSwitchRow)
+                RowUse(kTVUPLSwitchRow)
                     .key(@"login")
                     .rowData(^ { RowData
                         .title(@"Twitch")
@@ -360,7 +361,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^ { RowData
@@ -369,7 +370,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^ { RowData
@@ -379,7 +380,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLRightValueRow)
+                RowUse(kTVUPLRightValueRow)
                     .key(@"login")
                     .showIndicator(YES)
                     .rowData(^{ RowData
@@ -390,7 +391,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLRightValueRow)
+                RowUse(kTVUPLRightValueRow)
                     .key(@"yyyyyy")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
@@ -405,7 +406,7 @@
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
-                RowReuse(kTVUPLDefaultRow)
+                RowUse(kTVUPLDefaultRow)
                 .type(TVUPLRowTypeFooter)
                 .rowData(^ { RowData
                     .title(@"footer");
@@ -416,7 +417,7 @@
 
 - (TVUPLSection *)testSection {
     NSMutableArray *rows = @[].mutableCopy;
-    [rows addObject:RowReuse(@"CustomCell")
+    [rows addObject:RowUse(@"CustomCell")
      .type(TVUPLRowTypeHeader)
      .rowData(^ {return @"Header"; })
      .height(20)
@@ -426,20 +427,20 @@
     for (int i = 0; i < 20; i++) {
         NSString *dataStr = [NSString stringWithFormat:@"2-%d", i];
         NSString *clickStr = [NSString stringWithFormat:@"%@ click", dataStr];
-        [rows addObject:RowReuse(@"CustomCell")
+        [rows addObject:RowUse(@"CustomCell")
          .rowData(^ { return dataStr; })
          .tap(^(TVUPLRow *row, id value) {
              NSLog(@"%@", clickStr);
          })];
     }
-    [rows addObject:RowReuse(@"CustomCell")
+    [rows addObject:RowUse(@"CustomCell")
      .type(TVUPLRowTypeFooter)
      .rowData(^ { return @"Footer"; })
      .tap(^(TVUPLRow *row, id value) {
          NSLog(@"2-Footer click");
      })];
     
-    return SectionReuse
+    return SectionUse
         .key(@"LoginSection")
         .prefetch(^(TVUPLSection *section) { section
             .insets(UIEdgeInsetsMake(0, 20, 0, 20))

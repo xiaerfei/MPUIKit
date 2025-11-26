@@ -7,6 +7,8 @@
 #import <UIKit/UIKit.h>
 #import "TVUPLRowData.h"
 
+
+#define RowUse(identifier) [[TVUPLRow alloc] initWithIdentifier:identifier]
 #define RowData  return [TVUPLRowData new]
 
 
