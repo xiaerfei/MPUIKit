@@ -36,6 +36,7 @@ extern NSString *const kTVUPLRowLoginBigWord;
 extern NSString *const kTVUPLRightValueRow;
 
 extern NSString *const kTVUPLRowRightValue;
+extern NSString *const kTVUPLRightPriority;
 ///< 范围(0, 1]
 extern NSString *const kTVUPLRowRightScale;
 #if DEBUG

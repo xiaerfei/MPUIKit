@@ -129,7 +129,7 @@
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Resolution")
-                            .rightScale(0.6)
+                            .layoutPriority(TVUPLRowTitleRequired)
                             .rightValue(@"1280x720");
                         });
                     })
@@ -176,8 +176,7 @@
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Screenshare")
-                            .rightScale(0.6)
-                            .rightValue(@"Mix");
+                            .rightValue(@"Mix Mic and Audio from Share screen");
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {
@@ -249,6 +248,7 @@
                     }),
                 RowUse(kTVUPLSwitchRow)
                     .key(@"StreamInfo")
+                    .height(60)
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Disaster Recovery")

@@ -9,6 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, TVUPLRowLayoutPriority) {
+    TVUPLRowTitleRequired,
+    TVUPLRowRightRequired,
+    TVUPLRowCustomScale
+};
+
 @interface TVUPLRowData : NSObject
 
 - (TVUPLRowData *(^)(NSString *title))title;
@@ -28,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (TVUPLRowData *(^)(NSString *bigWord))loginBigWord;
 - (TVUPLRowData *(^)(NSString *value))rightValue;
 - (TVUPLRowData *(^)(CGFloat scale))rightScale;
+- (TVUPLRowData *(^)(TVUPLRowLayoutPriority layout))layoutPriority;
 
 ///< 自定义
 - (TVUPLRowData *(^)(NSString *key, id value))custom;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,24 +16,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMq-Fp-5Mt">
-                                <rect key="frame" x="20" y="406" width="353" height="40"/>
-                                <color key="backgroundColor" systemColor="systemBrownColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="R7Z-Bu-Fiq"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e41-ay-GrV">
+                                <rect key="frame" x="159" y="408.66666666666669" width="75" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                            </button>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kuv-9R-Cuf" customClass="TVUTabBar">
+                                <rect key="frame" x="0.0" y="701" width="393" height="83"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="nr4-rk-yIY">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Air Play" image="play.display" catalog="system" id="5Yq-bx-6br">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem systemItem="bookmarks" id="acG-8f-31c">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Mic" image="microphone" catalog="system" id="Nqo-d0-P7R">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Add" image="plus.app" catalog="system" id="U9B-h1-qTP">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                </items>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <tabBarAppearance key="scrollEdgeAppearance"/>
+                            </tabBar>
+                            <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3n-bj-4Ml" customClass="TVUTabBar">
+                                <rect key="frame" x="0.0" y="640" width="393" height="83"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem systemItem="favorites" id="bU2-eB-DVj">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Air Play" image="play.display" catalog="system" id="zNc-ia-C4L">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem systemItem="recents" id="Ntl-2o-kqE"/>
+                                    <tabBarItem title="Mic" image="microphone" catalog="system" id="4lY-xn-w6B">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                    <tabBarItem title="Add" image="plus.app" catalog="system" id="YUD-Fm-tGU">
+                                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tabBarItem>
+                                </items>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <tabBarAppearance key="scrollEdgeAppearance"/>
+                            </tabBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hMq-Fp-5Mt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="VK8-zc-DlF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hMq-Fp-5Mt" secondAttribute="trailing" constant="20" id="kwk-gk-0ds"/>
-                            <constraint firstItem="hMq-Fp-5Mt" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qUl-P8-KgM"/>
+                            <constraint firstItem="q3n-bj-4Ml" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6hb-da-cMn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kuv-9R-Cuf" secondAttribute="bottom" id="SO2-Yy-1e5"/>
+                            <constraint firstItem="e41-ay-GrV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bEv-dg-MeD"/>
+                            <constraint firstItem="kuv-9R-Cuf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gD9-oc-Pkh"/>
+                            <constraint firstItem="q3n-bj-4Ml" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jA9-QZ-OQY"/>
+                            <constraint firstItem="e41-ay-GrV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="llL-4I-jnx"/>
+                            <constraint firstItem="kuv-9R-Cuf" firstAttribute="top" secondItem="q3n-bj-4Ml" secondAttribute="bottom" constant="-22" id="rzY-Rg-WI6"/>
+                            <constraint firstItem="kuv-9R-Cuf" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="wfT-2A-oQD"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="backView" destination="hMq-Fp-5Mt" id="dPY-lP-f78"/>
+                        <outlet property="tabBar" destination="kuv-9R-Cuf" id="Aco-XA-kyj"/>
+                        <outlet property="tabBarTop" destination="q3n-bj-4Ml" id="ewc-PU-ISX"/>
+                        <outlet property="testButton" destination="e41-ay-GrV" id="R05-j3-Txt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -42,11 +93,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="microphone" catalog="system" width="110" height="128"/>
+        <image name="play.display" catalog="system" width="128" height="101"/>
+        <image name="plus.app" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -8,11 +8,13 @@
 #import "TVUPLRightValueRow.h"
 #import "TVUPLDefaultCellView.h"
 #import "NSObject+BaseDataType.h"
+#import "TVUPLRowData.h"
 #import "Masonry.h"
 
 NSString *const kTVUPLRowRightValue = @"RowRightValue";
 NSString *const kTVUPLRowRightScale = @"RowRightScale";
 NSString *const kTVUPLRightValueRow = @"TVUPLRightValueRow";
+NSString *const kTVUPLRightPriority = @"TVUPLRightPriority";
 
 @interface TVUPLRightValueRow ()
 @property (nonatomic, strong) UILabel *rightLabel;
@@ -59,7 +61,6 @@ NSString *const kTVUPLRightValueRow = @"TVUPLRightValueRow";
         make.right.centerY.equalTo(self.plContentView);
         make.top.greaterThanOrEqualTo(self.plContentView).offset(5);
         make.bottom.lessThanOrEqualTo(self.plContentView).offset(-5);
-        make.width.lessThanOrEqualTo(self.plContentView).dividedBy(7.0f/10.0f);
     }];
 }
 
@@ -67,24 +68,78 @@ NSString *const kTVUPLRightValueRow = @"TVUPLRightValueRow";
     [self.defaultView updateWithData:data];
     self.rightLabel.text = [data[kTVUPLRowRightValue] toStringValue];
     CGFloat scale = [[data[kTVUPLRowRightValue] toStringValue] floatValue];
-    [self updateLayoutConstraintsWithScale:scale];
+    TVUPLRowLayoutPriority strategy = [data[kTVUPLRightPriority] toIntegerValue];
+    [self layoutLabelsWithStrategy:strategy scale:scale];
 }
 
-- (void)updateLayoutConstraintsWithScale:(CGFloat)scale {
+- (void)layoutLabelsWithStrategy:(TVUPLRowLayoutPriority)strategy scale:(CGFloat)scale {
     BOOL showIndicator = self.plrow.rshowIndicator;
-    if (scale <= 0 || scale > 1) {
-        scale = 0.5;
-    }
-    [self.rightLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.plContentView);
-        make.top.greaterThanOrEqualTo(self.plContentView).offset(5);
-        make.bottom.lessThanOrEqualTo(self.plContentView).offset(-5);
-        make.width.equalTo(self.plContentView).dividedBy(1.0f/scale);
-        if (showIndicator) {
-            make.right.equalTo(self.indicatorImageView.mas_left).offset(-10);
-        } else {
-            make.right.equalTo(self.plContentView);
+    switch (strategy) {
+        case TVUPLRowTitleRequired:
+        {
+            // titleLabel 优先展示，rightLabel 占剩余空间
+            [self.defaultView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+            [self.rightLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+            [self.rightLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.plContentView);
+                make.top.greaterThanOrEqualTo(self.plContentView).offset(5);
+                make.bottom.lessThanOrEqualTo(self.plContentView).offset(-5);
+                if (showIndicator) {
+                    make.right.equalTo(self.indicatorImageView.mas_left).offset(-10);
+                } else {
+                    make.right.equalTo(self.plContentView);
+                }
+            }];
+            break;
         }
-    }];
+
+        case TVUPLRowRightRequired:
+        {
+            // rightLabel 优先展示，titleLabel 占剩余空间
+            [self.rightLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+            [self.defaultView setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+            [self.rightLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.plContentView);
+                make.top.greaterThanOrEqualTo(self.plContentView).offset(5);
+                make.bottom.lessThanOrEqualTo(self.plContentView).offset(-5);
+                if (showIndicator) {
+                    make.right.equalTo(self.indicatorImageView.mas_left).offset(-10);
+                } else {
+                    make.right.equalTo(self.plContentView);
+                }
+            }];
+            break;
+        }
+
+        case TVUPLRowCustomScale:
+        {
+            // 自定义比例，scale 为 titleLabel 占比
+            scale = MAX(0.0, MIN(scale, 1.0)); // 限制在 0~1 之间
+
+            [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.contentView).offset(15);
+                make.width.equalTo(self.contentView.mas_width).multipliedBy(scale).priorityHigh();
+            }];
+            
+            [self.rightLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.equalTo(self.plContentView);
+                make.top.greaterThanOrEqualTo(self.plContentView).offset(5);
+                make.bottom.lessThanOrEqualTo(self.plContentView).offset(-5);
+                make.width.equalTo(self.plContentView.mas_width).multipliedBy(scale);
+                if (showIndicator) {
+                    make.right.equalTo(self.indicatorImageView.mas_left).offset(-10);
+                } else {
+                    make.right.equalTo(self.plContentView);
+                }
+            }];
+
+            // 两者都设置抗压缩优先级为默认，避免冲突
+            [self.defaultView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+            [self.rightLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+            break;
+        }
+    }
 }
+
+
 @end

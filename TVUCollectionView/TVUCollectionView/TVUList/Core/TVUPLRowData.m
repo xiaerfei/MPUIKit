@@ -125,6 +125,14 @@
         return self;
     };
 }
+
+- (TVUPLRowData *(^)(TVUPLRowLayoutPriority layout))layoutPriority {
+    return ^(TVUPLRowLayoutPriority layout) {
+        self.rowDataDict[kTVUPLRightPriority] = @(layout);
+        return self;
+    };
+}
+
 - (TVUPLRowData *(^)(NSString *key, id value))custom {
     return ^(NSString *key, id value) {
         if ([key isKindOfClass:NSString.class] == NO ||

@@ -62,13 +62,17 @@ static const CGFloat kSwitchRightMargin = 16;   // Switch右边距
     [self.plContentView addSubview:self.defaultView];
     
     [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.equalTo(self.plContentView);
+        make.left.centerY.equalTo(self.plContentView);
         make.right.equalTo(self.switchView.mas_left);
     }];
 }
 
 - (void)updateWithData:(NSDictionary *)data {
     [self.defaultView updateWithData:data];
+    
+    [self.defaultView sizeToFit];
+    
+    NSLog(@"sharexia:%@", NSStringFromCGRect(self.defaultView.frame));
     // 更新Switch状态
     if (data[kTVUPLRowSwitchOn] &&
         [data[kTVUPLRowSwitchOn] isKindOfClass:[NSNumber class]]) {

@@ -150,7 +150,7 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     
     // 副标题
     self.subtitleLabel = [[UILabel alloc] init];
-    self.subtitleLabel.numberOfLines = 1;
+    self.subtitleLabel.numberOfLines = 0;
     // 默认样式
     self.subtitleLabel.font = [UIFont systemFontOfSize:13];
     self.subtitleLabel.textColor = [UIColor grayColor];
