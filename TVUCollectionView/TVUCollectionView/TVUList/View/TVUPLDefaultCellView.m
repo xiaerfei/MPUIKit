@@ -134,14 +134,17 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
 }
 #pragma mark - Private Methods
 - (void)setupSubviews {
+    self.translatesAutoresizingMaskIntoConstraints = NO;
     // 图标
     self.iconImageView = [[UIImageView alloc] init];
     self.iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.iconImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.iconImageView];
     
     // 标题
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.numberOfLines = 1;
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     // 默认样式
     self.titleLabel.font = [UIFont systemFontOfSize:15];
     self.titleLabel.textColor = [UIColor whiteColor];
@@ -151,6 +154,7 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     // 副标题
     self.subtitleLabel = [[UILabel alloc] init];
     self.subtitleLabel.numberOfLines = 0;
+    self.subtitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     // 默认样式
     self.subtitleLabel.font = [UIFont systemFontOfSize:13];
     self.subtitleLabel.textColor = [UIColor grayColor];
@@ -158,6 +162,11 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
 }
 
 - (void)setupConstraints {
+    
+    // 设置 hugging priority
+    [self setContentHuggingPriority:UILayoutPriorityDefaultLow
+                            forAxis:UILayoutConstraintAxisHorizontal];
+    
     // 图标约束（默认大小20x20）
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).offset(kIconLeftMargin);
@@ -224,13 +233,14 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
         // 情况4: 无图标 + 有副标题 → 标题在上，副标题在下（左对齐）
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(kIconLeftMargin);
-            make.right.lessThanOrEqualTo(self).offset(-kTitleRightMargin);
+            make.right.equalTo(self).offset(-kTitleRightMargin);
             make.top.greaterThanOrEqualTo(self).offset(kContentVerticalMargin);
             make.bottom.equalTo(self.mas_centerY);
         }];
         
         [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.titleLabel);
+            make.left.equalTo(self.titleLabel);
+            make.right.equalTo(self).offset(-kTitleRightMargin);
             make.top.equalTo(self.titleLabel.mas_bottom);
             make.bottom.lessThanOrEqualTo(self).offset(-kContentVerticalMargin);
         }];

@@ -1,5 +1,7 @@
 #import "TVUPLListFlowLayout.h"
+#import "UIView+AutoLayoutHelper.h"
 #import "TVUPLSection.h"
+#import "TVUPLBaseRow.h"
 #import "TVUPLRow.h"
 
 extern NSString *const kTVUPLSectionBackReuse;
@@ -19,6 +21,7 @@ extern NSString *const kTVUPLSectionBackReuse;
     if (self) {
         _layoutAttributesCache = [NSMutableDictionary dictionary];
         _sectionStartYCache = [NSMutableDictionary dictionary];
+        self.estimatedItemSize = CGSizeZero;
     }
     return self;
 }
@@ -73,6 +76,23 @@ extern NSString *const kTVUPLSectionBackReuse;
                                         section:(TVUPLSection *)section {
     TVUPLRow *row = [self rowAtIndexPath:indexPath];
     UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    
+    if (row.rHeight == 0) {
+        
+        TVUPLBaseRow *cell = [(TVUPLBaseRow *)[NSClassFromString(row.rIdentifier) alloc] initWithFrame:CGRectMake(0, 0, width, 0)];
+        [cell updateWithData:row.rRowData];
+        // 2. 强制更新约束 (如果需要)
+        [cell.contentView setNeedsLayout];
+        [cell.contentView layoutIfNeeded];
+        [cell.contentView applyPreferredMaxLayoutWidthToAllLabels];
+        // 计算自适应大小
+        // 3. 调用 API 计算高度
+        CGSize size = [cell.contentView systemLayoutSizeFittingSize:CGSizeMake(width, 0)
+                                      withHorizontalFittingPriority:UILayoutPriorityRequired
+                                            verticalFittingPriority:UILayoutPriorityFittingSizeLevel]; // 高度尽可能紧凑 (Hug content)
+        NSLog(@"size=%@", NSStringFromCGSize(size));
+        row.height(size.height);
+    }
     
     CGFloat rwidth = width - section.rinsets.left - section.rinsets.right;
     CGFloat rheight = row.rHeight;

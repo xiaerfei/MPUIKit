@@ -66,7 +66,10 @@
 
 #pragma mark - Private Methods
 - (void)configureBaseRowUI {
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
     UIView *line = [UIView new];
+    line.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:line];
     
     [line mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -79,6 +82,7 @@
     self.lineView = line;
     
     self.plContentView = [[UIView alloc] init];
+    self.plContentView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:self.plContentView];
     
     [self.plContentView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,6 +90,7 @@
     }];
     
     self.indicatorImageView = [[UIImageView alloc] init];
+    self.indicatorImageView.translatesAutoresizingMaskIntoConstraints = NO;
     self.indicatorImageView.image = [UIImage systemImageNamed:@"chevron.forward"];
     self.indicatorImageView.tintColor = [UIColor lightGrayColor];
     [self.plContentView addSubview:self.indicatorImageView];
