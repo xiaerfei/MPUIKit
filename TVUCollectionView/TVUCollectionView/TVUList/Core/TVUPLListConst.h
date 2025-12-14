@@ -8,6 +8,8 @@
 #ifndef TVUPLListConst_h
 #define TVUPLListConst_h
 
+extern NSString *const kTVUPLTextRow;
+
 #pragma mark - DefaultRow
 extern NSString *const kTVUPLDefaultRow;
 /// Data Key

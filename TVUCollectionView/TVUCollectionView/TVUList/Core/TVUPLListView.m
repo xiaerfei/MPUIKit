@@ -147,6 +147,13 @@ UICollectionViewDataSource>
 #pragma mark - Private Methods
 - (void)configureUI {
     self.flowLayout = [[TVUPLListFlowLayout alloc] init];
+    self.flowLayout.estimatedItemSize = CGSizeMake(1.0, 1.0);
+    // 确保没有行间距和 item 间距 (如果需要)
+    self.flowLayout.minimumLineSpacing = 0;
+    self.flowLayout.minimumInteritemSpacing = 0;
+    // 或者使用 Apple 推荐的常量，如果你的部署目标支持：
+    self.flowLayout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize;
+    
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -179,6 +186,7 @@ UICollectionViewDataSource>
     TVUPLSection *section = self.ssections[indexPath.section];
     section.section = indexPath.section;
     TVUPLRow *row = section.rrows[indexPath.row];
+    row.rsection = section;
     TVUPLBaseRow *cell =
     [collectionView dequeueReusableCellWithReuseIdentifier:row.rIdentifier
                                               forIndexPath:indexPath];
@@ -190,6 +198,18 @@ UICollectionViewDataSource>
     [self configureWithCell:cell indexPath:indexPath];
     [cell updateWithData:row.rRowData];
     return cell;
+}
+// 关键方法：设置 Cell 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat screenWidth = CGRectGetWidth(self.collectionView.bounds);
+    TVUPLRow *row = self.ssections[indexPath.section].rrows[indexPath.row];
+    if (row.rHeight == 0) {
+        return CGSizeMake(screenWidth, 100);
+    } else {
+        return CGSizeMake(screenWidth, row.rHeight);
+    }
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

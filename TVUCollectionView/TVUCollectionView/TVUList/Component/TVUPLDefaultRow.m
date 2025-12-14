@@ -35,10 +35,10 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
 
 - (void)setupSubviews {
     self.defaultView = [[TVUPLDefaultCellView alloc] initWithFrame:CGRectZero];
-    [self.plContentView addSubview:self.defaultView];
+    [self.contentView addSubview:self.defaultView];
     
     [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.plContentView);
+        make.top.left.bottom.right.equalTo(self.contentView);
     }];
 }
 

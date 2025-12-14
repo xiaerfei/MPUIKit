@@ -59,6 +59,11 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     }
     return self;
 }
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+}
+
 #pragma mark - Public Methods
 - (void)updateWithData:(NSDictionary *)data {
     // 1. 更新图标
@@ -141,19 +146,18 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     
     // 标题
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.numberOfLines = 1;
     // 默认样式
     self.titleLabel.font = [UIFont systemFontOfSize:15];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.numberOfLines = 0;
     [self addSubview:self.titleLabel];
-    
     // 副标题
     self.subtitleLabel = [[UILabel alloc] init];
     self.subtitleLabel.numberOfLines = 0;
     // 默认样式
     self.subtitleLabel.font = [UIFont systemFontOfSize:13];
     self.subtitleLabel.textColor = [UIColor grayColor];
+    self.subtitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [self addSubview:self.subtitleLabel];
 }
 
@@ -174,8 +178,9 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     
     // 副标题约束（初始隐藏状态）
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.titleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(kTitleSubtitleSpacing);
+        make.left.bottom.equalTo(self.titleLabel);
+        make.right.lessThanOrEqualTo(self).offset(-kTitleRightMargin);
     }];
     self.subtitleLabel.hidden = YES;
 }
@@ -192,10 +197,9 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
         // 情况1: 无图标 + 无副标题 → 只显示标题（居中）
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(kIconLeftMargin);
-            make.centerY.equalTo(self);
-            make.right.lessThanOrEqualTo(self).offset(-kTitleRightMargin);
-            make.top.greaterThanOrEqualTo(self).offset(kContentVerticalMargin);
-            make.bottom.lessThanOrEqualTo(self).offset(-kContentVerticalMargin);
+            make.right.equalTo(self).offset(-kTitleRightMargin);
+            make.top.equalTo(self).offset(kContentVerticalMargin);
+            make.bottom.equalTo(self).offset(-kContentVerticalMargin);
         }];
     } else if (hasIcon && !hasSubtitle) {
         // 情况2: 有图标 + 无副标题 → 图标和标题上下居中
@@ -216,23 +220,25 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
         }];
         
         [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.titleLabel);
+            make.left.equalTo(self.titleLabel);
             make.top.equalTo(self.titleLabel.mas_bottom);
+            make.right.lessThanOrEqualTo(self).offset(-kTitleRightMargin);
             make.bottom.lessThanOrEqualTo(self).offset(-kContentVerticalMargin);
         }];
     } else {
         // 情况4: 无图标 + 有副标题 → 标题在上，副标题在下（左对齐）
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(kIconLeftMargin);
-            make.right.lessThanOrEqualTo(self).offset(-kTitleRightMargin);
-            make.top.greaterThanOrEqualTo(self).offset(kContentVerticalMargin);
+            make.right.equalTo(self).offset(-kTitleRightMargin);
+            make.top.equalTo(self).offset(kContentVerticalMargin);
             make.bottom.equalTo(self.mas_centerY);
         }];
         
         [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self.titleLabel);
+            make.left.equalTo(self.titleLabel);
             make.top.equalTo(self.titleLabel.mas_bottom);
-            make.bottom.lessThanOrEqualTo(self).offset(-kContentVerticalMargin);
+            make.right.equalTo(self).offset(-kTitleRightMargin);
+            make.bottom.equalTo(self).offset(-kContentVerticalMargin);
         }];
     }
     // 强制更新布局

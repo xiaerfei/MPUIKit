@@ -1,0 +1,16 @@
+PODS:
+  - JJCollectionViewRoundFlowLayout (2.9.2)
+
+DEPENDENCIES:
+  - JJCollectionViewRoundFlowLayout
+
+SPEC REPOS:
+  trunk:
+    - JJCollectionViewRoundFlowLayout
+
+SPEC CHECKSUMS:
+  JJCollectionViewRoundFlowLayout: c39b6467a4a588b134138398f71b9aa1521c1b07
+
+PODFILE CHECKSUM: ccdbe8cd97e89a1c7c69c2b548f6f7018d74fe22
+
+COCOAPODS: 1.16.2
