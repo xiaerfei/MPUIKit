@@ -42,7 +42,10 @@ UICollectionViewDataSource>
 #pragma mark - Public Methods
 - (void)reload {
     [self fetchSections];
-    [self.collectionView reloadData];
+    [self.collectionView reloadData];    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.collectionView.collectionViewLayout invalidateLayout];
+    });
 }
 
 - (void)reloadSectionForKeys:(NSArray *)keys {

@@ -43,8 +43,13 @@
         .prefetch(^(TVUPLListView *list) { list
             .sections(@[
                 [self loginSection],
+                [self loginSection],
+                [self videoSection],
+                [self backupClipsSection],
                 [self videoSection],
                 [self audioSection],
+                [self audioSection],
+                [self multistreamSection],
                 [self multistreamSection],
                 [self backupClipsSection]
             ]);

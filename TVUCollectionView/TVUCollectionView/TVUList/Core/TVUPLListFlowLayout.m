@@ -76,8 +76,56 @@ extern NSString *const kTVUPLSectionBackReuse;
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
     NSMutableArray *attrs = [[super layoutAttributesForElementsInRect:rect] mutableCopy];
-    for (UICollectionViewLayoutAttributes *attr in self.backgroundLayoutAttributes) {
-        [attrs addObject:attr];
+    
+    NSMutableDictionary *mins = @{}.mutableCopy;
+    NSMutableDictionary *maxs = @{}.mutableCopy;
+    NSInteger numberOfSections = [self.collectionView numberOfSections];
+    for (NSInteger section = 0; section < numberOfSections; section++) {
+        NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:section];
+        if (numberOfItems == 0) continue;
+        
+        TVUPLSection *plSection = [self plsection:section];
+        
+        NSArray <TVUPLRow *> *rows = plSection.rrows;
+        NSInteger fromIndex = -1, toIndex = -1;
+        // 检查 header 是否存在（只能在第一个位置）
+        BOOL hasHeader = (rows[0].rrowType == TVUPLRowTypeHeader);
+        // 检查 footer 是否存在（只能在最后一个位置）
+        BOOL hasFooter = (rows[rows.count - 1].rrowType == TVUPLRowTypeFooter);
+        
+        // 计算 fromIndex（第一个内容行的起始索引）
+        fromIndex = hasHeader ? (rows.count > 1 ? 1 : -1) : 0;
+        
+        // 计算 toIndex（最后一个内容行的结束索引）
+        toIndex = hasFooter ? (rows.count > 1 ? rows.count - 2 : -1) : rows.count - 1;
+        
+        // 如果没有内容行（比如 [header, footer] 或单元素 header/footer），重置为 -1
+        if (fromIndex > toIndex || fromIndex == -1 || toIndex == -1) {
+            continue;
+        }
+        UICollectionViewLayoutAttributes *firstItemAttr  =
+        [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:fromIndex inSection:section]];
+        
+        UICollectionViewLayoutAttributes *secondItemAttr = fromIndex == toIndex ? firstItemAttr :
+        [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:toIndex inSection:section]];
+
+        
+        CGFloat minY = CGRectGetMinY(firstItemAttr.frame);
+        CGFloat maxY = CGRectGetMaxY(secondItemAttr.frame);
+        
+        mins[@(section)] = @(minY);
+        maxs[@(section)] = @(maxY);
+    }
+    
+    for (UICollectionViewLayoutAttributes *attri in self.backgroundLayoutAttributes) {
+        NSInteger section = attri.indexPath.section;
+        CGRect rect = attri.frame;
+        CGFloat minY = [mins[@(section)] floatValue];
+        CGFloat maxY = [maxs[@(section)] floatValue];
+        rect.origin.y = minY;
+        rect.size.height = maxY - minY;
+        attri.frame = rect;
+        [attrs addObject:attri];
     }
     return attrs;
 }
@@ -92,7 +140,4 @@ extern NSString *const kTVUPLSectionBackReuse;
     id <TVUPLListFlowLayoutDelegate> delegate = (id)self.collectionView.delegate;
     return [delegate layout:self rowAtIndexPath:indexPath];
 }
-
-
-
 @end

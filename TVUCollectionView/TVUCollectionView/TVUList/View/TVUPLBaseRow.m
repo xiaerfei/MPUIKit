@@ -125,7 +125,11 @@
     
     // 更新 attributes 的 frame size
     CGRect newFrame = layoutAttributes.frame;
-    newFrame.size.height = size.height;
+    if (self.plrow.rHeight == 0) {
+        newFrame.size.height = size.height;
+    } else {
+        newFrame.size.height = self.plrow.rHeight;
+    }
     layoutAttributes.frame = newFrame;
     return layoutAttributes;
 }
