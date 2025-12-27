@@ -42,12 +42,12 @@
         .sectionColor(UIColor.lightGrayColor)
         .prefetch(^(TVUPLListView *list) { list
             .sections(@[
+                [self audioSection],
                 [self loginSection],
                 [self loginSection],
                 [self videoSection],
                 [self backupClipsSection],
                 [self videoSection],
-                [self audioSection],
                 [self audioSection],
                 [self multistreamSection],
                 [self multistreamSection],
@@ -62,7 +62,7 @@
     return SectionUse
         .key(@"LoginSection")
         .cornerRadius(8)
-        .insets(UIEdgeInsetsMake(0, 20, 0, 20))
+        .insets(UIEdgeInsetsMake(20, 20, 20, 20))
         .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
@@ -121,7 +121,8 @@
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Resolution")
-                            .layoutPriority(TVUPLRowTitleRequired)
+                            .layoutPriority(TVUPLRowCustomScale)
+                            .rightScale(0.6)
                             .rightValue(@"1280x720");
                         });
                     })
@@ -165,10 +166,11 @@
                 RowUse(kTVUPLRightValueRow)
                     .key(@"Screenshare")
                     .showIndicator(YES)
+                    .height(0)
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Screenshare")
-                            .rightValue(@"Mix Mic and Audio from Share screen");
+                            .rightValue(@"Mix Mic and Audio from Share screen 愉快地在大语言模型的帮助下开始课程实验！但记得遵守实验须知中的 AIGC Policy。我们鼓励日常学习中使用大语言模型解释概念、命令行工具、API 等 (请谨慎求证) 并获取方法指导 (如使用什么工具调试、如何调试、有何技巧)，记得那个改变全人类的 Prompt。但同时，为了必要的训练，MiniLab 仅限单个 API 使用的生成，禁止将自然语言需求翻译成代码。");
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {
@@ -244,7 +246,7 @@
                     .prefetch(^(TVUPLRow *row) { row
                         .rowData(^{ RowData
                             .title(@"Disaster Recovery")
-                            .subtitle(@"Switch backup source when detect black frame");
+                            .subtitle(@"Switch backup source when detect black frame jslkdfj dskjfls jjfdkadl djkfdssfsdf");
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {

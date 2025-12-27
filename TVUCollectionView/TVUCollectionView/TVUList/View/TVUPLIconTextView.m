@@ -1,11 +1,10 @@
 //
-//  TVUPLDefaultView.m
-//  TVUCollectionView
+//  TVUPLIconTextView.m
 //
 //  Created by erfeixia on 2025/11/15.
 //
 
-#import "TVUPLDefaultCellView.h"
+#import "TVUPLIconTextView.h"
 #import "Masonry.h"
 
 // 常量实现
@@ -31,16 +30,14 @@ static const CGFloat kTitleRightMargin = 0;    // 标题右边距
 static const CGFloat kTitleSubtitleSpacing = 0; // 标题与副标题间距
 static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
 
-
-
-@interface TVUPLDefaultCellView ()
+@interface TVUPLIconTextView ()
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subtitleLabel;
 @end
 
 
-@implementation TVUPLDefaultCellView
+@implementation TVUPLIconTextView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -253,6 +250,4 @@ static const CGFloat kContentVerticalMargin = 5; // 内容上下边距
     }
     return nil;
 }
-
-
 @end

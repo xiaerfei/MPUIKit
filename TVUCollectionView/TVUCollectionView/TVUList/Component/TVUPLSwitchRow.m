@@ -7,7 +7,7 @@
 
 #import "TVUPLSwitchRow.h"
 #import "TVUPLListConst.h"
-#import "TVUPLDefaultCellView.h"
+#import "TVUPLIconTextView.h"
 #import "Masonry.h"
 
 // Switch相关常量实现
@@ -22,7 +22,8 @@ static const CGFloat kSwitchRightMargin = 16;   // Switch右边距
 
 @interface TVUPLSwitchRow ()
 @property (nonatomic, strong) UISwitch *switchView;      // 右侧开关
-@property (nonatomic, strong) TVUPLDefaultCellView *defaultView;
+@property (nonatomic, strong) TVUPLIconTextView *defaultView;
+@property (nonatomic, strong) UIStackView *hstack;
 @end
 
 
@@ -50,21 +51,32 @@ static const CGFloat kSwitchRightMargin = 16;   // Switch右边距
     [self.switchView addTarget:self
                         action:@selector(switchValueChanged:)
               forControlEvents:UIControlEventValueChanged];
-    [self.plContentView addSubview:self.switchView];
     
-    // Switch约束（右侧固定间距，垂直居中）
+    UIView *scontent = [UIView new];
+    scontent.backgroundColor = [UIColor clearColor];
+    [scontent addSubview:self.switchView];
+    
     [self.switchView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.plContentView).offset(-kSwitchRightMargin);
-        make.centerY.equalTo(self.plContentView);
+        make.left.equalTo(scontent).offset(5);
+        make.right.equalTo(scontent).offset(-5);
+        make.centerY.equalTo(scontent);
     }];
     
-    self.defaultView = [[TVUPLDefaultCellView alloc] initWithFrame:CGRectZero];
-    [self.plContentView addSubview:self.defaultView];
+    self.defaultView = [[TVUPLIconTextView alloc] initWithFrame:CGRectZero];
     
-    [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.plContentView);
-        make.right.equalTo(self.switchView.mas_left);
+    UIStackView *hstack = [[UIStackView alloc] initWithArrangedSubviews:@[self.defaultView, scontent]];
+    hstack.axis = UILayoutConstraintAxisHorizontal;
+    hstack.spacing = 10;
+    hstack.alignment = UIStackViewAlignmentFill;
+    hstack.distribution = UIStackViewDistributionFill;
+    
+    [self.plContentView addSubview:hstack];
+    
+    [hstack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.plContentView);
     }];
+    
+    self.hstack = hstack;
 }
 
 - (void)updateWithData:(NSDictionary *)data {

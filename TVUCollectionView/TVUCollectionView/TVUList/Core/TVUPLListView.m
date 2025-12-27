@@ -42,10 +42,7 @@ UICollectionViewDataSource>
 #pragma mark - Public Methods
 - (void)reload {
     [self fetchSections];
-    [self.collectionView reloadData];    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.collectionView.collectionViewLayout invalidateLayout];
-    });
+    [self.collectionView reloadData];
 }
 
 - (void)reloadSectionForKeys:(NSArray *)keys {
@@ -206,13 +203,21 @@ UICollectionViewDataSource>
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat screenWidth = CGRectGetWidth(self.collectionView.bounds);
-    TVUPLRow *row = self.ssections[indexPath.section].rrows[indexPath.row];
+    TVUPLSection *plsection = self.ssections[indexPath.section];
+    CGFloat screenWidth = CGRectGetWidth(self.collectionView.bounds) - plsection.rinsets.left - plsection.rinsets.right;
+    TVUPLRow *row = plsection.rrows[indexPath.row];
     if (row.rHeight == 0) {
         return CGSizeMake(screenWidth, 100);
     } else {
         return CGSizeMake(screenWidth, row.rHeight);
     }
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout*)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section {
+    TVUPLSection *plsection = self.ssections[section];
+    return plsection.rinsets;
 }
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -269,8 +274,8 @@ UICollectionViewDataSource>
     void(^hiddenBlock)(BOOL hidden) = ^(BOOL hidden) {
         baseRow.lineView.hidden = hidden;
         [baseRow.lineView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(baseRow).offset(row.rLineInsets.left);
-            make.right.equalTo(baseRow).offset(-row.rLineInsets.right);
+            make.left.equalTo(baseRow.plContentView).offset(row.rLineInsets.left);
+            make.right.equalTo(baseRow.plContentView).offset(-row.rLineInsets.right);
         }];
     };
     

@@ -6,7 +6,7 @@
 //
 
 #import "TVUPLLoginRow.h"
-#import "TVUPLDefaultCellView.h"
+#import "TVUPLIconTextView.h"
 #import "NSObject+BaseDataType.h"
 #import "Masonry.h"
 
@@ -15,7 +15,7 @@ NSString *const kTVUPLLoginRow        = @"TVUPLLoginRow";
 
 @interface TVUPLLoginRow ()
 @property (nonatomic, strong) UILabel *bigWordLabel;
-@property (nonatomic, strong) TVUPLDefaultCellView *defaultView;
+@property (nonatomic, strong) TVUPLIconTextView *defaultView;
 @end
 
 @implementation TVUPLLoginRow
@@ -55,7 +55,7 @@ NSString *const kTVUPLLoginRow        = @"TVUPLLoginRow";
         make.height.equalTo(@40);
     }];
     
-    self.defaultView = [[TVUPLDefaultCellView alloc] initWithFrame:CGRectZero];
+    self.defaultView = [[TVUPLIconTextView alloc] initWithFrame:CGRectZero];
     [self.plContentView addSubview:self.defaultView];
     
     [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {

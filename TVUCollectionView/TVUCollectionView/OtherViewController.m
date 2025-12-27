@@ -6,18 +6,8 @@
 //
 
 #import "OtherViewController.h"
-#import "JJCollectionViewRoundFlowLayout.h"
-#import "MyCustomCell.h"
-#import "TVUPLListView.h"
-#import "TVUPLCListFlowLayout.h"
-#import "TVUPLListView.h"
-#import "TVUPLDefaultRow.h"
-// 遵循 UICollectionView 必要的协议
-@interface OtherViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, TVUPLListFlowLayoutDelegate>
-
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSArray<NSString *> *dataArray;
-
+#import "Masonry.h"
+@interface OtherViewController ()
 @end
 
 @implementation OtherViewController
@@ -25,122 +15,80 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"动态高度 CollectionView";
-
-    // 示例数据，包含不同长度的字符串
-    self.dataArray = @[
-        @"这是第一条短文本。",
-        @"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。通过设置 flowLayout.estimatedItemSize，并正确配置 Cell 内部的 Auto Layout，我们可以让 CollectionView 自动计算 Cell 的高度。这大大简化了布局工作。",
-        @"第三条文本。",
-        @"第四条中等长度文本，也是一个很好的测试用例。",
-        @"第五条文本，非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常"];
-//    TVUPLCListFlowLayout *layout = [[TVUPLCListFlowLayout alloc] init];
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    // **最关键的设置：启用 Self-Sizing Cells**
-    // 只需要设置一个非零的宽度和高度，系统就知道你需要动态计算尺寸。
-    layout.estimatedItemSize = CGSizeMake(self.view.frame.size.width, 100); // 预估高度
-    // 或者使用 Apple 推荐的常量，如果你的部署目标支持：
-    layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize;
-
-    // 确保没有行间距和 item 间距 (如果需要)
-    layout.minimumLineSpacing = 0;
-    layout.minimumInteritemSpacing = 0;
-//    layout.delegate = self;
-    // 初始化 CollectionView
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
     
-    // 注册 Cell
-    [self.collectionView registerClass:MyCustomCell.class
-            forCellWithReuseIdentifier:NSStringFromClass(MyCustomCell.class)];
+    [self testHorizontal];
+}
 
-    [self.collectionView registerClass:NSClassFromString(kTVUPLDefaultRow)
-            forCellWithReuseIdentifier:kTVUPLDefaultRow];
+- (void)testHorizontal {
+    UILabel *leftLabel = [UILabel new];
+    leftLabel.numberOfLines = 0;
+    leftLabel.text = @"左边展示";
+    leftLabel.backgroundColor = UIColor.redColor;
+
+    [leftLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     
-    // 添加到视图
-    [self.view addSubview:self.collectionView];
+    UILabel *rightLabel = [UILabel new];
+    rightLabel.numberOfLines = 0;
+    rightLabel.text = @"可以通过 UIStackView + UILabel 的 Hugging / Compression Resistance Priority 与 自定义 width / multiplier 约束 来实现三种策略。";
+    rightLabel.backgroundColor = UIColor.greenColor;
 
-    // 约束 collectionView 充满整个 view
-    self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    UILayoutGuide *safeArea = self.view.safeAreaLayoutGuide;
-    [NSLayoutConstraint activateConstraints:@[
-        [self.collectionView.topAnchor constraintEqualToAnchor:safeArea.topAnchor],
-        [self.collectionView.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor],
-        [self.collectionView.trailingAnchor constraintEqualToAnchor:safeArea.trailingAnchor],
-        [self.collectionView.bottomAnchor constraintEqualToAnchor:safeArea.bottomAnchor]
-    ]];
-}
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 4) {
-        TVUPLBaseRow *row = [collectionView dequeueReusableCellWithReuseIdentifier:kTVUPLDefaultRow forIndexPath:indexPath];
-        [row updateWithData:@{kTVUPLRowTitle : self.dataArray[indexPath.item]}];
-        return row;
-    } else {
-        MyCustomCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MyCustomCell.class) forIndexPath:indexPath];
-        [cell configureWithText:self.dataArray[indexPath.item]];
-        return cell;
-    }
-}
-
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-// 关键方法：设置 Cell 的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 1) {
-        CGFloat screenWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-        return CGSizeMake(screenWidth, 40.0); // 宽度是屏幕宽度，高度留给 self-sizing 计算。
-    } else {
-        // 对其他的 cell 使用自动大小
-        return UICollectionViewFlowLayoutAutomaticSize;
-    }
-}
-
-// 确保在屏幕旋转时 CollectionView 能够重新布局
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:@[leftLabel, rightLabel]];
+    stack.axis = UILayoutConstraintAxisHorizontal;
+    stack.spacing = 10;
+    stack.alignment = UIStackViewAlignmentFill;
+    stack.distribution = UIStackViewDistributionFill;
+    [self.view addSubview:stack];
     
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        // 旋转时使 CollectionView 布局失效，触发 sizeForItemAtIndexPath 重新计算
-        [self.collectionView.collectionViewLayout invalidateLayout];
-    } completion:nil];
+    [stack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(100);
+        make.left.right.equalTo(self.view);
+    }];
 }
 
+- (void)testVertical {
+    UILabel *leftLabel = [UILabel new];
+    leftLabel.numberOfLines = 0;
+    leftLabel.text = @"如果你愿意，把你 layoutLabelsWithStrategy 全函数贴出来，我可以帮你整理成 无副作用 / 无 Warning / 生产级 的最终版";
+    leftLabel.backgroundColor = UIColor.redColor;
 
-#pragma mark - JJCollectionViewDelegateRoundFlowLayout
+    UILabel *rightLabel = [UILabel new];
+    rightLabel.numberOfLines = 0;
+    rightLabel.text = @"可以通过 UIStackView + UILabel 的 Hugging / Compression Resistance Priority 与 自定义 width / multiplier 约束 来实现三种策略。";
+    rightLabel.backgroundColor = UIColor.greenColor;
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout borderEdgeInsertsForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(5, 5, 5, 5);
-}
-
-- (JJCollectionViewRoundConfigModel *)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout configModelForSectionAtIndex:(NSInteger)section{
-
-    JJCollectionViewRoundConfigModel *model = [[JJCollectionViewRoundConfigModel alloc]init];
-    model.backgroundColor = UIColorFromHex(0x1F1F1F);
-    model.cornerRadius = 10;
-    return model;
+    UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:@[leftLabel, rightLabel]];
+    stack.axis = UILayoutConstraintAxisVertical;
+    stack.spacing = 8;
+    stack.alignment = UIStackViewAlignmentFill;
+    stack.distribution = UIStackViewDistributionFill;
     
+    UISwitch *ss = [[UISwitch alloc] init];
+    UIView *cssView = [UIView new];
+    [cssView addSubview:ss];
+    
+    [ss sizeToFit];
+    
+    [ss mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.centerY.equalTo(cssView);
+        make.width.equalTo(@(CGRectGetWidth(ss.bounds)));
+    }];
+    
+    UIStackView *hstack = [[UIStackView alloc] init];
+    hstack.axis = UILayoutConstraintAxisHorizontal;
+    hstack.spacing = 10;
+    hstack.alignment = UIStackViewAlignmentFill;
+    hstack.distribution = UIStackViewDistributionFill;
+    [self.view addSubview:hstack];
+    
+    [hstack addArrangedSubview:stack];
+    [hstack addArrangedSubview:cssView];
+    
+
+    [hstack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(100);
+        make.left.right.equalTo(self.view);
+    }];
 }
 
-// 3. 实现代理
-#pragma mark - TVUPLListFlowLayoutDelegate
-- (TVUPLConfigModel *)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)layout configModelForSection:(NSInteger)section {
-    TVUPLConfigModel *model = [[TVUPLConfigModel alloc] init];
-    model.backgroundColor = [UIColor lightGrayColor];
-    model.cornerRadius = 8;
-    model.borderWidth = 1;
-    model.borderColor = [UIColor darkGrayColor];
-    return model;
-}
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)layout borderEdgeInsetsForSection:(NSInteger)section {
-    return UIEdgeInsetsMake(5, 5, 5, 5); // 背景与内容的间距
-}
 @end

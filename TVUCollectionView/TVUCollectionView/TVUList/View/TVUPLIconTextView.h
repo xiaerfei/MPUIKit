@@ -1,6 +1,5 @@
 //
-//  TVUPLDefaultView.h
-//  TVUCollectionView
+//  TVUPLIconTextView.h
 //
 //  Created by erfeixia on 2025/11/15.
 //
@@ -9,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TVUPLDefaultCellView : UIView
+@interface TVUPLIconTextView : UIView
 - (void)updateWithData:(NSDictionary *)data;
 @end
 

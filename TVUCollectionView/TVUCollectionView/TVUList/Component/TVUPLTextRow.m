@@ -8,11 +8,17 @@
 #import "TVUPLTextRow.h"
 #import "Masonry.h"
 #import "TVUPLListConst.h"
-#import "TVUPLDefaultCellView.h"
+#import "TVUPLIconTextView.h"
 NSString *const kTVUPLTextRow = @"TVUPLTextRow";
 
 @interface TVUPLTextRow ()
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) TVUPLIconTextView *defaultView;
+
+
+@property (nonatomic, strong) UILabel *leftLabel;
+@property (nonatomic, strong) UILabel *rightLabel;
+@property (nonatomic, strong) UISwitch *toggleSwitch;
 @end
 
 @implementation TVUPLTextRow
@@ -33,27 +39,32 @@ NSString *const kTVUPLTextRow = @"TVUPLTextRow";
 }
 
 - (void)setupSubviews {
-    // 标题
-    self.textLabel = [[UILabel alloc] init];
-    // 默认样式
-    self.textLabel.font = [UIFont systemFontOfSize:15];
-    self.textLabel.textColor = [UIColor whiteColor];
-    self.textLabel.numberOfLines = 0;
-    [self.plContentView addSubview:self.textLabel];
-    self.textLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.bounds);
-    [self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.plContentView).offset(5);
-        make.right.bottom.equalTo(self.plContentView).offset(-5);
+    UILabel *leftLabel = [UILabel new];
+    leftLabel.numberOfLines = 0;
+    leftLabel.text = @"左边展示";
+    leftLabel.backgroundColor = UIColor.redColor;
+
+    [leftLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+    
+    UILabel *rightLabel = [UILabel new];
+    rightLabel.numberOfLines = 0;
+    rightLabel.text = @"可以通过 UIStackView + UILabel 的 Hugging / Compression Resistance Priority 与 自定义 width / multiplier 约束 来实现三种策略。";
+    rightLabel.backgroundColor = UIColor.greenColor;
+
+    UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:@[leftLabel, rightLabel]];
+    stack.axis = UILayoutConstraintAxisHorizontal;
+    stack.spacing = 10;
+    stack.alignment = UIStackViewAlignmentFill;
+    stack.distribution = UIStackViewDistributionFill;
+    [self.plContentView addSubview:stack];
+    
+    [stack mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.plContentView);
     }];
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.textLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.bounds) - 10;
-}
-
-
 - (void)updateWithData:(NSDictionary *)data {
-    self.textLabel.text = data[kTVUPLRowTitle];
+//    [self.defaultView updateWithData:data];
 }
+
 @end
