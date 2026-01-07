@@ -1,15 +1,15 @@
-#import "TVUPLListFlowLayout.h"
+#import "TVUPLListLayout.h"
 #import "TVUPLSection.h"
 #import "TVUPLBaseRow.h"
 #import "TVUPLRow.h"
 
 extern NSString *const kTVUPLSectionBackReuse;
 
-@interface TVUPLListFlowLayout ()
+@interface TVUPLListLayout ()
 @property (nonatomic, strong) NSMutableArray <UICollectionViewLayoutAttributes *>*backgroundLayoutAttributes;
 @end
 
-@implementation TVUPLListFlowLayout
+@implementation TVUPLListLayout
 
 - (instancetype)init {
     self = [super init];
@@ -23,7 +23,7 @@ extern NSString *const kTVUPLSectionBackReuse;
 
 - (void)prepareLayout {
     [super prepareLayout];
-    
+    NSLog(@"重置 frameValid");
     [self.backgroundLayoutAttributes removeAllObjects];
     
     NSInteger numberOfSections = [self.collectionView numberOfSections];
@@ -34,8 +34,12 @@ extern NSString *const kTVUPLSectionBackReuse;
         if (numberOfItems == 0) continue;
         
         TVUPLSection *plSection = [self plsection:section];
-        
         NSArray <TVUPLRow *> *rows = plSection.rrows;
+        
+        for (TVUPLRow *row in rows) {
+            row.frameValid = NO;
+        }
+        
         NSInteger fromIndex = -1, toIndex = -1;
         // 检查 header 是否存在（只能在第一个位置）
         BOOL hasHeader = (rows[0].rrowType == TVUPLRowTypeHeader);

@@ -7,7 +7,7 @@
 
 #import "TVUPLListView.h"
 #import "TVUPLSectionBackView.h"
-#import "TVUPLListFlowLayout.h"
+#import "TVUPLListLayout.h"
 #import "NSArray+Function.h"
 #import "TVUPLBaseRow.h"
 #import "Masonry.h"
@@ -16,7 +16,7 @@
 UICollectionViewDataSource>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) TVUPLListFlowLayout *flowLayout;
+@property (nonatomic, strong) TVUPLListLayout *flowLayout;
 @property (nonatomic, strong) NSArray <TVUPLSection *> *ssections;
 @property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLSection *> *sectionDict;
 @property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLRow *> *rowDict;
@@ -146,7 +146,7 @@ UICollectionViewDataSource>
 
 #pragma mark - Private Methods
 - (void)configureUI {
-    self.flowLayout = [[TVUPLListFlowLayout alloc] init];
+    self.flowLayout = [[TVUPLListLayout alloc] init];
     self.flowLayout.estimatedItemSize = CGSizeMake(1.0, 1.0);
     // 确保没有行间距和 item 间距 (如果需要)
     self.flowLayout.minimumLineSpacing = 0;
@@ -243,11 +243,11 @@ UICollectionViewDataSource>
     return nil;
 }
 #pragma mark - TVUPLListFlowLayoutDelegate
-- (TVUPLSection *)layout:(TVUPLListFlowLayout *)layout section:(NSInteger)section {
+- (TVUPLSection *)layout:(TVUPLListLayout *)layout section:(NSInteger)section {
     return self.ssections[section];
 }
 
-- (TVUPLRow *)layout:(TVUPLListFlowLayout *)layout rowAtIndexPath:(NSIndexPath *)indexPath {
+- (TVUPLRow *)layout:(TVUPLListLayout *)layout rowAtIndexPath:(NSIndexPath *)indexPath {
     return self.ssections[indexPath.section].rrows[indexPath.row];
 }
 

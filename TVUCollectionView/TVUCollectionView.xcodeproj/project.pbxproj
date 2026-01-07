@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C40EE922F0E0FC7002E4297 /* TVUTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C40EE912F0E0FC7002E4297 /* TVUTuple.m */; };
 		2CC1EC742EEC1B74003A35ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CC1EC632EEC1B74003A35ED /* Assets.xcassets */; };
 		2CC1EC762EEC1B74003A35ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC1EC662EEC1B74003A35ED /* LaunchScreen.storyboard */; };
 		2CC1EC772EEC1B74003A35ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC1EC6B2EEC1B74003A35ED /* Main.storyboard */; };
@@ -25,12 +26,11 @@
 		2CC1EC842EEC1B74003A35ED /* TVUPLLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC3C2EEC1B74003A35ED /* TVUPLLoginRow.m */; };
 		2CC1EC852EEC1B74003A35ED /* TVUPLRightValueRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC3E2EEC1B74003A35ED /* TVUPLRightValueRow.m */; };
 		2CC1EC862EEC1B74003A35ED /* TVUPLSwitchRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC402EEC1B74003A35ED /* TVUPLSwitchRow.m */; };
-		2CC1EC882EEC1B74003A35ED /* TVUPLListFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC472EEC1B74003A35ED /* TVUPLListFlowLayout.m */; };
+		2CC1EC882EEC1B74003A35ED /* TVUPLListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC472EEC1B74003A35ED /* TVUPLListLayout.m */; };
 		2CC1EC892EEC1B74003A35ED /* TVUPLListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC492EEC1B74003A35ED /* TVUPLListView.m */; };
 		2CC1EC8A2EEC1B74003A35ED /* TVUPLRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC4B2EEC1B74003A35ED /* TVUPLRow.m */; };
 		2CC1EC8B2EEC1B74003A35ED /* TVUPLRowData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC4D2EEC1B74003A35ED /* TVUPLRowData.m */; };
 		2CC1EC8C2EEC1B74003A35ED /* TVUPLSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC4F2EEC1B74003A35ED /* TVUPLSection.m */; };
-		2CC1EC8D2EEC1B74003A35ED /* UIView+AutoLayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC522EEC1B74003A35ED /* UIView+AutoLayoutHelper.m */; };
 		2CC1EC8E2EEC1B74003A35ED /* TVUPLBaseRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC552EEC1B74003A35ED /* TVUPLBaseRow.m */; };
 		2CC1EC8F2EEC1B74003A35ED /* TVUPLIconTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC572EEC1B74003A35ED /* TVUPLIconTextView.m */; };
 		2CC1EC902EEC1B74003A35ED /* TVUPLSectionBackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC592EEC1B74003A35ED /* TVUPLSectionBackView.m */; };
@@ -44,13 +44,14 @@
 		2CC1EC982EEC1B74003A35ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1EC712EEC1B74003A35ED /* ViewController.m */; };
 		41A716A5093D8D202E86A870 /* Pods_TVUCollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215617AF573E9D3B35B9A79F /* Pods_TVUCollectionView.framework */; };
 		9CB66F142EED7DED000289FC /* TVUPLTextRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB66F132EED7DED000289FC /* TVUPLTextRow.m */; };
-		9CB66F172EED832A000289FC /* TVUPLCListFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB66F162EED832A000289FC /* TVUPLCListFlowLayout.m */; };
 		9CF507E62EEE676D00C85D5D /* TVUStaticView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF507E52EEE676D00C85D5D /* TVUStaticView.m */; };
 		9CF507E92EEE6A1900C85D5D /* TVUStaticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF507E82EEE6A1900C85D5D /* TVUStaticViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		215617AF573E9D3B35B9A79F /* Pods_TVUCollectionView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVUCollectionView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C40EE902F0E0FC7002E4297 /* TVUTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUTuple.h; sourceTree = "<group>"; };
+		2C40EE912F0E0FC7002E4297 /* TVUTuple.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUTuple.m; sourceTree = "<group>"; };
 		2CC1EC1C2EEC1B74003A35ED /* MASCompositeConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		2CC1EC1D2EEC1B74003A35ED /* MASCompositeConstraint.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		2CC1EC1E2EEC1B74003A35ED /* MASConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
@@ -87,8 +88,8 @@
 		2CC1EC3F2EEC1B74003A35ED /* TVUPLSwitchRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLSwitchRow.h; sourceTree = "<group>"; };
 		2CC1EC402EEC1B74003A35ED /* TVUPLSwitchRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLSwitchRow.m; sourceTree = "<group>"; };
 		2CC1EC452EEC1B74003A35ED /* TVUPLListConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLListConst.h; sourceTree = "<group>"; };
-		2CC1EC462EEC1B74003A35ED /* TVUPLListFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLListFlowLayout.h; sourceTree = "<group>"; };
-		2CC1EC472EEC1B74003A35ED /* TVUPLListFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLListFlowLayout.m; sourceTree = "<group>"; };
+		2CC1EC462EEC1B74003A35ED /* TVUPLListLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLListLayout.h; sourceTree = "<group>"; };
+		2CC1EC472EEC1B74003A35ED /* TVUPLListLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLListLayout.m; sourceTree = "<group>"; };
 		2CC1EC482EEC1B74003A35ED /* TVUPLListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLListView.h; sourceTree = "<group>"; };
 		2CC1EC492EEC1B74003A35ED /* TVUPLListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLListView.m; sourceTree = "<group>"; };
 		2CC1EC4A2EEC1B74003A35ED /* TVUPLRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLRow.h; sourceTree = "<group>"; };
@@ -97,8 +98,6 @@
 		2CC1EC4D2EEC1B74003A35ED /* TVUPLRowData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLRowData.m; sourceTree = "<group>"; };
 		2CC1EC4E2EEC1B74003A35ED /* TVUPLSection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLSection.h; sourceTree = "<group>"; };
 		2CC1EC4F2EEC1B74003A35ED /* TVUPLSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLSection.m; sourceTree = "<group>"; };
-		2CC1EC512EEC1B74003A35ED /* UIView+AutoLayoutHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayoutHelper.h"; sourceTree = "<group>"; };
-		2CC1EC522EEC1B74003A35ED /* UIView+AutoLayoutHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayoutHelper.m"; sourceTree = "<group>"; };
 		2CC1EC542EEC1B74003A35ED /* TVUPLBaseRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLBaseRow.h; sourceTree = "<group>"; };
 		2CC1EC552EEC1B74003A35ED /* TVUPLBaseRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLBaseRow.m; sourceTree = "<group>"; };
 		2CC1EC562EEC1B74003A35ED /* TVUPLIconTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLIconTextView.h; sourceTree = "<group>"; };
@@ -128,8 +127,6 @@
 		9C86FF442E75230400082982 /* TVUCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVUCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CB66F122EED7DED000289FC /* TVUPLTextRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLTextRow.h; sourceTree = "<group>"; };
 		9CB66F132EED7DED000289FC /* TVUPLTextRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLTextRow.m; sourceTree = "<group>"; };
-		9CB66F152EED832A000289FC /* TVUPLCListFlowLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLCListFlowLayout.h; sourceTree = "<group>"; };
-		9CB66F162EED832A000289FC /* TVUPLCListFlowLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLCListFlowLayout.m; sourceTree = "<group>"; };
 		9CF507E42EEE676D00C85D5D /* TVUStaticView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUStaticView.h; sourceTree = "<group>"; };
 		9CF507E52EEE676D00C85D5D /* TVUStaticView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUStaticView.m; sourceTree = "<group>"; };
 		9CF507E72EEE6A1900C85D5D /* TVUStaticViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUStaticViewController.h; sourceTree = "<group>"; };
@@ -211,8 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				2CC1EC452EEC1B74003A35ED /* TVUPLListConst.h */,
-				2CC1EC462EEC1B74003A35ED /* TVUPLListFlowLayout.h */,
-				2CC1EC472EEC1B74003A35ED /* TVUPLListFlowLayout.m */,
+				2CC1EC462EEC1B74003A35ED /* TVUPLListLayout.h */,
+				2CC1EC472EEC1B74003A35ED /* TVUPLListLayout.m */,
 				2CC1EC482EEC1B74003A35ED /* TVUPLListView.h */,
 				2CC1EC492EEC1B74003A35ED /* TVUPLListView.m */,
 				2CC1EC4A2EEC1B74003A35ED /* TVUPLRow.h */,
@@ -221,8 +218,6 @@
 				2CC1EC4D2EEC1B74003A35ED /* TVUPLRowData.m */,
 				2CC1EC4E2EEC1B74003A35ED /* TVUPLSection.h */,
 				2CC1EC4F2EEC1B74003A35ED /* TVUPLSection.m */,
-				9CB66F152EED832A000289FC /* TVUPLCListFlowLayout.h */,
-				9CB66F162EED832A000289FC /* TVUPLCListFlowLayout.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -230,8 +225,8 @@
 		2CC1EC532EEC1B74003A35ED /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				2CC1EC512EEC1B74003A35ED /* UIView+AutoLayoutHelper.h */,
-				2CC1EC522EEC1B74003A35ED /* UIView+AutoLayoutHelper.m */,
+				2C40EE902F0E0FC7002E4297 /* TVUTuple.h */,
+				2C40EE912F0E0FC7002E4297 /* TVUTuple.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -469,10 +464,10 @@
 				9CB66F142EED7DED000289FC /* TVUPLTextRow.m in Sources */,
 				2CC1EC7B2EEC1B74003A35ED /* MASLayoutConstraint.m in Sources */,
 				2CC1EC7C2EEC1B74003A35ED /* MASViewAttribute.m in Sources */,
+				2C40EE922F0E0FC7002E4297 /* TVUTuple.m in Sources */,
 				2CC1EC7D2EEC1B74003A35ED /* MASViewConstraint.m in Sources */,
 				2CC1EC7E2EEC1B74003A35ED /* NSArray+MASAdditions.m in Sources */,
 				2CC1EC7F2EEC1B74003A35ED /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
-				9CB66F172EED832A000289FC /* TVUPLCListFlowLayout.m in Sources */,
 				2CC1EC802EEC1B74003A35ED /* View+MASAdditions.m in Sources */,
 				2CC1EC812EEC1B74003A35ED /* ViewController+MASAdditions.m in Sources */,
 				2CC1EC822EEC1B74003A35ED /* MyCustomCell.m in Sources */,
@@ -480,12 +475,11 @@
 				2CC1EC842EEC1B74003A35ED /* TVUPLLoginRow.m in Sources */,
 				2CC1EC852EEC1B74003A35ED /* TVUPLRightValueRow.m in Sources */,
 				2CC1EC862EEC1B74003A35ED /* TVUPLSwitchRow.m in Sources */,
-				2CC1EC882EEC1B74003A35ED /* TVUPLListFlowLayout.m in Sources */,
+				2CC1EC882EEC1B74003A35ED /* TVUPLListLayout.m in Sources */,
 				2CC1EC892EEC1B74003A35ED /* TVUPLListView.m in Sources */,
 				2CC1EC8A2EEC1B74003A35ED /* TVUPLRow.m in Sources */,
 				2CC1EC8B2EEC1B74003A35ED /* TVUPLRowData.m in Sources */,
 				2CC1EC8C2EEC1B74003A35ED /* TVUPLSection.m in Sources */,
-				2CC1EC8D2EEC1B74003A35ED /* UIView+AutoLayoutHelper.m in Sources */,
 				2CC1EC8E2EEC1B74003A35ED /* TVUPLBaseRow.m in Sources */,
 				2CC1EC8F2EEC1B74003A35ED /* TVUPLIconTextView.m in Sources */,
 				9CF507E62EEE676D00C85D5D /* TVUStaticView.m in Sources */,

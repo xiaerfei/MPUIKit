@@ -52,7 +52,9 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLRow *row);
 
 @property (nonatomic, weak) TVUPLSection *rsection;
-
+/// 高度或者宽度计算失效了，需要重新计算
+@property (nonatomic, assign) BOOL frameValid;
+@property (nonatomic, assign) CGRect frame;
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
 - (TVUPLRow *(^)(NSString *identifier))identifier;

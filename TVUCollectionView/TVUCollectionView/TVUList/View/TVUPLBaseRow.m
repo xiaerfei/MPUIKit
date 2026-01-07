@@ -127,15 +127,20 @@
 - (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes {
     // 获取 contentView 根据 Auto Layout 计算出的最合适大小
     CGRect newFrame = layoutAttributes.frame;
-    
-    CGSize size = [self systemLayoutSizeFittingSize:CGSizeMake(CGRectGetWidth(newFrame), CGFLOAT_MAX)
-        withHorizontalFittingPriority:(UILayoutPriorityRequired)
-              verticalFittingPriority:(UILayoutPriorityFittingSizeLevel)];
-    // 更新 attributes 的 frame size
-    if (self.plrow.rHeight == 0) {
-        newFrame.size.height = size.height;
+    if (self.plrow.frameValid) {
+        newFrame = self.plrow.frame;
     } else {
-        newFrame.size.height = self.plrow.rHeight;
+        CGSize size = [self systemLayoutSizeFittingSize:CGSizeMake(CGRectGetWidth(newFrame), CGFLOAT_MAX)
+                          withHorizontalFittingPriority:(UILayoutPriorityRequired)
+                                verticalFittingPriority:(UILayoutPriorityFittingSizeLevel)];
+        // 更新 attributes 的 frame size
+        if (self.plrow.rHeight == 0) {
+            newFrame.size.height = size.height;
+        } else {
+            newFrame.size.height = self.plrow.rHeight;
+        }
+        self.plrow.frame = newFrame;
+        self.plrow.frameValid = YES;
     }
     layoutAttributes.frame = newFrame;
     return layoutAttributes;
