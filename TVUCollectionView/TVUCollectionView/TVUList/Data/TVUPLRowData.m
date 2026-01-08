@@ -23,6 +23,13 @@
 }
 
 #pragma mark - Public Methods
+- (TVUPLRowData *(^)(void(^)(TVUPLLabelData *data)))titleLabel {
+    return ^(void(^block)(TVUPLLabelData *data)) {
+        TVUPLLabelData *data = [TVUPLLabelData new];
+        if (block) block(data);
+        return self;
+    };
+}
 - (TVUPLRowData *(^)(NSString *title))title {
     return ^(id title) {
         self.rowDataDict[kTVUPLRowTitle] = title;

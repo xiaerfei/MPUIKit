@@ -324,6 +324,7 @@
                         .title(@"增加了用户指定的常量定义，统一了数据字典的键名，避免硬编码.调整默认样式：title 默认白色 15 号字体，subtitle 默认灰色 13 号字体，icon 默认")
                         .icon(@"tvu_cover_tiktok")
                         .titleFont(@19);
+                        
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
