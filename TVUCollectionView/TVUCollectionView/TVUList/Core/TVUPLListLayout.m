@@ -89,7 +89,6 @@ extern NSString *const kTVUPLSectionBackReuse;
         if (numberOfItems == 0) continue;
         
         TVUPLSection *plSection = [self plsection:section];
-        
         NSArray <TVUPLRow *> *rows = plSection.rrows;
         NSInteger fromIndex = -1, toIndex = -1;
         // 检查 header 是否存在（只能在第一个位置）

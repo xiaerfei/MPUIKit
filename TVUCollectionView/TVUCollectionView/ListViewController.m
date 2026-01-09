@@ -257,6 +257,22 @@
                     .rowData(^ { RowData
                         .title(@"Switch backup source when detect black frame Switch backup source when detect black frame Switch backup source when detect black frame Switch backup source when detect black frame");
                     }),
+                RowUse(kTVUPLTextRow)
+                    .height(0)
+                    .rowData(^ { RowData
+                        .labelData(^(TVUPLLabelData *data) { data
+                            .text(@"")
+                            .font([UIFont systemFontOfSize:14])
+                            .textAlignment(NSTextAlignmentCenter);
+                        })
+                        .labelData(^(TVUPLLabelData *data) { data
+                            .text(@"");
+                        })
+                        .imageData(^(TVUPLImageData *data) { data
+                            .icon(@"")
+                            .size(CGSizeMake(30, 30));
+                        });
+                    }),
             ]);
         });
 }
