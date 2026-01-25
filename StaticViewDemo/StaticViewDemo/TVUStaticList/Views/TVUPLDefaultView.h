@@ -1,5 +1,5 @@
 //
-//  TVUPLSystemView.h
+//  TVUPLDefaultView.h
 //  StaticViewDemo
 //
 //  Created by erfeixia on 2025/12/14.
@@ -9,8 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TVUPLSystemView : UIView
-- (void)updateWithData:(NSDictionary *)data;
+@class TVUPLRow;
+
+@interface TVUPLDefaultView : UIView
+
+- (void)updateWithRowData:(TVUPLRow *)rowData;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -6,11 +6,11 @@
 //
 
 #import "TVUPLDefaultRow.h"
-#import "TVUPLSystemView.h"
+#import "TVUPLDefaultView.h"
+#import "TVUPLSection.h"
 #import "Masonry.h"
-
 @interface TVUPLDefaultRow ()
-@property (nonatomic, strong) TVUPLSystemView *defaultView;
+@property (nonatomic, strong) TVUPLDefaultView *defaultView;
 @end
 
 @implementation TVUPLDefaultRow
@@ -31,29 +31,15 @@
 }
 
 - (void)setupSubviews {
-    self.defaultView = [[TVUPLSystemView alloc] initWithFrame:CGRectZero];
+    self.defaultView = [[TVUPLDefaultView alloc] initWithFrame:CGRectZero];
     [self.plContentView addSubview:self.defaultView];
     
     [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self.plContentView);
+        make.edges.equalTo(self.plContentView);
     }];
 }
 
 - (void)updateWithData:(NSDictionary *)data {
-    [self.defaultView updateWithData:data];
-    // 动态更新布局
-//    [self updateLayoutConstraints];
-}
-
-- (void)updateLayoutConstraints {
-    BOOL showIndicator = self.plrow.rshowIndicator;
-    [self.defaultView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.equalTo(self.plContentView);
-        if (showIndicator) {
-            make.right.equalTo(self.indicatorImageView.mas_left);
-        } else {
-            make.right.equalTo(self.plContentView);
-        }
-    }];
+    [self.defaultView updateWithRowData:self.plrow];
 }
 @end

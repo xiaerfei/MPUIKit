@@ -6,6 +6,7 @@
 //
 
 #import "TVUStaticView.h"
+#import "TVUPLStackView.h"
 #import "TVUPLBaseRow.h"
 #import "Masonry.h"
 
@@ -84,8 +85,9 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
     
     for (TVUPLSection *section in self.rsections) {
         if (section.rprefetch) section.rprefetch(section);
-        [self prepareSection:section];
-        [self.mainStackView addArrangedSubview:section.stackView];
+        [self prepareDataForSection:section];
+        [self.mainStackView addArrangedSubview:section.contentView];
+        [self prepareLayoutForSection:section];
     }
 }
 #pragma mark - Private Methods
@@ -95,6 +97,7 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 
 - (void)setupMainStackView {
     self.mainStackView = [[UIStackView alloc] init];
+    self.mainStackView.mas_key = @"Main";
     [self addSubview:self.mainStackView];
     self.mainStackView.axis = UILayoutConstraintAxisVertical;  // 垂直排列
     self.mainStackView.spacing = 10;  // 每个项之间的间隔
@@ -106,8 +109,22 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         make.width.equalTo(self.mas_width);
     }];
 }
-
-- (void)prepareSection:(TVUPLSection *)section {
+#pragma mark - Section Methods
+- (void)prepareDataForSection:(TVUPLSection *)section {
+    if (section.contentView == nil) {
+        UIView *contentView = [[UIView alloc] init];
+        section.contentView = contentView;
+    }
+    
+    if (section.backgroundView == nil) {
+        UIView *backgroundView = [[UIView alloc] init];
+        backgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
+        backgroundView.layer.cornerRadius  = 8;
+        backgroundView.layer.masksToBounds = YES;
+        backgroundView.mas_key = @"backgroundView";
+        section.backgroundView = backgroundView;
+    }
+    
     if (section.stackView == nil) {
         UIStackView *stackView = [[UIStackView alloc] init];
         stackView.axis = UILayoutConstraintAxisVertical;  // 垂直排列
@@ -116,25 +133,55 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         stackView.alignment = UIStackViewAlignmentFill;
         // 填充整个空间
         stackView.distribution = UIStackViewDistributionFill;
+        stackView.mas_key = @"Section";
         section.stackView = stackView;
     }
     
+    if (section.backgroundView.superview == nil) {
+        [section.contentView addSubview:section.backgroundView];
+    }
+    
+    if (section.stackView.superview == nil) {
+        [section.backgroundView addSubview:section.stackView];
+    }
+    
     for (TVUPLRow *row in section.rrows) {
-        if (row.rprefetch) row.rprefetch(row);
-        TVUPLBaseRow *cell =
-        [[NSClassFromString(row.rIdentifier) alloc] init];
-        [section.stackView addArrangedSubview:cell];
-        // 设置每个 item 的高度
-        if (row.rHeight != 0) {
-            [cell mas_makeConstraints:^(MASConstraintMaker *make) {
-                // 设置每个 item 的固定高度
-                make.height.equalTo(@(row.rHeight));
-            }];
-        }
-        row.rsection = section;
-        cell.plrow = row;
-        [cell updateWithData:row.rRowData];
+        [self prepareDataForRow:row section:section];
+        [self prepareLayoutForRow:row section:section];
     }
 }
+
+- (void)prepareLayoutForSection:(TVUPLSection *)section {
+    [section.stackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(section.backgroundView);
+    }];
+    
+    [section.backgroundView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(section.contentView).offset(20);
+        make.right.equalTo(section.contentView).offset(-20);
+        make.top.bottom.equalTo(section.contentView);
+    }];
+}
+#pragma mark - Row Methods
+- (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section {
+    if (row.rprefetch) row.rprefetch(row);
+    if (row.rowView == nil) {
+        row.rowView = [[NSClassFromString(row.rIdentifier) alloc] init];
+        [section.stackView addArrangedSubview:row.rowView];
+    }
+    row.rsection = section;
+    row.rowView.plrow = row;
+    [row.rowView updateWithData:row.rRowData];
+}
+
+- (void)prepareLayoutForRow:(TVUPLRow *)row section:(TVUPLSection *)section {
+    [row.rowView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if (row.rHeight != 0) {
+            // 设置每个 item 的固定高度
+            make.height.equalTo(@(row.rHeight));
+        }
+    }];
+}
+
 
 @end

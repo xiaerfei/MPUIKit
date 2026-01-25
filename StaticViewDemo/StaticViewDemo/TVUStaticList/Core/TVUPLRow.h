@@ -11,6 +11,20 @@
 #define RowUse(identifier) [[TVUPLRow alloc] initWithIdentifier:identifier]
 #define RowData  return [TVUPLRowData new]
 
+extern NSString *const kTVUPLDataTitle   ;
+extern NSString *const kTVUPLDataSubtitle;
+extern NSString *const kTVUPLDataImage   ;
+extern NSString *const kTVUPLDataKey0    ;
+extern NSString *const kTVUPLDataKey1    ;
+extern NSString *const kTVUPLDataKey2    ;
+extern NSString *const kTVUPLDataKey3    ;
+extern NSString *const kTVUPLDataKey4    ;
+extern NSString *const kTVUPLDataKey5    ;
+extern NSString *const kTVUPLDataKey6    ;
+extern NSString *const kTVUPLDataKey7    ;
+extern NSString *const kTVUPLDataKey8    ;
+extern NSString *const kTVUPLDataKey9    ;
+
 
 typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeDefault,
@@ -18,7 +32,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeFooter
 };
 
-@class TVUPLSection;
+@class TVUPLSection, TVUPLBaseRow;
 
 @interface TVUPLRow : NSObject
 @property (nonatomic,   copy, readonly) NSString *rKey;
@@ -52,6 +66,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLRow *row);
 
 @property (nonatomic, weak) TVUPLSection *rsection;
+@property (nonatomic, strong) TVUPLBaseRow *rowView;
 
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
@@ -77,6 +92,8 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(TVUPLRowType rowType))type;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))prefetch;
 
+- (TVUPLRow *(^)(id (^)(void)))viewData;
+- (id)customForKey:(NSString *)key;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier;
 @end

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		42A55ABD39EE94ACC4B96D3B /* Pods_StaticViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */; };
+		9C41F2F32F265BA100AB8684 /* TVUPLStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C41F2F22F265BA100AB8684 /* TVUPLStackView.m */; };
+		9CA7BE6F2F2506E300272432 /* TVUPLViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE6E2F2506E300272432 /* TVUPLViewData.m */; };
+		9CA7BE722F25075400272432 /* TVUPLLabelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE712F25075400272432 /* TVUPLLabelData.m */; };
+		9CA7BE752F25076300272432 /* TVUPLImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE742F25076300272432 /* TVUPLImageData.m */; };
 		9CAF89932EEEA3C800CFEE69 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89862EEEA3C800CFEE69 /* AppDelegate.m */; };
 		9CAF89942EEEA3C800CFEE69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF898B2EEEA3C800CFEE69 /* main.m */; };
 		9CAF89952EEEA3C800CFEE69 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF898F2EEEA3C800CFEE69 /* SceneDelegate.m */; };
@@ -23,13 +27,21 @@
 		9CAF89B92EEEA57100CFEE69 /* NSArray+Function.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89B52EEEA57100CFEE69 /* NSArray+Function.m */; };
 		9CAF89BA2EEEA57100CFEE69 /* NSObject+BaseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89B72EEEA57100CFEE69 /* NSObject+BaseDataType.m */; };
 		9CAF89BE2EEEA72E00CFEE69 /* TVUPLDefaultRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89BD2EEEA72E00CFEE69 /* TVUPLDefaultRow.m */; };
-		9CAF89C12EEEA77100CFEE69 /* TVUPLSystemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89C02EEEA77100CFEE69 /* TVUPLSystemView.m */; };
+		9CAF89C12EEEA77100CFEE69 /* TVUPLDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B745EAE5F6FE25DB461D664 /* Pods-StaticViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StaticViewDemo.debug.xcconfig"; path = "Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		41DE7786ABC22A70F8E05BC2 /* Pods-StaticViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StaticViewDemo.release.xcconfig"; path = "Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StaticViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C41F2F12F265BA100AB8684 /* TVUPLStackView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLStackView.h; sourceTree = "<group>"; };
+		9C41F2F22F265BA100AB8684 /* TVUPLStackView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLStackView.m; sourceTree = "<group>"; };
+		9CA7BE6D2F2506E300272432 /* TVUPLViewData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLViewData.h; sourceTree = "<group>"; };
+		9CA7BE6E2F2506E300272432 /* TVUPLViewData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLViewData.m; sourceTree = "<group>"; };
+		9CA7BE702F25075400272432 /* TVUPLLabelData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLLabelData.h; sourceTree = "<group>"; };
+		9CA7BE712F25075400272432 /* TVUPLLabelData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLLabelData.m; sourceTree = "<group>"; };
+		9CA7BE732F25076300272432 /* TVUPLImageData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLImageData.h; sourceTree = "<group>"; };
+		9CA7BE742F25076300272432 /* TVUPLImageData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLImageData.m; sourceTree = "<group>"; };
 		9CAF89682EEEA3C000CFEE69 /* StaticViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaticViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CAF89852EEEA3C800CFEE69 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9CAF89862EEEA3C800CFEE69 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -59,8 +71,8 @@
 		9CAF89BB2EEEA5B800CFEE69 /* TVUPLListConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLListConst.h; sourceTree = "<group>"; };
 		9CAF89BC2EEEA72E00CFEE69 /* TVUPLDefaultRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLDefaultRow.h; sourceTree = "<group>"; };
 		9CAF89BD2EEEA72E00CFEE69 /* TVUPLDefaultRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultRow.m; sourceTree = "<group>"; };
-		9CAF89BF2EEEA77100CFEE69 /* TVUPLSystemView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLSystemView.h; sourceTree = "<group>"; };
-		9CAF89C02EEEA77100CFEE69 /* TVUPLSystemView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLSystemView.m; sourceTree = "<group>"; };
+		9CAF89BF2EEEA77100CFEE69 /* TVUPLDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLDefaultView.h; sourceTree = "<group>"; };
+		9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +93,19 @@
 				818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CA7BE6C2F2506BE00272432 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9CA7BE6D2F2506E300272432 /* TVUPLViewData.h */,
+				9CA7BE6E2F2506E300272432 /* TVUPLViewData.m */,
+				9CA7BE702F25075400272432 /* TVUPLLabelData.h */,
+				9CA7BE712F25075400272432 /* TVUPLLabelData.m */,
+				9CA7BE732F25076300272432 /* TVUPLImageData.h */,
+				9CA7BE742F25076300272432 /* TVUPLImageData.m */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		9CAF895F2EEEA3C000CFEE69 = {
@@ -124,6 +149,7 @@
 		9CAF899D2EEEA40C00CFEE69 /* TVUStaticList */ = {
 			isa = PBXGroup;
 			children = (
+				9CA7BE6C2F2506BE00272432 /* Data */,
 				9CAF89B02EEEA48E00CFEE69 /* Components */,
 				9CAF89AF2EEEA48E00CFEE69 /* Views */,
 				9CAF89A22EEEA42E00CFEE69 /* Core */,
@@ -136,6 +162,8 @@
 			children = (
 				9CAF89A02EEEA42E00CFEE69 /* TVUStaticView.h */,
 				9CAF89A12EEEA42E00CFEE69 /* TVUStaticView.m */,
+				9C41F2F12F265BA100AB8684 /* TVUPLStackView.h */,
+				9C41F2F22F265BA100AB8684 /* TVUPLStackView.m */,
 				9CAF89A42EEEA44F00CFEE69 /* TVUPLRow.h */,
 				9CAF89A52EEEA44F00CFEE69 /* TVUPLRow.m */,
 				9CAF89A62EEEA44F00CFEE69 /* TVUPLRowData.h */,
@@ -152,8 +180,8 @@
 			children = (
 				9CAF89B12EEEA4A700CFEE69 /* TVUPLBaseRow.h */,
 				9CAF89B22EEEA4A700CFEE69 /* TVUPLBaseRow.m */,
-				9CAF89BF2EEEA77100CFEE69 /* TVUPLSystemView.h */,
-				9CAF89C02EEEA77100CFEE69 /* TVUPLSystemView.m */,
+				9CAF89BF2EEEA77100CFEE69 /* TVUPLDefaultView.h */,
+				9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -286,9 +314,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -303,13 +335,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CAF89A32EEEA42E00CFEE69 /* TVUStaticView.m in Sources */,
-				9CAF89C12EEEA77100CFEE69 /* TVUPLSystemView.m in Sources */,
+				9CAF89C12EEEA77100CFEE69 /* TVUPLDefaultView.m in Sources */,
 				9CAF89932EEEA3C800CFEE69 /* AppDelegate.m in Sources */,
+				9CA7BE752F25076300272432 /* TVUPLImageData.m in Sources */,
 				9CAF89B32EEEA4A700CFEE69 /* TVUPLBaseRow.m in Sources */,
 				9CAF89942EEEA3C800CFEE69 /* main.m in Sources */,
 				9CAF89BE2EEEA72E00CFEE69 /* TVUPLDefaultRow.m in Sources */,
+				9CA7BE6F2F2506E300272432 /* TVUPLViewData.m in Sources */,
+				9C41F2F32F265BA100AB8684 /* TVUPLStackView.m in Sources */,
 				9CAF89AA2EEEA44F00CFEE69 /* TVUPLRowData.m in Sources */,
 				9CAF89AB2EEEA44F00CFEE69 /* TVUPLSection.m in Sources */,
+				9CA7BE722F25075400272432 /* TVUPLLabelData.m in Sources */,
 				9CAF89B92EEEA57100CFEE69 /* NSArray+Function.m in Sources */,
 				9CAF89BA2EEEA57100CFEE69 /* NSObject+BaseDataType.m in Sources */,
 				9CAF89AC2EEEA44F00CFEE69 /* TVUPLRow.m in Sources */,
@@ -365,6 +401,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -395,6 +433,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.TVUAnywhereLite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

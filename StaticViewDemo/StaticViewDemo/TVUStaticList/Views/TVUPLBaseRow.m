@@ -11,8 +11,10 @@
 
 @interface TVUPLBaseRow ()
 @property (nonatomic, strong, readwrite) UIView *plContentView;
+@property (nonatomic, strong, readwrite) UIView *plBackgroundView;
 @property (nonatomic, strong, readwrite) UIImageView *indicatorImageView;
 @property (nonatomic, strong) UIView *heightView;
+@property (nonatomic, strong) UIStackView *hStackView;
 @end
 
 @implementation TVUPLBaseRow
@@ -31,19 +33,19 @@
 // 触摸开始（按下）
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    self.plContentView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
+    self.plBackgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
 }
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.plContentView.backgroundColor = [UIColor clearColor];
+        self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
 }
 // 触摸结束（松开）
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.plContentView.backgroundColor = [UIColor clearColor];
+        self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
 }
 
@@ -74,22 +76,50 @@
 
     self.lineView = line;
     
-    self.plContentView = [[UIView alloc] init];
-    [self addSubview:self.plContentView];
+    self.plBackgroundView = [[UIView alloc] init];
+    [self addSubview:self.plBackgroundView];
     
-    [self.plContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.plBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self);
     }];
     
-//    self.indicatorImageView = [[UIImageView alloc] init];
-//    self.indicatorImageView.image = [UIImage systemImageNamed:@"chevron.forward"];
-//    self.indicatorImageView.tintColor = [UIColor lightGrayColor];
-//    [self.plContentView addSubview:self.indicatorImageView];
-//    
-//    [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.equalTo(self.plContentView);
-//        make.right.equalTo(self.plContentView).offset(-20);
-//    }];
+    UIStackView *stackView = [[UIStackView alloc] init];
+    stackView.axis = UILayoutConstraintAxisHorizontal;  // 垂直排列
+    stackView.spacing = 5;  // 每个项之间的间隔
+    stackView.alignment = UIStackViewAlignmentFill;  // 填充子视图
+    stackView.distribution = UIStackViewDistributionFill;  // 填充整个空间
+    self.hStackView = stackView;
+    [self.plBackgroundView addSubview:self.hStackView];
+    
+    [self.hStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.plBackgroundView);
+    }];
+    
+    self.plContentView = [[UIView alloc] init];
+    [self.hStackView addArrangedSubview:self.plContentView];
+    
+    
+    self.indicatorImageView = [[UIImageView alloc] init];
+    self.indicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.indicatorImageView.image = [UIImage systemImageNamed:@"chevron.forward"];
+    self.indicatorImageView.tintColor = [UIColor lightGrayColor];
+    [self.hStackView addArrangedSubview:self.indicatorImageView];
+    
+    [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@15);
+    }];
+    
     self.indicatorImageView.hidden = YES;
 }
+
+- (void)setPlrow:(TVUPLRow *)plrow {
+    _plrow = plrow;
+    
+    [self.hStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.plBackgroundView).offset(plrow.rInsets.left);
+        make.right.equalTo(self.plBackgroundView).offset(-plrow.rInsets.right);
+    }];
+    self.indicatorImageView.hidden = !plrow.rshowIndicator;
+}
+
 @end

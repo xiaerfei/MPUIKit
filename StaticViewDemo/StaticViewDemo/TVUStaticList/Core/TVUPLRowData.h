@@ -6,6 +6,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TVUPLLabelData.h"
+#import "TVUPLImageData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +18,8 @@ typedef NS_ENUM(NSUInteger, TVUPLRowLayoutPriority) {
 };
 
 @interface TVUPLRowData : NSObject
+
+- (TVUPLRowData *(^)(id(^)(void)))viewData;
 
 - (TVUPLRowData *(^)(NSString *title))title;
 - (TVUPLRowData *(^)(id font))titleFont;
@@ -38,6 +42,8 @@ typedef NS_ENUM(NSUInteger, TVUPLRowLayoutPriority) {
 
 ///< 自定义
 - (TVUPLRowData *(^)(NSString *key, id value))custom;
+
+- (id)customForKey:(NSString *)key;
 
 - (NSDictionary *)toRowDataDict;
 @end

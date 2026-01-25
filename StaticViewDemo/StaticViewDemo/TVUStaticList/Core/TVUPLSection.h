@@ -30,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLSection *section);
 
 @property (nonatomic, strong) UIStackView *stackView;
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UIView *backgroundView;
 
 // 链式调用方法
 - (TVUPLSection *(^)(NSString *key))key;

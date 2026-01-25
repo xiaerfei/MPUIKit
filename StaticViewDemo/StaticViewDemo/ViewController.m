@@ -59,14 +59,22 @@
                 RowUse(kTVUPLDefaultRow)
                     .key(@"UnloginRow")
                     .showIndicator(YES)
-                    .height(60)
+                    .height(50)
                     .prefetch(^(TVUPLRow *row) { row
-                        .rowData(^ { RowData
-                            .title(@"Login")
-                            .titleFont(@16)
-                            .systemIcon(@"person.crop.circle")
-                            .iconTintColor([UIColor grayColor])
-                            .iconSize(CGSizeMake(40, 40));
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Sharexia")
+                                .font([UIFont systemFontOfSize:16])
+                                .textColor([UIColor whiteColor]);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataSubtitle)
+                                .text(@"sharexia@tvunetworks.com")
+                                .font([UIFont systemFontOfSize:13])
+                                .textColor([UIColor lightGrayColor]);
+                        })
+                        .viewData(^id { return ImageData(kTVUPLDataImage)
+                                .systemIcon(@"person.crop.circle")
+                                .tintColor([UIColor grayColor])
+                                .size(CGSizeMake(40, 40));
                         });
                     }),
                 RowUse(kTVUPLDefaultRow)
@@ -74,12 +82,15 @@
                     .showIndicator(YES)
                     .height(60)
                     .prefetch(^(TVUPLRow *row) { row
-                        .rowData(^ { RowData
-                            .title(@"UnLogin")
-                            .titleFont(@16)
-                            .systemIcon(@"person.crop.circle")
-                            .iconTintColor([UIColor grayColor])
-                            .iconSize(CGSizeMake(40, 40));
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"UnLogin")
+                                .font([UIFont systemFontOfSize:16])
+                                .textColor([UIColor whiteColor]);
+                        })
+                        .viewData(^id { return ImageData(kTVUPLDataImage)
+                                .systemIcon(@"person.crop.circle")
+                                .tintColor([UIColor grayColor])
+                                .size(CGSizeMake(40, 40));
                         });
                     }),
 
@@ -97,21 +108,64 @@
             .rows(@[
                 RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
-                    .height(30)
-                    .rowData(^ { RowData
-                        .title(@"Video")
-                        .titleColor([UIColor grayColor])
-                        .icon(@"tvu_setting_camera")
-                        .iconSize(CGSizeMake(16, 16));
+                    .height(40)
+                    .viewData(^id { return LabelData(kTVUPLDataTitle)
+                            .text(@"Video")
+                            .textColor([UIColor grayColor]);
+                    })
+                    .viewData(^id { return ImageData(kTVUPLDataImage)
+                            .icon(@"tvu_setting_camera")
+                            .size(CGSizeMake(16, 16));
                     }),
                 RowUse(kTVUPLDefaultRow)
                     .key(@"Resolution")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
                         .height(0)
-                        .rowData(^{ RowData
-                            .title(@"Resolution")
-                            .subtitle(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。");
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
+                                .font([UIFont systemFontOfSize:15])
+                                .textColor(UIColor.whiteColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"Test0")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(0)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
+                                .font([UIFont systemFontOfSize:15])
+                                .textColor(UIColor.whiteColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"Test")
+                    .showIndicator(NO)
+                    .height(0)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"这是 title")
+                                .font([UIFont systemFontOfSize:15])
+                                .textColor(UIColor.whiteColor)
+                                .textAlignment(NSTextAlignmentLeft);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataSubtitle)
+                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
+                                .font([UIFont systemFontOfSize:13])
+                                .textColor(UIColor.greenColor)
+                                .textAlignment(NSTextAlignmentLeft);
+                        })
+                        .viewData(^id { return ImageData(kTVUPLDataImage)
+                                .tintColor([UIColor lightGrayColor])
+                                .systemIcon(@"person.crop.circle")
+                                .size(CGSizeMake(20, 20));
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {

@@ -7,6 +7,20 @@
 
 #import "TVUPLRow.h"
 
+NSString *const kTVUPLDataTitle     = @"DataTitle";
+NSString *const kTVUPLDataSubtitle  = @"DataSubtitle";
+NSString *const kTVUPLDataImage     = @"DataImage";
+NSString *const kTVUPLDataKey0      = @"DataKey0";
+NSString *const kTVUPLDataKey1      = @"DataKey1";
+NSString *const kTVUPLDataKey2      = @"DataKey2";
+NSString *const kTVUPLDataKey3      = @"DataKey3";
+NSString *const kTVUPLDataKey4      = @"DataKey4";
+NSString *const kTVUPLDataKey5      = @"DataKey5";
+NSString *const kTVUPLDataKey6      = @"DataKey6";
+NSString *const kTVUPLDataKey7      = @"DataKey7";
+NSString *const kTVUPLDataKey8      = @"DataKey8";
+NSString *const kTVUPLDataKey9      = @"DataKey9";
+
 @interface TVUPLRow ()
 @property (nonatomic,   copy, readwrite) NSString *rKey;
 @property (nonatomic,   copy, readwrite) NSString *rIdentifier;
@@ -24,6 +38,8 @@
 @property (nonatomic, assign, readwrite) CGFloat rHeight;
 
 @property (nonatomic, strong, readwrite) id rRowData;
+
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mrowDataDict;
 
 @property (nonatomic,   copy, readwrite) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readwrite) void (^rFetchRowParameterBlock)(TVUPLRow *row);
@@ -174,14 +190,33 @@
         return self;
     };
 }
+
+- (TVUPLRow *(^)(id (^)(void)))viewData {
+    return ^(id (^block)(void)) {
+        TVUPLViewData *viewData = block ? block() : nil;
+        if ([viewData isKindOfClass:TVUPLViewData.class]) {
+            self.mrowDataDict[viewData.mkey] = viewData;
+        }
+        return self;
+    };
+}
+- (id)customForKey:(NSString *)key {
+    if ([key isKindOfClass:NSString.class] == NO ||
+        key.length == 0) {
+        return nil;
+    }
+
+    return self.mrowDataDict[key];
+}
 #pragma mark - Class Methods
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
         self.rIdentifier = identifier;
         self.rHeight = 50;
-        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 20);
         self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
+        self.mrowDataDict = @{}.mutableCopy;
     }
     return self;
 }
@@ -190,8 +225,9 @@
     self = [super init];
     if (self) {
         self.rHeight = 50;
-        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 20);
         self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
+        self.mrowDataDict = @{}.mutableCopy;
     }
     return self;
 }

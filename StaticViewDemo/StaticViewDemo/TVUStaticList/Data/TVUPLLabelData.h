@@ -1,17 +1,18 @@
 //
 //  TVUPLLabelData.h
-//  TVUCollectionView
+//  StaticViewDemo
 //
-//  Created by TVUM4Pro on 2026/1/8.
+//  Created by erfeixia on 2026/1/24.
 //
 
-#import <UIKit/UIKit.h>
+#import "TVUPLViewData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TVUPLLabelData : NSObject
+#define LabelData(KEY) ((TVUPLLabelData *)[TVUPLLabelData new].key(KEY))
 
-@property (nonatomic,   copy, readonly) NSString *mkey;
+@interface TVUPLLabelData : TVUPLViewData
+
 @property (nonatomic,   copy, readonly) NSString *mtext;
 @property (nonatomic, strong, readonly) UIFont *mfont;
 @property (nonatomic, strong, readonly) id mtextColor;
@@ -20,8 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSInteger mnumberOfLines;
 @property (nonatomic,   copy, readonly) NSAttributedString *mattributedText;
 
-
-- (TVUPLLabelData *(^)(NSString * _Nullable key))key;
 - (TVUPLLabelData *(^)(NSString * _Nullable text))text;
 - (TVUPLLabelData *(^)(UIFont * _Nullable font))font;
 - (TVUPLLabelData *(^)(id _Nullable textColor))textColor;
@@ -29,11 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (TVUPLLabelData *(^)(NSLineBreakMode lineBreakMode))lineBreakMode;
 - (TVUPLLabelData *(^)(NSInteger numberOfLines))numberOfLines;
 - (TVUPLLabelData *(^)(NSAttributedString * _Nullable attributedText))attributedText;
-///< 自定义
-- (TVUPLLabelData *(^)(NSString *key, id value))custom;
-- (id)customForKey:(NSString *)key;
-
-- (void)configure:(UILabel *)label;
 @end
 
 NS_ASSUME_NONNULL_END
