@@ -7,6 +7,7 @@
 
 #import "TVUPLSection.h"
 #import "NSObject+BaseDataType.h"
+#import "TVUPLRow.h"
 
 @interface TVUPLSection ()
 @property (nonatomic, copy) void(^attributesBlock)(TVUPLSection *section);
@@ -59,7 +60,17 @@
 
 - (TVUPLSection *(^)(NSArray *rows))rows {
     return ^(NSArray *rows) {
-        self.rrows = rows;
+        NSMutableArray *onlyRows = @[].mutableCopy;
+        for (TVUPLRow *row in rows) {
+            if (row.rrowType == TVUPLRowTypeHeader) {
+                self.header = row;
+            } else if (row.rrowType == TVUPLRowTypeFooter) {
+                self.footer = row;
+            } else {
+                [onlyRows addObject:row];
+            }
+        }
+        self.rrows = onlyRows.copy;
         return self;
     };
 }

@@ -17,12 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 ///< 支持 UIColor、FFFFFF、FFFFFFA2(携带透明度)、#FBFBFB
 @property (nonatomic, strong, readonly) id mbackgroundColor;
 @property (nonatomic, assign, readonly) CGFloat mcornerRadius;
-
+@property (nonatomic, assign, readonly) UIEdgeInsets minsets;
 @property (nonatomic, strong, readonly) NSMutableDictionary *mdataDict;
 
 - (TVUPLViewData *(^)(NSString * _Nullable key))key;
 - (TVUPLViewData *(^)(id _Nullable color))backgroundColor;
 - (TVUPLViewData *(^)(CGFloat cornerRadius))cornerRadius;
+- (TVUPLViewData *(^)(UIEdgeInsets insets))insets;
+
 ///< 自定义
 - (TVUPLViewData *(^)(NSString *key, id value))custom;
 - (id)customForKey:(NSString *)key;

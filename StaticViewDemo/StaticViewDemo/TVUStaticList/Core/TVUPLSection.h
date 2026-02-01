@@ -5,6 +5,32 @@
 //  Created by erfeixia on 2025/9/13.
 //
 
+/*
+ @property (nonatomic, strong) UIView *contentView;
+
+ @property (nonatomic, strong) UIStackView *stackView;
+
+ @property (nonatomic, strong) TVUPLRow *header;
+ @property (nonatomic, strong) UIView *backgroundView;
+ @property (nonatomic, strong) TVUPLRow *footer;
+
+ @property (nonatomic, strong) UIStackView *rowsStackView;
+ 
+ 上面几个属性的关系如下:
+ 
+                                         +---------------+                           +-------------+
+                                       +-+     Header    |                         +-+     Row     |
+                                       | +---------------+                         | +-------------+
+                                       |                                           |
++-------------+     +-------------+    | +---------------+      +-------------+    | +-------------+
+| ContentView +---->|  StackView  +--->+-+BackgroundView +----->|RowsStackView+--->+-+     Row     |
++-------------+     +-------------+    | +---------------+      +-------------+    | +-------------+
+                                       |                                           |
+                                       | +---------------+                         | +-------------+
+                                       +-+     Footer    |                         +-+     Row     |
+                                         +---------------+                           +-------------+
+ */
+
 #import <UIKit/UIKit.h>
 
 #define SectionUse [TVUPLSection new]
@@ -15,32 +41,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TVUPLSection : NSObject
 @property (nonatomic,   copy) NSString *rkey;
-@property (nonatomic, assign) UIEdgeInsets rinsets;
 @property (nonatomic, assign) BOOL rhidden;
-@property (nonatomic, assign) CGFloat rcornerRadius;
-@property (nonatomic, strong) UIColor *rbackgroundColor;
-
-@property (nonatomic, assign) NSInteger section;
 @property (nonatomic, strong) NSArray <TVUPLRow *> *rrows;
-
-@property (nonatomic, strong) TVUPLRow *header;
-@property (nonatomic, strong) TVUPLRow *footer;
-@property (nonatomic, assign) NSInteger tag;
-
 @property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLSection *section);
 
-@property (nonatomic, strong) UIStackView *stackView;
 @property (nonatomic, strong) UIView *contentView;
+
+@property (nonatomic, strong) UIStackView *stackView;
+
+@property (nonatomic, strong) TVUPLRow *header;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) TVUPLRow *footer;
+
+@property (nonatomic, strong) UIStackView *rowsStackView;
 
 // 链式调用方法
 - (TVUPLSection *(^)(NSString *key))key;
 - (TVUPLSection *(^)(BOOL hidden))hidden;
-- (TVUPLSection *(^)(UIEdgeInsets insets))insets;
-- (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius;
-- (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor;
 - (TVUPLSection *(^)(NSArray *rows))rows;
 - (TVUPLSection *(^)(void(^)(TVUPLSection *section)))prefetch;
+
+- (TVUPLSection *(^)(id (^)(void)))viewData;
+- (id)customForKey:(NSString *)key;
+
 @end
 
 NS_ASSUME_NONNULL_END

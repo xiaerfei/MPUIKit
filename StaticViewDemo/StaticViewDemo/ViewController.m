@@ -41,6 +41,10 @@
             .sections(@[
                 [self loginSection],
                 [self videoSection],
+                [self loginSection],
+                [self videoSection],
+                [self loginSection],
+                [self videoSection],
             ]);
         });
     [self.staticView reload];
@@ -51,10 +55,10 @@
 - (TVUPLSection *)loginSection {
     return SectionUse
         .key(@"LoginSection")
-        .cornerRadius(8)
-        .insets(UIEdgeInsetsMake(0, 20, 0, 20))
-        .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
+            .viewData(^id { return ViewData(nil);
+                
+            })
             .rows(@[
                 RowUse(kTVUPLDefaultRow)
                     .key(@"UnloginRow")
@@ -101,9 +105,6 @@
 - (TVUPLSection *)videoSection {
     return SectionUse
         .key(@"VideoSection")
-        .cornerRadius(8)
-        .insets(UIEdgeInsetsMake(10, 20, 0, 20))
-        .backgroundColor(UIColorFromHex(0x1F1F1F))
         .prefetch(^(TVUPLSection *section) { section
             .rows(@[
                 RowUse(kTVUPLDefaultRow)

@@ -6,11 +6,8 @@
 //
 
 #import "TVUStaticView.h"
-#import "TVUPLStackView.h"
 #import "TVUPLBaseRow.h"
 #import "Masonry.h"
-
-
 
 NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
 
@@ -86,7 +83,6 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
     for (TVUPLSection *section in self.rsections) {
         if (section.rprefetch) section.rprefetch(section);
         [self prepareDataForSection:section];
-        [self.mainStackView addArrangedSubview:section.contentView];
         [self prepareLayoutForSection:section];
     }
 }
@@ -96,13 +92,9 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 }
 
 - (void)setupMainStackView {
-    self.mainStackView = [[UIStackView alloc] init];
+    self.mainStackView = [self createStackWithSpacing:10];
     self.mainStackView.mas_key = @"Main";
     [self addSubview:self.mainStackView];
-    self.mainStackView.axis = UILayoutConstraintAxisVertical;  // 垂直排列
-    self.mainStackView.spacing = 10;  // 每个项之间的间隔
-    self.mainStackView.alignment = UIStackViewAlignmentFill;  // 填充子视图
-    self.mainStackView.distribution = UIStackViewDistributionFill;  // 填充整个空间
     // 使用 Masonry 设置 stackView 的约束，使其宽度与 UIScrollView 一致
     [self.mainStackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self);
@@ -112,62 +104,68 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 #pragma mark - Section Methods
 - (void)prepareDataForSection:(TVUPLSection *)section {
     if (section.contentView == nil) {
-        UIView *contentView = [[UIView alloc] init];
-        section.contentView = contentView;
-    }
-    
-    if (section.backgroundView == nil) {
-        UIView *backgroundView = [[UIView alloc] init];
-        backgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
-        backgroundView.layer.cornerRadius  = 8;
-        backgroundView.layer.masksToBounds = YES;
-        backgroundView.mas_key = @"backgroundView";
-        section.backgroundView = backgroundView;
+        section.contentView = [[UIView alloc] init];
+        [self.mainStackView addArrangedSubview:section.contentView];
     }
     
     if (section.stackView == nil) {
-        UIStackView *stackView = [[UIStackView alloc] init];
-        stackView.axis = UILayoutConstraintAxisVertical;  // 垂直排列
-        stackView.spacing = 0;  // 每个项之间的间隔
-        // 填充子视图
-        stackView.alignment = UIStackViewAlignmentFill;
-        // 填充整个空间
-        stackView.distribution = UIStackViewDistributionFill;
-        stackView.mas_key = @"Section";
-        section.stackView = stackView;
+        section.stackView = [self createStackWithSpacing:0];
+        section.stackView.mas_key = @"SectionStackView";
+        [section.contentView addSubview:section.stackView];
     }
     
-    if (section.backgroundView.superview == nil) {
-        [section.contentView addSubview:section.backgroundView];
+    if (section.header) {
+        [self prepareDataForRow:section.header section:section forRow:NO];
+        [self prepareLayoutForRow:section.header section:section];
     }
     
-    if (section.stackView.superview == nil) {
-        [section.backgroundView addSubview:section.stackView];
+    if (section.backgroundView == nil) {
+        section.backgroundView = [[UIView alloc] init];
+        section.backgroundView.mas_key = @"BackgroundView";
+        [section.stackView addArrangedSubview:section.backgroundView];
+        section.backgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
+        section.backgroundView.layer.cornerRadius  = 8;
+        section.backgroundView.layer.masksToBounds = YES;
+    }
+    
+    if (section.rowsStackView == nil) {
+        section.rowsStackView = [self createStackWithSpacing:0];
+        section.rowsStackView.mas_key = @"RowsStackView";
+        [section.backgroundView addSubview:section.rowsStackView];
     }
     
     for (TVUPLRow *row in section.rrows) {
-        [self prepareDataForRow:row section:section];
+        [self prepareDataForRow:row section:section forRow:YES];
         [self prepareLayoutForRow:row section:section];
+    }
+    
+    if (section.footer) {
+        [self prepareDataForRow:section.footer section:section forRow:NO];
+        [self prepareLayoutForRow:section.footer section:section];
     }
 }
 
 - (void)prepareLayoutForSection:(TVUPLSection *)section {
     [section.stackView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(section.backgroundView);
-    }];
-    
-    [section.backgroundView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(section.contentView).offset(20);
         make.right.equalTo(section.contentView).offset(-20);
         make.top.bottom.equalTo(section.contentView);
     }];
+    
+    [section.rowsStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(@0);
+    }];
 }
 #pragma mark - Row Methods
-- (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section {
+- (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section forRow:(BOOL)forRow {
     if (row.rprefetch) row.rprefetch(row);
     if (row.rowView == nil) {
         row.rowView = [[NSClassFromString(row.rIdentifier) alloc] init];
-        [section.stackView addArrangedSubview:row.rowView];
+        if (forRow) {
+            [section.rowsStackView addArrangedSubview:row.rowView];
+        } else {
+            [section.stackView addArrangedSubview:row.rowView];
+        }
     }
     row.rsection = section;
     row.rowView.plrow = row;
@@ -183,5 +181,13 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
     }];
 }
 
-
+#pragma mark - Private Methods
+- (UIStackView *)createStackWithSpacing:(CGFloat)spacing {
+    UIStackView *stackView = [[UIStackView alloc] init];
+    stackView.axis = UILayoutConstraintAxisVertical;  // 垂直排列
+    stackView.spacing = spacing;  // 每个项之间的间隔
+    stackView.alignment = UIStackViewAlignmentFill;  // 填充子视图
+    stackView.distribution = UIStackViewDistributionFill;  // 填充整个空间
+    return stackView;
+}
 @end
