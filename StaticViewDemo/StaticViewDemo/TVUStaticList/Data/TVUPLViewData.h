@@ -18,12 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) id mbackgroundColor;
 @property (nonatomic, assign, readonly) CGFloat mcornerRadius;
 @property (nonatomic, assign, readonly) UIEdgeInsets minsets;
+@property (nonatomic, assign, readonly) BOOL mhidden;
 @property (nonatomic, strong, readonly) NSMutableDictionary *mdataDict;
 
 - (TVUPLViewData *(^)(NSString * _Nullable key))key;
 - (TVUPLViewData *(^)(id _Nullable color))backgroundColor;
 - (TVUPLViewData *(^)(CGFloat cornerRadius))cornerRadius;
 - (TVUPLViewData *(^)(UIEdgeInsets insets))insets;
+- (TVUPLViewData *(^)(BOOL hidden))hidden;
 
 ///< 自定义
 - (TVUPLViewData *(^)(NSString *key, id value))custom;

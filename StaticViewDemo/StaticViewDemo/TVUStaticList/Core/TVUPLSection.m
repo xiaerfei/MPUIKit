@@ -9,10 +9,13 @@
 #import "NSObject+BaseDataType.h"
 #import "TVUPLRow.h"
 
+NSString *const kTVUPLDataSection = @"DataSection";
+
 @interface TVUPLSection ()
 @property (nonatomic, copy) void(^attributesBlock)(TVUPLSection *section);
 @property (nonatomic, copy) NSArray <TVUPLRow *>*(^rowsBlock)(void);
 @property (nonatomic, copy, readwrite)void(^rprefetch)(TVUPLSection *section);
+@property (nonatomic, strong, readwrite) NSMutableDictionary *mrowDataDict;
 @end
 
 @implementation TVUPLSection
@@ -21,6 +24,13 @@
     self = [super init];
     if (self) {
         self.rrows = [NSMutableArray array];
+        self.mrowDataDict = @{}.mutableCopy;
+        
+        self.mrowDataDict[kTVUPLDataSection] =
+        ViewData(kTVUPLDataSection)
+            .backgroundColor([[UIColor lightGrayColor] colorWithAlphaComponent:0.2])
+            .cornerRadius(8)
+            .insets(UIEdgeInsetsMake(0, 20, 0, 20));
     }
     return self;
 }
@@ -35,25 +45,6 @@
 - (TVUPLSection *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {
         self.rhidden = hidden;
-        return self;
-    };
-}
-- (TVUPLSection *(^)(UIEdgeInsets insets))insets {
-    return ^(UIEdgeInsets insets) {
-        self.rinsets = insets;
-        return self;
-    };
-}
-
-- (TVUPLSection *(^)(CGFloat cornerRadius))cornerRadius {
-    return ^(CGFloat cornerRadius) {
-        self.rcornerRadius = cornerRadius;
-        return self;
-    };
-}
-- (TVUPLSection *(^)(UIColor *backgroundColor))backgroundColor {
-    return ^(UIColor *backgroundColor) {
-        self.rbackgroundColor = backgroundColor;
         return self;
     };
 }
@@ -80,5 +71,24 @@
         self.rprefetch = prefetch;
         return self;
     };
+}
+
+- (TVUPLSection *(^)(id (^)(void)))viewData {
+    return ^(id (^block)(void)) {
+        TVUPLViewData *viewData = block ? block() : nil;
+        if ([viewData isKindOfClass:TVUPLViewData.class]) {
+            self.mrowDataDict[viewData.mkey] = viewData;
+        }
+        return self;
+    };
+}
+
+- (id)customForKey:(NSString *)key {
+    if ([key isKindOfClass:NSString.class] == NO ||
+        key.length == 0) {
+        return nil;
+    }
+
+    return self.mrowDataDict[key];
 }
 @end

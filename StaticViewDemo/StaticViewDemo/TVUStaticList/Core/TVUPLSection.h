@@ -37,6 +37,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString *const kTVUPLDataSection;
+
 @class TVUPLRow;
 
 @interface TVUPLSection : NSObject

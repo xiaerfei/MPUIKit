@@ -20,6 +20,7 @@ return self; \
 @property (nonatomic, strong, readwrite) id mbackgroundColor;
 @property (nonatomic, assign, readwrite) CGFloat mcornerRadius;
 @property (nonatomic, assign, readwrite) UIEdgeInsets minsets;
+@property (nonatomic, assign, readwrite) BOOL mhidden;
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mdataDict;
 @end
 
@@ -36,6 +37,7 @@ DotMethod(NSString *, key, mkey)
 DotMethod(id, backgroundColor, mbackgroundColor)
 DotMethod(CGFloat, cornerRadius, mcornerRadius)
 DotMethod(UIEdgeInsets, insets, minsets)
+DotMethod(BOOL, hidden, mhidden)
 
 ///< 自定义
 - (TVUPLViewData *(^)(NSString *key, id value))custom {
@@ -60,5 +62,6 @@ DotMethod(UIEdgeInsets, insets, minsets)
     
     view.layer.cornerRadius = self.mcornerRadius;
     view.layer.masksToBounds = self.mcornerRadius != 0;
+    view.hidden = self.mhidden;
 }
 @end
