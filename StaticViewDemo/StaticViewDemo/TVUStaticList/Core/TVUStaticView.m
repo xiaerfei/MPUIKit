@@ -7,8 +7,8 @@
 
 #import "TVUStaticView.h"
 #import "TVUPLBaseRow.h"
+#import "TVUPLViewData.h"
 #import "Masonry.h"
-
 NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
 
 NSString *const kTVUPLRowLoginBigWord = @"RowLoginBigWord";
@@ -123,10 +123,10 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         section.backgroundView = [[UIView alloc] init];
         section.backgroundView.mas_key = @"BackgroundView";
         [section.stackView addArrangedSubview:section.backgroundView];
-        section.backgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.2];
-        section.backgroundView.layer.cornerRadius  = 8;
-        section.backgroundView.layer.masksToBounds = YES;
     }
+    
+    TVUPLViewData *viewData = [section customForKey:kTVUPLDataSection];
+    [viewData configure:section.backgroundView];
     
     if (section.rowsStackView == nil) {
         section.rowsStackView = [self createStackWithSpacing:0];
@@ -146,9 +146,13 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 }
 
 - (void)prepareLayoutForSection:(TVUPLSection *)section {
+    TVUPLViewData *viewData = [section customForKey:kTVUPLDataSection];
+    CGFloat left  = viewData.minsets.left;
+    CGFloat right = viewData.minsets.right;
+    
     [section.stackView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(section.contentView).offset(20);
-        make.right.equalTo(section.contentView).offset(-20);
+        make.left.equalTo(section.contentView).offset(left);
+        make.right.equalTo(section.contentView).offset(-right);
         make.top.bottom.equalTo(section.contentView);
     }];
     

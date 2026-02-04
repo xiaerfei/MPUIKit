@@ -57,8 +57,8 @@
         .key(@"LoginSection")
         .prefetch(^(TVUPLSection *section) { section
             .viewData(^id { return ViewData(kTVUPLDataSection)
-                .backgroundColor([UIColor lightGrayColor])
-                .cornerRadius(8);
+                .backgroundColor([UIColor redColor])
+                .cornerRadius(20);
             })
             .rows(@[
                 RowUse(kTVUPLDefaultRow)
