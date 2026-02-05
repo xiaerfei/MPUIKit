@@ -134,13 +134,6 @@ NSString *const kTVUPLDataKey9      = @"DataKey9";
     };
 }
 
-- (TVUPLRow *(^)(BOOL showLeftImage))showLeftImage {
-    return ^(BOOL showLeftImage) {
-        self.rShowLeftImage = showLeftImage;
-        return self;
-    };
-}
-
 - (TVUPLRow *(^)(CGFloat height))height {
     return ^(CGFloat height) {
         self.rHeight = height;

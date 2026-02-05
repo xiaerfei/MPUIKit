@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (TVUStaticView *(^)(NSArray <TVUPLSection *>*sections))sections;
 - (void)reload;
 
+- (void)reloadSectionForKey:(NSString *)key;
+- (void)reloadRowForKey:(NSString *)key;
+
 @end
 
 NS_ASSUME_NONNULL_END

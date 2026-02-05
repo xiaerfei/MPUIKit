@@ -9,42 +9,15 @@
 #import "TVUPLBaseRow.h"
 #import "TVUPLViewData.h"
 #import "Masonry.h"
+
 NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
-
-NSString *const kTVUPLRowLoginBigWord = @"RowLoginBigWord";
-NSString *const kTVUPLLoginRow        = @"TVUPLLoginRow";
-
-NSString *const kTVUPLRowRightValue = @"RowRightValue";
-NSString *const kTVUPLRowRightScale = @"RowRightScale";
-NSString *const kTVUPLRightValueRow = @"TVUPLRightValueRow";
-NSString *const kTVUPLRightPriority = @"TVUPLRightPriority";
-
-// Switch相关常量实现
-NSString *const kTVUPLRowSwitchOn       = @"RowSwitchOn";
-NSString *const kTVUPLRowSwitchEnabled  = @"RowSwitchEnabled";
-
-NSString *const kTVUPLSwitchRow         = @"TVUPLSwitchRow";
-
-// 常量实现
-NSString *const kTVUPLRowTitle          = @"RowTitle";
-NSString *const kTVUPLRowTitleFont      = @"RowTitleFont";
-NSString *const kTVUPLRowTitleColor     = @"RowTitleColor";
-NSString *const kTVUPLRowTitleAlignment = @"RowTitleAlignment";
-NSString *const kTVUPLRowTitleNumberOfLines = @"RowTitleNumberOfLines";
-
-NSString *const kTVUPLRowSubtitle       = @"RowSubtitle";
-NSString *const kTVUPLRowSubtitleFont   = @"RowSubtitleFont";
-NSString *const kTVUPLRowSubtitleColor  = @"RowSubtitleColor";
-
-NSString *const kTVUPLRowIcon           = @"RowIcon";
-NSString *const kTVUPLRowSystemIcon     = @"RowSystemIcon";
-NSString *const kTVUPLRowIconTintColor  = @"RowIconTintColor";
-NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 
 @interface TVUStaticView ()
 @property (nonatomic, strong) UIStackView *mainStackView;
 @property (nonatomic,   copy) void(^rprefetch)(TVUStaticView *list);
 @property (nonatomic, strong) NSArray <TVUPLSection *>*rsections;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLSection *>*sectionDict;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLRow *>*rowDict;
 @end
 
 @implementation TVUStaticView
@@ -86,8 +59,35 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         [self prepareLayoutForSection:section];
     }
 }
+
+- (void)reloadSectionForKey:(NSString *)key {
+    if (key.length == 0) return;
+    
+    TVUPLSection *section = self.sectionDict[key];
+    if (section == nil) return;
+    
+    if (section.rprefetch) section.rprefetch(section);
+    [self prepareDataForSection:section];
+    [self prepareLayoutForSection:section];
+}
+
+- (void)reloadRowForKey:(NSString *)key {
+    if (key.length == 0) return;
+    
+    TVUPLRow *row = self.rowDict[key];
+    if (row == nil) return;
+    
+    if (row.rprefetch) row.rprefetch(row);
+    
+    [self prepareDataForRow:row
+                    section:row.rsection
+                     forRow:row.rrowType == TVUPLRowTypeDefault];
+    [self prepareLayoutForRow:row section:row.rsection];
+}
 #pragma mark - Private Methods
 - (void)setupSubviews {
+    self.sectionDict = @{}.mutableCopy;
+    self.rowDict = @{}.mutableCopy;
     [self setupMainStackView];
 }
 
@@ -103,6 +103,10 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
 }
 #pragma mark - Section Methods
 - (void)prepareDataForSection:(TVUPLSection *)section {
+    if (section.rkey) {
+        self.sectionDict[section.rkey] = section;
+    }
+    
     if (section.contentView == nil) {
         section.contentView = [[UIView alloc] init];
         [self.mainStackView addArrangedSubview:section.contentView];
@@ -125,14 +129,14 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         [section.stackView addArrangedSubview:section.backgroundView];
     }
     
-    TVUPLViewData *viewData = [section customForKey:kTVUPLDataSection];
-    [viewData configure:section.backgroundView];
     
     if (section.rowsStackView == nil) {
         section.rowsStackView = [self createStackWithSpacing:0];
         section.rowsStackView.mas_key = @"RowsStackView";
         [section.backgroundView addSubview:section.rowsStackView];
     }
+
+    [self configureSectionData:section];
     
     for (TVUPLRow *row in section.rrows) {
         [self prepareDataForRow:row section:section forRow:YES];
@@ -156,10 +160,22 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
         make.top.bottom.equalTo(section.contentView);
     }];
     
-    [section.rowsStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [section.rowsStackView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(@0);
     }];
 }
+
+- (void)configureSectionData:(TVUPLSection *)section {
+    TVUPLViewData *viewData = [section customForKey:kTVUPLDataSection];
+    section.backgroundView.backgroundColor =
+    viewData.mbackgroundColor ? viewData.mbackgroundColor : [UIColor clearColor];
+    
+    section.backgroundView.layer.cornerRadius  = viewData.mcornerRadius;
+    section.backgroundView.layer.masksToBounds = viewData.mcornerRadius != 0;
+    
+    section.contentView.hidden = viewData.mhidden;
+}
+
 #pragma mark - Row Methods
 - (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section forRow:(BOOL)forRow {
     if (row.rprefetch) row.rprefetch(row);
@@ -171,9 +187,14 @@ NSString *const kTVUPLRowIconSize       = @"RowIconSize";
             [section.stackView addArrangedSubview:row.rowView];
         }
     }
+    row.rowView.hidden = row.rhidden;
     row.rsection = section;
     row.rowView.plrow = row;
     [row.rowView updateWithData:row.rRowData];
+    
+    if (row.rKey) {
+        self.rowDict[row.rKey] = row;
+    }
 }
 
 - (void)prepareLayoutForRow:(TVUPLRow *)row section:(TVUPLSection *)section {

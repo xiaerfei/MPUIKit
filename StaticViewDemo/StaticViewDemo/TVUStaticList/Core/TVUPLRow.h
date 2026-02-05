@@ -81,10 +81,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(UIColor *indicatorColor))indicatorColor;
 - (TVUPLRow *(^)(BOOL unselected))unselected;
 - (TVUPLRow *(^)(BOOL unselectedStyle))unselectedStyle;
-- (TVUPLRow *(^)(BOOL showLeftImage))showLeftImage;
 - (TVUPLRow *(^)(CGFloat height))height;
-
-- (TVUPLRow *(^)(id (^)(void)))rowData;
 
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))tap;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))fetchRowParameterBlock;

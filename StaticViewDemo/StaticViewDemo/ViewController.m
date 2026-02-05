@@ -17,6 +17,7 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) TVUStaticView *staticView;
+@property (nonatomic, assign) BOOL unlogin;
 @end
 
 @implementation ViewController
@@ -41,16 +42,26 @@
             .sections(@[
                 [self loginSection],
                 [self videoSection],
-                [self loginSection],
-                [self videoSection],
-                [self loginSection],
-                [self videoSection],
             ]);
         });
     [self.staticView reload];
     
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"Change" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(changeAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.equalTo(self.view);
+        make.width.equalTo(@100);
+    }];
 }
 
+- (void)changeAction {
+    self.unlogin = self.unlogin ? NO : YES;
+    [self.staticView reloadRowForKey:@"UnloginRow"];
+}
 #pragma mark - sections
 - (TVUPLSection *)loginSection {
     return SectionUse
@@ -58,14 +69,16 @@
         .prefetch(^(TVUPLSection *section) { section
             .viewData(^id { return ViewData(kTVUPLDataSection)
                 .backgroundColor([UIColor redColor])
-                .cornerRadius(20);
+                .cornerRadius(20)
+                .insets(UIEdgeInsetsMake(0, 30, 0, 30));
             })
             .rows(@[
                 RowUse(kTVUPLDefaultRow)
-                    .key(@"UnloginRow")
+                    .key(@"LoginRow")
                     .showIndicator(YES)
                     .height(50)
                     .prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.unlogin)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
                                 .text(@"Sharexia")
                                 .font([UIFont systemFontOfSize:16])
@@ -87,6 +100,7 @@
                     .showIndicator(YES)
                     .height(60)
                     .prefetch(^(TVUPLRow *row) { row
+                        .hidden(self.unlogin)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
                                 .text(@"UnLogin")
                                 .font([UIFont systemFontOfSize:16])
