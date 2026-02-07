@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subtitleLabel;
+@property (nonatomic, strong) UILabel *valueLabel;
 @property (nonatomic, strong) UIStackView *hStackView;
 @property (nonatomic, strong) UIStackView *vStackView;
 @end
@@ -54,13 +55,31 @@
     
     TVUPLLabelData *subtitleData = [rowData customForKey:kTVUPLDataSubtitle];
     [subtitleData configure:self.subtitleLabel];
+    
+    TVUPLLabelData *valueData = [rowData customForKey:kTVUPLDataValue];
+    UIView *valueContent = self.valueLabel.superview;
+    if (valueData) {
+        [valueData configure:self.valueLabel];
+        valueContent.hidden = self.valueLabel.hidden;
+        CGFloat scale = [[valueData customForKey:kTVUPLDataScale] floatValue];
+        if (scale > 0 && scale <= 1) {
+            [valueContent mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(self.hStackView.mas_width).multipliedBy(scale);
+            }];
+        } else {
+            [valueContent mas_remakeConstraints:^(MASConstraintMaker *make) {}];
+        }
+    } else {
+        self.valueLabel.text = @"";
+        valueContent.hidden = YES;
+        [valueContent mas_remakeConstraints:^(MASConstraintMaker *make) {}];
+    }
 }
-
 
 #pragma mark - Private Methods
 - (void)setupSubviews {
     self.hStackView = [self createStackViewWithAxis:UILayoutConstraintAxisHorizontal];
-    self.hStackView.spacing = 5;
+    self.hStackView.spacing = 10;
     [self addSubview:self.hStackView];
     
     // 图标
@@ -92,6 +111,23 @@
     
     [backContent addSubview:textContent];
     [self.vStackView addArrangedSubview:backContent];
+    
+    // 标题
+    self.valueLabel = [[UILabel alloc] init];
+    // 默认样式
+    self.valueLabel.font = [UIFont systemFontOfSize:15];
+    self.valueLabel.textColor = [UIColor whiteColor];
+    self.valueLabel.numberOfLines = 0;
+    
+    UIView *valueContent = [[UIView alloc] init];
+    [valueContent addSubview:self.valueLabel];
+    
+    [self.hStackView addArrangedSubview:valueContent];
+    /// title 不被压缩的优先级较高
+    [self.hStackView setContentCompressionResistancePriority:UILayoutPriorityRequired
+                                                     forAxis:UILayoutConstraintAxisHorizontal];
+    [self.valueLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow
+                                                     forAxis:UILayoutConstraintAxisHorizontal];
 }
 
 - (void)setupConstraints {
@@ -122,6 +158,14 @@
     [self.subtitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom);
         make.left.bottom.right.equalTo(textContent);
+    }];
+    
+    UIView *valueContent = self.valueLabel.superview;
+    [self.valueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(valueContent);
+        make.centerY.equalTo(valueContent);
+        make.top.greaterThanOrEqualTo(valueContent.mas_top).offset(5);
+        make.bottom.lessThanOrEqualTo(valueContent.mas_bottom).offset(-5);
     }];
 }
 #pragma mark - Private Methods

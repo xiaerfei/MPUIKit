@@ -11,7 +11,6 @@
 extern NSString *const kTVUPLTextRow;
 
 #pragma mark - DefaultRow
-extern NSString *const kTVUPLDefaultRow;
 /// Data Key
 extern NSString *const kTVUPLRowTitle;
 extern NSString *const kTVUPLRowTitleFont;
@@ -31,8 +30,6 @@ extern NSString *const kTVUPLSwitchRow;
 extern NSString *const kTVUPLRowSwitchOn;
 extern NSString *const kTVUPLRowSwitchEnabled;
 #pragma mark - LoginRow
-extern NSString *const kTVUPLLoginRow;
-
 extern NSString *const kTVUPLRowLoginBigWord;
 #pragma mark - RightValueRow
 extern NSString *const kTVUPLRightValueRow;

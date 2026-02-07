@@ -8,7 +8,11 @@
 #import <UIKit/UIKit.h>
 #import "TVUPLSection.h"
 #import "TVUPLRow.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+extern NSString *const kTVUPLDefaultRow;
+extern NSString *const kTVUPLLoginRow;
 
 @interface TVUStaticView : UIScrollView
 

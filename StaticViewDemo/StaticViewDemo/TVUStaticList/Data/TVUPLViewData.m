@@ -9,10 +9,10 @@
 
 #define DotMethod(TYPE, NAME, PRONAME) \
 - (TVUPLViewData *(^)(TYPE NAME))NAME { \
-return ^(TYPE NAME) { \
-self.PRONAME = NAME; \
-return self; \
-}; \
+    return ^(TYPE NAME) { \
+        self.PRONAME = NAME; \
+        return self; \
+    }; \
 }
 
 @interface TVUPLViewData ()
@@ -21,6 +21,7 @@ return self; \
 @property (nonatomic, assign, readwrite) CGFloat mcornerRadius;
 @property (nonatomic, assign, readwrite) UIEdgeInsets minsets;
 @property (nonatomic, assign, readwrite) BOOL mhidden;
+@property (nonatomic, assign, readwrite) CGRect mframe;
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mdataDict;
 @end
 
@@ -38,6 +39,7 @@ DotMethod(id, backgroundColor, mbackgroundColor)
 DotMethod(CGFloat, cornerRadius, mcornerRadius)
 DotMethod(UIEdgeInsets, insets, minsets)
 DotMethod(BOOL, hidden, mhidden)
+DotMethod(CGRect, frame, mframe)
 
 ///< 自定义
 - (TVUPLViewData *(^)(NSString *key, id value))custom {

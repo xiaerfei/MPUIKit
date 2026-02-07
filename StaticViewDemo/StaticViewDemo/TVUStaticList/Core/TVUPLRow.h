@@ -5,14 +5,17 @@
 //  Created by erfeixia on 2025/9/13.
 //
 #import <UIKit/UIKit.h>
-#import "TVUPLRowData.h"
-
+#import "TVUPLLabelData.h"
+#import "TVUPLImageData.h"
+#import "TVUPLViewData.h"
 
 #define RowUse(identifier) [[TVUPLRow alloc] initWithIdentifier:identifier]
 #define RowData  return [TVUPLRowData new]
 
 extern NSString *const kTVUPLDataTitle   ;
 extern NSString *const kTVUPLDataSubtitle;
+extern NSString *const kTVUPLDataValue   ;
+extern NSString *const kTVUPLDataScale   ;
 extern NSString *const kTVUPLDataImage   ;
 extern NSString *const kTVUPLDataKey0    ;
 extern NSString *const kTVUPLDataKey1    ;
@@ -25,6 +28,8 @@ extern NSString *const kTVUPLDataKey7    ;
 extern NSString *const kTVUPLDataKey8    ;
 extern NSString *const kTVUPLDataKey9    ;
 
+extern NSString *const kTVUPLDataLine;
+extern NSString *const kTVUPLDataRow;
 
 typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeDefault,
@@ -35,8 +40,8 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @class TVUPLSection, TVUPLBaseRow;
 
 @interface TVUPLRow : NSObject
-@property (nonatomic,   copy, readonly) NSString *rKey;
-@property (nonatomic,   copy, readonly) NSString *rIdentifier;
+@property (nonatomic,   copy, readonly) NSString *mkey;
+@property (nonatomic,   copy, readonly) NSString *midentifier;
 @property (nonatomic, assign, readonly) UIEdgeInsets rInsets;
 @property (nonatomic, assign, readonly) UIEdgeInsets rLineInsets;
 @property (nonatomic, strong, readonly) UIColor *rLineColor;
@@ -44,12 +49,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 ///< header、footer 或者 Cell 只有一行则强制显示
 @property (nonatomic, assign, readonly) BOOL rforceShowLine;
 @property (nonatomic, assign, readonly) BOOL rhidden;
-@property (nonatomic, assign, readonly) BOOL rshowIndicator;
-@property (nonatomic,   copy, readonly) NSString *rIndicatorImageName;
-@property (nonatomic, strong, readonly) UIColor *rIndicatorColor;
-@property (nonatomic, assign, readonly) BOOL rUnselected;
-@property (nonatomic, assign, readonly) BOOL rUnselectedStyle;
-@property (nonatomic, assign, readonly) BOOL rShowLeftImage;
+@property (nonatomic, assign, readonly) BOOL mshowIndicator;
 @property (nonatomic, assign, readonly) CGFloat rHeight;
 
 @property (nonatomic, strong, readonly) id rRowData;
@@ -71,14 +71,8 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
 - (TVUPLRow *(^)(NSString *identifier))identifier;
-- (TVUPLRow *(^)(UIEdgeInsets insets))insets;
-- (TVUPLRow *(^)(UIEdgeInsets lineInsets))lineInsets;
-- (TVUPLRow *(^)(UIColor *lineColor))lineColor;
-- (TVUPLRow *(^)(BOOL hiddenLine))hiddenLine;
 - (TVUPLRow *(^)(BOOL hidden))hidden;
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator;
-- (TVUPLRow *(^)(NSString *indicatorImageName))indicatorImageName;
-- (TVUPLRow *(^)(UIColor *indicatorColor))indicatorColor;
 - (TVUPLRow *(^)(BOOL unselected))unselected;
 - (TVUPLRow *(^)(BOOL unselectedStyle))unselectedStyle;
 - (TVUPLRow *(^)(CGFloat height))height;

@@ -7,10 +7,7 @@
 
 #import "TVUStaticView.h"
 #import "TVUPLBaseRow.h"
-#import "TVUPLViewData.h"
 #import "Masonry.h"
-
-NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
 
 @interface TVUStaticView ()
 @property (nonatomic, strong) UIStackView *mainStackView;
@@ -180,7 +177,7 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
 - (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section forRow:(BOOL)forRow {
     if (row.rprefetch) row.rprefetch(row);
     if (row.rowView == nil) {
-        row.rowView = [[NSClassFromString(row.rIdentifier) alloc] init];
+        row.rowView = [[NSClassFromString(row.midentifier) alloc] init];
         if (forRow) {
             [section.rowsStackView addArrangedSubview:row.rowView];
         } else {
@@ -192,8 +189,8 @@ NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
     row.rowView.plrow = row;
     [row.rowView updateWithData:row.rRowData];
     
-    if (row.rKey) {
-        self.rowDict[row.rKey] = row;
+    if (row.mkey) {
+        self.rowDict[row.mkey] = row;
     }
 }
 

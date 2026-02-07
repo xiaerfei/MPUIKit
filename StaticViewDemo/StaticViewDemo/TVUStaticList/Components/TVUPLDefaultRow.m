@@ -9,6 +9,9 @@
 #import "TVUPLDefaultView.h"
 #import "TVUPLSection.h"
 #import "Masonry.h"
+
+NSString *const kTVUPLDefaultRow = @"TVUPLDefaultRow";
+
 @interface TVUPLDefaultRow ()
 @property (nonatomic, strong) TVUPLDefaultView *defaultView;
 @end

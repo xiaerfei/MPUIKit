@@ -9,6 +9,8 @@
 
 NSString *const kTVUPLDataTitle     = @"DataTitle";
 NSString *const kTVUPLDataSubtitle  = @"DataSubtitle";
+NSString *const kTVUPLDataValue     = @"DataValue";
+NSString *const kTVUPLDataScale     = @"DataScale";
 NSString *const kTVUPLDataImage     = @"DataImage";
 NSString *const kTVUPLDataKey0      = @"DataKey0";
 NSString *const kTVUPLDataKey1      = @"DataKey1";
@@ -21,23 +23,29 @@ NSString *const kTVUPLDataKey7      = @"DataKey7";
 NSString *const kTVUPLDataKey8      = @"DataKey8";
 NSString *const kTVUPLDataKey9      = @"DataKey9";
 
+NSString *const kTVUPLDataLine      = @"DataLine";
+
+
+#define DotMethod(TYPE, NAME, PRONAME) \
+- (TVUPLRow *(^)(TYPE NAME))NAME { \
+    return ^(TYPE NAME) { \
+        self.PRONAME = NAME; \
+        return self; \
+    }; \
+}
+
+
 @interface TVUPLRow ()
-@property (nonatomic,   copy, readwrite) NSString *rKey;
-@property (nonatomic,   copy, readwrite) NSString *rIdentifier;
-@property (nonatomic, assign, readwrite) UIEdgeInsets rInsets;
-@property (nonatomic, assign, readwrite) UIEdgeInsets rLineInsets;
-@property (nonatomic, strong, readwrite) UIColor *rLineColor;
-@property (nonatomic, assign, readwrite) BOOL rhiddenLine;
-@property (nonatomic, assign, readwrite) BOOL rhidden;
-@property (nonatomic, assign, readwrite) BOOL rshowIndicator;
+@property (nonatomic,   copy, readwrite) NSString *mkey;
+@property (nonatomic,   copy, readwrite) NSString *midentifier;
+@property (nonatomic, assign, readwrite) BOOL mhidden;
+@property (nonatomic, assign, readwrite) BOOL mshowIndicator;
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
 @property (nonatomic, assign, readwrite) BOOL rUnselected;
 @property (nonatomic, assign, readwrite) BOOL rUnselectedStyle;
 @property (nonatomic, assign, readwrite) BOOL rShowLeftImage;
 @property (nonatomic, assign, readwrite) CGFloat rHeight;
-
-@property (nonatomic, strong, readwrite) id rRowData;
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mrowDataDict;
 
@@ -50,72 +58,19 @@ NSString *const kTVUPLDataKey9      = @"DataKey9";
 
 @implementation TVUPLRow
 #pragma mark - Chainable Setters
-- (TVUPLRow *(^)(NSString *key))key {
-    return ^(NSString *key) {
-        self.rKey = key;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(NSString *identifier))identifier {
-    return ^(NSString *identifier) {
-        self.rIdentifier = identifier;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(UIEdgeInsets insets))insets {
-    return ^(UIEdgeInsets insets) {
-        self.rInsets = insets;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(UIEdgeInsets lineInsets))lineInsets {
-    return ^(UIEdgeInsets lineInsets) {
-        self.rLineInsets = lineInsets;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(UIColor *lineColor))lineColor {
-    return ^(UIColor *lineColor) {
-        self.rLineColor = lineColor;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(BOOL hiddenLine))hiddenLine {
-    return ^(BOOL hiddenLine) {
-        self.rhiddenLine = hiddenLine;
-        return self;
-    };
-}
+DotMethod(NSString *, key, mkey)
+DotMethod(NSString *, identifier, midentifier)
 
 - (TVUPLRow *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {
-        self.rhidden = hidden;
+        self.mhidden = hidden;
         return self;
     };
 }
 
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator {
     return ^(BOOL showIndicator) {
-        self.rshowIndicator = showIndicator;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(NSString *indicatorImageName))indicatorImageName {
-    return ^(NSString *indicatorImageName) {
-        self.rIndicatorImageName = indicatorImageName;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(UIColor *indicatorColor))indicatorColor {
-    return ^(UIColor *indicatorColor) {
-        self.rIndicatorColor = indicatorColor;
+        self.mshowIndicator = showIndicator;
         return self;
     };
 }
@@ -137,21 +92,6 @@ NSString *const kTVUPLDataKey9      = @"DataKey9";
 - (TVUPLRow *(^)(CGFloat height))height {
     return ^(CGFloat height) {
         self.rHeight = height;
-        return self;
-    };
-}
-
-- (TVUPLRow *(^)(id (^)(void)))rowData {
-    return ^(id (^block)(void)) {
-        id value = nil;
-        if (block) value = block();
-        
-        if ([value isKindOfClass:TVUPLRowData.class]) {
-            TVUPLRowData *rowData = value;
-            self.rRowData = [rowData toRowDataDict];
-        } else {
-            self.rRowData = value;
-        }
         return self;
     };
 }
@@ -205,11 +145,8 @@ NSString *const kTVUPLDataKey9      = @"DataKey9";
 - (instancetype)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if (self) {
-        self.rIdentifier = identifier;
-        self.rHeight = 50;
-        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 20);
-        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
-        self.mrowDataDict = @{}.mutableCopy;
+        self.midentifier = identifier;
+        [self configure];
     }
     return self;
 }
@@ -217,12 +154,19 @@ NSString *const kTVUPLDataKey9      = @"DataKey9";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.rHeight = 50;
-        self.rInsets = UIEdgeInsetsMake(0, 20, 0, 20);
-        self.rLineInsets = UIEdgeInsetsMake(0, 20, 0, 15);
-        self.mrowDataDict = @{}.mutableCopy;
+        [self configure];
     }
     return self;
 }
+
+- (void)configure {
+    self.rHeight = 50;
+    self.mrowDataDict = @{}.mutableCopy;
+    self.mrowDataDict[kTVUPLDataRow] =
+    ViewData(kTVUPLDataRow)
+    .frame(CGRectMake(0, 0, 0, 50))
+    .insets(UIEdgeInsetsMake(0, 20, 0, 20));
+}
+
 
 @end

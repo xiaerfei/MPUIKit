@@ -14,7 +14,7 @@
 @property (nonatomic, strong, readwrite) UIView *plBackgroundView;
 @property (nonatomic, strong, readwrite) UIImageView *indicatorImageView;
 @property (nonatomic, strong) UIView *heightView;
-@property (nonatomic, strong) UIStackView *hStackView;
+@property (nonatomic, strong) UIStackView *hBaseStackView;
 @end
 
 @implementation TVUPLBaseRow
@@ -77,6 +77,7 @@
     self.lineView = line;
     
     self.plBackgroundView = [[UIView alloc] init];
+    self.plBackgroundView.mas_key = @"plBackgroundView";
     [self addSubview:self.plBackgroundView];
     
     [self.plBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,22 +89,25 @@
     stackView.spacing = 5;  // 每个项之间的间隔
     stackView.alignment = UIStackViewAlignmentFill;  // 填充子视图
     stackView.distribution = UIStackViewDistributionFill;  // 填充整个空间
-    self.hStackView = stackView;
-    [self.plBackgroundView addSubview:self.hStackView];
+    self.hBaseStackView = stackView;
+    self.hBaseStackView.mas_key = @"hBaseStackView";
+    [self.plBackgroundView addSubview:self.hBaseStackView];
     
-    [self.hStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.hBaseStackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self.plBackgroundView);
     }];
     
     self.plContentView = [[UIView alloc] init];
-    [self.hStackView addArrangedSubview:self.plContentView];
+    self.plContentView.mas_key = @"plContentView";
+    [self.hBaseStackView addArrangedSubview:self.plContentView];
     
     
     self.indicatorImageView = [[UIImageView alloc] init];
     self.indicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.indicatorImageView.image = [UIImage systemImageNamed:@"chevron.forward"];
     self.indicatorImageView.tintColor = [UIColor lightGrayColor];
-    [self.hStackView addArrangedSubview:self.indicatorImageView];
+    self.indicatorImageView.mas_key = @"indicator";
+    [self.hBaseStackView addArrangedSubview:self.indicatorImageView];
     
     [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@15);
@@ -115,11 +119,11 @@
 - (void)setPlrow:(TVUPLRow *)plrow {
     _plrow = plrow;
     
-    [self.hStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.hBaseStackView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.plBackgroundView).offset(plrow.rInsets.left);
         make.right.equalTo(self.plBackgroundView).offset(-plrow.rInsets.right);
     }];
-    self.indicatorImageView.hidden = !plrow.rshowIndicator;
+    self.indicatorImageView.hidden = !plrow.mshowIndicator;
 }
 
 @end

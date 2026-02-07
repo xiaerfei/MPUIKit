@@ -67,21 +67,16 @@
     return SectionUse
         .key(@"LoginSection")
         .prefetch(^(TVUPLSection *section) { section
-            .viewData(^id { return ViewData(kTVUPLDataSection)
-                .backgroundColor([UIColor redColor])
-                .cornerRadius(20)
-                .insets(UIEdgeInsetsMake(0, 30, 0, 30));
-            })
             .rows(@[
-                RowUse(kTVUPLDefaultRow)
+                RowUse(kTVUPLLoginRow)
                     .key(@"LoginRow")
                     .showIndicator(YES)
-                    .height(50)
+                    .height(60)
                     .prefetch(^(TVUPLRow *row) { row
-                        .hidden(self.unlogin)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
                                 .text(@"Sharexia")
-                                .font([UIFont systemFontOfSize:16])
+                                .font([UIFont systemFontOfSize:21])
+                                .numberOfLines(1)
                                 .textColor([UIColor whiteColor]);
                         })
                         .viewData(^id { return LabelData(kTVUPLDataSubtitle)
@@ -89,10 +84,20 @@
                                 .font([UIFont systemFontOfSize:13])
                                 .textColor([UIColor lightGrayColor]);
                         })
-                        .viewData(^id { return ImageData(kTVUPLDataImage)
-                                .systemIcon(@"person.crop.circle")
-                                .tintColor([UIColor grayColor])
-                                .size(CGSizeMake(40, 40));
+                        .viewData(^id { return LabelData(kTVUPLDataKey0)
+                                .text(@"S")
+                                .font([UIFont systemFontOfSize:25])
+                                .textAlignment(NSTextAlignmentCenter)
+                                .textColor([UIColor whiteColor])
+                                .cornerRadius(25)
+                                .frame(CGRectMake(0, 0, 50, 50))
+                                .backgroundColor([UIColor colorWithRed:82.0f/255.0f
+                                                                 green:80.0f/255.0f
+                                                                  blue:236.0f/255.0f
+                                                                 alpha:1]);
+                        })
+                        .tap(^(TVUPLRow *row, id value) {
+                            NSLog(@"Login click");
                         });
                     }),
                 RowUse(kTVUPLDefaultRow)
@@ -112,7 +117,41 @@
                                 .size(CGSizeMake(40, 40));
                         });
                     }),
-
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"Subscription")
+                    .showIndicator(YES)
+                    .height(40)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Subscription")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor([UIColor whiteColor]);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataValue)
+                                .text(@"Base")
+                                .font([UIFont systemFontOfSize:12])
+                                .textAlignment(NSTextAlignmentRight)
+                                .textColor([UIColor lightGrayColor]);
+                        });
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"ResetPID")
+                    .showIndicator(YES)
+                    .height(0)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Reset PID")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor([UIColor whiteColor]);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataValue)
+                                .text(@"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID")
+                                .font([UIFont systemFontOfSize:12])
+                                .textAlignment(NSTextAlignmentRight)
+                                .textColor([UIColor lightGrayColor])
+                                .custom(kTVUPLDataScale, @(0.6));
+                        });
+                    }),
             ]);
         });
 }
