@@ -24,7 +24,7 @@ NSString *const kTVUPLDataKey8      = @"DataKey8";
 NSString *const kTVUPLDataKey9      = @"DataKey9";
 
 NSString *const kTVUPLDataLine      = @"DataLine";
-
+NSString *const kTVUPLDataRow       = @"DataRow";
 
 #define DotMethod(TYPE, NAME, PRONAME) \
 - (TVUPLRow *(^)(TYPE NAME))NAME { \
@@ -165,7 +165,7 @@ DotMethod(NSString *, identifier, midentifier)
     self.mrowDataDict[kTVUPLDataRow] =
     ViewData(kTVUPLDataRow)
     .frame(CGRectMake(0, 0, 0, 50))
-    .insets(UIEdgeInsetsMake(0, 20, 0, 20));
+    .insets(UIEdgeInsetsMake(0, 15, 0, 15));
 }
 
 

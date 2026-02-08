@@ -79,7 +79,7 @@
 #pragma mark - Private Methods
 - (void)setupSubviews {
     self.hStackView = [self createStackViewWithAxis:UILayoutConstraintAxisHorizontal];
-    self.hStackView.spacing = 10;
+    self.hStackView.spacing = 5;
     [self addSubview:self.hStackView];
     
     // 图标

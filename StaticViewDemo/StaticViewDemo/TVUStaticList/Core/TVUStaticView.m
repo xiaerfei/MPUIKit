@@ -140,6 +140,11 @@
         [self prepareLayoutForRow:row section:section];
     }
     
+    TVUPLRow *lastRow = section.rrows.lastObject;
+    if ([lastRow customForKey:kTVUPLDataLine] == nil) {
+        lastRow.rowView.lineView.hidden = YES;
+    }
+    
     if (section.footer) {
         [self prepareDataForRow:section.footer section:section forRow:NO];
         [self prepareLayoutForRow:section.footer section:section];
@@ -182,6 +187,7 @@
             [section.rowsStackView addArrangedSubview:row.rowView];
         } else {
             [section.stackView addArrangedSubview:row.rowView];
+            row.rowView.lineView.hidden = YES;
         }
     }
     row.rowView.hidden = row.rhidden;

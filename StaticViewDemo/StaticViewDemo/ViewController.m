@@ -20,12 +20,17 @@
 @property (nonatomic, assign) BOOL unlogin;
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    NSInteger _count;
+    NSString *_pidString;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColorFromHex(0x141414);
+    
+    _pidString = @"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID";
     
     self.staticView = [[TVUStaticView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.staticView];
@@ -42,6 +47,9 @@
             .sections(@[
                 [self loginSection],
                 [self videoSection],
+                [self audioSection],
+                [self multistreamSection],
+                [self backupClipsSection],
             ]);
         });
     [self.staticView reload];
@@ -53,14 +61,32 @@
     [self.view addSubview:btn];
     
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.equalTo(self.view);
+        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         make.width.equalTo(@100);
     }];
 }
 
 - (void)changeAction {
-    self.unlogin = self.unlogin ? NO : YES;
-    [self.staticView reloadRowForKey:@"UnloginRow"];
+    switch (_count) {
+        case 1:
+            _pidString = @"这是业内较普遍的判断，认为本轮是持续2-3年的“超级周期”，价格上涨势头可能在2026年底趋缓，但价格真正回落要等到2027年。";
+            break;
+        case 2:
+            _pidString = @"理解预测分歧的关键在于区分不同产品。";
+            break;
+        case 3:
+            _pidString = @"根据最新的市场分析，这次内存涨价主要由人工智能（AI）需求爆发导致，因此难以像显卡降价那样因“挖矿”需求消失而快速回调。价格回归正常的时间窗口存在不确定性，市场主流观点是高价将持续2-3年，但也有较悲观或短期看跌的观点。";
+            break;
+        default:
+            _pidString = @"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID";
+            break;
+    }
+    _count++;
+    if (_count >= 5) {
+        _count = 1;
+    }
+    [self.staticView reloadRowForKey:@"ResetPID"];
 }
 #pragma mark - sections
 - (TVUPLSection *)loginSection {
@@ -71,8 +97,9 @@
                 RowUse(kTVUPLLoginRow)
                     .key(@"LoginRow")
                     .showIndicator(YES)
-                    .height(60)
+                    .height(50)
                     .prefetch(^(TVUPLRow *row) { row
+                        .hidden(!self.unlogin)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
                                 .text(@"Sharexia")
                                 .font([UIFont systemFontOfSize:21])
@@ -89,8 +116,8 @@
                                 .font([UIFont systemFontOfSize:25])
                                 .textAlignment(NSTextAlignmentCenter)
                                 .textColor([UIColor whiteColor])
-                                .cornerRadius(25)
-                                .frame(CGRectMake(0, 0, 50, 50))
+                                .cornerRadius(20)
+                                .frame(CGRectMake(0, 0, 40, 40))
                                 .backgroundColor([UIColor colorWithRed:82.0f/255.0f
                                                                  green:80.0f/255.0f
                                                                   blue:236.0f/255.0f
@@ -103,7 +130,7 @@
                 RowUse(kTVUPLDefaultRow)
                     .key(@"UnloginRow")
                     .showIndicator(YES)
-                    .height(60)
+                    .height(50)
                     .prefetch(^(TVUPLRow *row) { row
                         .hidden(self.unlogin)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
@@ -145,17 +172,17 @@
                                 .textColor([UIColor whiteColor]);
                         })
                         .viewData(^id { return LabelData(kTVUPLDataValue)
-                                .text(@"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID")
+                                .text(self->_pidString)
                                 .font([UIFont systemFontOfSize:12])
                                 .textAlignment(NSTextAlignmentRight)
-                                .textColor([UIColor lightGrayColor])
+                                .textColor([UIColor lightTextColor])
                                 .custom(kTVUPLDataScale, @(0.6));
                         });
                     }),
             ]);
         });
 }
-
+#pragma mark - Video
 - (TVUPLSection *)videoSection {
     return SectionUse
         .key(@"VideoSection")
@@ -163,9 +190,10 @@
             .rows(@[
                 RowUse(kTVUPLDefaultRow)
                     .type(TVUPLRowTypeHeader)
-                    .height(40)
+                    .height(30)
                     .viewData(^id { return LabelData(kTVUPLDataTitle)
                             .text(@"Video")
+                            .font([UIFont systemFontOfSize:13])
                             .textColor([UIColor grayColor]);
                     })
                     .viewData(^id { return ImageData(kTVUPLDataImage)
@@ -176,51 +204,37 @@
                     .key(@"Resolution")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
-                        .height(0)
+                        .height(44)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
-                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
-                                .font([UIFont systemFontOfSize:15])
+                                .text(@"Resolution")
+                                .font([UIFont systemFontOfSize:14])
                                 .textColor(UIColor.whiteColor);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataValue)
+                                .text(@"1920x1080")
+                                .font([UIFont systemFontOfSize:12])
+                                .textAlignment(NSTextAlignmentRight)
+                                .textColor(UIColor.lightTextColor);
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {
                         NSLog(@"1 click");
                     }),
                 RowUse(kTVUPLDefaultRow)
-                    .key(@"Test0")
+                    .key(@"Frame")
                     .showIndicator(YES)
                     .prefetch(^(TVUPLRow *row) { row
-                        .height(0)
+                        .height(44)
                         .viewData(^id { return LabelData(kTVUPLDataTitle)
-                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
-                                .font([UIFont systemFontOfSize:15])
+                                .text(@"Frame Rate")
+                                .font([UIFont systemFontOfSize:14])
                                 .textColor(UIColor.whiteColor);
-                        });
-                    })
-                    .tap(^(TVUPLRow *row, id value) {
-                        NSLog(@"1 click");
-                    }),
-                RowUse(kTVUPLDefaultRow)
-                    .key(@"Test")
-                    .showIndicator(NO)
-                    .height(0)
-                    .prefetch(^(TVUPLRow *row) { row
-                        .viewData(^id { return LabelData(kTVUPLDataTitle)
-                                .text(@"这是 title")
-                                .font([UIFont systemFontOfSize:15])
-                                .textColor(UIColor.whiteColor)
-                                .textAlignment(NSTextAlignmentLeft);
                         })
-                        .viewData(^id { return LabelData(kTVUPLDataSubtitle)
-                                .text(@"这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。这是第二条非常长的文本，它将占据多行以证明 Cell 的动态高度功能是生效的。")
-                                .font([UIFont systemFontOfSize:13])
-                                .textColor(UIColor.greenColor)
-                                .textAlignment(NSTextAlignmentLeft);
-                        })
-                        .viewData(^id { return ImageData(kTVUPLDataImage)
-                                .tintColor([UIColor lightGrayColor])
-                                .systemIcon(@"person.crop.circle")
-                                .size(CGSizeMake(20, 20));
+                        .viewData(^id { return LabelData(kTVUPLDataValue)
+                                .text(@"60p")
+                                .font([UIFont systemFontOfSize:12])
+                                .textAlignment(NSTextAlignmentRight)
+                                .textColor(UIColor.lightTextColor);
                         });
                     })
                     .tap(^(TVUPLRow *row, id value) {
@@ -229,5 +243,148 @@
             ]);
         });
 }
-
+#pragma mark - Audio
+- (TVUPLSection *)audioSection {
+    return SectionUse
+        .key(@"VideoSection")
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowUse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .viewData(^id { return LabelData(kTVUPLDataTitle)
+                            .text(@"Audio")
+                            .font([UIFont systemFontOfSize:13])
+                            .textColor([UIColor grayColor]);
+                    })
+                    .viewData(^id { return ImageData(kTVUPLDataImage)
+                            .icon(@"tvu_cover_mic")
+                            .size(CGSizeMake(16, 16));
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"ShareScreen")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(44)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Share Screen")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor(UIColor.whiteColor);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataValue)
+                                .text(@"Mix Mic and Audio from Share screen")
+                                .font([UIFont systemFontOfSize:12])
+                                .textAlignment(NSTextAlignmentRight)
+                                .textColor(UIColor.lightTextColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    })
+            ]);
+        });
+}
+#pragma mark - Multistream
+- (TVUPLSection *)multistreamSection {
+    return SectionUse
+        .key(@"Multistream")
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowUse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .viewData(^id { return LabelData(kTVUPLDataTitle)
+                            .text(@"Multistream")
+                            .font([UIFont systemFontOfSize:13])
+                            .textColor([UIColor grayColor]);
+                    })
+                    .viewData(^id { return ImageData(kTVUPLDataImage)
+                            .icon(@"tvu_share_platforms")
+                            .size(CGSizeMake(16, 16));
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"StreamInfo")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(44)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Stream Info")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor(UIColor.whiteColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"SocialPlatforms")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(44)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Social Platforms")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor(UIColor.whiteColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
+#pragma mark - Multistream
+- (TVUPLSection *)backupClipsSection {
+    return SectionUse
+        .key(@"BackupClips")
+        .prefetch(^(TVUPLSection *section) { section
+            .rows(@[
+                RowUse(kTVUPLDefaultRow)
+                    .type(TVUPLRowTypeHeader)
+                    .height(30)
+                    .viewData(^id { return LabelData(kTVUPLDataTitle)
+                            .text(@"Backup Clips")
+                            .font([UIFont systemFontOfSize:13])
+                            .textColor([UIColor grayColor]);
+                    })
+                    .viewData(^id { return ImageData(kTVUPLDataImage)
+                            .icon(@"tvu_setting_backupclips")
+                            .size(CGSizeMake(16, 16));
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"DisasterRecovery")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(44)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Disaster Recovery")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor(UIColor.whiteColor);
+                        })
+                        .viewData(^id { return LabelData(kTVUPLDataSubtitle)
+                                .text(@"Switch backup source when detect black frame")
+                                .font([UIFont systemFontOfSize:12])
+                                .textColor(UIColor.lightTextColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+                RowUse(kTVUPLDefaultRow)
+                    .key(@"ManageBackupClips")
+                    .showIndicator(YES)
+                    .prefetch(^(TVUPLRow *row) { row
+                        .height(44)
+                        .viewData(^id { return LabelData(kTVUPLDataTitle)
+                                .text(@"Manage backup clips")
+                                .font([UIFont systemFontOfSize:14])
+                                .textColor(UIColor.whiteColor);
+                        });
+                    })
+                    .tap(^(TVUPLRow *row, id value) {
+                        NSLog(@"1 click");
+                    }),
+            ]);
+        });
+}
 @end

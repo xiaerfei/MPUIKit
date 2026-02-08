@@ -33,10 +33,12 @@
 // 触摸开始（按下）
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    if ([self isHeaderOrFooter]) return;
     self.plBackgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
 }
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
     [super touchesMoved:touches withEvent:event];
+    if ([self isHeaderOrFooter]) return;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
@@ -44,6 +46,7 @@
 // 触摸结束（松开）
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    if ([self isHeaderOrFooter]) return;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
@@ -110,7 +113,7 @@
     [self.hBaseStackView addArrangedSubview:self.indicatorImageView];
     
     [self.indicatorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@15);
+        make.width.equalTo(@10);
     }];
     
     self.indicatorImageView.hidden = YES;
@@ -118,12 +121,19 @@
 
 - (void)setPlrow:(TVUPLRow *)plrow {
     _plrow = plrow;
-    
+    TVUPLViewData *viewData = [plrow customForKey:kTVUPLDataRow];
+    CGFloat left  = viewData.minsets.left;
+    CGFloat right = viewData.minsets.right;
     [self.hBaseStackView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.plBackgroundView).offset(plrow.rInsets.left);
-        make.right.equalTo(self.plBackgroundView).offset(-plrow.rInsets.right);
+        make.left.equalTo(self.plBackgroundView).offset(left);
+        make.right.equalTo(self.plBackgroundView).offset(-right);
     }];
     self.indicatorImageView.hidden = !plrow.mshowIndicator;
+}
+
+- (BOOL)isHeaderOrFooter {
+    TVUPLRowType type = self.plrow.rrowType;
+    return type == TVUPLRowTypeHeader || type == TVUPLRowTypeFooter;
 }
 
 @end
