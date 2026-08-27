@@ -188,6 +188,7 @@
     row.rstaticView = self;
     [TVUPLState beginEvaluatingRow:row];
     if (row.rprefetch) row.rprefetch(row);
+    [row resolveBindings];
     [TVUPLState endEvaluating];
     if (row.rowView == nil) {
         row.rowView = [[NSClassFromString(row.midentifier) alloc] init];

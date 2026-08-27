@@ -48,6 +48,7 @@ NSString *const kTVUPLDataRow       = @"DataRow";
 @property (nonatomic, assign, readwrite) CGFloat rHeight;
 
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mrowDataDict;
+@property (nonatomic, strong) NSMutableDictionary <NSString *, TVUPLState *>*rbindings;
 
 @property (nonatomic,   copy, readwrite) void (^rDidSelectedBlock)(TVUPLRow *row, id value);
 @property (nonatomic,   copy, readwrite) void (^rFetchRowParameterBlock)(TVUPLRow *row);
@@ -132,6 +133,79 @@ DotMethod(NSString *, identifier, midentifier)
         return self;
     };
 }
+#pragma mark - Slots
+///< 取槽位对应的 LabelData，没有或类型不符则新建 —— 让槽位方法与 viewData 可以任意顺序组合
+- (TVUPLLabelData *)labelDataForKey:(NSString *)key {
+    TVUPLLabelData *data = self.mrowDataDict[key];
+    if ([data isKindOfClass:TVUPLLabelData.class] == NO) {
+        data = LabelData(key);
+        self.mrowDataDict[key] = data;
+    }
+    return data;
+}
+
+- (TVUPLRow *(^)(NSString *title))title {
+    return ^(NSString *title) {
+        [self labelDataForKey:kTVUPLDataTitle].text(title);
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(NSString *subtitle))subtitle {
+    return ^(NSString *subtitle) {
+        [self labelDataForKey:kTVUPLDataSubtitle].text(subtitle);
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(NSString *value))value {
+    return ^(NSString *value) {
+        [self labelDataForKey:kTVUPLDataValue].text(value);
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(NSString *icon))icon {
+    return ^(NSString *icon) {
+        TVUPLImageData *data = self.mrowDataDict[kTVUPLDataImage];
+        if ([data isKindOfClass:TVUPLImageData.class] == NO) {
+            data = ImageData(kTVUPLDataImage);
+            self.mrowDataDict[kTVUPLDataImage] = data;
+        }
+        data.icon(icon);
+        return self;
+    };
+}
+#pragma mark - Bindings
+- (TVUPLRow *(^)(TVUPLState<NSString *> *state))bindTitle {
+    return ^(TVUPLState<NSString *> *state) {
+        self.rbindings[kTVUPLDataTitle] = state;
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(TVUPLState<NSString *> *state))bindSubtitle {
+    return ^(TVUPLState<NSString *> *state) {
+        self.rbindings[kTVUPLDataSubtitle] = state;
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(TVUPLState<NSString *> *state))bindValue {
+    return ^(TVUPLState<NSString *> *state) {
+        self.rbindings[kTVUPLDataValue] = state;
+        return self;
+    };
+}
+
+///< 只在求值作用域内被调用；这里的 state.value 读取就是订阅登记
+- (void)resolveBindings {
+    [self.rbindings enumerateKeysAndObjectsUsingBlock:
+     ^(NSString *key, TVUPLState *state, BOOL *stop) {
+        [self labelDataForKey:key].text(state.value);
+    }];
+}
+
 - (id)customForKey:(NSString *)key {
     if ([key isKindOfClass:NSString.class] == NO ||
         key.length == 0) {
@@ -161,6 +235,7 @@ DotMethod(NSString *, identifier, midentifier)
 - (void)configure {
     self.rHeight = 50;
     _rstates = [NSHashTable weakObjectsHashTable];
+    _rbindings = @{}.mutableCopy;
     self.mrowDataDict = @{}.mutableCopy;
     self.mrowDataDict[kTVUPLDataRow] =
     ViewData(kTVUPLDataRow)
