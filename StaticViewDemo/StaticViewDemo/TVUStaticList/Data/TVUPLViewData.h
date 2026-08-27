@@ -33,6 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (TVUPLViewData *(^)(NSString *key, id value))custom;
 - (id)customForKey:(NSString *)key;
 
+#pragma mark - 框架内部
+///< 记录/查询某个属性是否被显式设置过。
+///< configure: 据此决定是否覆盖 view 自身的默认样式 —— 没设过就不碰，
+///< 这样 View 层的默认字体、颜色才不会被 nil 冲掉。
+- (void)markSet:(NSString *)propertyName;
+- (BOOL)isSet:(NSString *)propertyName;
+
 - (void)configure:(UIView *)view;
 @end
 

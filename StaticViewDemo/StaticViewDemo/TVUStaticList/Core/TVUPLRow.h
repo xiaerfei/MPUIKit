@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
     TVUPLRowTypeFooter
 };
 
-@class TVUPLSection, TVUPLBaseRow;
+@class TVUPLSection, TVUPLBaseRow, TVUStaticView, TVUPLState;
 
 @interface TVUPLRow : NSObject
 @property (nonatomic,   copy, readonly) NSString *mkey;
@@ -66,7 +66,10 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 @property (nonatomic,   copy, readonly) void(^rprefetch)(TVUPLRow *row);
 
 @property (nonatomic, weak) TVUPLSection *rsection;
+@property (nonatomic, weak) TVUStaticView *rstaticView;
 @property (nonatomic, strong) TVUPLBaseRow *rowView;
+///< 本行依赖的 TVUPLState 集合（弱引用），供下次求值前解绑
+@property (nonatomic, strong, readonly) NSHashTable <TVUPLState *>*rstates;
 
 // 链式调用方法
 - (TVUPLRow *(^)(NSString *key))key;
@@ -83,7 +86,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(TVUPLRowType rowType))type;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))prefetch;
 
-- (TVUPLRow *(^)(id (^)(void)))viewData;
+- (TVUPLRow *(^)(TVUPLViewData *data))viewData;
 - (id)customForKey:(NSString *)key;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier;

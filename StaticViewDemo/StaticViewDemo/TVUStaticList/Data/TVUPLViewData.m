@@ -11,6 +11,7 @@
 - (TVUPLViewData *(^)(TYPE NAME))NAME { \
     return ^(TYPE NAME) { \
         self.PRONAME = NAME; \
+        [self markSet:@#PRONAME]; \
         return self; \
     }; \
 }
@@ -23,6 +24,7 @@
 @property (nonatomic, assign, readwrite) BOOL mhidden;
 @property (nonatomic, assign, readwrite) CGRect mframe;
 @property (nonatomic, strong, readwrite) NSMutableDictionary *mdataDict;
+@property (nonatomic, strong) NSMutableSet <NSString *>*msetKeys;
 @end
 
 @implementation TVUPLViewData
@@ -30,8 +32,18 @@
     self = [super init];
     if (self) {
         self.mdataDict = @{}.mutableCopy;
+        self.msetKeys = [NSMutableSet set];
     }
     return self;
+}
+
+#pragma mark - 框架内部
+- (void)markSet:(NSString *)propertyName {
+    if (propertyName.length) [self.msetKeys addObject:propertyName];
+}
+
+- (BOOL)isSet:(NSString *)propertyName {
+    return [self.msetKeys containsObject:propertyName];
 }
 
 DotMethod(NSString *, key, mkey)
@@ -56,14 +68,15 @@ DotMethod(CGRect, frame, mframe)
 }
 
 - (void)configure:(UIView *)view {
-    if (self.mbackgroundColor) {
-        view.backgroundColor = self.mbackgroundColor;
-    } else {
-        view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor =
+    self.mbackgroundColor ? self.mbackgroundColor : [UIColor clearColor];
+
+    if ([self isSet:@"mcornerRadius"]) {
+        view.layer.cornerRadius  = self.mcornerRadius;
+        view.layer.masksToBounds = self.mcornerRadius != 0;
     }
-    
-    view.layer.cornerRadius = self.mcornerRadius;
-    view.layer.masksToBounds = self.mcornerRadius != 0;
-    view.hidden = self.mhidden;
+    if ([self isSet:@"mhidden"]) {
+        view.hidden = self.mhidden;
+    }
 }
 @end

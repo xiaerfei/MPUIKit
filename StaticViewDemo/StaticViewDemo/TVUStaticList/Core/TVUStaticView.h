@@ -21,6 +21,7 @@ extern NSString *const kTVUPLLoginRow;
 - (void)reload;
 
 - (void)reloadSectionForKey:(NSString *)key;
+- (void)reloadRow:(TVUPLRow *)row;
 - (void)reloadRowForKey:(NSString *)key;
 
 @end

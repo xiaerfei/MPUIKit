@@ -95,7 +95,7 @@
     // 标题
     self.titleLabel = [[UILabel alloc] init];
     // 默认样式
-    self.titleLabel.font = [UIFont systemFontOfSize:15];
+    self.titleLabel.font = [UIFont systemFontOfSize:14];
     self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.numberOfLines = 0;
     [textContent addSubview:self.titleLabel];
@@ -115,8 +115,9 @@
     // 标题
     self.valueLabel = [[UILabel alloc] init];
     // 默认样式
-    self.valueLabel.font = [UIFont systemFontOfSize:15];
-    self.valueLabel.textColor = [UIColor whiteColor];
+    self.valueLabel.font = [UIFont systemFontOfSize:12];
+    self.valueLabel.textColor = [UIColor lightTextColor];
+    self.valueLabel.textAlignment = NSTextAlignmentRight;
     self.valueLabel.numberOfLines = 0;
     
     UIView *valueContent = [[UIView alloc] init];

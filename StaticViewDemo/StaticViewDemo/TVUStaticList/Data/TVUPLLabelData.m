@@ -11,6 +11,7 @@
 - (TVUPLLabelData *(^)(TYPE NAME))NAME { \
 return ^(TYPE NAME) { \
 self.PRONAME = NAME; \
+[self markSet:@#PRONAME]; \
 return self; \
 }; \
 }
@@ -38,11 +39,12 @@ DotMethod(NSAttributedString *, attributedText, mattributedText)
 - (void)configure:(UILabel *)label {
     [super configure:label];
     
-    label.textColor = self.mtextColor;
-    label.font = self.mfont;
-    label.textAlignment = self.mtextAlignment;
-    label.lineBreakMode = self.mlineBreakMode;
-    label.numberOfLines = self.mnumberOfLines;
+    ///< 没显式设置过的属性不碰，保留 label 自身的默认样式
+    if ([self isSet:@"mtextColor"])     label.textColor     = self.mtextColor;
+    if ([self isSet:@"mfont"])          label.font          = self.mfont;
+    if ([self isSet:@"mtextAlignment"]) label.textAlignment = self.mtextAlignment;
+    if ([self isSet:@"mlineBreakMode"]) label.lineBreakMode = self.mlineBreakMode;
+    if ([self isSet:@"mnumberOfLines"]) label.numberOfLines = self.mnumberOfLines;
     if (self.mattributedText) {
         label.attributedText = self.mattributedText;
     } else if (self.mtext) {

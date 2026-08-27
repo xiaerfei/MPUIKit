@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const kTVUPLDataSection;
 
-@class TVUPLRow;
+@class TVUPLRow, TVUPLViewData;
 
 @interface TVUPLSection : NSObject
 @property (nonatomic,   copy) NSString *rkey;
@@ -63,7 +63,7 @@ extern NSString *const kTVUPLDataSection;
 - (TVUPLSection *(^)(NSArray *rows))rows;
 - (TVUPLSection *(^)(void(^)(TVUPLSection *section)))prefetch;
 
-- (TVUPLSection *(^)(id (^)(void)))viewData;
+- (TVUPLSection *(^)(TVUPLViewData *data))viewData;
 - (id)customForKey:(NSString *)key;
 
 @end

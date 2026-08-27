@@ -38,7 +38,7 @@ NSString *const kTVUPLDataRow       = @"DataRow";
 @interface TVUPLRow ()
 @property (nonatomic,   copy, readwrite) NSString *mkey;
 @property (nonatomic,   copy, readwrite) NSString *midentifier;
-@property (nonatomic, assign, readwrite) BOOL mhidden;
+@property (nonatomic, assign, readwrite) BOOL rhidden;
 @property (nonatomic, assign, readwrite) BOOL mshowIndicator;
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
@@ -63,7 +63,7 @@ DotMethod(NSString *, identifier, midentifier)
 
 - (TVUPLRow *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {
-        self.mhidden = hidden;
+        self.rhidden = hidden;
         return self;
     };
 }
@@ -124,10 +124,9 @@ DotMethod(NSString *, identifier, midentifier)
     };
 }
 
-- (TVUPLRow *(^)(id (^)(void)))viewData {
-    return ^(id (^block)(void)) {
-        TVUPLViewData *viewData = block ? block() : nil;
-        if ([viewData isKindOfClass:TVUPLViewData.class]) {
+- (TVUPLRow *(^)(TVUPLViewData *data))viewData {
+    return ^(TVUPLViewData *viewData) {
+        if (viewData.mkey.length) {
             self.mrowDataDict[viewData.mkey] = viewData;
         }
         return self;
@@ -161,6 +160,7 @@ DotMethod(NSString *, identifier, midentifier)
 
 - (void)configure {
     self.rHeight = 50;
+    _rstates = [NSHashTable weakObjectsHashTable];
     self.mrowDataDict = @{}.mutableCopy;
     self.mrowDataDict[kTVUPLDataRow] =
     ViewData(kTVUPLDataRow)

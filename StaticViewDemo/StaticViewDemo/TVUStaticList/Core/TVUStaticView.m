@@ -7,6 +7,7 @@
 
 #import "TVUStaticView.h"
 #import "TVUPLBaseRow.h"
+#import "TVUPLState.h"
 #import "Masonry.h"
 
 @interface TVUStaticView ()
@@ -43,10 +44,13 @@
 
 - (void)reload {
     
-    NSArray<UIView *> *arrangedSubviews = self.mainStackView.arrangedSubviews;
-    for (UIView *item in arrangedSubviews) {
-        [self.mainStackView removeArrangedSubview:item];
+    // removeArrangedSubview: 只把 view 摘出 arrangedSubviews 列表，
+    // view 本身仍留在 subviews 中，必须 removeFromSuperview 才会真正移除
+    for (UIView *item in self.mainStackView.arrangedSubviews) {
+        [item removeFromSuperview];
     }
+    [self.sectionDict removeAllObjects];
+    [self.rowDict removeAllObjects];
     
     if (self.rprefetch) self.rprefetch(self);
     
@@ -68,18 +72,19 @@
     [self prepareLayoutForSection:section];
 }
 
-- (void)reloadRowForKey:(NSString *)key {
-    if (key.length == 0) return;
-    
-    TVUPLRow *row = self.rowDict[key];
+- (void)reloadRow:(TVUPLRow *)row {
     if (row == nil) return;
     
-    if (row.rprefetch) row.rprefetch(row);
-    
+    // rprefetch 由 prepareDataForRow: 内部触发，此处不再重复调用
     [self prepareDataForRow:row
                     section:row.rsection
                      forRow:row.rrowType == TVUPLRowTypeDefault];
     [self prepareLayoutForRow:row section:row.rsection];
+}
+
+- (void)reloadRowForKey:(NSString *)key {
+    if (key.length == 0) return;
+    [self reloadRow:self.rowDict[key]];
 }
 #pragma mark - Private Methods
 - (void)setupSubviews {
@@ -175,12 +180,15 @@
     section.backgroundView.layer.cornerRadius  = viewData.mcornerRadius;
     section.backgroundView.layer.masksToBounds = viewData.mcornerRadius != 0;
     
-    section.contentView.hidden = viewData.mhidden;
+    section.contentView.hidden = section.rhidden || viewData.mhidden;
 }
 
 #pragma mark - Row Methods
 - (void)prepareDataForRow:(TVUPLRow *)row section:(TVUPLSection *)section forRow:(BOOL)forRow {
+    row.rstaticView = self;
+    [TVUPLState beginEvaluatingRow:row];
     if (row.rprefetch) row.rprefetch(row);
+    [TVUPLState endEvaluating];
     if (row.rowView == nil) {
         row.rowView = [[NSClassFromString(row.midentifier) alloc] init];
         if (forRow) {

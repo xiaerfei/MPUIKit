@@ -73,10 +73,9 @@ NSString *const kTVUPLDataSection = @"DataSection";
     };
 }
 
-- (TVUPLSection *(^)(id (^)(void)))viewData {
-    return ^(id (^block)(void)) {
-        TVUPLViewData *viewData = block ? block() : nil;
-        if ([viewData isKindOfClass:TVUPLViewData.class]) {
+- (TVUPLSection *(^)(TVUPLViewData *data))viewData {
+    return ^(TVUPLViewData *viewData) {
+        if (viewData.mkey.length) {
             self.mrowDataDict[viewData.mkey] = viewData;
         }
         return self;

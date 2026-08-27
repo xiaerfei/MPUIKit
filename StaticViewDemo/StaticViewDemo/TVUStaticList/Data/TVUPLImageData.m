@@ -20,6 +20,7 @@
 - (TVUPLImageData *(^)(TYPE NAME))NAME { \
 return ^(TYPE NAME) { \
 self.PRONAME = NAME; \
+[self markSet:@#PRONAME]; \
 return self; \
 }; \
 }
@@ -42,7 +43,9 @@ DotMethod(id, tintColor, mtintColor)
             imageView.image = nil;
         }
     }
-    imageView.tintColor = self.mtintColor ? self.mtintColor : nil;
+    if ([self isSet:@"mtintColor"]) {
+        imageView.tintColor = self.mtintColor;
+    }
 }
 
 @end
