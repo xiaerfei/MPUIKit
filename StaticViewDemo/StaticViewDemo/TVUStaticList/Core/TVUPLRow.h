@@ -10,9 +10,12 @@
 #import "TVUPLViewData.h"
 #import "TVUPLState.h"
 
-#define RowUse(identifier) [[TVUPLRow alloc] initWithIdentifier:identifier]
-///< 默认样式行（kTVUPLDefaultRow），绝大多数行用它
-#define RowDefault RowUse(kTVUPLDefaultRow)
+///< 自定义行类：按 identifier（类名）创建
+#define RowCustom(IDENTIFIER) [[TVUPLRow alloc] initWithIdentifier:IDENTIFIER]
+///< 默认样式的无标题行，header 等特殊行用它
+#define RowDefault RowCustom(kTVUPLDefaultRow)
+///< 标题行：绝大多数行的起手式，与 SectionUse 对仗
+#define RowUse(TITLE) RowDefault.title(TITLE)
 #define RowData  return [TVUPLRowData new]
 
 extern NSString *const kTVUPLDataTitle   ;
@@ -78,12 +81,16 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(NSString *key))key;
 - (TVUPLRow *(^)(NSString *identifier))identifier;
 - (TVUPLRow *(^)(BOOL hidden))hidden;
+///< 默认跟随 tap/onTap：可点的行自动显示指示器；调用本方法即显式覆盖
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator;
 - (TVUPLRow *(^)(BOOL unselected))unselected;
 - (TVUPLRow *(^)(BOOL unselectedStyle))unselectedStyle;
+///< 不设即自动高度（内容撑开，44pt 触控下限）；设置则为固定高度
 - (TVUPLRow *(^)(CGFloat height))height;
 
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row, id value)))tap;
+///< 不需要 row/value 上下文时的简写
+- (TVUPLRow *(^)(void(^)(void)))onTap;
 - (TVUPLRow *(^)(void(^)(TVUPLRow *row)))fetchRowParameterBlock;
 
 - (TVUPLRow *(^)(TVUPLRowType rowType))type;
@@ -93,7 +100,8 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (id)customForKey:(NSString *)key;
 
 #pragma mark - 常用槽位
-///< 与 .viewData 可组合：槽位方法只更新文字/图名，同 key 已有的数据对象保留其余样式
+///< 与 .viewData 可组合：槽位方法只更新文字/图名，同 key 已有的数据对象保留其余样式。
+///< 同 key 混用时 viewData 写在前面 —— viewData 是整体替换，槽位是合并
 - (TVUPLRow *(^)(NSString *title))title;
 - (TVUPLRow *(^)(NSString *subtitle))subtitle;
 - (TVUPLRow *(^)(NSString *value))value;

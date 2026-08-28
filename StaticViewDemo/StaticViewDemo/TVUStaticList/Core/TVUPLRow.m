@@ -40,6 +40,7 @@ NSString *const kTVUPLDataRow       = @"DataRow";
 @property (nonatomic,   copy, readwrite) NSString *midentifier;
 @property (nonatomic, assign, readwrite) BOOL rhidden;
 @property (nonatomic, assign, readwrite) BOOL mshowIndicator;
+@property (nonatomic, assign) BOOL rindicatorSet;
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
 @property (nonatomic, assign, readwrite) BOOL rUnselected;
@@ -71,9 +72,16 @@ DotMethod(NSString *, identifier, midentifier)
 
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator {
     return ^(BOOL showIndicator) {
+        self.rindicatorSet = YES;
         self.mshowIndicator = showIndicator;
         return self;
     };
+}
+
+///< 未显式设置时跟随 tap：可点的行默认带指示器
+- (BOOL)mshowIndicator {
+    if (self.rindicatorSet == NO) return self.rDidSelectedBlock != nil;
+    return _mshowIndicator;
 }
 
 - (TVUPLRow *(^)(BOOL unselected))unselected {
@@ -100,6 +108,13 @@ DotMethod(NSString *, identifier, midentifier)
 - (TVUPLRow *(^)(void (^)(TVUPLRow *, id)))tap {
     return ^(void (^block)(TVUPLRow *row, id value)) {
         self.rDidSelectedBlock = block;
+        return self;
+    };
+}
+
+- (TVUPLRow *(^)(void (^)(void)))onTap {
+    return ^(void (^block)(void)) {
+        self.rDidSelectedBlock = block ? ^(TVUPLRow *r, id v) { block(); } : nil;
         return self;
     };
 }
@@ -233,7 +248,8 @@ DotMethod(NSString *, identifier, midentifier)
 }
 
 - (void)configure {
-    self.rHeight = 50;
+    ///< 0 = 自动高度（44pt 下限），见 prepareLayoutForRow:
+    self.rHeight = 0;
     _rstates = [NSHashTable weakObjectsHashTable];
     _rbindings = @{}.mutableCopy;
     self.mrowDataDict = @{}.mutableCopy;

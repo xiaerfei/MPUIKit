@@ -103,162 +103,116 @@
 }
 #pragma mark - Sections
 - (TVUPLSection *)loginSection {
-    return SectionUse
-        .key(@"LoginSection")
-        .rows(@[
-            RowUse(kTVUPLLoginRow)
-                .key(@"LoginRow")
-                .showIndicator(YES)
-                .height(50)
-                .viewData(LabelData(kTVUPLDataTitle)
-                        .text(@"Sharexia")
-                        .font([UIFont systemFontOfSize:21])
-                        .numberOfLines(1))
-                .viewData(LabelData(kTVUPLDataSubtitle)
-                        .text(@"sharexia@tvunetworks.com")
-                        .textColor([UIColor lightGrayColor]))
-                .viewData(LabelData(kTVUPLDataKey0)
-                        .text(@"S")
-                        .font([UIFont systemFontOfSize:25])
-                        .textAlignment(NSTextAlignmentCenter)
-                        .textColor([UIColor whiteColor])
-                        .cornerRadius(20)
-                        .frame(CGRectMake(0, 0, 40, 40))
-                        .backgroundColor([UIColor colorWithRed:82.0f/255.0f
-                                                         green:80.0f/255.0f
-                                                          blue:236.0f/255.0f
-                                                         alpha:1]))
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"Login click");
-                })
-                .prefetch(^(TVUPLRow *row) { row
-                    .hidden(!self.unlogin);
-                }),
-            RowDefault
-                .key(@"UnloginRow")
-                .showIndicator(YES)
-                .height(50)
-                .viewData(LabelData(kTVUPLDataTitle)
-                        .text(@"UnLogin")
-                        .font([UIFont systemFontOfSize:16]))
-                .viewData(ImageData(kTVUPLDataImage)
-                        .systemIcon(@"person.crop.circle")
-                        .tintColor([UIColor grayColor])
-                        .size(CGSizeMake(40, 40)))
-                .prefetch(^(TVUPLRow *row) { row
-                    .hidden(self.unlogin);
-                }),
-            RowDefault
-                .key(@"Subscription")
-                .showIndicator(YES)
-                .height(40)
-                .title(@"Subscription")
-                .viewData(LabelData(kTVUPLDataValue)
-                        .text(@"Base")
-                        .textColor([UIColor lightGrayColor])),
-            RowDefault
-                .key(@"ResetPID")
-                .showIndicator(YES)
-                .height(0)
-                .title(@"Reset PID")
-                .bindValue(self.pidString)
-                .viewData(LabelData(kTVUPLDataValue)
-                        .custom(kTVUPLDataScale, @(0.6))),
-        ]);
+    return SectionUse.rows(@[
+        RowCustom(kTVUPLLoginRow)
+            .height(50)
+            .viewData(LabelData(kTVUPLDataTitle)
+                    .text(@"Sharexia")
+                    .font([UIFont systemFontOfSize:21])
+                    .numberOfLines(1))
+            .viewData(LabelData(kTVUPLDataSubtitle)
+                    .text(@"sharexia@tvunetworks.com")
+                    .textColor([UIColor lightGrayColor]))
+            .viewData(LabelData(kTVUPLDataKey0)
+                    .text(@"S")
+                    .font([UIFont systemFontOfSize:25])
+                    .textAlignment(NSTextAlignmentCenter)
+                    .textColor([UIColor whiteColor])
+                    .cornerRadius(20)
+                    .frame(CGRectMake(0, 0, 40, 40))
+                    .backgroundColor([UIColor colorWithRed:82.0f/255.0f
+                                                     green:80.0f/255.0f
+                                                      blue:236.0f/255.0f
+                                                     alpha:1]))
+            .onTap(^{
+                NSLog(@"Login click");
+            })
+            .prefetch(^(TVUPLRow *row) { row
+                .hidden(!self.unlogin);
+            }),
+        RowDefault
+            .height(50)
+            .showIndicator(YES)
+            .viewData(LabelData(kTVUPLDataTitle)
+                    .text(@"UnLogin")
+                    .font([UIFont systemFontOfSize:16]))
+            .viewData(ImageData(kTVUPLDataImage)
+                    .systemIcon(@"person.crop.circle")
+                    .tintColor([UIColor grayColor])
+                    .size(CGSizeMake(40, 40)))
+            .prefetch(^(TVUPLRow *row) { row
+                .hidden(self.unlogin);
+            }),
+        RowUse(@"Subscription")
+            .height(40)
+            .showIndicator(YES)
+            .viewData(LabelData(kTVUPLDataValue)
+                    .text(@"Base")
+                    .textColor([UIColor lightGrayColor])),
+        RowUse(@"Reset PID")
+            .showIndicator(YES)
+            .bindValue(self.pidString)
+            .viewData(LabelData(kTVUPLDataValue)
+                    .custom(kTVUPLDataScale, @(0.6))),
+    ]);
 }
 #pragma mark - Video
 - (TVUPLSection *)videoSection {
-    return SectionUse
-        .key(@"VideoSection")
-        .rows(@[
-            [self headerRow:@"Video" icon:@"tvu_setting_camera"],
-            RowDefault
-                .key(@"Resolution")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Resolution")
-                .value(@"1920x1080")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-            RowDefault
-                .key(@"Frame")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Frame Rate")
-                .value(@"60p")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-        ]);
+    return SectionUse.rows(@[
+        [self headerRow:@"Video" icon:@"tvu_setting_camera"],
+        RowUse(@"Resolution")
+            .value(@"1920x1080")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+        RowUse(@"Frame Rate")
+            .value(@"60p")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+    ]);
 }
 #pragma mark - Audio
 - (TVUPLSection *)audioSection {
-    return SectionUse
-        .key(@"AudioSection")
-        .rows(@[
-            [self headerRow:@"Audio" icon:@"tvu_cover_mic"],
-            RowDefault
-                .key(@"ShareScreen")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Share Screen")
-                .value(@"Mix Mic and Audio from Share screen")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-        ]);
+    return SectionUse.rows(@[
+        [self headerRow:@"Audio" icon:@"tvu_cover_mic"],
+        RowUse(@"Share Screen")
+            .value(@"Mix Mic and Audio from Share screen")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+    ]);
 }
 #pragma mark - Multistream
 - (TVUPLSection *)multistreamSection {
-    return SectionUse
-        .key(@"Multistream")
-        .rows(@[
-            [self headerRow:@"Multistream" icon:@"tvu_share_platforms"],
-            RowDefault
-                .key(@"StreamInfo")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Stream Info")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-            RowDefault
-                .key(@"SocialPlatforms")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Social Platforms")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-        ]);
+    return SectionUse.rows(@[
+        [self headerRow:@"Multistream" icon:@"tvu_share_platforms"],
+        RowUse(@"Stream Info")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+        RowUse(@"Social Platforms")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+    ]);
 }
 #pragma mark - Backup Clips
 - (TVUPLSection *)backupClipsSection {
-    return SectionUse
-        .key(@"BackupClips")
-        .rows(@[
-            [self headerRow:@"Backup Clips" icon:@"tvu_setting_backupclips"],
-            RowDefault
-                .key(@"DisasterRecovery")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Disaster Recovery")
-                .viewData(LabelData(kTVUPLDataSubtitle)
-                        .text(@"Switch backup source when detect black frame")
-                        .font([UIFont systemFontOfSize:12])
-                        .textColor(UIColor.lightTextColor))
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-            RowDefault
-                .key(@"ManageBackupClips")
-                .showIndicator(YES)
-                .height(44)
-                .title(@"Manage backup clips")
-                .tap(^(TVUPLRow *row, id value) {
-                    NSLog(@"1 click");
-                }),
-        ]);
+    return SectionUse.rows(@[
+        [self headerRow:@"Backup Clips" icon:@"tvu_setting_backupclips"],
+        RowUse(@"Disaster Recovery")
+            .viewData(LabelData(kTVUPLDataSubtitle)
+                    .text(@"Switch backup source when detect black frame")
+                    .font([UIFont systemFontOfSize:12])
+                    .textColor(UIColor.lightTextColor))
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+        RowUse(@"Manage backup clips")
+            .onTap(^{
+                NSLog(@"1 click");
+            }),
+    ]);
 }
 @end

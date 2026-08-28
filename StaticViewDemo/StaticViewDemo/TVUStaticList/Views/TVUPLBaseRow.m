@@ -50,6 +50,11 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
+    ///< 松手仍在行内才算点击；滑动会走 touchesCancelled，不会误触
+    CGPoint point = [touches.anyObject locationInView:self];
+    if (CGRectContainsPoint(self.bounds, point)) {
+        [self sendEventInfo:nil];
+    }
 }
 
 // 触摸取消（如滑动离开单元格）

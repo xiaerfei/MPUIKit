@@ -214,6 +214,9 @@
         if (row.rHeight != 0) {
             // 设置每个 item 的固定高度
             make.height.equalTo(@(row.rHeight));
+        } else {
+            // 自动高度：内容撑开，44pt 为触控下限
+            make.height.greaterThanOrEqualTo(@44);
         }
     }];
 }
