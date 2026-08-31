@@ -24,6 +24,7 @@ return self; \
 @property (nonatomic, assign, readwrite) NSLineBreakMode mlineBreakMode;
 @property (nonatomic, assign, readwrite) NSInteger mnumberOfLines;
 @property (nonatomic,   copy, readwrite) NSAttributedString *mattributedText;
+@property (nonatomic, assign, readwrite) CGFloat mscale;
 @end
 
 @implementation TVUPLLabelData
@@ -35,6 +36,7 @@ DotMethod(NSTextAlignment, textAlignment, mtextAlignment)
 DotMethod(NSLineBreakMode, lineBreakMode, mlineBreakMode)
 DotMethod(NSInteger, numberOfLines, mnumberOfLines)
 DotMethod(NSAttributedString *, attributedText, mattributedText)
+DotMethod(CGFloat, scale, mscale)
 
 - (void)configure:(UILabel *)label {
     [super configure:label];

@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define ImageData(KEY) ((TVUPLImageData *)[TVUPLImageData new].key(KEY))
+///< 无 key 起手：配合 .imageData，槽位由方法名指定
+#define ImageUse [TVUPLImageData new]
 
 @interface TVUPLImageData : TVUPLViewData
 @property (nonatomic, strong, readonly) UIImage *mimage;

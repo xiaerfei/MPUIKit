@@ -191,6 +191,20 @@ DotMethod(NSString *, identifier, midentifier)
         return self;
     };
 }
+///< 槽位样式：方法名承载槽位，key 由这里盖章，调用方不再手写常量
+#define SlotDataMethod(NAME, DATATYPE, KEY) \
+- (TVUPLRow *(^)(DATATYPE *data))NAME { \
+    return ^(DATATYPE *data) { \
+        self.mrowDataDict[KEY] = data.key(KEY); \
+        return self; \
+    }; \
+}
+
+SlotDataMethod(titleData,    TVUPLLabelData, kTVUPLDataTitle)
+SlotDataMethod(subtitleData, TVUPLLabelData, kTVUPLDataSubtitle)
+SlotDataMethod(valueData,    TVUPLLabelData, kTVUPLDataValue)
+SlotDataMethod(imageData,    TVUPLImageData, kTVUPLDataImage)
+
 #pragma mark - Bindings
 - (TVUPLRow *(^)(TVUPLState<NSString *> *state))bindTitle {
     return ^(TVUPLState<NSString *> *state) {

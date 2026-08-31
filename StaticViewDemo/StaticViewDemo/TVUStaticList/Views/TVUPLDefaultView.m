@@ -61,7 +61,7 @@
     if (valueData) {
         [valueData configure:self.valueLabel];
         valueContent.hidden = self.valueLabel.hidden;
-        CGFloat scale = [[valueData customForKey:kTVUPLDataScale] floatValue];
+        CGFloat scale = valueData.mscale;
         if (scale > 0 && scale <= 1) {
             [valueContent mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.width.mas_equalTo(self.hStackView.mas_width).multipliedBy(scale);

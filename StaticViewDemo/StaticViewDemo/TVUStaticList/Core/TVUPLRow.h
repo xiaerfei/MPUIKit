@@ -107,6 +107,13 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 - (TVUPLRow *(^)(NSString *value))value;
 - (TVUPLRow *(^)(NSString *icon))icon;
 
+#pragma mark - 槽位样式
+///< 整体替换该槽位的数据对象（文字/图名也写进 data），不与同槽位的文字简写混用
+- (TVUPLRow *(^)(TVUPLLabelData *data))titleData;
+- (TVUPLRow *(^)(TVUPLLabelData *data))subtitleData;
+- (TVUPLRow *(^)(TVUPLLabelData *data))valueData;
+- (TVUPLRow *(^)(TVUPLImageData *data))imageData;
+
 #pragma mark - 绑定
 ///< 绑定 State 到槽位：渲染时读取并自动订阅，State 变化只刷本行。
 ///< 与 prefetch 不同，绑定写在哪里都有效；"内容 = 单个 State"的行用它即可免掉 prefetch

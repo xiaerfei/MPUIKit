@@ -93,11 +93,11 @@
     return RowDefault
         .type(TVUPLRowTypeHeader)
         .height(30)
-        .viewData(LabelData(kTVUPLDataTitle)
+        .titleData(LabelUse
                 .text(title)
                 .font([UIFont systemFontOfSize:13])
                 .textColor([UIColor grayColor]))
-        .viewData(ImageData(kTVUPLDataImage)
+        .imageData(ImageUse
                 .icon(icon)
                 .size(CGSizeMake(16, 16)));
 }
@@ -106,11 +106,11 @@
     return SectionUse.rows(@[
         RowCustom(kTVUPLLoginRow)
             .height(50)
-            .viewData(LabelData(kTVUPLDataTitle)
+            .titleData(LabelUse
                     .text(@"Sharexia")
                     .font([UIFont systemFontOfSize:21])
                     .numberOfLines(1))
-            .viewData(LabelData(kTVUPLDataSubtitle)
+            .subtitleData(LabelUse
                     .text(@"sharexia@tvunetworks.com")
                     .textColor([UIColor lightGrayColor]))
             .viewData(LabelData(kTVUPLDataKey0)
@@ -133,10 +133,10 @@
         RowDefault
             .height(50)
             .showIndicator(YES)
-            .viewData(LabelData(kTVUPLDataTitle)
+            .titleData(LabelUse
                     .text(@"UnLogin")
                     .font([UIFont systemFontOfSize:16]))
-            .viewData(ImageData(kTVUPLDataImage)
+            .imageData(ImageUse
                     .systemIcon(@"person.crop.circle")
                     .tintColor([UIColor grayColor])
                     .size(CGSizeMake(40, 40)))
@@ -146,14 +146,13 @@
         RowUse(@"Subscription")
             .height(40)
             .showIndicator(YES)
-            .viewData(LabelData(kTVUPLDataValue)
+            .valueData(LabelUse
                     .text(@"Base")
                     .textColor([UIColor lightGrayColor])),
         RowUse(@"Reset PID")
             .showIndicator(YES)
             .bindValue(self.pidString)
-            .viewData(LabelData(kTVUPLDataValue)
-                    .custom(kTVUPLDataScale, @(0.6))),
+            .valueData(LabelUse.scale(0.6)),
     ]);
 }
 #pragma mark - Video
@@ -202,7 +201,7 @@
     return SectionUse.rows(@[
         [self headerRow:@"Backup Clips" icon:@"tvu_setting_backupclips"],
         RowUse(@"Disaster Recovery")
-            .viewData(LabelData(kTVUPLDataSubtitle)
+            .subtitleData(LabelUse
                     .text(@"Switch backup source when detect black frame")
                     .font([UIFont systemFontOfSize:12])
                     .textColor(UIColor.lightTextColor))
