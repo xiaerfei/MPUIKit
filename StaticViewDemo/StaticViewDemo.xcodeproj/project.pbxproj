@@ -16,6 +16,8 @@
 		2CEEE3A53047FD45006732E4 /* NSEvent+TVUSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3903047FD45006732E4 /* NSEvent+TVUSignalSupport.m */; };
 		2CEEE3A63047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3923047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m */; };
 		42A55ABD39EE94ACC4B96D3B /* Pods_StaticViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */; };
+		7B52B57A99B0D9404D15C084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7F98914B5AC8B6B5B9CE42C /* Foundation.framework */; };
+		907A62192E8CD4C9A4FA5DF4 /* TVURSignalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 010E2BBC688F802036F03489 /* TVURSignalTests.m */; };
 		9C7EB0252F3704D100D236EA /* TVUPLLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EB0242F3704D100D236EA /* TVUPLLoginRow.m */; };
 		9CA7BE6F2F2506E300272432 /* TVUPLViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE6E2F2506E300272432 /* TVUPLViewData.m */; };
 		9CA7BE722F25075400272432 /* TVUPLLabelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE712F25075400272432 /* TVUPLLabelData.m */; };
@@ -40,7 +42,19 @@
 		EA7A132B0E0E7A83E5B8BC2D /* TVUPLDeviceRow.m in Sources */ = {isa = PBXBuildFile; fileRef = AF81CF5364A5E5DE9F7498C5 /* TVUPLDeviceRow.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3AC44622CB89C21648806202 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CAF89602EEEA3C000CFEE69 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9CAF89672EEEA3C000CFEE69;
+			remoteInfo = StaticViewDemo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		010E2BBC688F802036F03489 /* TVURSignalTests.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TVURSignalTests.m; sourceTree = "<group>"; };
+		07D1603670640B2B09DC9BB1 /* StaticViewDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StaticViewDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CEEE38A3047FD45006732E4 /* NSControl+TVUSignalSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSControl+TVUSignalSupport.h"; sourceTree = "<group>"; };
 		2CEEE38B3047FD45006732E4 /* NSControl+TVUSignalSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSControl+TVUSignalSupport.m"; sourceTree = "<group>"; };
 		2CEEE38C3047FD45006732E4 /* UIControl+TVURSignal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+TVURSignal.h"; sourceTree = "<group>"; };
@@ -104,10 +118,19 @@
 		9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultView.m; sourceTree = "<group>"; };
 		AF81CF5364A5E5DE9F7498C5 /* TVUPLDeviceRow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TVUPLDeviceRow.m; sourceTree = "<group>"; };
 		C3DB7A04CFB94184646B3377 /* TVUPLDeviceRow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TVUPLDeviceRow.h; sourceTree = "<group>"; };
+		D7F98914B5AC8B6B5B9CE42C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		F4CB743122FCA0F28D8D5F95 /* TVUPLSwitchRow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TVUPLSwitchRow.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4E423AD3C771FD3EAF028E58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B52B57A99B0D9404D15C084 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CAF89652EEEA3C000CFEE69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */,
+				D3D5BB34B55C6FC0AD8B9890 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -188,6 +212,7 @@
 				9CAF89692EEEA3C000CFEE69 /* Products */,
 				A78DE9A4792A5276CF434A47 /* Pods */,
 				3AE0C463731375871272DC3B /* Frameworks */,
+				B23F8B93BC0A3C597B07CB9C /* StaticViewDemoTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				9CAF89682EEEA3C000CFEE69 /* StaticViewDemo.app */,
+				07D1603670640B2B09DC9BB1 /* StaticViewDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,6 +319,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B23F8B93BC0A3C597B07CB9C /* StaticViewDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				010E2BBC688F802036F03489 /* TVURSignalTests.m */,
+			);
+			name = StaticViewDemoTests;
+			path = StaticViewDemoTests;
+			sourceTree = "<group>";
+		};
+		D3D5BB34B55C6FC0AD8B9890 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D7F98914B5AC8B6B5B9CE42C /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -314,6 +357,24 @@
 			productName = StaticViewDemo;
 			productReference = 9CAF89682EEEA3C000CFEE69 /* StaticViewDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C4E2EA8132A2142738D06C91 /* StaticViewDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEADDFEF2ECB68F4BDE2E340 /* Build configuration list for PBXNativeTarget "StaticViewDemoTests" */;
+			buildPhases = (
+				F03782D76379A2886A5866FB /* Sources */,
+				4E423AD3C771FD3EAF028E58 /* Frameworks */,
+				41BE1340409E0BCB47E2C7AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A40EF53C64AE3B198554BB2B /* PBXTargetDependency */,
+			);
+			name = StaticViewDemoTests;
+			productName = StaticViewDemoTests;
+			productReference = 07D1603670640B2B09DC9BB1 /* StaticViewDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -344,11 +405,19 @@
 			projectRoot = "";
 			targets = (
 				9CAF89672EEEA3C000CFEE69 /* StaticViewDemo */,
+				C4E2EA8132A2142738D06C91 /* StaticViewDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		41BE1340409E0BCB47E2C7AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9CAF89662EEEA3C000CFEE69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -442,7 +511,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F03782D76379A2886A5866FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				907A62192E8CD4C9A4FA5DF4 /* TVURSignalTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A40EF53C64AE3B198554BB2B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StaticViewDemo;
+			target = 9CAF89672EEEA3C000CFEE69 /* StaticViewDemo */;
+			targetProxy = 3AC44622CB89C21648806202 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9CAF898A2EEEA3C800CFEE69 /* LaunchScreen.storyboard */ = {
@@ -464,6 +550,22 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0F8DEF81B5A4A1B47594D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.StaticViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StaticViewDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StaticViewDemo";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/StaticViewDemo/Utils/TVUSignal/**";
+			};
+			name = Debug;
+		};
 		9CAF89812EEEA3C100CFEE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B745EAE5F6FE25DB461D664 /* Pods-StaticViewDemo.debug.xcconfig */;
@@ -644,6 +746,23 @@
 			};
 			name = Release;
 		};
+		D907D2222BCDB9E290FD056D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tvunetworks.StaticViewDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StaticViewDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StaticViewDemo";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/StaticViewDemo/Utils/TVUSignal/**";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -661,6 +780,15 @@
 			buildConfigurations = (
 				9CAF89812EEEA3C100CFEE69 /* Debug */,
 				9CAF89822EEEA3C100CFEE69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEADDFEF2ECB68F4BDE2E340 /* Build configuration list for PBXNativeTarget "StaticViewDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D907D2222BCDB9E290FD056D /* Release */,
+				0F8DEF81B5A4A1B47594D70A /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
