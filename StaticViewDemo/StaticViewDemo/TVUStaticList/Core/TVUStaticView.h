@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const kTVUPLDefaultRow;
 extern NSString *const kTVUPLLoginRow;
+extern NSString *const kTVUPLDeviceRow;
 
 @interface TVUStaticView : UIScrollView
 

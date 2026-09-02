@@ -3,6 +3,7 @@
 //  StaticViewDemo
 //
 //  Created by erfeixia on 2025/12/14.
+//  仿 TVUIRLSettingViewController 的 UI 结构（仅 UI，业务逻辑以 NSLog 占位）
 //
 
 #import "ViewController.h"
@@ -18,81 +19,63 @@
 
 @interface ViewController ()
 @property (nonatomic, strong) TVUStaticView *staticView;
-@property (nonatomic, strong) TVUPLState <NSString *>*pidString;
+///< Customize Delay & Bitrate 主开关：Delay / Bitrate 两行的显隐跟随它
+@property (nonatomic, strong) TVUPLState <NSNumber *>*streamTuningOn;
+///< Connection Boost 主开关：Connection Phones 行的显隐跟随它
+@property (nonatomic, strong) TVUPLState <NSNumber *>*peerLinkOn;
 @property (nonatomic, assign) BOOL unlogin;
 @end
 
-@implementation ViewController {
-    NSInteger _count;
-}
+@implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.view.backgroundColor = UIColorFromHex(0x141414);
-    
-    self.pidString = [TVUPLState value:@"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID"];
-    
+
+    self.streamTuningOn = [TVUPLState value:@NO];
+    self.peerLinkOn     = [TVUPLState value:@NO];
+
     self.staticView = [[TVUStaticView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.staticView];
-    
+
     [self.staticView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
     }];
-    
+
     self.staticView
         .prefetch(^(TVUStaticView *list) { list
             .sections(@[
                 [self loginSection],
                 [self videoSection],
                 [self audioSection],
-                [self multistreamSection],
-                [self backupClipsSection],
+                [self platformsSection],
+                [self backupSection],
+                [self mirrorSection],
+                [self externalDeviceSection],
+                [self streamSettingSection],
+                [self peerLinkSection],
             ]);
         });
     [self.staticView reload];
-    
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:@"Change" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(changeAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
-    
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-        make.width.equalTo(@100);
-    }];
-}
-
-- (void)changeAction {
-    switch (_count) {
-        case 1:
-            self.pidString.value = @"这是业内较普遍的判断，认为本轮是持续2-3年的“超级周期”，价格上涨势头可能在2026年底趋缓，但价格真正回落要等到2027年。";
-            break;
-        case 2:
-            self.pidString.value = @"理解预测分歧的关键在于区分不同产品。";
-            break;
-        case 3:
-            self.pidString.value = @"根据最新的市场分析，这次内存涨价主要由人工智能（AI）需求爆发导致，因此难以像显卡降价那样因“挖矿”需求消失而快速回调。价格回归正常的时间窗口存在不确定性，市场主流观点是高价将持续2-3年，但也有较悲观或短期看跌的观点。在 ReactiveCocoa (RAC) 里，信号本质上是异步的。但有时候我们需要在方法里“同步”拿到结果，这就涉及到如何设计一个 同步方法。这里的“同步”并不是让 RAC 真正阻塞线程，而是通过一些技巧在调用点上拿到结果。";
-            break;
-        default:
-            self.pidString.value = @"If you transfer data from your previous iOS device with TVU Anywhere installed to your new iPhone, iPad, please reset PID";
-            break;
-    }
-    _count++;
-    if (_count >= 5) {
-        _count = 1;
-    }
 }
 #pragma mark - Components
+///< 深色卡片（对应线上 0x1F1F1F 圆角卡）
+- (TVUPLSection *)cardSection {
+    return SectionUse.sectionData(ViewUse
+            .backgroundColor(UIColorFromHex(0x1F1F1F))
+            .cornerRadius(8)
+            .insets(UIEdgeInsetsMake(0, 15, 0, 15)));
+}
+
+///< 卡片上方的图标小标题
 - (TVUPLRow *)headerRow:(NSString *)title icon:(NSString *)icon {
     return RowDefault
         .type(TVUPLRowTypeHeader)
-        .height(30)
+        .height(40)
         .titleData(LabelUse
                 .text(title)
                 .font([UIFont systemFontOfSize:13])
@@ -101,11 +84,22 @@
                 .icon(icon)
                 .size(CGSizeMake(16, 16)));
 }
+
+///< 卡片下方的小字说明
+- (TVUPLRow *)footerRow:(NSString *)text {
+    return RowDefault
+        .type(TVUPLRowTypeFooter)
+        .titleData(LabelUse
+                .text(text)
+                .font([UIFont systemFontOfSize:12])
+                .textColor(UIColorFromHex(0x9E9E9E)));
+}
 #pragma mark - Sections
 - (TVUPLSection *)loginSection {
-    return SectionUse.rows(@[
+    return [self cardSection].rows(@[
         RowCustom(kTVUPLLoginRow)
-            .height(50)
+            .height(80)
+            .showIndicator(YES)
             .titleData(LabelUse
                     .text(@"Sharexia")
                     .font([UIFont systemFontOfSize:21])
@@ -120,97 +114,180 @@
                     .textColor([UIColor whiteColor])
                     .cornerRadius(20)
                     .frame(CGRectMake(0, 0, 40, 40))
-                    .backgroundColor([UIColor colorWithRed:82.0f/255.0f
-                                                     green:80.0f/255.0f
-                                                      blue:236.0f/255.0f
-                                                     alpha:1]))
-            .onTap(^{
-                NSLog(@"Login click");
-            })
+                    .backgroundColor(UIColorFromHex(0x5250EC)))
+            .onTap(^{ NSLog(@"push About"); })
             .prefetch(^(TVUPLRow *row) { row
                 .hidden(!self.unlogin);
             }),
-        RowDefault
-            .height(50)
+        RowUse(@"Login")
+            .height(60)
             .showIndicator(YES)
-            .titleData(LabelUse
-                    .text(@"UnLogin")
-                    .font([UIFont systemFontOfSize:16]))
-            .imageData(ImageUse
-                    .systemIcon(@"person.crop.circle")
-                    .tintColor([UIColor grayColor])
-                    .size(CGSizeMake(40, 40)))
+            .onTap(^{ NSLog(@"present Login"); })
             .prefetch(^(TVUPLRow *row) { row
                 .hidden(self.unlogin);
             }),
         RowUse(@"Subscription")
-            .height(40)
-            .showIndicator(YES)
-            .valueData(LabelUse
-                    .text(@"Base")
-                    .textColor([UIColor lightGrayColor])),
-        RowUse(@"Reset PID")
-            .showIndicator(YES)
-            .bindValue(self.pidString)
-            .valueData(LabelUse.scale(0.6)),
+            .height(48)
+            .value(@"Unlimited")
+            .onTap(^{ NSLog(@"push Subscription"); }),
     ]);
 }
-#pragma mark - Video
+
 - (TVUPLSection *)videoSection {
-    return SectionUse.rows(@[
+    return [self cardSection].rows(@[
         [self headerRow:@"Video" icon:@"tvu_setting_camera"],
         RowUse(@"Resolution")
+            .height(48)
             .value(@"1920x1080")
-            .onTap(^{
-                NSLog(@"1 click");
-            }),
+            .onTap(^{ NSLog(@"push Resolution"); }),
         RowUse(@"Frame Rate")
+            .height(48)
             .value(@"60p")
-            .onTap(^{
-                NSLog(@"1 click");
-            }),
+            .onTap(^{ NSLog(@"push Frame Rate"); }),
     ]);
 }
-#pragma mark - Audio
+
 - (TVUPLSection *)audioSection {
-    return SectionUse.rows(@[
+    return [self cardSection].rows(@[
         [self headerRow:@"Audio" icon:@"tvu_cover_mic"],
         RowUse(@"Share Screen")
+            .height(48)
             .value(@"Mix Mic and Audio from Share screen")
-            .onTap(^{
-                NSLog(@"1 click");
-            }),
+            .onTap(^{ NSLog(@"push Share Screen"); }),
     ]);
 }
-#pragma mark - Multistream
-- (TVUPLSection *)multistreamSection {
-    return SectionUse.rows(@[
-        [self headerRow:@"Multistream" icon:@"tvu_share_platforms"],
+
+- (TVUPLSection *)platformsSection {
+    return [self cardSection].rows(@[
+        [self headerRow:@"Streaming Destinations" icon:@"tvu_share_platforms"],
         RowUse(@"Stream Info")
-            .onTap(^{
-                NSLog(@"1 click");
-            }),
+            .height(48)
+            .onTap(^{ NSLog(@"push Stream Info"); }),
         RowUse(@"Social Platforms")
-            .onTap(^{
-                NSLog(@"1 click");
+            .height(48)
+            .onTap(^{ NSLog(@"push Social Platforms"); }),
+    ]);
+}
+
+- (TVUPLSection *)backupSection {
+    return [self cardSection].rows(@[
+        [self headerRow:@"Backup Content" icon:@"tvu_setting_backupclips"],
+        RowSwitch(@"Enable Disconnect Protection")
+            .height(48)
+            .tap(^(TVUPLRow *row, id value) {
+                NSLog(@"disconnect protection -> %@", value);
+            }),
+        RowUse(@"Manage Backup Content")
+            .height(48)
+            .onTap(^{ NSLog(@"push Manage Backup Content"); }),
+        [self footerRow:@"Automatically play backup content if your stream signal is lost or interrupted."],
+    ]);
+}
+
+///< Mirror 是画面偏好不是外设设置，线上是独立单行卡片，Nerd Mode 标题挂在它上方
+- (TVUPLSection *)mirrorSection {
+    return [self cardSection].rows(@[
+        [self headerRow:@"Nerd Mode" icon:@"tvu_setting_camera"],
+        RowSwitch(@"Mirror Front Camera Output")
+            .height(68)
+            .subtitle(@"Makes your live stream match your front camera preview.")
+            .tap(^(TVUPLRow *row, id value) {
+                NSLog(@"mirror front output -> %@", value);
             }),
     ]);
 }
-#pragma mark - Backup Clips
-- (TVUPLSection *)backupClipsSection {
-    return SectionUse.rows(@[
-        [self headerRow:@"Backup Clips" icon:@"tvu_setting_backupclips"],
-        RowUse(@"Disaster Recovery")
+
+- (TVUPLSection *)externalDeviceSection {
+    return [self cardSection].rows(@[
+        RowSwitch(@"UVC Camera")
+            .height(64)
+            .switchOn(YES)
             .subtitleData(LabelUse
-                    .text(@"Switch backup source when detect black frame")
+                    .text(@"Connected")
                     .font([UIFont systemFontOfSize:12])
-                    .textColor(UIColor.lightTextColor))
-            .onTap(^{
-                NSLog(@"1 click");
+                    .textColor([UIColor systemGreenColor]))
+            .tap(^(TVUPLRow *row, id value) {
+                NSLog(@"uvc camera -> %@", value);
             }),
-        RowUse(@"Manage backup clips")
-            .onTap(^{
-                NSLog(@"1 click");
+        RowSwitch(@"SeeMo Device")
+            .height(48)
+            .tap(^(TVUPLRow *row, id value) {
+                NSLog(@"seemo device -> %@", value);
+            }),
+        RowCustom(kTVUPLDeviceRow)
+            .height(48)
+            .title(@"OSMO POCKET 3")
+            .switchOn(YES)
+            .valueData(LabelUse.text(@"Starting Stream"))
+            .imageData(ImageUse.tintColor(UIColorFromHex(0xFFCC00)))
+            .tap(^(TVUPLRow *row, id value) {
+                if (value) {
+                    NSLog(@"dji device -> %@", value);
+                } else {
+                    NSLog(@"push DJI device setting");
+                }
+            }),
+        RowDefault
+            .height(48)
+            .showIndicator(NO)
+            .titleData(LabelUse
+                    .text(@"Add")
+                    .textAlignment(NSTextAlignmentCenter)
+                    .textColor([UIColor systemBlueColor]))
+            .onTap(^{ NSLog(@"push Add DJI Device"); }),
+        [self footerRow:@"The app automatically reconnects your DJI device if the connection is lost. Turn the switch off when not in use."],
+    ]);
+}
+
+- (TVUPLSection *)streamSettingSection {
+    return [self cardSection].rows(@[
+        RowSwitch(@"Customize Delay & Bitrate")
+            .height(75)
+            .subtitle(@"Adjust stream delay and bitrate for your network.")
+            .prefetch(^(TVUPLRow *row) { row
+                .switchOn(self.streamTuningOn.value.boolValue);
+            })
+            .tap(^(TVUPLRow *row, id value) {
+                self.streamTuningOn.value = value;
+            }),
+        RowUse(@"Stream Delay")
+            .height(48)
+            .value(@"8s")
+            .onTap(^{ NSLog(@"pick Stream Delay"); })
+            .prefetch(^(TVUPLRow *row) { row
+                .hidden(!self.streamTuningOn.value.boolValue);
+            }),
+        RowUse(@"Stream Bitrate")
+            .height(48)
+            .value(@"5mbps")
+            .onTap(^{ NSLog(@"pick Stream Bitrate"); })
+            .prefetch(^(TVUPLRow *row) { row
+                .hidden(!self.streamTuningOn.value.boolValue);
+            }),
+        [self footerRow:@"Lower delay: lower latency but less protection against poor networks.\nHigher delay: greater stability and recovery capability during network degradation."],
+    ]);
+}
+
+- (TVUPLSection *)peerLinkSection {
+    return [self cardSection].rows(@[
+        RowSwitch(@"Connection Boost")
+            .height(68)
+            .subtitle(@"Use nearby phones to make your stream stronger and more reliable.")
+            .prefetch(^(TVUPLRow *row) { row
+                .switchOn(self.peerLinkOn.value.boolValue);
+            })
+            .tap(^(TVUPLRow *row, id value) {
+                self.peerLinkOn.value = value;
+            }),
+        RowUse(@"Connection Phones")
+            .height(48)
+            .valueData(LabelUse
+                    .text(@"2 phones connected")
+                    .font([UIFont systemFontOfSize:12])
+                    .textColor([UIColor systemGreenColor]))
+            .onTap(^{ NSLog(@"push Paired Devices"); })
+            .prefetch(^(TVUPLRow *row) { row
+                .hidden(!self.peerLinkOn.value.boolValue);
             }),
     ]);
 }

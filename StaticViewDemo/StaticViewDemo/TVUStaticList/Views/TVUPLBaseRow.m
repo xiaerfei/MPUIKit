@@ -33,7 +33,7 @@
 // 触摸开始（按下）
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
-    if ([self isHeaderOrFooter]) return;
+    if ([self isHeaderOrFooter] || self.plrow.rUnselected) return;
     self.plBackgroundView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.1];
 }
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event {
@@ -51,6 +51,7 @@
         self.plBackgroundView.backgroundColor = [UIColor clearColor];
     });
     ///< 松手仍在行内才算点击；滑动会走 touchesCancelled，不会误触
+    if (self.plrow.rUnselected) return;
     CGPoint point = [touches.anyObject locationInView:self];
     if (CGRectContainsPoint(self.bounds, point)) {
         [self sendEventInfo:nil];

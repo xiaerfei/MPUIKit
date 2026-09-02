@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 #define ViewData(KEY) [TVUPLViewData new].key(KEY)
+///< 无 key 起手：配合 .sectionData 等槽位方法使用
+#define ViewUse [TVUPLViewData new]
 
 @interface TVUPLViewData : NSObject
 

@@ -44,6 +44,7 @@ NSString *const kTVUPLDataRow       = @"DataRow";
 @property (nonatomic,   copy, readwrite) NSString *rIndicatorImageName;
 @property (nonatomic, strong, readwrite) UIColor *rIndicatorColor;
 @property (nonatomic, assign, readwrite) BOOL rUnselected;
+@property (nonatomic, assign, readwrite) BOOL rswitchOn;
 @property (nonatomic, assign, readwrite) BOOL rUnselectedStyle;
 @property (nonatomic, assign, readwrite) BOOL rShowLeftImage;
 @property (nonatomic, assign, readwrite) CGFloat rHeight;
@@ -62,6 +63,7 @@ NSString *const kTVUPLDataRow       = @"DataRow";
 #pragma mark - Chainable Setters
 DotMethod(NSString *, key, mkey)
 DotMethod(NSString *, identifier, midentifier)
+DotMethod(BOOL, switchOn, rswitchOn)
 
 - (TVUPLRow *(^)(BOOL hidden))hidden {
     return ^(BOOL hidden) {

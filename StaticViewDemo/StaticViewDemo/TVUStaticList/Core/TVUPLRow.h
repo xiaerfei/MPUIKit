@@ -16,6 +16,8 @@
 #define RowDefault RowCustom(kTVUPLDefaultRow)
 ///< 标题行：绝大多数行的起手式，与 SectionUse 对仗
 #define RowUse(TITLE) RowDefault.title(TITLE)
+///< 开关行（kTVUPLSwitchRow）：行体不派发点击，开关拨动经 sendEventInfo 派发 @(on)
+#define RowSwitch(TITLE) RowCustom(kTVUPLSwitchRow).title(TITLE).unselected(YES)
 #define RowData  return [TVUPLRowData new]
 
 extern NSString *const kTVUPLDataTitle   ;
@@ -55,6 +57,10 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 ///< header、footer 或者 Cell 只有一行则强制显示
 @property (nonatomic, assign, readonly) BOOL rforceShowLine;
 @property (nonatomic, assign, readonly) BOOL rhidden;
+///< YES = 行体不响应点击（开关行等自带控件的行）
+@property (nonatomic, assign, readonly) BOOL rUnselected;
+///< 开关行的初始开合状态
+@property (nonatomic, assign, readonly) BOOL rswitchOn;
 @property (nonatomic, assign, readonly) BOOL mshowIndicator;
 @property (nonatomic, assign, readonly) CGFloat rHeight;
 
@@ -84,6 +90,7 @@ typedef NS_ENUM(NSInteger, TVUPLRowType) {
 ///< 默认跟随 tap/onTap：可点的行自动显示指示器；调用本方法即显式覆盖
 - (TVUPLRow *(^)(BOOL showIndicator))showIndicator;
 - (TVUPLRow *(^)(BOOL unselected))unselected;
+- (TVUPLRow *(^)(BOOL switchOn))switchOn;
 - (TVUPLRow *(^)(BOOL unselectedStyle))unselectedStyle;
 ///< 不设即自动高度（内容撑开，44pt 触控下限）；设置则为固定高度
 - (TVUPLRow *(^)(CGFloat height))height;

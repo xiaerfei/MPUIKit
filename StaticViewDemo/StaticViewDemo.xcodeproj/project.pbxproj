@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CEEE39F3047FD45006732E4 /* TVUTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE39D3047FD45006732E4 /* TVUTuple.m */; };
+		2CEEE3A03047FD45006732E4 /* UIControl+TVURSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE38D3047FD45006732E4 /* UIControl+TVURSignal.m */; };
+		2CEEE3A13047FD45006732E4 /* TVURSDisposable.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3953047FD45006732E4 /* TVURSDisposable.m */; };
+		2CEEE3A23047FD45006732E4 /* NSControl+TVUSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE38B3047FD45006732E4 /* NSControl+TVUSignalSupport.m */; };
+		2CEEE3A33047FD45006732E4 /* TVURSignal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3973047FD45006732E4 /* TVURSignal.m */; };
+		2CEEE3A43047FD45006732E4 /* TVURSubscriber.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE39B3047FD45006732E4 /* TVURSubscriber.m */; };
+		2CEEE3A53047FD45006732E4 /* NSEvent+TVUSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3903047FD45006732E4 /* NSEvent+TVUSignalSupport.m */; };
+		2CEEE3A63047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEEE3923047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m */; };
 		42A55ABD39EE94ACC4B96D3B /* Pods_StaticViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */; };
 		9C7EB0252F3704D100D236EA /* TVUPLLoginRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EB0242F3704D100D236EA /* TVUPLLoginRow.m */; };
 		9CA7BE6F2F2506E300272432 /* TVUPLViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA7BE6E2F2506E300272432 /* TVUPLViewData.m */; };
@@ -27,13 +35,34 @@
 		9CAF89BA2EEEA57100CFEE69 /* NSObject+BaseDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89B72EEEA57100CFEE69 /* NSObject+BaseDataType.m */; };
 		9CAF89BE2EEEA72E00CFEE69 /* TVUPLDefaultRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89BD2EEEA72E00CFEE69 /* TVUPLDefaultRow.m */; };
 		9CAF89C12EEEA77100CFEE69 /* TVUPLDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */; };
+		A5DF5D708066FA5B51BD9789 /* TVUPLSwitchRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E91B82138109556B78A2DF /* TVUPLSwitchRow.m */; };
 		E35E313CAB6864DE6F37240A /* TVUPLState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5641D63659EFC98D4F4DE5 /* TVUPLState.m */; };
+		EA7A132B0E0E7A83E5B8BC2D /* TVUPLDeviceRow.m in Sources */ = {isa = PBXBuildFile; fileRef = AF81CF5364A5E5DE9F7498C5 /* TVUPLDeviceRow.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CEEE38A3047FD45006732E4 /* NSControl+TVUSignalSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSControl+TVUSignalSupport.h"; sourceTree = "<group>"; };
+		2CEEE38B3047FD45006732E4 /* NSControl+TVUSignalSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSControl+TVUSignalSupport.m"; sourceTree = "<group>"; };
+		2CEEE38C3047FD45006732E4 /* UIControl+TVURSignal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIControl+TVURSignal.h"; sourceTree = "<group>"; };
+		2CEEE38D3047FD45006732E4 /* UIControl+TVURSignal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIControl+TVURSignal.m"; sourceTree = "<group>"; };
+		2CEEE38F3047FD45006732E4 /* NSEvent+TVUSignalSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSEvent+TVUSignalSupport.h"; sourceTree = "<group>"; };
+		2CEEE3903047FD45006732E4 /* NSEvent+TVUSignalSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSEvent+TVUSignalSupport.m"; sourceTree = "<group>"; };
+		2CEEE3913047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+TVUSignalSupport.h"; sourceTree = "<group>"; };
+		2CEEE3923047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+TVUSignalSupport.m"; sourceTree = "<group>"; };
+		2CEEE3943047FD45006732E4 /* TVURSDisposable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVURSDisposable.h; sourceTree = "<group>"; };
+		2CEEE3953047FD45006732E4 /* TVURSDisposable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVURSDisposable.m; sourceTree = "<group>"; };
+		2CEEE3963047FD45006732E4 /* TVURSignal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVURSignal.h; sourceTree = "<group>"; };
+		2CEEE3973047FD45006732E4 /* TVURSignal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVURSignal.m; sourceTree = "<group>"; };
+		2CEEE3983047FD45006732E4 /* TVURSignalObjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVURSignalObjc.h; sourceTree = "<group>"; };
+		2CEEE3993047FD45006732E4 /* TVURSmetamacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVURSmetamacros.h; sourceTree = "<group>"; };
+		2CEEE39A3047FD45006732E4 /* TVURSubscriber.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVURSubscriber.h; sourceTree = "<group>"; };
+		2CEEE39B3047FD45006732E4 /* TVURSubscriber.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVURSubscriber.m; sourceTree = "<group>"; };
+		2CEEE39C3047FD45006732E4 /* TVUTuple.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUTuple.h; sourceTree = "<group>"; };
+		2CEEE39D3047FD45006732E4 /* TVUTuple.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUTuple.m; sourceTree = "<group>"; };
 		3B745EAE5F6FE25DB461D664 /* Pods-StaticViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StaticViewDemo.debug.xcconfig"; path = "Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		41DE7786ABC22A70F8E05BC2 /* Pods-StaticViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StaticViewDemo.release.xcconfig"; path = "Target Support Files/Pods-StaticViewDemo/Pods-StaticViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 		5C5641D63659EFC98D4F4DE5 /* TVUPLState.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TVUPLState.m; sourceTree = "<group>"; };
+		67E91B82138109556B78A2DF /* TVUPLSwitchRow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TVUPLSwitchRow.m; sourceTree = "<group>"; };
 		7741E69FA4E86E9F53086E74 /* TVUPLState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TVUPLState.h; sourceTree = "<group>"; };
 		818DBD82D87575BB7B971D2C /* Pods_StaticViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StaticViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7EB0232F3704D100D236EA /* TVUPLLoginRow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLLoginRow.h; sourceTree = "<group>"; };
@@ -73,6 +102,9 @@
 		9CAF89BD2EEEA72E00CFEE69 /* TVUPLDefaultRow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultRow.m; sourceTree = "<group>"; };
 		9CAF89BF2EEEA77100CFEE69 /* TVUPLDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TVUPLDefaultView.h; sourceTree = "<group>"; };
 		9CAF89C02EEEA77100CFEE69 /* TVUPLDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TVUPLDefaultView.m; sourceTree = "<group>"; };
+		AF81CF5364A5E5DE9F7498C5 /* TVUPLDeviceRow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TVUPLDeviceRow.m; sourceTree = "<group>"; };
+		C3DB7A04CFB94184646B3377 /* TVUPLDeviceRow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TVUPLDeviceRow.h; sourceTree = "<group>"; };
+		F4CB743122FCA0F28D8D5F95 /* TVUPLSwitchRow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TVUPLSwitchRow.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +119,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2CEEE38E3047FD45006732E4 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				2CEEE38A3047FD45006732E4 /* NSControl+TVUSignalSupport.h */,
+				2CEEE38B3047FD45006732E4 /* NSControl+TVUSignalSupport.m */,
+				2CEEE38C3047FD45006732E4 /* UIControl+TVURSignal.h */,
+				2CEEE38D3047FD45006732E4 /* UIControl+TVURSignal.m */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		2CEEE3933047FD45006732E4 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				2CEEE38E3047FD45006732E4 /* Button */,
+				2CEEE38F3047FD45006732E4 /* NSEvent+TVUSignalSupport.h */,
+				2CEEE3903047FD45006732E4 /* NSEvent+TVUSignalSupport.m */,
+				2CEEE3913047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.h */,
+				2CEEE3923047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		2CEEE39E3047FD45006732E4 /* TVUSignal */ = {
+			isa = PBXGroup;
+			children = (
+				2CEEE3933047FD45006732E4 /* Category */,
+				2CEEE3943047FD45006732E4 /* TVURSDisposable.h */,
+				2CEEE3953047FD45006732E4 /* TVURSDisposable.m */,
+				2CEEE3963047FD45006732E4 /* TVURSignal.h */,
+				2CEEE3973047FD45006732E4 /* TVURSignal.m */,
+				2CEEE3983047FD45006732E4 /* TVURSignalObjc.h */,
+				2CEEE3993047FD45006732E4 /* TVURSmetamacros.h */,
+				2CEEE39A3047FD45006732E4 /* TVURSubscriber.h */,
+				2CEEE39B3047FD45006732E4 /* TVURSubscriber.m */,
+				2CEEE39C3047FD45006732E4 /* TVUTuple.h */,
+				2CEEE39D3047FD45006732E4 /* TVUTuple.m */,
+			);
+			path = TVUSignal;
+			sourceTree = "<group>";
+		};
 		3AE0C463731375871272DC3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +264,10 @@
 				9CAF89BD2EEEA72E00CFEE69 /* TVUPLDefaultRow.m */,
 				9C7EB0232F3704D100D236EA /* TVUPLLoginRow.h */,
 				9C7EB0242F3704D100D236EA /* TVUPLLoginRow.m */,
+				F4CB743122FCA0F28D8D5F95 /* TVUPLSwitchRow.h */,
+				67E91B82138109556B78A2DF /* TVUPLSwitchRow.m */,
+				C3DB7A04CFB94184646B3377 /* TVUPLDeviceRow.h */,
+				AF81CF5364A5E5DE9F7498C5 /* TVUPLDeviceRow.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -198,6 +275,7 @@
 		9CAF89B82EEEA57100CFEE69 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2CEEE39E3047FD45006732E4 /* TVUSignal */,
 				9CAF89B42EEEA57100CFEE69 /* NSArray+Function.h */,
 				9CAF89B52EEEA57100CFEE69 /* NSArray+Function.m */,
 				9CAF89B62EEEA57100CFEE69 /* NSObject+BaseDataType.h */,
@@ -341,6 +419,14 @@
 				9CA7BE752F25076300272432 /* TVUPLImageData.m in Sources */,
 				9CAF89B32EEEA4A700CFEE69 /* TVUPLBaseRow.m in Sources */,
 				9CAF89942EEEA3C800CFEE69 /* main.m in Sources */,
+				2CEEE39F3047FD45006732E4 /* TVUTuple.m in Sources */,
+				2CEEE3A03047FD45006732E4 /* UIControl+TVURSignal.m in Sources */,
+				2CEEE3A13047FD45006732E4 /* TVURSDisposable.m in Sources */,
+				2CEEE3A23047FD45006732E4 /* NSControl+TVUSignalSupport.m in Sources */,
+				2CEEE3A33047FD45006732E4 /* TVURSignal.m in Sources */,
+				2CEEE3A43047FD45006732E4 /* TVURSubscriber.m in Sources */,
+				2CEEE3A53047FD45006732E4 /* NSEvent+TVUSignalSupport.m in Sources */,
+				2CEEE3A63047FD45006732E4 /* NSNotificationCenter+TVUSignalSupport.m in Sources */,
 				9CAF89BE2EEEA72E00CFEE69 /* TVUPLDefaultRow.m in Sources */,
 				9CA7BE6F2F2506E300272432 /* TVUPLViewData.m in Sources */,
 				9CAF89AB2EEEA44F00CFEE69 /* TVUPLSection.m in Sources */,
@@ -351,6 +437,8 @@
 				9CAF89952EEEA3C800CFEE69 /* SceneDelegate.m in Sources */,
 				9CAF89962EEEA3C800CFEE69 /* ViewController.m in Sources */,
 				E35E313CAB6864DE6F37240A /* TVUPLState.m in Sources */,
+				A5DF5D708066FA5B51BD9789 /* TVUPLSwitchRow.m in Sources */,
+				EA7A132B0E0E7A83E5B8BC2D /* TVUPLDeviceRow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

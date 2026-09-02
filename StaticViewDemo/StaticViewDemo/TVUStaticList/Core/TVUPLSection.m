@@ -82,6 +82,13 @@ NSString *const kTVUPLDataSection = @"DataSection";
     };
 }
 
+- (TVUPLSection *(^)(TVUPLViewData *data))sectionData {
+    return ^(TVUPLViewData *data) {
+        self.mrowDataDict[kTVUPLDataSection] = data.key(kTVUPLDataSection);
+        return self;
+    };
+}
+
 - (id)customForKey:(NSString *)key {
     if ([key isKindOfClass:NSString.class] == NO ||
         key.length == 0) {

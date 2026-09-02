@@ -64,6 +64,8 @@ extern NSString *const kTVUPLDataSection;
 - (TVUPLSection *(^)(void(^)(TVUPLSection *section)))prefetch;
 
 - (TVUPLSection *(^)(TVUPLViewData *data))viewData;
+///< 卡片样式槽位：key 由框架盖章（背景色 / 圆角 / 左右边距）
+- (TVUPLSection *(^)(TVUPLViewData *data))sectionData;
 - (id)customForKey:(NSString *)key;
 
 @end
