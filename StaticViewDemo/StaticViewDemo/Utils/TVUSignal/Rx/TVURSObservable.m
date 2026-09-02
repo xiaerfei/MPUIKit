@@ -7,6 +7,8 @@
 #import "TVURSReactive.h"
 #import "TVURSmetamacros.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef TVURSDisposable * _Nullable (^TVURSSubscribeHandler)(TVURSubscriber *observer);
 typedef void (^TVURSNext)(id _Nullable x);
 /// 每次订阅调用一次，返回带有独立状态的 next 处理块（scan / skip / take 的计数器都在这里诞生）
@@ -113,8 +115,8 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSDisposable *(^)(void (^)(id), void (^)(NSError *), void (^)(void)))subscribe {
-    return ^(void (^next)(id), void (^error)(NSError *), void (^completed)(void)) {
+- (TVURSDisposable *(^)(void (^_Nullable)(id), void (^_Nullable)(NSError *), void (^_Nullable)(void)))subscribe {
+    return ^(void (^_Nullable next)(id), void (^_Nullable error)(NSError *), void (^_Nullable completed)(void)) {
         return [self subscribeWithObserver:[TVURSubscriber subscriberWithNext:next error:error completed:completed]];
     };
 }
@@ -124,7 +126,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
         NSAssert(owner != nil, @"subscribeWith owner is null");
         NSAssert(next != nil, @"subscribeWith block is null");
         __weak id weakOwner = owner;
-        __block __weak TVURSDisposable *weakDisposable = nil;
+        __block __weak TVURSDisposable *_Nullable weakDisposable = nil;
         TVURSDisposable *disposable = [self subscribeWithObserver:[TVURSubscriber subscriberWithNext:^(id x) {
             id strongOwner = weakOwner;
             if (strongOwner == nil) {                  ///< owner 正在销毁，bag 尚未来得及拆链
@@ -153,8 +155,8 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     }];
 }
 
-- (TVURSObservable *(^)(id (^)(id)))map {
-    return ^(id (^block)(id)) {
+- (TVURSObservable *(^)(id _Nullable (^)(id)))map {
+    return ^(id _Nullable (^block)(id)) {
         NSAssert(block != nil, @"map block is null");
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
             return ^(id x) { [downstream sendNext:block(x)]; };
@@ -162,7 +164,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(BOOL (^)(id)))filter {
+- (TVURSObservable<id> *(^)(BOOL (^)(id)))filter {
     return ^(BOOL (^block)(id)) {
         NSAssert(block != nil, @"filter block is null");
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
@@ -171,13 +173,13 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *)distinctUntilChanged {
+- (TVURSObservable<id> *)distinctUntilChanged {
     return self.distinctUntilChangedBy(^BOOL(id pre, id now) {
         return pre == now || [pre isEqual:now];
     });
 }
 
-- (TVURSObservable *(^)(BOOL (^)(id, id)))distinctUntilChangedBy {
+- (TVURSObservable<id> *(^)(BOOL (^)(id, id)))distinctUntilChangedBy {
     return ^(BOOL (^isEqual)(id, id)) {
         NSAssert(isEqual != nil, @"distinctUntilChangedBy block is null");
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
@@ -193,8 +195,8 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(id, id (^)(id, id)))scan {
-    return ^(id start, id (^reduce)(id, id)) {
+- (TVURSObservable *(^)(id _Nullable, id _Nullable (^)(id _Nullable, id)))scan {
+    return ^(id _Nullable start, id _Nullable (^reduce)(id _Nullable, id)) {
         NSAssert(reduce != nil, @"scan reduce block is null");
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
             __block id acc = start;
@@ -206,7 +208,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(void (^)(id)))doNext {
+- (TVURSObservable<id> *(^)(void (^)(id)))doNext {
     return ^(void (^block)(id)) {
         NSAssert(block != nil, @"doNext block is null");
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
@@ -215,7 +217,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(NSUInteger))skip {
+- (TVURSObservable<id> *(^)(NSUInteger))skip {
     return ^(NSUInteger count) {
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
             __block NSUInteger skipped = 0;
@@ -227,7 +229,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(NSUInteger))take {
+- (TVURSObservable<id> *(^)(NSUInteger))take {
     return ^(NSUInteger count) {
         return [self lift:^TVURSNext(TVURSubscriber *downstream) {
             __block NSUInteger taken = 0;
@@ -241,7 +243,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(TVURSObservable *))merge {
+- (TVURSObservable<id> *(^)(TVURSObservable<id> *))merge {
     return ^(TVURSObservable *other) {
         NSAssert(other != nil, @"merge other is null");
         return [TVURSObservable create:^TVURSDisposable *(TVURSubscriber *downstream) {
@@ -263,7 +265,7 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
     };
 }
 
-- (TVURSObservable *(^)(TVURSObservable *))takeUntil {
+- (TVURSObservable<id> *(^)(TVURSObservable *))takeUntil {
     return ^(TVURSObservable *trigger) {
         NSAssert(trigger != nil, @"takeUntil trigger is null");
         return [TVURSObservable create:^TVURSDisposable *(TVURSubscriber *downstream) {
@@ -285,3 +287,5 @@ typedef TVURSNext _Nonnull (^TVURSNextFactory)(TVURSubscriber *downstream);
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

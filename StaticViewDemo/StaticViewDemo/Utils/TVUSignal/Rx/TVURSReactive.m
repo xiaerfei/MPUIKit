@@ -6,6 +6,8 @@
 #import "TVURSReactive.h"
 #import <objc/runtime.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - Reactive
 
 @interface TVURSReactive ()
@@ -47,15 +49,15 @@
 
 @implementation TVURSControlReactive
 
-- (TVURSObservable *)tap {
+- (TVURSObservable<UIControl *> *)tap {
     return self.controlEvent(UIControlEventTouchUpInside);
 }
 
-- (TVURSObservable *)valueChanged {
+- (TVURSObservable<UIControl *> *)valueChanged {
     return self.controlEvent(UIControlEventValueChanged);
 }
 
-- (TVURSObservable *(^)(UIControlEvents))controlEvent {
+- (TVURSObservable<UIControl *> *(^)(UIControlEvents))controlEvent {
     __weak UIControl *weakControl = self.base;
     return ^(UIControlEvents events) {
         return [TVURSObservable create:^TVURSDisposable *(TVURSubscriber *observer) {
@@ -78,15 +80,15 @@
 #pragma mark - NSNotificationCenter
 
 @implementation TVURSNotificationReactive
-- (TVURSObservable *(^)(NSNotificationName))notification {
+- (TVURSObservable<NSNotification *> *(^)(NSNotificationName))notification {
     return ^(NSNotificationName name) {
         return self.notificationOf(name, nil);
     };
 }
 
-- (TVURSObservable *(^)(NSNotificationName, id))notificationOf {
+- (TVURSObservable<NSNotification *> *(^)(NSNotificationName, id _Nullable))notificationOf {
     NSNotificationCenter *center = self.base;
-    return ^(NSNotificationName name, id object) {
+    return ^(NSNotificationName name, id _Nullable object) {
         return [TVURSObservable create:^TVURSDisposable *(TVURSubscriber *observer) {
             id token = [center addObserverForName:name object:object queue:nil usingBlock:^(NSNotification *note) {
                 [observer sendNext:note];
@@ -126,3 +128,5 @@
     }];
 }
 @end
+
+NS_ASSUME_NONNULL_END

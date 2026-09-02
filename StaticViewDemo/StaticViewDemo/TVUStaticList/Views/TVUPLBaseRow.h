@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) UIImageView *indicatorImageView;
 @property (nonatomic, strong, readonly) UIView *plContentView;
 
-- (void)sendEventInfo:(id)info;
+- (void)sendEventInfo:(nullable id)info;
 
 - (void)updateWithData:(id)data;
 @end
